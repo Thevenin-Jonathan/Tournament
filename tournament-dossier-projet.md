@@ -4,8 +4,12 @@
 - [DEFINITION PROJET TOURNAMENT](#definition-projet-tournament)
   - [Cahier des charges](#cahier-des-charges)
   - [Présentation du projet](#présentation-du-projet)
+    - [cible du projet](#cible-du-projet)
   - [Attribution des roles de l'équipe](#attribution-des-roles-de-léquipe)
   - [Les technologies utilisées](#les-technologies-utilisées)
+  - [Les navigateurs compatibles](#les-navigateurs-compatibles)
+  - [Arborescence](#arborescence)
+  - [Routes (front)](#routes-front)
   - [Les roles utilisateurs](#les-roles-utilisateurs)
   - [Les fonctionnalités](#les-fonctionnalités)
   - [Use Cases](#use-cases)
@@ -18,6 +22,10 @@ Entre gérer les tableaux/catégories (jeunes, double, mixte, simple), les inscr
 Cela demande beaucoup de préparation et de gestion technique pour un club qui veut proposer des tournois amicaux ! (les tournois dans le cadre de la fédération disposent de leurs propres outils).
 Souvent ça se termine en tableau Excel, au mieux, et la plupart du temps au Velléda sur le bord du gymnase, avec un bon mal de crane pour essayer d'optimiser un minimum et pas finir à 2h du matin :)
 Notre objectif est de proposer un outil clé en main pour organiser facilement ces évènements.
+
+### cible du projet
+Le service cibles les clubs de badminton.
+Les utilisateurs seront les gestionnaires de club et les adhérents du club.
 
 
 ## Attribution des roles de l'équipe
@@ -34,6 +42,34 @@ Notre objectif est de proposer un outil clé en main pour organiser facilement c
 - Front :
   - HTML, CSS, JS, React, Redux
 
+## Les navigateurs compatibles
+- Chrome
+- Firefox
+- Safari
+- Opera
+- Edge
+
+## Arborescence
+https://www.gloomaps.com/YsdgTyfRa3
+
+## Routes (front)
+- /
+- /connexion
+- /contact
+- /a-propos
+- /mentions-legales
+- /404
+- /tableau-de-bord
+- /tournois
+- /tournois/creer-tournoi
+- /tournois/:slug-du-tournoi
+- /club
+- /membres
+- /membres/:id-membre
+- /classements
+- /profil/:id-membre
+- /aide
+- /404 (version connecté)
 
 ## Les roles utilisateurs
 - Admin
@@ -137,21 +173,21 @@ todo
 ## Wireframes
 distrib wireframes
 
-Tom - home : presentation du service
-Tino - formulaire de contact du service
-Tino - connexion
-- récupération de mot de passe
-Tom - dashboard admin
-Tom - dashboard user
-Cédric - page profil utilisateur
-Cédric - page profil du club
-Houceine - page liste des tournois (tournoi actif propose : inscription individuelle / binome)
-- page utilisateur : participation en equipe
-- page tournoi en cours (suivre l'avancée du tournoi)
-Houceine - page classement
-- page admin création des membres (unitaire ou en masse)
-- page liste membres (avec bouton edit pour l'admin)
-Jonathan - page créer un tournoi 
-Jonathan - page créer un tournoi rapide (l'admin inscrit les joueurs)
-- page tournoi en cours Admin : mettre à jour le tournoi (entrer le score d'un match, cloturer, modifier tant que le tournoi n'a pas commencé)
-- page aide dans le dashboard
+- Tom - home : presentation du service
+- Tino - formulaire de contact du service
+- Tino - connexion
+- - récupération de mot de passe
+- Tom - dashboard admin
+- Tom - dashboard user
+- Cédric - page profil utilisateur
+- Cédric - page profil du club
+- Houceine - page liste des tournois (tournoi actif propose : inscription individuelle / binome)
+- - page utilisateur : participation en equipe
+- - page tournoi en cours (suivre l'avancée du tournoi)
+- Houceine - page classement
+- - page admin création des membres (unitaire ou en masse)
+- - page liste membres (avec bouton edit pour l'admin)
+- Jonathan - page créer un tournoi 
+- Jonathan - page créer un tournoi rapide (l'admin inscrit les joueurs)
+- - page tournoi en cours Admin : mettre à jour le tournoi (entrer le score d'un match, cloturer, modifier tant que le tournoi n'a pas commencé)
+- - page aide dans le dashboard
