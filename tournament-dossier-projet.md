@@ -53,6 +53,25 @@ Les utilisateurs seront les gestionnaires de club et les adhérents du club.
 ## Arborescence
 https://www.gloomaps.com/YsdgTyfRa3
 
+📄home\
+ ┣ 📄connexion\
+ ┃  ┣ 📄dashboard\
+ ┃  ┃  ┣ 📄tournois\
+ ┃  ┃  ┃  ┣ 📄création d'un tournoi\
+ ┃  ┃  ┃  ┗ 📄details d'un tournoi\
+ ┃  ┃  ┣ 📄club\
+ ┃  ┃  ┣ 📄membres\
+ ┃  ┃  ┃  ┗ 📄details d'un membre\
+ ┃  ┃  ┣ 📄classements\
+ ┃  ┃  ┣ 📄profil\
+ ┃  ┃  ┣ 📄aide\
+ ┃  ┃  ┗ 📄404\
+ ┃  ┗ 📄mot de passe perdu\
+ ┣ 📄contact\
+ ┣ 📄à propos\
+ ┣ 📄mentions légales\
+ ┗ 📄404
+
 ## Routes (front)
 - /
 - /connexion
