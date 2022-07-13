@@ -4,7 +4,7 @@
 - [DEFINITION PROJET TOURNAMENT](#definition-projet-tournament)
   - [Cahier des charges](#cahier-des-charges)
   - [Présentation du projet](#présentation-du-projet)
-    - [cible du projet](#cible-du-projet)
+    - [Cible du projet](#cible-du-projet)
   - [Attribution des roles de l'équipe](#attribution-des-roles-de-léquipe)
   - [Les technologies utilisées](#les-technologies-utilisées)
   - [Les navigateurs compatibles](#les-navigateurs-compatibles)
@@ -23,8 +23,9 @@ Cela demande beaucoup de préparation et de gestion technique pour un club qui v
 Souvent ça se termine en tableau Excel, au mieux, et la plupart du temps au Velléda sur le bord du gymnase, avec un bon mal de crane pour essayer d'optimiser un minimum et pas finir à 2h du matin :)
 Notre objectif est de proposer un outil clé en main pour organiser facilement ces évènements.
 
-### cible du projet
-Le service cibles les clubs de badminton.
+
+### Cible du projet
+Le service cible les clubs de badminton.
 Les utilisateurs seront les gestionnaires de club et les adhérents du club.
 
 
@@ -55,6 +56,7 @@ https://www.gloomaps.com/YsdgTyfRa3
 ## Routes (front)
 - /
 - /connexion
+- /mot-de-passe-perdu
 - /contact
 - /a-propos
 - /mentions-legales
@@ -70,6 +72,7 @@ https://www.gloomaps.com/YsdgTyfRa3
 - /profil/:id-membre
 - /aide
 - /404 (version connecté)
+
 
 ## Les roles utilisateurs
 - Admin
@@ -110,7 +113,7 @@ https://www.gloomaps.com/YsdgTyfRa3
       - s'inscrire en solo
       - inscrire un partenaire
   - Consultation des tournois passés et voir les resultats
-  - Consultation des laderboards
+  - Consultation des leaderboards
 - admin ou membre avec droit organisateur
   - réorganisation du tournoi (equipes, type, etc...)
   - Le jour du tournoi (tant que le tournoi n'est pas commencé)
