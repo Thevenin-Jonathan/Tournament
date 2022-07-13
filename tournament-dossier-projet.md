@@ -104,7 +104,6 @@ Notre objectif est de proposer un outil clé en main pour organiser facilement c
 | Admin | importer un fichier csv ou txt | créer des comptes membres en masse |
 | Admin | modifier un compte membre | mettre à jour son compte |
 | Admin | créer un tournoi | d'organiser une rencontre |
-| Admin | créer un tournoi rapide | d'organiser une rencontre flash |
 | Admin | modifier un tournoi | mettre à jour une rencontre |
 | Admin | cloturer un tournoi | archiver un tournoi |
 | Admin | supprimer un tournoi | |
@@ -128,7 +127,6 @@ pages :
 - page admin création des membres (unitaire ou en masse)
 - page liste membres (avec bouton edit pour l'admin)
 - page créer un tournoi 
-- page créer un tournoi rapide (l'admin inscrit les joueurs)
 - page tournoi en cours Admin : mettre à jour le tournoi (entrer le score d'un match, cloturer, modifier tant que le tournoi n'a pas commencé)
 - page aide dans le dashboard
 
