@@ -378,7 +378,7 @@
                         <mxRectangle x="206" y="605" width="76" height="30" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="176" value="code user&#10;firstname&#10;lastname&#10;address&#10;birthdate&#10;sex&#10;email&#10;password&#10;url avatar&#10;player license" style="align=center;strokeColor=none;fillColor=#cce5ff;spacingLeft=4;fontSize=12;verticalAlign=middle;resizable=0;rotatable=0;part=1;fontColor=#000000;" parent="175" vertex="1">
+                <mxCell id="176" value="code user&#10;firstname&#10;lastname&#10;address&#10;birthdate&#10;sex&#10;is active&#10;email&#10;is active&#10;password&#10;url avatar&#10;player license" style="align=center;strokeColor=none;fillColor=#cce5ff;spacingLeft=4;fontSize=12;verticalAlign=middle;resizable=0;rotatable=0;part=1;fontColor=#000000;" parent="175" vertex="1">
                     <mxGeometry y="30" width="121.55" height="181" as="geometry"/>
                 </mxCell>
                 <mxCell id="177" value="ROLE" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=none;swimlaneLine=0;" parent="1" vertex="1">
