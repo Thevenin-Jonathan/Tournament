@@ -12,6 +12,8 @@
   - [Routes (front)](#routes-front)
   - [Les roles utilisateurs](#les-roles-utilisateurs)
   - [Les fonctionnalités](#les-fonctionnalités)
+    - [MVP](#mvp)
+    - [Évolutions futures](#évolutions-futures)
   - [Use Cases](#use-cases)
   - [conventions](#conventions)
   - [Wireframes](#wireframes)
@@ -99,49 +101,59 @@ https://www.gloomaps.com/YsdgTyfRa3
 
 
 ## Les fonctionnalités
-- admin
-  - création de compte membre
-    - nom
-    - prénom
-    - age
-    - sexe
-    - adresse
-    - email
-    - photo de profil
-  - modification de compte membre
-  - création tournoi rapide (préconstruit, sans notif)
-  - création de tournoi - avancée
-    - nom
-    - date
-    - descriptif
-    - photo
-    - type (all-vs-all)
-    - discipline (solo, double femme, double homme, double mixte)
-    - organisateurs (gerants suplémentaires optionnels du tournoi)
-    - nb de terrains - facultatif
-    - limite joueurs/equipes - facultatif
-    - Si le tournoi est validé / une notif est envoyée aux adherents - facultatif
-  - modification d'un tournoi
-  - suppression d'un tournoi
-- membre
-  - modification de son compte
-  - inscription aux tournois
-    - en simple
-    - en double
-      - inscrire une equipe : un nom d'équipe / nom random (option lors de la créa du tournoi)
-      - s'inscrire en solo
-      - inscrire un partenaire
-  - Consultation des tournois passés et voir les resultats
-  - Consultation des leaderboards
-- admin ou membre avec droit organisateur
-  - réorganisation du tournoi (equipes, type, etc...)
-  - Le jour du tournoi (tant que le tournoi n'est pas commencé)
-    - démarrer le tournoi
-    - mettre à jour le tournoi (gagnants, perdants, notes...)
-    - cloturer le tournoi / affichage des resultats
+### MVP
+  - admin
+    - création de compte membre
+      - nom
+      - prénom
+      - age
+      - sexe
+      - adresse
+      - email
+      - photo de profil
+    - modification de compte membre
+    - création tournoi rapide (préconstruit, sans notif)
+    - création de tournoi - avancée
+      - nom
+      - date
+      - descriptif
+      - photo
+      - type (all-vs-all)
+      - discipline (solo, double femme, double homme, double mixte)
+      - organisateurs (gerants suplémentaires optionnels du tournoi)
+      - nb de terrains - facultatif
+      - limite joueurs/equipes - facultatif
+      - Si le tournoi est validé / une notif est envoyée aux adherents - facultatif
+    - modification d'un tournoi
+    - suppression d'un tournoi
+  - membre
+    - modification de son compte
+    - inscription aux tournois
+      - en simple
+      - en double
+        - inscrire une equipe : un nom d'équipe / nom random (option lors de la créa du tournoi)
+        - s'inscrire en solo
+        - inscrire un partenaire
+    - Consultation des tournois passés et voir les resultats
+    - Consultation des leaderboards
+  - admin ou membre avec droit organisateur
+    - réorganisation du tournoi (equipes, type, etc...)
+    - Le jour du tournoi (tant que le tournoi n'est pas commencé)
+      - démarrer le tournoi
+      - mettre à jour le tournoi (gagnants, perdants, notes...)
+      - cloturer le tournoi / affichage des resultats
 
-
-...
+### Évolutions futures
+  - Ajout de type de tournoi (Poules, élimnation direct, etc)
+  - Gestion d'équipes favorites
+  - Gestion complète des scores
+  - Ouverture aux inscriptions de joueurs externes au club
+  - Intégration de l'API officielle du FFBAD
+  - Gérer une vue spectateur publique
+  - Gestion multi-club
+  - Gestion multi-sport
+  - Messagerie interne
+  - Intégration d'une section blog
 
 ## Use Cases
 
@@ -201,7 +213,7 @@ pages :
 - noms de variables CSS: kebab-case
 - titres de commit:
   - fix:
-  - docs:
+  - doc(s):
   - feat:
   - refactor:
   - style:
@@ -210,23 +222,27 @@ pages :
   - build:
 
 ## Wireframes
-distrib wireframes
-
-- Tom - home : presentation du service
-- Tino - formulaire de contact du service
-- Tino - connexion
-- - récupération de mot de passe
-- Tom - dashboard admin
-- Tom - dashboard user
-- Cédric - page profil utilisateur
-- Cédric - page profil du club
-- Houceine - page liste des tournois (tournoi actif propose : inscription individuelle / binome)
-- - page utilisateur : participation en equipe
-- - page tournoi en cours (suivre l'avancée du tournoi)
-- Houceine - page classement
-- - page admin création des membres (unitaire ou en masse)
-- - page liste membres (avec bouton edit pour l'admin)
-- Jonathan - page créer un tournoi 
-- Jonathan - page créer un tournoi rapide (l'admin inscrit les joueurs)
-- - page tournoi en cours Admin : mettre à jour le tournoi (entrer le score d'un match, cloturer, modifier tant que le tournoi n'a pas commencé)
-- - page aide dans le dashboard
+​
+|Vue|Desktop|Mobile|
+|-----|-----|-----|
+|home|[version desktop](https://wireframe.cc/kCyS8P)|[version mobile](https://wireframe.cc/XKlu5L)|
+|connexion|[version desktop](https://wireframe.cc/MM6bcg)|version mobile|
+|dashboard admin|[version desktop](https://wireframe.cc/anlNKU)|[version mobile](https://wireframe.cc/Q0js7U)|
+|dashboard membre|[version desktop](https://wireframe.cc/aOnRbN)|[version mobile](https://wireframe.cc/7Pq3CP)|
+|tournois|[version desktop](https://wireframe.cc/G8oHsy)|[version mobile](https://wireframe.cc/fEd79p)|
+|création d'un tournoi|[version desktop](https://wireframe.cc/pro/pp/b425c4120565529)|[version mobile](https://wireframe.cc/pro/pp/45213f241565534)|
+|details d'un tournoi en préparation|version desktop|version mobile|
+|details d'un tournoi en cours|version desktop|version mobile|
+|details d'un tournoi terminé|version desktop|version mobile|
+|club|[version desktop](https://wireframe.cc/UpUgLQ)|[version mobile](https://wireframe.cc/lMlsq0)|
+|membres|[version desktop](https://wireframe.cc/bvV69j)|[version mobile](https://wireframe.cc/r0cWah)|
+|details d'un membre|version desktop|version mobile|
+|classements|[version desktop](https://wireframe.cc/Ddhcvo)|version mobile|
+|profil|[version desktop](https://wireframe.cc/HIUrQM)|[version mobile](https://wireframe.cc/lMlsq0)|
+|aide|version desktop|version mobile|
+|404|version desktop|version mobile|
+|mot de passe perdu|[version desktop](https://wireframe.cc/uKfaPB)|[version mobile](https://wireframe.cc/0Bon9w)|
+|contact|[version desktop](https://wireframe.cc/IicAxd)|[version mobile](https://wireframe.cc/2Abx44)|
+|à propos|version desktop|version mobile|
+|mentions légales|version desktop|version mobile|
+|404|version desktop|version mobile|
