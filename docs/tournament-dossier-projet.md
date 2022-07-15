@@ -43,7 +43,7 @@ Les utilisateurs seront les gestionnaires de club et les adhérents du club.
 - Back :
   - NodeJS, Express, Postgresql, Swagger, Sqitch
 - Front :
-  - HTML, CSS, JS, React, Redux
+  - HTML, CSS, JS, React, Redux, SASS
 
 ## Les navigateurs compatibles
 - Chrome
@@ -63,6 +63,7 @@ https://www.gloomaps.com/YsdgTyfRa3
  ┃  ┃  ┃  ┗ 📄details d'un tournoi\
  ┃  ┃  ┣ 📄club\
  ┃  ┃  ┣ 📄membres\
+ ┃  ┃  ┃  ┗ 📄création d'un membre\
  ┃  ┃  ┃  ┗ 📄details d'un membre\
  ┃  ┃  ┣ 📄classements\
  ┃  ┃  ┣ 📄profil\
@@ -112,8 +113,7 @@ https://www.gloomaps.com/YsdgTyfRa3
       - email
       - photo de profil
     - modification de compte membre
-    - création tournoi rapide (préconstruit, sans notif)
-    - création de tournoi - avancée
+    - création de tournoi
       - nom
       - date
       - descriptif
@@ -204,6 +204,7 @@ pages :
 
 - langage général: Anglais
 - linter: ESLint + config airbnb
+- noms des classes HTML: BEM
 - noms de fichiers généraux: kebab-case (minuscule et séparé par des tirets)
 - noms de dossier généraux: kebab-case (minuscule et séparé par des tirets)
 - noms de dossier de composant REACT: PascalCase
