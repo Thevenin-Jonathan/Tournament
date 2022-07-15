@@ -5,7 +5,7 @@
 - Beaucoup de discussions autour des fonctionnalités du site et debut du cachier des charges
 - Attributions des roles de chacun
 
-### 12/07/2022 - Sprint 1 - Jour 2
+### 12/07/2022 - Sprint 0 - Jour 2
 
 - Discussion plus en details sur les fonctionnalités du projet
 - Création des user stories individuellement
@@ -13,7 +13,7 @@
 - Discussion et explication sur les wireframes
 - Distribution à chacun des wireframes à dessiner individuellement
 
-### 13/07/2022 - Sprint 1 - Jour 3
+### 13/07/2022 - Sprint 0 - Jour 3
 
 - Comparaison de nos wireframes fait la veille afin d'en garder les meilleurs idées
 - Discussion sur de futurs fonctionnalités
