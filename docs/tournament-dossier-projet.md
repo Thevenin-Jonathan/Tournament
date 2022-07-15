@@ -189,8 +189,25 @@ pages :
 - page aide dans le dashboard
 
 ## conventions
-todo
 
+- langage général: Anglais
+- linter: ESLint + config airbnb
+- noms de fichiers généraux: kebab-case (minuscule et séparé par des tirets)
+- noms de dossier généraux: kebab-case (minuscule et séparé par des tirets)
+- noms de dossier de composant REACT: PascalCase
+- noms de fichier de model: PascalCase
+- noms de fonctions: camelCase
+- noms de variables: camelCase
+- noms de variables CSS: kebab-case
+- titres de commit:
+  - fix:
+  - docs:
+  - feat:
+  - refactor:
+  - style:
+  - perf:
+  - test:
+  - build:
 
 ## Wireframes
 distrib wireframes
