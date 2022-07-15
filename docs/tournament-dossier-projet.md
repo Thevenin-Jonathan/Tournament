@@ -154,6 +154,7 @@ https://www.gloomaps.com/YsdgTyfRa3
   - Gestion multi-sport
   - Messagerie interne
   - Intégration d'une section blog
+  - chiffrage des emails et des numéros de téléphone
 
 ## Use Cases
 
