@@ -9,6 +9,7 @@
   - [Les technologies utilisées](#les-technologies-utilisées)
   - [Les navigateurs compatibles](#les-navigateurs-compatibles)
   - [Arborescence](#arborescence)
+  - [Liste des routes à créer (côté Back)](#liste-des-routes-à-créer-côté-back)
   - [Routes (front)](#routes-front)
   - [Les roles utilisateurs](#les-roles-utilisateurs)
   - [Les fonctionnalités](#les-fonctionnalités)
@@ -74,6 +75,23 @@ https://www.gloomaps.com/YsdgTyfRa3
  ┣ 📄à propos\
  ┣ 📄mentions légales\
  ┗ 📄404
+
+## Liste des routes à créer (côté Back)
+
+| Route      | Méthode | Action | Données renvoyées |
+-------------|---------|------------------------------|-----------------
+| /   | GET     |  | 
+| /tournois    | GET     | Récupère la liste des tournois | Liste des tournois
+| /tournois/creer-tournoi     | POST    | Ajouter/creer un nouveau tournoi | Tournoi créée
+| /tournois/:id | PUT     | Modifie un tournoi| Tournoi modifier
+| /tournois/:id | DELETE  | Supprime un tournoi | Aucune donnée renvoyée
+| /membres| GET  | Recupèrer la liste des membres | Liste des membres
+| /membres | POST  | Ajouter un membre | Membre crée
+| /membres/:id | PUT  | Modifie un membre | Membre modifier
+| /membres/:id | DELETE  | Supprime un membre | Aucune donnée renvoyée
+
+Note : pensez à retourner les code HTTP appropriés
+
 
 ## Routes (front)
 - /
