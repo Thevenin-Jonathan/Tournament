@@ -79,19 +79,29 @@ https://www.gloomaps.com/YsdgTyfRa3
 ## Liste des routes à créer (côté Back)
 
 | Route      | Méthode | Action | Données renvoyées |
--------------|---------|------------------------------|-----------------
-| /   | GET     |  | 
-| /tournois    | GET     | Récupère la liste des tournois | Liste des tournois
-| /tournois/creer-tournoi     | POST    | Ajouter/creer un nouveau tournoi | Tournoi créée
-| /tournois/:id | PUT     | Modifie un tournoi| Tournoi modifier
-| /tournois/:id | DELETE  | Supprime un tournoi | Aucune donnée renvoyée
-| /membres| GET  | Recupèrer la liste des membres | Liste des membres
-| /membres | POST  | Ajouter un membre | Membre crée
-| /membres/:id | PUT  | Modifie un membre | Membre modifier
-| /membres/:id | DELETE  | Supprime un membre | Aucune donnée renvoyée
+-------------|---------|------------------------------|-----------------|
+| /login | GET | affiche la page de connexion | affiche la page
+| /login | POST | nous connecte ou non| renvoi la page 
+| /api/tournament   | GET     | Récupère la liste des tournois | Liste des tournois
+| /api/tournament    | POST    | Ajouter/creer un nouveau tournoi | Tournoi créée
+| /api/tournament/:id | PATCH     | Modifie un tournoi| Tournoi modifier
+| /api/tournament/:id | DELETE  | Supprime un tournoi | Aucune donnée renvoyée
+| /api/tournament/:id/match | GET  | Récupére tous les matchs | renvoi les matchs donné
+| /api/tournament/:id/match/:id | PATCH  | mettre à jour le match| renvoi un match à jour
+| /api/tournament/:id/team/ | GET  | récuperer toutes les teams d'un tournoi| renvoi les teams du tournoi avec ces joueurs
+| /api/tournament/:id/team/:id | PATCH  | mettre à jour une team| renvoi une team modifié
+| /api/tournament/:id/team/:id/match | GET  | récupere tous les matchs d'une team| renvoi les matchs d'une team 
+| /api/user| GET  | Recupèrer la liste des membres | Liste des membres
+| /api/user | POST  | Ajouter un membre | Membre crée
+| /api/user/:id | PATCH  | Modifie un membre | Membre modifier
+| /api/user/:id | DELETE  | Supprime un membre | Aucune donnée renvoyée
+| /api/user/:id/match | GET  | récupére tous les matchs avec la table PLAY | 
+| /404 | GET  | redirige vers la page 404 | renvoi une 404
+| /contact | GET  | redirige vers la page contact | renvoi une page contact
+| /contact | POST  | soumettre le formulaire | renvoi le formulaire
 
-Note : pensez à retourner les code HTTP appropriés
 
+(Note : pensez à retourner les code HTTP appropriés)
 
 ## Routes (front)
 - /
