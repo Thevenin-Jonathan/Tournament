@@ -9,13 +9,15 @@
   - [Les technologies utilisées](#les-technologies-utilisées)
   - [Les navigateurs compatibles](#les-navigateurs-compatibles)
   - [Arborescence](#arborescence)
-  - [Liste des routes à créer (côté Back)](#liste-des-routes-à-créer-côté-back)
-  - [Routes (front)](#routes-front)
+  - [Routes](#routes)
+    - [Back](#back)
+    - [Front](#front)
   - [Les roles utilisateurs](#les-roles-utilisateurs)
   - [Les fonctionnalités](#les-fonctionnalités)
     - [MVP](#mvp)
     - [Évolutions futures](#évolutions-futures)
   - [Use Cases](#use-cases)
+  - [Liste des pages](#liste-des-pages)
   - [conventions](#conventions)
   - [Wireframes](#wireframes)
 
@@ -44,7 +46,7 @@ Les utilisateurs seront les gestionnaires de club et les adhérents du club.
 - Back :
   - NodeJS, Express, Postgresql, Swagger, Sqitch
 - Front :
-  - HTML, CSS, JS, React, Redux, SASS
+  - HTML, CSS, SASS, JS, React, Redux
 
 ## Les navigateurs compatibles
 - Chrome
@@ -76,57 +78,59 @@ https://www.gloomaps.com/YsdgTyfRa3
  ┣ 📄mentions légales\
  ┗ 📄404
 
-## Liste des routes à créer (côté Back)
+## Routes
 
-| Route      | Méthode | Action | Données renvoyées |
--------------|---------|------------------------------|-----------------|
+### Back
+
+| Route | Méthode | Action | Données renvoyées |
+| --- | --- | --- | --- |
 | /login | GET | affiche la page de connexion | affiche la page
 | /login | POST | nous connecte ou non| renvoi la page 
-| /api/tournament   | GET     | Récupère la liste des tournois | Liste des tournois
-| /api/tournament    | POST    | Ajouter/creer un nouveau tournoi | Tournoi créée
-| /api/tournament/:id | PATCH     | Modifie un tournoi| Tournoi modifier
-| /api/tournament/:id | DELETE  | Supprime un tournoi | Aucune donnée renvoyée
-| /api/tournament/:id/match | GET  | Récupére tous les matchs | renvoi les matchs donné
-| /api/tournament/:id/match/:id | PATCH  | mettre à jour le match| renvoi un match à jour
-| /api/tournament/:id/team/ | GET  | récuperer toutes les teams d'un tournoi| renvoi les teams du tournoi avec ces joueurs
-| /api/tournament/:id/team/:id | PATCH  | mettre à jour une team| renvoi une team modifié
-| /api/tournament/:id/team/:id/match | GET  | récupere tous les matchs d'une team| renvoi les matchs d'une team 
-| /api/user| GET  | Recupèrer la liste des membres | Liste des membres
-| /api/user | POST  | Ajouter un membre | Membre crée
-| /api/user/:id | PATCH  | Modifie un membre | Membre modifier
-| /api/user/:id | DELETE  | Supprime un membre | Aucune donnée renvoyée
-| /api/user/:id/match | GET  | récupére tous les matchs avec la table PLAY | 
-| /404 | GET  | redirige vers la page 404 | renvoi une 404
-| /contact | GET  | redirige vers la page contact | renvoi une page contact
-| /contact | POST  | soumettre le formulaire | renvoi le formulaire
+| /api/tournament | GET | Récupère la liste des tournois | Liste des tournois
+| /api/tournament | POST | Ajouter/creer un nouveau tournoi | Tournoi créée
+| /api/tournament/:id | PATCH | Modifie un tournoi| Tournoi modifier
+| /api/tournament/:id | DELETE | Supprime un tournoi | Aucune donnée renvoyée
+| /api/tournament/:id/match | GET | Récupére tous les matchs | renvoi les matchs donné
+| /api/tournament/:id/match/:id | PATCH | mettre à jour le match | renvoi un match à jour
+| /api/tournament/:id/team/ | GET | récuperer toutes les teams d'un tournoi | renvoi les teams du tournoi avec ces joueurs
+| /api/tournament/:id/team/:id | PATCH | mettre à jour une team| renvoi une team modifié
+| /api/tournament/:id/team/:id/match | GET | récupere tous les matchs d'une team | renvoi les matchs d'une team 
+| /api/user| GET | Recupèrer la liste des membres | Liste des membres
+| /api/user | POST | Ajouter un membre | Membre crée
+| /api/user/:id | PATCH | Modifie un membre | Membre modifier
+| /api/user/:id | DELETE | Supprime un membre | Aucune donnée renvoyée
+| /api/user/:id/match | GET | récupére tous les matchs avec la table PLAY
+| /404 | GET | redirige vers la page 404 | renvoi une 404
+| /contact | GET | redirige vers la page contact | renvoi une page contact
+| /contact | POST | soumettre le formulaire | renvoi le formulaire
 
+### Front
 
-(Note : pensez à retourner les code HTTP appropriés)
-
-## Routes (front)
-- /
-- /connexion
-- /mot-de-passe-perdu
-- /contact
-- /a-propos
-- /mentions-legales
-- /404
-- /tableau-de-bord
-- /tournois
-- /tournois/creer-tournoi
-- /tournois/:slug-du-tournoi
-- /club
-- /membres
-- /membres/:id-membre
-- /classements
-- /profil/:id-membre
-- /aide
-- /404 (version connecté)
+| Route | Action |
+| --- | --- |
+| / | Affiche la page promo du site ? route back statique
+| /connexion | Affiche la page de connexion
+| /mot-de-passe-perdu | Permet de récuprer son mot de passe
+| /contact | Permet d'envoyer un message personnel au admin du club ? club ou nous
+| /a-propos | Permet d'accéder au infos de ? club ou nous
+| /mentions-legales | Permet d'acceder aux mentions légales
+| /404 | Affiche une page 404 en cas de route inconnue (si non connecté)
+| /tableau-de-bord | Permet d'accéder à son tableau de bord personnel
+| /tournois | Permet d'accéder à la liste des tournois à venir, en cours et archivé ? page archive
+| /tournois/creer-tournoi | Affiche la page de création d'un tournoi
+| /tournois/:slug-du-tournoi | Affiche un tournois spécifique
+| /club | Affiche les infos du club
+| /membres | Affiche la liste des membres
+| /membres/:id-membre | Affiche la page d'un membres afin de voir ses infos publiques et statistiques
+| /classements | Affiche le classement des membres
+| /profil/:id-membre | Affiche le profil d'un membre
+| /aide | Affiche une page aide et FAQ
+| /404 (version connecté) | Affiche une page 404 en cas de route inconnue (si connecté)
 
 
 ## Les roles utilisateurs
 - Admin
-- membre (interne ou externe)
+- membre
 
 
 ## Les fonctionnalités
@@ -135,14 +139,16 @@ https://www.gloomaps.com/YsdgTyfRa3
     - création de compte membre
       - nom
       - prénom
-      - age
+      - date de naissance
       - sexe
       - adresse
       - email
       - photo de profil
+      - si actif
+      - licence
     - modification de compte membre
     - création de tournoi
-      - nom
+      - titre
       - date
       - descriptif
       - photo
@@ -209,9 +215,9 @@ https://www.gloomaps.com/YsdgTyfRa3
 | Visiteur | parcourir le site | découvrir son contenu |
 | Visiteur | contacter un admin | poser des questions, demander des infos |
 
+## Liste des pages
 
-pages :
-- home : presentation du service
+- home (presentation du service)
 - formulaire de contact du service
 - connexion
 - récupération de mot de passe
