@@ -27,19 +27,25 @@ Table "type" :
 |code_type|integer|primary key|identifiant unique de la table|
 |name|text|not null|format du tournoi (All vs All, championnat, élimination directe, etc)
 
-Table "club" :
+Table "state" :
 |Champ|Type|Spécificités|Description|
 | --- | --- | --- | --- |
-|code_club|integer|primary key|identifiant unique de la table|
-|name|text|not null|nom du club|
-|address|text||adresse postale|
-|phone|text||numéro de téléphone|
-|email|text|not null|adresse courriel|
-|logo_url|text||adresse du logo|
-|nb_playground|integer|not null|nombre de terrain disponible simultanément du club|
-|website|text||adresse web du site du club|
-|club_ref|text||identifiant fédéral du club|
-|description|text||information libre du club|
+|code_state|integer|primary key|identifiant unique de la table|
+|name|text|not null|nom de l'état|
+
+Table "match" :
+|Champ|Type|Spécificités|Description|
+| --- | --- | --- | --- |
+|code_match|integer|primary key|identifiant unique de la table|
+|note|text||commentaire libre|
+|code_state|integer|foreign key, not null|identifiant unique qui référence state|
+|code_tournament|integer|foreign key, not null|identifiant unique qui référence tournament|
+
+Table "team" :
+|Champ|Type|Spécificités|Description|
+| --- | --- | --- | --- |
+|code_team|integer|primary key|identifiant unique de la table|
+|code_tournament|integer|foreign key, not null|identifiant unique qui référence tournament|
 
 Table "user" :
 |Champ|Type|Spécificités|Description|
@@ -62,33 +68,26 @@ Table "role" :
 |Champ|Type|Spécificités|Description|
 | --- | --- | --- | --- |
 |code_role|integer|primary key|identifiant unique de la table|
-|name|text|not null|nom du role|"
-"
-Table "team" :
-|Champ|Type|Spécificités|Description|
-| --- | --- | --- | --- |
-|code_team|integer|primary key|identifiant unique de la table|
-|code_tournament|integer|foreign key, not null|identifiant unique qui référence tournament|
+|name|text|not null|nom du role|
 
-Table "match" :
+Table "club" :
 |Champ|Type|Spécificités|Description|
 | --- | --- | --- | --- |
-|code_match|integer|primary key|identifiant unique de la table|
-|note|text||commentaire libre|
-|code_state|integer|foreign key, not null|identifiant unique qui référence state|
-|code_tournament|integer|foreign key, not null|identifiant unique qui référence tournament|
-
-Table "state" :
-|Champ|Type|Spécificités|Description|
-| --- | --- | --- | --- |
-|code_state|integer|primary key|identifiant unique de la table|
-|name|text|not null|nom de l'état|
+|code_club|integer|primary key|identifiant unique de la table|
+|name|text|not null|nom du club|
+|address|text||adresse postale|
+|phone|text||numéro de téléphone|
+|email|text|not null|adresse courriel|
+|logo_url|text||adresse du logo|
+|nb_playground|integer|not null|nombre de terrain disponible simultanément du club|
+|website|text||adresse web du site du club|
+|club_ref|text||identifiant fédéral du club|
+|description|text||information libre du club|
 
 Table d'association "play" :
 |Champ|Type|Spécificités|Description|
 | --- | --- | --- | --- |
-|code_play|integer|primary key|identifiant unique de la table|
 |score|text||résultat de l'équipe, nombre de set gagné ou forfait (0, 1, 2 ,F)|
 |is_winner|boolean|default false| définit si l'équipe est gagnante|
-|code_team|integer|foreign key, not null|identifiant unique qui référence team|
-|code_match|integer|foreign key, not null|identifiant unique qui référence match|
+|code_team|integer|primary key, foreign key, not null|partie de l'identifiant unique de la table et identifiant unique qui référence team|
+|code_match|integer|primary key, foreign key, not null|partie de l'identifiant unique de la table et identifiant unique qui référence match|
