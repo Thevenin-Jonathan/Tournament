@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="q14IiLRXBmb8PRQ_uYk1" name="Page-1">
-        <mxGraphModel dx="358" dy="567" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff" math="0" shadow="0">
+        <mxGraphModel dx="672" dy="1134" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -350,19 +350,19 @@
                     <mxGeometry y="30" width="101" height="45" as="geometry"/>
                 </mxCell>
                 <mxCell id="166" value="PLAY" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;fillColor=#fad9d5;strokeColor=none;swimlaneLine=0;fontColor=#000000;" parent="1" vertex="1">
-                    <mxGeometry x="245.22000000000003" y="509.5" width="113" height="87.5" as="geometry">
+                    <mxGeometry x="244" y="514" width="113" height="69.5" as="geometry">
                         <mxRectangle x="206" y="605" width="76" height="30" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="167" value="code play&#10;is winner&#10;score" style="align=center;strokeColor=none;fillColor=#ffcccc;spacingLeft=4;fontSize=12;verticalAlign=middle;resizable=0;rotatable=0;part=1;fontColor=#000000;" parent="166" vertex="1">
-                    <mxGeometry y="30" width="113" height="57.5" as="geometry"/>
+                <mxCell id="167" value="is winner&#10;score" style="align=center;strokeColor=none;fillColor=#ffcccc;spacingLeft=4;fontSize=12;verticalAlign=middle;resizable=0;rotatable=0;part=1;fontColor=#000000;" parent="166" vertex="1">
+                    <mxGeometry y="30" width="113" height="39.5" as="geometry"/>
                 </mxCell>
                 <mxCell id="169" value="BELONGS" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;fillColor=#fad9d5;strokeColor=none;swimlaneLine=0;fontColor=#000000;" parent="1" vertex="1">
                     <mxGeometry x="539" y="680" width="113" height="58" as="geometry">
                         <mxRectangle x="206" y="605" width="76" height="30" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="170" value="code belongs" style="align=center;strokeColor=none;fillColor=#ffcccc;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;fontColor=#000000;" parent="169" vertex="1">
+                <mxCell id="170" value="" style="align=center;strokeColor=none;fillColor=#ffcccc;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;fontColor=#000000;" parent="169" vertex="1">
                     <mxGeometry y="30" width="113" height="28" as="geometry"/>
                 </mxCell>
                 <mxCell id="171" value="MANAGE" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;fillColor=#fad9d5;strokeColor=none;swimlaneLine=0;fontColor=#000000;" parent="1" vertex="1">
@@ -370,7 +370,7 @@
                         <mxRectangle x="206" y="605" width="76" height="30" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="172" value="code manage" style="align=center;strokeColor=none;fillColor=#ffcccc;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;fontColor=#000000;" parent="171" vertex="1">
+                <mxCell id="172" value="" style="align=center;strokeColor=none;fillColor=#ffcccc;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;fontColor=#000000;" parent="171" vertex="1">
                     <mxGeometry y="30" width="98" height="28" as="geometry"/>
                 </mxCell>
                 <mxCell id="175" value="USER" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=none;swimlaneLine=0;" parent="1" vertex="1">
@@ -378,7 +378,7 @@
                         <mxRectangle x="206" y="605" width="76" height="30" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="176" value="code user&#10;firstname&#10;lastname&#10;address&#10;birthdate&#10;sex&#10;is active&#10;email&#10;is active&#10;password&#10;url avatar&#10;player license" style="align=center;strokeColor=none;fillColor=#cce5ff;spacingLeft=4;fontSize=12;verticalAlign=middle;resizable=0;rotatable=0;part=1;fontColor=#000000;" parent="175" vertex="1">
+                <mxCell id="176" value="code user&#10;firstname&#10;lastname&#10;address&#10;birthdate&#10;sex&#10;email&#10;is active&#10;password&#10;url avatar&#10;player license" style="align=center;strokeColor=none;fillColor=#cce5ff;spacingLeft=4;fontSize=12;verticalAlign=middle;resizable=0;rotatable=0;part=1;fontColor=#000000;" parent="175" vertex="1">
                     <mxGeometry y="30" width="121.55" height="181" as="geometry"/>
                 </mxCell>
                 <mxCell id="177" value="ROLE" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=none;swimlaneLine=0;" parent="1" vertex="1">
