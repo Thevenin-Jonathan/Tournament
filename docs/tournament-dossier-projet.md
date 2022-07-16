@@ -1,4 +1,5 @@
 # DEFINITION PROJET TOURNAMENT
+
 ## Cahier des charges
 
 - [DEFINITION PROJET TOURNAMENT](#definition-projet-tournament)
@@ -18,37 +19,39 @@
     - [Évolutions futures](#évolutions-futures)
   - [Use Cases](#use-cases)
   - [Liste des pages](#liste-des-pages)
-  - [conventions](#conventions)
+  - [Conventions](#conventions)
   - [Wireframes](#wireframes)
 
 ## Présentation du projet
+
 L'organisation d'un tournoi de sport et plus spécifiquement dans le cadre du Badminton:(ou Tennis) est toujours fastidieuse.
 Entre gérer les tableaux/catégories (jeunes, double, mixte, simple), les inscriptions, la composition, le type de tournoi (all-play-all, poules, élimination directe), les passages, les terrains...
 Cela demande beaucoup de préparation et de gestion technique pour un club qui veut proposer des tournois amicaux ! (les tournois dans le cadre de la fédération disposent de leurs propres outils).
 Souvent ça se termine en tableau Excel, au mieux, et la plupart du temps au Velléda sur le bord du gymnase, avec un bon mal de crane pour essayer d'optimiser un minimum et pas finir à 2h du matin :)
 Notre objectif est de proposer un outil clé en main pour organiser facilement ces évènements.
 
-
 ### Cible du projet
+
 Le service cible les clubs de badminton.
 Les utilisateurs seront les gestionnaires de club et les adhérents du club.
 
-
 ## Attribution des roles de l'équipe
+
 - Tom Roche : Product Owner
 - Jonathan Thevenin : Scrum master
 - Cédric Bernard : Lead dev front
 - Augustin Pajaro : Lead dev back
-- El Houceine El Handouz : Git Master
-  
+- El Houceine El Handouz : Git Master  
 
 ## Les technologies utilisées
+
 - Back :
   - NodeJS, Express, Postgresql, Swagger, Sqitch
 - Front :
   - HTML, CSS, SASS, JS, React, Redux
 
 ## Les navigateurs compatibles
+
 - Chrome
 - Firefox
 - Safari
@@ -56,7 +59,8 @@ Les utilisateurs seront les gestionnaires de club et les adhérents du club.
 - Edge
 
 ## Arborescence
-https://www.gloomaps.com/YsdgTyfRa3
+
+[Lien vers le gloomaps](https://www.gloomaps.com/YsdgTyfRa3)
 
 📄home\
  ┣ 📄connexion\
@@ -85,7 +89,7 @@ https://www.gloomaps.com/YsdgTyfRa3
 | Route | Méthode | Action | Données renvoyées |
 | --- | --- | --- | --- |
 | /login | GET | affiche la page de connexion | affiche la page
-| /login | POST | nous connecte ou non| renvoi la page 
+| /login | POST | nous connecte ou non| renvoi la page
 | /api/tournament | GET | Récupère la liste des tournois | Liste des tournois
 | /api/tournament | POST | Ajouter/creer un nouveau tournoi | Tournoi créée
 | /api/tournament/:id | PATCH | Modifie un tournoi| Tournoi modifier
@@ -94,7 +98,7 @@ https://www.gloomaps.com/YsdgTyfRa3
 | /api/tournament/:id/match/:id | PATCH | mettre à jour le match | renvoi un match à jour
 | /api/tournament/:id/team/ | GET | récuperer toutes les teams d'un tournoi | renvoi les teams du tournoi avec ces joueurs
 | /api/tournament/:id/team/:id | PATCH | mettre à jour une team| renvoi une team modifié
-| /api/tournament/:id/team/:id/match | GET | récupere tous les matchs d'une team | renvoi les matchs d'une team 
+| /api/tournament/:id/team/:id/match | GET | récupere tous les matchs d'une team | renvoi les matchs d'une team
 | /api/user| GET | Recupèrer la liste des membres | Liste des membres
 | /api/user | POST | Ajouter un membre | Membre crée
 | /api/user/:id | PATCH | Modifie un membre | Membre modifier
@@ -127,68 +131,70 @@ https://www.gloomaps.com/YsdgTyfRa3
 | /aide | Affiche une page aide et FAQ
 | /404 (version connecté) | Affiche une page 404 en cas de route inconnue (si connecté)
 
-
 ## Les roles utilisateurs
+
 - Admin
 - membre
 
-
 ## Les fonctionnalités
+
 ### MVP
-  - admin
-    - création de compte membre
-      - nom
-      - prénom
-      - date de naissance
-      - sexe
-      - adresse
-      - email
-      - photo de profil
-      - si actif
-      - licence
-    - modification de compte membre
-    - création de tournoi
-      - titre
-      - date
-      - descriptif
-      - photo
-      - type (all-vs-all)
-      - discipline (solo, double femme, double homme, double mixte)
-      - organisateurs (gerants suplémentaires optionnels du tournoi)
-      - nb de terrains - facultatif
-      - limite joueurs/equipes - facultatif
-      - Si le tournoi est validé / une notif est envoyée aux adherents - facultatif
-    - modification d'un tournoi
-    - suppression d'un tournoi
-  - membre
-    - modification de son compte
-    - inscription aux tournois
-      - en simple
-      - en double
-        - inscrire une equipe : un nom d'équipe / nom random (option lors de la créa du tournoi)
-        - s'inscrire en solo
-        - inscrire un partenaire
-    - Consultation des tournois passés et voir les resultats
-    - Consultation des leaderboards
-  - admin ou membre avec droit organisateur
-    - réorganisation du tournoi (equipes, type, etc...)
-    - Le jour du tournoi (tant que le tournoi n'est pas commencé)
-      - démarrer le tournoi
-      - mettre à jour le tournoi (gagnants, perdants, notes...)
-      - cloturer le tournoi / affichage des resultats
+
+- admin
+  - création de compte membre
+    - nom
+    - prénom
+    - date de naissance
+    - sexe
+    - adresse
+    - email
+    - photo de profil
+    - si actif
+    - licence
+  - modification de compte membre
+  - création de tournoi
+    - titre
+    - date
+    - descriptif
+    - photo
+    - type (all-vs-all)
+    - discipline (solo, double femme, double homme, double mixte)
+    - organisateurs (gerants suplémentaires optionnels du tournoi)
+    - nb de terrains - facultatif
+    - limite joueurs/equipes - facultatif
+    - Si le tournoi est validé / une notif est envoyée aux adherents - facultatif
+  - modification d'un tournoi
+  - suppression d'un tournoi
+- membre
+  - modification de son compte
+  - inscription aux tournois
+    - en simple
+    - en double
+      - inscrire une equipe : un nom d'équipe / nom random (option lors de la créa du tournoi)
+      - s'inscrire en solo
+      - inscrire un partenaire
+  - Consultation des tournois passés et voir les resultats
+  - Consultation des leaderboards
+- admin ou membre avec droit organisateur
+  - réorganisation du tournoi (equipes, type, etc...)
+  - Le jour du tournoi (tant que le tournoi n'est pas commencé)
+    - démarrer le tournoi
+    - mettre à jour le tournoi (gagnants, perdants, notes...)
+    - cloturer le tournoi / affichage des resultats
 
 ### Évolutions futures
-  - Ajout de type de tournoi (Poules, élimnation direct, etc)
-  - Gestion d'équipes favorites
-  - Gestion complète des scores
-  - Ouverture aux inscriptions de joueurs externes au club
-  - Intégration de l'API officielle du FFBAD
-  - Gérer une vue spectateur publique
-  - Gestion multi-club
-  - Gestion multi-sport
-  - Messagerie interne
-  - Intégration d'une section blog
-  - chiffrage des emails et des numéros de téléphone
+
+- Ajout de type de tournoi (Poules, élimnation direct, etc)
+- Gestion d'équipes favorites
+- Gestion complète des scores
+- Ouverture aux inscriptions de joueurs externes au club
+- Intégration de l'API officielle du FFBAD
+- Gérer une vue spectateur publique
+- Gestion multi-club
+- Gestion multi-sport
+- Messagerie interne
+- Intégration d'une section blog
+- chiffrage des emails et des numéros de téléphone
 
 ## Use Cases
 
@@ -231,11 +237,11 @@ https://www.gloomaps.com/YsdgTyfRa3
 - page classement
 - page admin création des membres (unitaire ou en masse)
 - page liste membres (avec bouton edit pour l'admin)
-- page créer un tournoi 
+- page créer un tournoi
 - page tournoi en cours Admin : mettre à jour le tournoi (entrer le score d'un match, cloturer, modifier tant que le tournoi n'a pas commencé)
 - page aide dans le dashboard
 
-## conventions
+## Conventions
 
 - langage général: Anglais
 - linter: ESLint + config airbnb
@@ -258,6 +264,7 @@ https://www.gloomaps.com/YsdgTyfRa3
   - build:
 
 ## Wireframes
+
 ​
 |Vue|Desktop|Mobile|
 |-----|-----|-----|
