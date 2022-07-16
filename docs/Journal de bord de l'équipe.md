@@ -20,3 +20,11 @@
 - Prototypage de MCD individuellement
 - Comparaison de nos MCD, plusieurs désaccords
 - Prévoir des amélioration du MCD, analyse sur la prochaine journée
+
+### 13/07/2022 - Sprint 0 - Jour 3
+
+- mise à jours du MCD
+- ajout des routes back, des conventions et des évolutions futures dans les spécifications
+- création du dictonnaire de données
+- échange avec Jordan de l'état du projet
+- création d'un fichier de suivi de veille
