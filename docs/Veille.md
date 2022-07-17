@@ -8,4 +8,5 @@ https://www.ionos.fr/digitalguide/sites-internet/developpement-web/json-web-toke
 https://www.digitalocean.com/community/tutorials/nodejs-jwt-expressjs
 https://medium.com/@sbesnier1901/s%C3%A9curiser-une-api-avec-node-js-et-jwt-15e14d9df109
 https://www.digitalocean.com/community/tutorials/api-authentication-with-json-web-tokensjwt-and-passport
+https://www.wawasensei.dev/tuto/tuto-authentification-refresh-json-web-token-en-nodejs-avec-express
 
