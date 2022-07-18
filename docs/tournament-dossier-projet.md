@@ -185,6 +185,8 @@ Les utilisateurs seront les gestionnaires de club et les adhérents du club.
 ### Évolutions futures
 
 - Ajout de type de tournoi (Poules, élimnation direct, etc)
+- Ajout d'une vue et filtre pour les tournois archivés
+- Gestion du role utilisateur par les admins
 - Gestion d'équipes favorites
 - Gestion complète des scores
 - Ouverture aux inscriptions de joueurs externes au club
@@ -194,7 +196,6 @@ Les utilisateurs seront les gestionnaires de club et les adhérents du club.
 - Gestion multi-sport
 - Messagerie interne
 - Intégration d'une section blog
-- chiffrage des emails et des numéros de téléphone
 
 ## Use Cases
 
