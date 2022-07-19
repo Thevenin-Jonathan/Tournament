@@ -1,0 +1,4 @@
+%syntax-version=1.0.0
+%project=tournament_sqitch
+
+v1 2022-07-19T14:39:05Z jonathan thevenin <warzo@Warzone-W11-Lap> # Init DB (Tables, PK, FK, Index)
