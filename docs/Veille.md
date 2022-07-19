@@ -4,6 +4,8 @@
   - Télécharger Strawberry-Perl [ici](https://strawberryperl.com/) et l'installer
   - Ouvrir un le Perl CLI
   - lancer la commande: ```cpan install App::Sqitch DBD::Pg```
+  - si erreur : ```cpan install DBD::Pg```
+  - si encore erreur : ```cpanm install DBD::Pg```
 
 - Sur MAC
   - Ouvrir le terminal
