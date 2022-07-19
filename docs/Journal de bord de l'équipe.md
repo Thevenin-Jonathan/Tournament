@@ -21,10 +21,26 @@
 - Comparaison de nos MCD, plusieurs désaccords
 - Prévoir des amélioration du MCD, analyse sur la prochaine journée
 
-### 13/07/2022 - Sprint 0 - Jour 3
+### 15/07/2022 - Sprint 0 - Jour 4
 
 - mise à jours du MCD
 - ajout des routes back, des conventions et des évolutions futures dans les spécifications
 - création du dictonnaire de données
 - échange avec Jordan de l'état du projet
 - création d'un fichier de suivi de veille
+
+### 18/07/2022 - Sprint 0 - Jour 5
+
+- structuration du repo en deux dossier front et back
+- amélioration du cahier des charges
+- amélioration du MCD
+- amélioration du dico de données
+- création du MLD
+- préparation pour Tino à la présentation du projet pour la rétrospective du lendemain
+
+### 19/07/2022 - Sprint 1 - Jour 6
+
+- matinée retrospective et présentation des projets entre nous
+- Tom et Cédric ont discuté et commencer à s'organiser au niveau des composants REACT de base
+- Moi, Tino et El Houceine avons initialisé et configuré sqitch et terminé la premiere migration pour créer la base de donnée
+- Plusieurs résolution de probleme mineur lié aux installations de certains programmes et terminals
