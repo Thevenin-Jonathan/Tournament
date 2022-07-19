@@ -55,7 +55,7 @@ Table "user" :
 |lastname|text|not null|nom|
 |address|text||adresse postale|
 |birthdate|date|not null|date de naissance|
-|sex|text|not null|sexe|
+|gender|text|not null|genre|
 |is_active|boolean|not null default true| définit si un joueur est actif ou non|
 |email|text|not null|adresse courriel|
 |password|text|not null|mot de passe chiffré|
