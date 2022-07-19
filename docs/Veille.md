@@ -1,3 +1,19 @@
+## Comment installer sqitch
+
+- Sur Windows
+  - Télécharger Strawberry-Perl et l'installer
+  - Ouvrir un le Perl CLI
+  - lancer la commande: ```cpan install App::Sqitch DBD::Pg```
+
+- Sur MAC
+  - Ouvrir le terminal
+  - Lancer la commande ```brew tap sqitchers/sqitch```
+  - Puis lancer cette commande ```brew install sqitch --with-postgres-support```
+
+- Sur Linux
+  - Ouvrir le terminal
+  - Lancer la commande ```apt-get install sqitch libdbd-pg-perl postgresql-client```
+
 ## Recherche sur le dictionnaire de données:
 
 - https://www.univ-constantine2.dz/CoursOnLine/Benelhadj-Mohamed/co/grain3_2.html
