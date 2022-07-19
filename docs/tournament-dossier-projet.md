@@ -263,6 +263,7 @@ Les utilisateurs seront les gestionnaires de club et les adhérents du club.
   - perf:
   - test:
   - build:
+  - config:
 
 ## Wireframes
 
