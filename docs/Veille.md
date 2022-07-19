@@ -1,7 +1,7 @@
 ## Comment installer sqitch
 
 - Sur Windows
-  - Télécharger Strawberry-Perl et l'installer
+  - Télécharger Strawberry-Perl [ici](https://strawberryperl.com/) et l'installer
   - Ouvrir un le Perl CLI
   - lancer la commande: ```cpan install App::Sqitch DBD::Pg```
 
