@@ -9,7 +9,7 @@ function Menu() {
             to="/tableau-de-bord"
             className={({ isActive }) => (isActive ? 'menu-link menu-link--selected' : 'menu-link')}
           >
-            Tableau de bord
+            <i className="fa fa-home fa-fw" aria-hidden="true" />&nbsp; Tableau de bord
           </NavLink>
         </li>
 
@@ -18,7 +18,7 @@ function Menu() {
             to="/tournois"
             className={({ isActive }) => (isActive ? 'menu-link menu-link--selected' : 'menu-link')}
           >
-            Tournois
+            <i className="fa fa-trophy fa-fw" aria-hidden="true" />&nbsp; Tournois
           </NavLink>
         </li>
 
@@ -27,7 +27,7 @@ function Menu() {
             to="/club"
             className={({ isActive }) => (isActive ? 'menu-link menu-link--selected' : 'menu-link')}
           >
-            Club
+            <i className="fa fa-flag fa-fw" aria-hidden="true" />&nbsp; Club
           </NavLink>
         </li>
 
@@ -36,7 +36,7 @@ function Menu() {
             to="/membres"
             className={({ isActive }) => (isActive ? 'menu-link menu-link--selected' : 'menu-link')}
           >
-            Membres
+            <i className="fa fa-users fa-fw" aria-hidden="true" />&nbsp; Membres
           </NavLink>
         </li>
 
@@ -45,7 +45,7 @@ function Menu() {
             to="/classements"
             className={({ isActive }) => (isActive ? 'menu-link menu-link--selected' : 'menu-link')}
           >
-            Classements
+            <i className="fa fa-list-ol fa-fw" aria-hidden="true" />&nbsp; Classements
           </NavLink>
         </li>
 
@@ -54,7 +54,7 @@ function Menu() {
             to="/aide"
             className={({ isActive }) => (isActive ? 'menu-link menu-link--selected' : 'menu-link')}
           >
-            Aide
+            <i className="fa fa-question-circle fa-fw" aria-hidden="true" />&nbsp; Aide
           </NavLink>
         </li>
 
