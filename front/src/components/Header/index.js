@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import logo from 'src/assets/logo-petit-tournament.svg';
 
 function Header() {
@@ -13,11 +15,14 @@ function Header() {
         <div className="header-user-menu-pannel">
           <div className="user-image">
             <img src="" alt="" />
-
           </div>
           <ul>
-            <li>Mon profil</li>
-            <li>Déconnexion</li>
+            <li>
+              <Link className="pannel-link" to="/profil">Mon profil</Link>
+            </li>
+            <li>
+              <Link className="pannel-link" to="/connexion">Déconnexion</Link>
+            </li>
           </ul>
         </div>
       </div>

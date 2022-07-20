@@ -7,6 +7,10 @@ html, body, #root, .app {
   height: 100%;
 }
 
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
 .app {
   background-color: lightseagreen;
   display: flex;
@@ -23,10 +27,13 @@ html, body, #root, .app {
   color: var(--ligthColor-text);
   // padding: 1rem 2rem;
 
+  &-logo {
+    margin: 0 1rem 0 2rem;
+  }
+
   &-club-name {
     font-weight: bold;
     font-size: 3rem;
-    padding: 0 1rem;
   }
 
   &-user-welcome {
@@ -48,9 +55,25 @@ html, body, #root, .app {
 
       .user-image {
         background-color: blue;
-        width: 4rem;
-        height: 4rem;
+        border-radius: 10px;
+        margin-right: 1rem;
+        width: 5rem;
+        height: 5rem;
       }
+
+        
+        
+        .pannel-link {
+          width: 10rem;
+          padding: 0.5rem 0;
+          display: block;
+          color: var(--header-color);
+        }
+
+        .pannel-link:hover {
+          text-decoration: underline;
+        }
+      
     }
   }
 
@@ -60,6 +83,7 @@ html, body, #root, .app {
 
     .header-user-menu-pannel {
       display: flex;
+      align-items: center;
     }
   }
 
