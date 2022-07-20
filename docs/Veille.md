@@ -30,3 +30,6 @@
 - https://www.digitalocean.com/community/tutorials/api-authentication-with-json-web-tokensjwt-and-passport
 - https://www.wawasensei.dev/tuto/tuto-authentification-refresh-json-web-token-en-nodejs-avec-express
 
+## Generation de données fictives
+
+-https://www.mockaroo.com/
