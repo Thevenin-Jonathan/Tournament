@@ -1,6 +1,13 @@
 :root {
+  // colors variables
+  --bg-color: #1A2F4C;
   --main-color: #061B38;
   --emphase-color: #BF9C5A;
+  --header-color: #16273E;
+  --ligth-color-text: #FFFFFF;
+
+  // margin variables
+  --margin-base: 1rem;
 }
 
 html, body, #root, .app {
@@ -12,7 +19,7 @@ body {
 }
 
 .app {
-  background-color: lightseagreen;
+  background-color: var(--bg-color);
   display: flex;
   flex-wrap: wrap;
 }
@@ -24,11 +31,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: var(--ligthColor-text);
-  // padding: 1rem 2rem;
+  color: var(--ligth-color-text);
 
   &-logo {
-    margin: 0 1rem 0 2rem;
+    padding: 0 1rem 0 2rem;
   }
 
   &-club-name {
@@ -48,7 +54,7 @@ body {
     &-pannel {
       display: none;
       position: absolute;
-      background-color: var(--ligthColor-text);
+      background-color: var(--ligth-color-text);
       right: 0;
       padding: 1rem;
       box-shadow: 0 10px 8px rgba(0,0,0,.2);
