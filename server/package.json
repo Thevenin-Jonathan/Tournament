@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "db-seed": "psql -U tournament_admin -d tournament -f ./sqitch/seed_db.sql"
   },"repository": {
     "type": "git",
     "url": "https://github.com/O-clock-Cassini/projet-11-tournament"
