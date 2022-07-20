@@ -67,18 +67,16 @@ body {
         height: 5rem;
       }
 
-        
-        
-        .pannel-link {
-          width: 10rem;
-          padding: 0.5rem 0;
-          display: block;
-          color: var(--header-color);
-        }
+      .pannel-link {
+        width: 10rem;
+        padding: 0.5rem 0;
+        display: block;
+        color: var(--header-color);
+      }
 
-        .pannel-link:hover {
-          text-decoration: underline;
-        }
+      .pannel-link:hover {
+        text-decoration: underline;
+      }
       
     }
   }

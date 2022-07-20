@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
 
 import Dashboard from '../Dashboard';
+import Club from '../Club';
 import Header from '../Header';
 import Menu from '../Menu';
 import Tournaments from '../Tournaments';
@@ -34,6 +35,7 @@ function App() {
       <Routes>
         <Route path="/tableau-de-bord" element={<Dashboard />} />
         <Route path="/tournois" element={<Tournaments />} />
+        <Route path="/club" element={<Club />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </div>
