@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS "club"(
   "logo_url" TEXT,
   "nb_playground" INTEGER NOT NULL,
   "website" TEXT UNIQUE,
-  "club_ref" TEXT,
+  "club_ref" TEXT UNIQUE,
   "description" TEXT
 );
 
