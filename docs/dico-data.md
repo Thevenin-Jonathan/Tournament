@@ -54,15 +54,22 @@ Table "user" :
 |firstname|text|not null|prénom|
 |lastname|text|not null|nom|
 |address|text||adresse postale|
+|phone|text||numéro de téléphone|
 |birthdate|date|not null|date de naissance|
-|gender|text|not null|genre|
 |is_active|boolean|not null default true| définit si un joueur est actif ou non|
 |email|text|not null|adresse courriel|
 |password|text|not null|mot de passe chiffré|
 |url_avatar|text||photo de profil|
 |player_license|text||licence fédérale|
+|code_gender|integer|foreign key, not null|identifiant unique qui référence gender|
 |code_club|integer|foreign key, not null|identifiant unique qui référence club|
 |code_role|integer|foreign key, not null|identifiant unique qui référence role|
+
+Table "gender" :
+|Champ|Type|Spécificités|Description|
+| --- | --- | --- | --- |
+|code_gender|integer|primary key|identifiant unique de la table|
+|name|text|not null|nom du genre|
 
 Table "role" :
 |Champ|Type|Spécificités|Description|
@@ -84,10 +91,16 @@ Table "club" :
 |club_ref|text||identifiant fédéral du club|
 |description|text||information libre du club|
 
+Table "result" :
+|Champ|Type|Spécificités|Description|
+| --- | --- | --- | --- |
+|code_result|integer|primary key|identifiant unique de la table|
+|label|text|not null|résultat de l'équipe, nombre de set gagné ou forfait (0, 1, 2 ,F)|
+
 Table d'association "play" :
 |Champ|Type|Spécificités|Description|
 | --- | --- | --- | --- |
-|score|text||résultat de l'équipe, nombre de set gagné ou forfait (0, 1, 2 ,F)|
 |is_winner|boolean|default false| définit si l'équipe est gagnante|
+|code_result|integer|foreign key, not null|identifiant unique qui référence result|
 |code_team|integer|primary key, foreign key, not null|partie de l'identifiant unique de la table et identifiant unique qui référence team|
 |code_match|integer|primary key, foreign key, not null|partie de l'identifiant unique de la table et identifiant unique qui référence match|
