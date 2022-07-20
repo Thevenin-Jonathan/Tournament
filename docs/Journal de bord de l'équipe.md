@@ -44,3 +44,17 @@
 - Tom et Cédric ont discuté et commencer à s'organiser au niveau des composants REACT de base
 - Moi, Tino et El Houceine avons initialisé et configuré sqitch et terminé la premiere migration pour créer la base de donnée
 - Plusieurs résolution de probleme mineur lié aux installations de certains programmes et terminals
+
+### 20/07/2022 - Sprint 1 - Jour 7
+
+- Initialisation du server express
+- Discussion autour de la structure de fichier du serveur
+- Configuration du routage du serveur
+- Configuration de la connexion du serveur à la base de donnée
+- Mise à jour de la base de données, ajout de deux tables
+- Mise à jour de la doc avec les nouvelles données
+- Ajout du migration en version 2, deploy, revert et verify ok
+- Mise à jour du fichier de seeding avec les nouvelles données
+- Étude des communs : règles css globales, composants récurrents, ressources graphiques et techniques (images, icônes, fonts)
+- Création des 2 composants React communs, Header et Menu (en mode static pour le moment ) qui apparaîtront quelle que soit la vue lorsque l’user est connecté.
+- Fix d’un conflit de merge (notre premier !) et fix des variables css globales.
