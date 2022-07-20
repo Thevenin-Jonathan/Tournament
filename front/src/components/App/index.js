@@ -12,7 +12,7 @@ import './styles.scss';
 
 // == Composant
 function App() {
-  const [isLogged, setIsLogged] = useState(false);
+  const [isLogged, setIsLogged] = useState(true);
 
   // if not connected
   if (!isLogged) {
