@@ -88,8 +88,6 @@ Les utilisateurs seront les gestionnaires de club et les adhérents du club.
 
 | Route | Méthode | Action | Données renvoyées |
 | --- | --- | --- | --- |
-| /login | GET | affiche la page de connexion | affiche la page
-| /login | POST | nous connecte ou non| renvoi la page
 | /api/tournament | GET | Récupère la liste des tournois | Liste des tournois
 | /api/tournament | POST | Ajouter/creer un nouveau tournoi | Tournoi créée
 | /api/tournament/:id | PATCH | Modifie un tournoi| Tournoi modifier
@@ -104,9 +102,6 @@ Les utilisateurs seront les gestionnaires de club et les adhérents du club.
 | /api/user/:id | PATCH | Modifie un membre | Membre modifier
 | /api/user/:id | DELETE | Supprime un membre | Aucune donnée renvoyée
 | /api/user/:id/match | GET | récupére tous les matchs avec la table PLAY
-| /404 | GET | redirige vers la page 404 | renvoi une 404
-| /contact | GET | redirige vers la page contact | renvoi une page contact
-| /contact | POST | soumettre le formulaire | renvoi le formulaire
 
 ### Front
 
