@@ -1,5 +1,6 @@
 :root {
   --main-color: #061B38;
+  --emphase-color: #BF9C5A;
 }
 
 html, body, #root, .app {
@@ -22,7 +23,7 @@ html, body, #root, .app {
   background-color: var(--main-color);
   height: calc(100% - 6rem);
   width: 18rem;
-  padding-top: 2rem;
+  padding: 2rem 0;
   font-size: 1.2em;
   ul {
     height: 100%;
@@ -36,6 +37,14 @@ html, body, #root, .app {
     display: block;
     color: white;
     padding: 1rem;
+    &:hover {
+      background-color: rgba(255,255,255,.1);
+    }
+    &--selected {
+      color : var(--emphase-color);
+      background-color: rgba(255,255,255,.1);
+      border-right: solid .8rem var(--emphase-color);
+    }
   }
 }
 
