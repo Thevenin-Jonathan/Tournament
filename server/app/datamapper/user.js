@@ -71,7 +71,20 @@ async function updateOne(id, user) {
   return result.rows[0];
 }
 
-  async deleteOne(id) {
+/**
+ * Delete one user from database
+ * @param {number} id user identifiant
+ * @returns {boolean} true if user was delete
+ */
+async function deleteOne(id) {
+  const result = await pool.query(
+    `
+      DELETE FROM "user" WHERE id = $1
+    `,
+    [id]
+  );
 
-  }
+  pool.end();
+  return !!result.rowCount;
+}
 }
