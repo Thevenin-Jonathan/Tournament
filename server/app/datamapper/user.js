@@ -22,32 +22,29 @@ async function findById(id) {
   return result.rows[0];
 }
 
-  async insertOne(user) {
-    const result = pool.query(
+/**
+ * Insert one user in database
+ * @param {object} user 
+ * @returns {object} user
+ */
+async function insertOne(user) {
+  const columns = Object.keys(user).map((name, i) => `"${name}"`);
+  const values = Object.values(user);
+  const symbols = values.map((_, i) => `$${i + 1}`);
+
+  const result = await pool.query(
     `
       INSERT INTO "user"
-        ("firstname", "lastname", "address", "birthdate", "is_active", "email", "password", "url_avatar", "player_license", "club_id", "role_id", "phone", "gender_id")
+        (${columns})
       VALUES
-        ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13);
-      RETURNING *
-    `,
-    [
-      user.firstname,
-      user.lastname,
-      user.address || null,
-      user.phone || null,
-      user.birthdate,
-      user.isActive,
-      user.email,
-      user.password,
-      user.urlAvatar || null,
-      user.playerLicense || null,
-      user.genderId,
-      user.clubId,
-      user.roleId
-    ])
-    pool.end();
-    return result.rows[0];
+        (${symbols})
+      RETURNING *;
+    `,      
+    [...values]
+  )
+
+  pool.end();
+  return result.rows[0];
   },
 
   async updateOne(id, user) {
