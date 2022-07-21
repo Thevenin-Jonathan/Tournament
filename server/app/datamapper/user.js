@@ -41,4 +41,36 @@ module.exports = {
     return result.rows[0];
   },
 
+  async updateOne(id, user) {
+    const result = pool.query(
+    `
+      UPDATE "user" SET
+        "firstname" = $1,
+        "lastname" = $2,
+        "address" = $3,
+        "birthdate" = $4,
+        "is_active" = $5,
+        "phone" = $6,
+        "email" = $7,
+        "password" = $8,
+        "url_avatar" = $9,
+        "player_license" = $10,
+        "club_id" = $11,
+        "role_id" = $12,
+        "gender_id" = $13
+      WHERE id = $2
+      RETURNING *
+    `,
+    [
+      user.firstname
+      ,
+      id
+    ]);
+    pool.end()
+    return result.rows[0];
+  },
+
+  async deleteOne(id) {
+
+  }
 }
