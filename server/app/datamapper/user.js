@@ -45,36 +45,31 @@ async function insertOne(user) {
 
   pool.end();
   return result.rows[0];
-  },
+}
 
-  async updateOne(id, user) {
-    const result = pool.query(
+/**
+ * Update one user in database
+ * @param {number} id user identifiant
+ * @param {object} user user informations
+ * @returns {object} user
+ */
+async function updateOne(id, user) {
+  const columns = Object.keys(user).map((name, i) => `"${name}" = $${i + 1}`);
+  const values = Object.values(user);
+  const result = await pool.query(
     `
       UPDATE "user" SET
-        "firstname" = $1,
-        "lastname" = $2,
-        "address" = $3,
-        "birthdate" = $4,
-        "is_active" = $5,
-        "phone" = $6,
-        "email" = $7,
-        "password" = $8,
-        "url_avatar" = $9,
-        "player_license" = $10,
-        "club_id" = $11,
-        "role_id" = $12,
-        "gender_id" = $13
-      WHERE id = $2
-      RETURNING *
+        ${columns}
+      WHERE
+        id = $${columns.length + 1}
+      RETURNING *;
     `,
-    [
-      user.firstname
-      ,
-      id
-    ]);
-    pool.end()
-    return result.rows[0];
-  },
+    [...values, id]
+  );
+
+  pool.end();
+  return result.rows[0];
+}
 
   async deleteOne(id) {
 
