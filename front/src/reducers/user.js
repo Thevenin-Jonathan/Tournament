@@ -49,6 +49,7 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         logged: false,
+        displayName: '',
         email: '',
         password: '',
         token: null,
