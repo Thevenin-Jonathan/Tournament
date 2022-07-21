@@ -1,8 +1,26 @@
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import logoBig from 'src/assets/img/logo-grand-tournament.png';
 
 function LoginForm() {
+  const dispatch = useDispatch();
+
+  const changeField = (value, input) => {
+    dispatch({
+      type: 'CHANGE_FIELD',
+      input,
+      value,
+    });
+  };
+
+  const handleLoginSubmit = (evt) => {
+    evt.preventDefault();
+    dispatch({
+      type: 'SUBMIT_LOGIN',
+    });
+  };
+
   return (
     <main className="login-page">
       <div className="wrapper">
@@ -10,17 +28,31 @@ function LoginForm() {
           <img src={logoBig} alt="Logo Tournament" />
         </a>
 
-        <form action="/connexion" className="login-form" method="POST">
+        <form className="login-form" onSubmit={handleLoginSubmit}>
           <h1>Connexion <span>Club</span></h1>
 
           <div className="input-line">
             <label htmlFor="email" className="non-necessary-label"><i className="fa fa-at" aria-hidden="true" /> Identifiant (email) </label>
-            <input type="email" name="email" id="email" className="login-input text-input" placeholder="president@club.fr" />
+            <input
+              onChange={(evt) => changeField(evt.target.value, 'email')}
+              type="email"
+              name="email"
+              id="email"
+              className="login-input text-input"
+              placeholder="president@club.fr"
+            />
           </div>
 
           <div className="input-line">
             <label htmlFor="password" className="non-necessary-label"><i className="fa fa-at" aria-hidden="true" /> Mot de passe </label>
-            <input type="password" name="password" id="password" className="password-input text-input" placeholder="•••••" />
+            <input
+              onChange={(evt) => changeField(evt.target.value, 'password')}
+              type="password"
+              name="password"
+              id="password"
+              className="password-input text-input"
+              placeholder="•••••"
+            />
           </div>
 
           <div className="input-line rememberme">
