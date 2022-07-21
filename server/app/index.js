@@ -4,6 +4,7 @@ const debug = require('debug')('app:server');
 const app = express();
 const router = require("./routers");
 
+
 // On active le middleware pour parser le payload JSON
 app.use(express.json());
 // On active le middleware pour parser le payload urlencoded
