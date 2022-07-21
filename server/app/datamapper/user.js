@@ -11,11 +11,16 @@ async function findAll() {
   return result.rows;
 }
 
-  async findById(id) {
-    const result = pool.query(`SELECT * FROM "user" WHERE "id" = $1`, [id]);
-    pool.end();
-    return result.rows[0];
-  },
+/**
+ * Return one user from database
+ * @param {number} id User identifiant
+ * @returns {object} user
+ */
+async function findById(id) {
+  const result = await pool.query(`SELECT * FROM "user" WHERE "id" = $1`, [id]);
+  pool.end();
+  return result.rows[0];
+}
 
   async insertOne(user) {
     const result = pool.query(
