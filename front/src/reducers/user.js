@@ -1,6 +1,9 @@
 export const initialState = {
   logged: false,
+  loginLoading: false,
+
   id: null,
+  diplayName: '',
   token: null,
 
   // champs controlés
@@ -9,8 +12,9 @@ export const initialState = {
   //
   lastName: '',
   firstName: '',
-  adress: '',
-  birthDate: '',
+  address: '',
+  phone: '',
+  birthdate: '',
   gender: '',
   playerLicense: '',
   // avatar: '',
@@ -33,6 +37,8 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         token: action.value.token,
         logged: action.value.logged,
+        displayName: action.value.firstName,
+        password: '',
       };
     case 'SUBMIT_LOGIN_FAILED':
       return {
