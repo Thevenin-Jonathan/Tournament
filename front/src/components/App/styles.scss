@@ -25,6 +25,13 @@ body {
   flex-wrap: wrap;
 }
 
+// pen button (=> edit button)
+.list-item-btn {
+  background-color: var(--bg-color);
+  color: var(--ligth-color-text);
+  border: none;
+}
+
 .header {
   background-color: var(--header-color);
   width: 100%;
@@ -78,7 +85,6 @@ body {
       .pannel-link:hover {
         text-decoration: underline;
       }
-      
     }
   }
 
@@ -187,3 +193,54 @@ body {
     max-width: 40rem;
   }
 }
+
+/************************/
+/****** RESPONSIVE ******/
+/************************/
+
+@media only screen and (max-width: 640px) {
+  .content {
+    width: 100%;
+  }
+  .menu {
+    display: none;
+  }
+  .header {
+    height: 15rem;
+    display: flex;
+    flex-direction: column;
+  
+    &-logo {
+      padding: 1rem 0;
+    }
+  
+    &-user-welcome {
+      line-height: 2rem;
+      padding: 1rem;
+    }
+  
+    &-user-menu {
+      margin: 0;
+  
+      &-pannel {
+        position: relative;
+  
+        .user-image {
+          margin: 0 0 1rem 0;
+        }
+      }
+    }
+  
+    &-user-menu:hover {  
+      .header-user-menu-pannel {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  }
+  .club-profil-image {
+    display: none;
+  }
+}
+
