@@ -1,7 +1,6 @@
 // == Import
 import { Routes, Route } from 'react-router-dom';
-
-import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import Dashboard from '../Dashboard';
 import Header from '../Header';
@@ -13,8 +12,7 @@ import LoginForm from '../LoginForm';
 
 // == Composant
 function App() {
-  const [isLogged, setIsLogged] = useState(false);
-
+  const isLogged = useSelector((state) => (state.user.logged));
   // if not connected
   if (!isLogged) {
     // display public content
