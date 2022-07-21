@@ -3,7 +3,7 @@ export const initialState = {
   loginLoading: false,
 
   id: null,
-  diplayName: '',
+  displayName: '',
   token: null,
 
   // champs controlés
@@ -37,6 +37,7 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         token: action.value.token,
         logged: action.value.logged,
+        id: action.value.id,
         displayName: action.value.firstName,
         avatar: action.value.avatar,
         password: '',
