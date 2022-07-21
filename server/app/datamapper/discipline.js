@@ -1,61 +1,79 @@
-// Penser à JSDoc sur chaque fonction.
-
 const pool = require("../config/database");
 
-// findAll() Recupere toutes les disciplines
+/** 
+ * Get and return all disciplines from DB
+ * @returns {Object[]} - the list of all disciplines
+*/
 async function findAll() {
-    const result = await pool.query(`SELECT * FROM "discipline"`);
-    const disciplines = result.rows;
-    console.log(disciplines);
+    const result = await pool.query(
+        `SELECT * FROM "discipline"`
+    );
     pool.end();
-    return disciplines;
+    return result.rows;
 };
 
-// findById(id) Recupere une discipline en function de son id
-async function findById(disciplineId) {
-    const result = await pool.query(`SELECT * FROM "discipline" WHERE "id" = $1;`, [disciplineId]);
+/** 
+ * Get and return one discipline based on its id from DB
+ * @param {number} - id of the discipline
+ * @returns {Object} - one discipline
+*/
+async function findById(id) {
+    const result = await pool.query(
+        `SELECT * FROM "discipline" WHERE "id"= $1;`,[id]
+    );
     pool.end();
     return result.rows[0];
 };
 
-// insertOne() Ajoute une nouvelle discipline a la BDD
-async function insertOne(newDiscipline) {
-    const sql = {
-        text: `
-        INSERT INTO discipline ("name")
-        VALUES($1);`,
-        values: [newDiscipline]
-    };
-    const result = await pool.query(sql);
+/** 
+ * Add a new discipline to the DB
+ * @param {string} - name of discipline
+ * @returns {Object} - discipline added
+*/
+async function insertOne(discipline) {
+    const result = await pool.query(
+        `INSERT INTO discipline ("name")
+        VALUES($1) 
+        RETURNING *;`,[discipline]
+    );  
     pool.end();
-    return result.rowCount;
+    return result.rows[0];
 };
 
-// deleteOne(id) Enleve une discipline de la BDD
-async function deleteOne(disciplineId) {
-    const result = await pool.query(`DELETE FROM "discipline" WHERE "id" = $1;`, [disciplineId]);
+/** 
+ * Delete one discipline from DB
+ * @param {number} - id of the discipline
+ * @returns {boolean} - true if the discipline is deleted
+*/
+async function deleteOne(id) {
+    const result = await pool.query(
+        `DELETE FROM "discipline" WHERE "id" = $1;`,[id]
+    );
     pool.end();
-    return result.rowCount;
+    return !!result.rowCount;
 };
 
-// updateOne(id) Change les informations (name) d'une discipline
-async function updateOne(disciplineName, disciplineId) {
-    const sql = {
-      text: `
-          UPDATE "discipline" SET "name" = $1
-          WHERE "id" = $2;`,
-      values: [disciplineName, disciplineId]
-    };
-    const result = await pool.query(sql);
+/** 
+ * Update the name of one discipline
+ * @param {string} - name of the discipline
+ * @param {number} - id of the discipline 
+ * @returns {Object} - discipline updated
+*/
+async function updateOne(name, id) {
+    const result = await pool.query(
+        `UPDATE "discipline" 
+        SET "name" = $1
+        WHERE "id" = $2
+        RETURNING *;`,[name, id]
+    );
     pool.end();
-    return result.rowCount;
+    return result.rows[0];
   };
 
-module.exports = {
+  module.exports = {
     findAll,
     findById,
     insertOne,
     deleteOne,
     updateOne
-}
-
+  }
