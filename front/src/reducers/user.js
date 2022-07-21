@@ -17,7 +17,7 @@ export const initialState = {
   birthdate: '',
   gender: '',
   playerLicense: '',
-  // avatar: '',
+  avatar: '',
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -38,6 +38,7 @@ const reducer = (state = initialState, action = {}) => {
         token: action.value.token,
         logged: action.value.logged,
         displayName: action.value.firstName,
+        avatar: action.value.avatar,
         password: '',
       };
     case 'SUBMIT_LOGIN_FAILED':
