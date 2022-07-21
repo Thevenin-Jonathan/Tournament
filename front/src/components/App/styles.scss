@@ -181,6 +181,10 @@ a {
         max-width: 20rem;
         margin-bottom: 1rem;
         transition: filter .2s;
+        @media only screen and (max-width: 810px) {
+          margin: auto;
+        }
+        
       }
       .logo-tournament:hover {
         filter: drop-shadow(0 0 100px var(--ligth-color-text));
@@ -275,6 +279,9 @@ a {
         border-top: solid .1rem rgba(255,255,255,.3);
         padding: 1rem;
         font-size: .7rem;
+        @media only screen and (max-width: 810px) {
+          text-align: center;
+        }
       }
       ::placeholder {
         color: lightgray
