@@ -40,6 +40,7 @@ const reducer = (state = initialState, action = {}) => {
         displayName: action.value.firstName,
         avatar: action.value.avatar,
         password: '',
+        loginLoading: false,
       };
     case 'SUBMIT_LOGIN_FAILED':
       return {

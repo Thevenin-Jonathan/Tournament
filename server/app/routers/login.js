@@ -22,6 +22,12 @@ router.post("/", (req, res) => {
     )
 
     res.json({
+      // tests
+      logged: true, 
+      id: "1",
+      firstName: "Jonathan",
+      LastName: "Thevenin",
+      avatar: "https://ca.slack-edge.com/T031GD7HYJE-U032A3NU6FK-b572cbb49793-512",
       token
     })
   }

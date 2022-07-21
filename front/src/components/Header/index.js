@@ -24,7 +24,7 @@ function Header() {
         </p>
         <div className="header-user-menu-pannel">
           <div className="user-image">
-            <img src="" alt="" />
+            <img src={user.avatar} alt={user.displayName} />
           </div>
           <ul>
             <li>
