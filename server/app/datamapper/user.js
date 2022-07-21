@@ -87,4 +87,11 @@ async function deleteOne(id) {
   pool.end();
   return !!result.rowCount;
 }
+
+module.exports = {
+  findAll,
+  findById,
+  insertOne,
+  updateOne,
+  deleteOne
 }
