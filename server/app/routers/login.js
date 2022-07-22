@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const userDatamapper = require("../datamapper/user");
+const userDatamapper = require("../datamappers/user");
 
 /** JWT **/
 const jwt = require("jsonwebtoken");
