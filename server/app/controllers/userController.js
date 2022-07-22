@@ -6,6 +6,8 @@ async function register(req, res) {
 };
 
 async function getAll(req, res) {
+  const users = await userDatamapper.findAll();
+  res.json(users);
 };
 
 async function getOne(req, res) {
