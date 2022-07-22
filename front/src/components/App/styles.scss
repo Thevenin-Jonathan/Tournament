@@ -34,9 +34,16 @@ a {
   flex-wrap: wrap;
 }
 
+// page title (Tableau de bord, Tournois, Mon profil, etc...)
+.title {
+  font-size: 3rem;
+  font-weight: 200;
+  margin-bottom: 1rem;
+}
+
 // pen button (=> edit button)
 .list-item-btn {
-  background-color: var(--bg-color);
+  background-color: transparent;
   color: var(--ligth-color-text);
   border: none;
 }
@@ -346,5 +353,45 @@ a {
       ::placeholder {
         color: lightgray
       }
+  }
+}
+
+.profil {
+  display: flex;
+  flex-direction: column;
+
+  &-content {
+    display: flex;
+    max-width: 800px;
+    }
+  
+  &-infos {
+    display: flex;
+    width: 65%;
+    background-color: var(--main-color);
+    border-radius: 10px;
+    padding: 1rem;
+  }
+
+  &-image {
+    width: 7rem;
+    height: 7rem;
+    background-color: blue;
+    margin: 0.5rem;
+  }
+
+  &-stats {
+    padding: 1rem;
+  }
+
+  li {
+    padding: 0.5rem;
+  }
+
+  @media only screen and (max-width: 810px) {
+    &-content, &-infos {
+      flex-direction: column;
+      padding: 1rem 0;
+    }
   }
 }
