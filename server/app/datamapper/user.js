@@ -87,10 +87,46 @@ async function deleteOne(id) {
   return !!result.rowCount;
 }
 
+/**
+ * Verify if the user is already in DB by unique variables
+ * @param {object} user user informations
+ * @param {number} id user identifiant
+ * @returns {boolean} true if already exist
+ */
+async function exist(user, id) {
+  const columns = [];
+  const values = [];
+
+  Object.entries(user).forEach(([key, val]) => {
+    if (["email", "phone", "player_license"].includes(key)) {
+      columns.push(`"${key}" = $${columns.length + 1}`);
+      values.push(val);
+    }
+  })
+
+  const query = {
+    text: `SELECT * FROM "user" WHERE ${columns.join(" OR ")}`,
+    values
+  }
+
+  console.log(query)
+
+  if (id) {
+    query.text += ` AND id = $${values.length + 1}`,
+    query.values.push(id)
+  }
+
+  const result = await pool.query(query);
+  pool.end();
+
+  return !!result.rowCount;
+}
+
 module.exports = {
   findAll,
   findById,
   insertOne,
   updateOne,
-  deleteOne
+  deleteOne,
+  exist
 }
