@@ -1,3 +1,5 @@
+import clublogo from 'src/assets/logo-bayard-bad-blanc.png';
+
 function Club() {
   return (
     <main className="content club">
@@ -38,7 +40,7 @@ function Club() {
           </ul>
         </div>
         <div className="club-profil-image">
-          <img href="" alt="" />
+        <img src={clublogo} className="club-logo" alt="Logo Tournament" />
         </div>
       </div>
       <div className="club-description">
