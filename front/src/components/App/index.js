@@ -1,6 +1,7 @@
 // == Import
+import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Dashboard from '../Dashboard';
 import Club from '../Club';
@@ -13,7 +14,33 @@ import LoginForm from '../LoginForm';
 
 // == Composant
 function App() {
+  const dispatch = useDispatch();
   const isLogged = useSelector((state) => (state.user.logged));
+
+  // au montage du composant
+  useEffect(() => {
+    // si logged = false
+    if (!isLogged) {
+      // tester si token présent
+      // récuperer le token dans le local storage
+      const currentUser = JSON.parse(localStorage.getItem('authToken'));
+      // si pas de token
+      if (!currentUser) {
+        // on verouille l'acces
+        dispatch({
+          type: 'LOGOUT',
+        });
+      }
+      else {
+        // sinon on login
+        dispatch({
+          type: 'TOKEN_LOGIN',
+          token: currentUser,
+        });
+      }
+    }
+  });
+
   // if not connected
   if (!isLogged) {
     // display public content

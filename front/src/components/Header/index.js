@@ -5,13 +5,13 @@ import logo from 'src/assets/logo-petit-tournament.svg';
 
 function Header() {
   const dispatch = useDispatch();
+  const user = useSelector((state) => (state.user));
 
   const handleLogout = () => {
     dispatch({
       type: 'LOGOUT',
     });
   };
-  const user = useSelector((state) => (state.user));
 
   return (
     <header className="header">
