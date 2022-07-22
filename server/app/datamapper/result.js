@@ -6,7 +6,6 @@ const pool = require("../config/database");
  */
  async function findAll() {
     const result = await pool.query(`SELECT * FROM "result"`);
-    pool.end();
     return result.rows;
 };
 
@@ -17,7 +16,6 @@ const pool = require("../config/database");
  */
  async function findById(id) {
     const result = await pool.query(`SELECT * FROM "result" WHERE "id" = $1`, [id]);
-    pool.end();
     return result.rows[0];
 };
 
@@ -32,7 +30,6 @@ const pool = require("../config/database");
         VALUES ($1)
         RETURNING *`, [result]
     );
-    pool.end();
     return result.rows[0];
 };
 
@@ -45,7 +42,6 @@ const pool = require("../config/database");
     const result = await pool.query(
         `DELETE FROM "result" WHERE "id" = $1`, [id]
     );
-    pool.end();
     return !!result.rowCount;
 };
 
@@ -63,7 +59,6 @@ const pool = require("../config/database");
         RETURNING *
         `, [id, label]
     );
-    pool.end();
     return result.rows[0];
 };
 
