@@ -16,12 +16,16 @@
   - Ouvrir le terminal
   - Lancer la commande ```apt-get install sqitch libdbd-pg-perl postgresql-client```
 
-## Recherche sur le dictionnaire de données:
+## Méthode SCRUM
+
+- https://ignition-program.com/tuto/la-methode-scrum-pour-les-nuls?locale=fr#:~:text=D%C3%A9finition%20%3A%20L'approche%20SCRUM%20est,des%20feedbacks%20r%C3%A9guliers%20du%20march%C3%A9.
+
+## Recherche sur le dictionnaire de données
 
 - https://www.univ-constantine2.dz/CoursOnLine/Benelhadj-Mohamed/co/grain3_2.html
 - https://kourou.oclock.io/ressources/fiche-recap/dictionnaire-de-donnees/#anchor-table-dassociation%c2%a0emprunter%c2%a0entre-les-tables%c2%a0livre%c2%a0personne%c2%a0et%c2%a0lieuemprunt%c2%a0non-facultative
 
-## Recherche sur JWT:
+## Recherche sur JWT
 
 - https://grafikart.fr/tutoriels/json-web-token-presentation-958
 - https://www.ionos.fr/digitalguide/sites-internet/developpement-web/json-web-token-jwt/
