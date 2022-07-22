@@ -5,9 +5,19 @@
   --emphase-color: #BF9C5A;
   --header-color: #16273E;
   --ligth-color-text: #FFFFFF;
+
+  // font weights
+  --fine:100;
+  --normal:400;
+  --bold:700;
+  --black:900;
   
   // margin variables
   --margin-base: 1rem;
+  // rounded
+  --border-radius: 10px;
+  // border size
+  --border-size: 4px;
 }
 
 html, body, #root, .app {
@@ -16,6 +26,7 @@ html, body, #root, .app {
 
 body {
   font-family: 'Roboto', sans-serif;
+  overflow: hidden;
 }
 
 .app {
@@ -28,8 +39,9 @@ body {
 .content {
   width: calc(100% - 18rem);
   padding: 1rem 2rem;
-  display: flex;
-  flex-direction: column;
+
+  overflow: auto;
+  height: calc(100% - 6rem);
 
   // page title (Tableau de bord, Tournois, Mon profil, etc...)
   .title {
@@ -39,6 +51,7 @@ body {
   }
 }
 
+/* Generique */
 input {
   color: inherit;
   font-family: inherit;
@@ -46,6 +59,23 @@ input {
 a {
   color: inherit;
   text-decoration: none;
+  display: block;
+}
+.button {
+  background-color: var(--main-color);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-weight: var(--fine);
+  background-repeat: no-repeat;
+  &:hover {
+    outline: solid var(--border-size) var(--emphase-color);
+  }
 }
 
 // pen button (=> edit button)
@@ -161,6 +191,167 @@ a {
       border-right: solid .8rem var(--emphase-color);
     }
   }
+}
+
+
+.dashboard {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 2rem;
+  .dashboard-widget {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    // flex: 1;
+    width: calc( calc(100% - 6rem) / 4);
+    background-color: var(--main-color);
+    text-align: center;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    min-height: 12rem;
+    &:hover {
+      outline: solid var(--border-size) var(--emphase-color);
+      .widget-icon {
+        transform: scale(1.3);
+      }
+    }
+    .widget-icon {
+      transition: transform .2s;
+    }
+    .fa {
+      color: var(--emphase-color);
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    p:first-of-type {
+      font-size: 1.8rem;
+      font-weight: 900;
+    }
+  }
+  .logo {
+    display: flex;
+    img {
+      margin: auto;
+      max-width: 100%;
+    }
+  }
+  .members {
+    
+  }
+  .tournament {
+    
+  }
+  .club {
+    
+  }
+  .tournament-column {
+    width: calc( calc(100% - 6rem) / 4 * 3 + 4rem);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .create-tournament-button {
+    background-image: url(../../assets/img/icon-arrow-right.svg);
+    background-position: right 2rem center;
+    span {
+      font-weight: var(--bold);
+    }
+  }
+  .hall-of-fame {
+    font-size: .9rem;
+    .fa {
+      font-size: inherit;
+      color: inherit;
+    }
+    .hof-icon {
+      font-size: 3rem;
+      position: relative;
+      margin-top: -3.5rem;
+      color: var(--emphase-color);
+
+    }
+    .hof-title {
+      margin-bottom: 1rem;
+    }
+    .champion {
+      color: var(--emphase-color);
+      font-weight: var(--black);
+    }
+    .player-name {
+      
+    }
+    .player-victory {
+      
+    }
+    ol {
+      list-style-type: decimal;
+      text-align: left;
+      li {
+        display: flex;
+        justify-content: space-between;
+
+      }
+    }
+  }
+}
+
+.tournaments {
+}
+
+.tournament-card {
+  display: block;
+  background-color: var(--main-color);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  min-height: 10rem;
+  background-size: 60%;
+  background-position: right -1rem center;
+  background-repeat: no-repeat;
+  position: relative;
+  &:hover {
+    outline: solid var(--border-size) var(--emphase-color);
+  }
+    .tournament-layer {
+      border-radius: var(--border-radius);
+      background: linear-gradient(90deg, var(--main-color) 20%, rgba(0,0,0,0) 100%);
+      width: 60%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+    .tournament-text {
+      position: relative;
+      display: flex;
+      align-items: stretch;
+      gap: 1rem;
+    }
+    .tournament-info {
+
+    }
+    .tournament-icon {
+      color:var(--emphase-color);
+      font-size: 3rem;
+    }
+    .tournament-status {
+      font-weight: 300;
+    }
+    .tournament-name {
+      font-size: 2rem;
+      color: var(--emphase-color);
+    }
+    .tournament-discipline {
+      font-size: .8rem;
+      margin-bottom: 1rem;
+    }
+    .tournament-players-count {
+
+    }
+    .tournament-match {
+
+    }
 }
 
 .club {
