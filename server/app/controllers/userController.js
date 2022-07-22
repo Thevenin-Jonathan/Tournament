@@ -1,14 +1,14 @@
 const userDatamapper = require("../datamapper/user");
 
-async function getAll(req, res) {
+async function getAll(_, res) {
   const users = await userDatamapper.findAll();
-  res.json(users);
+  return res.json(users);
 };
 
 async function getOne(req, res) {
   const id = req.params.id;
   const user = await userDatamapper.findById(id);
-  res.json(user);
+  return res.json(user);
 };
 
 async function create(req, res) {
@@ -22,7 +22,7 @@ async function create(req, res) {
 
   const newUser = await userDatamapper.insertOne(userData);
 
-  res.json(newUser);
+  return res.json(newUser);
 };
 
 async function update(req, res) {
@@ -43,15 +43,22 @@ async function update(req, res) {
   }
 
   const updUser = await userDatamapper.updateOne(id, newData)
-  res.json(updUser)
+  return res.json(updUser)
 }
 
 async function destroy(req, res) {
+  const id = req.params.id;
+  const user = await userDatamapper.findById(id);
 
+  if (!user) {
+    return res.json({message: "User does not exist in DB"})
+  }
+
+  await userDatamapper.deleteOne(id);
+  return res.status(204).json();
 };
 
 module.exports = {
-  register,
   getAll,
   getOne,
   create,
