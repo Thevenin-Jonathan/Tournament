@@ -12,7 +12,7 @@ function TournamentCard({
     >
       <div className="tournament-layer" />
       <div className="tournament-text">
-        <i className="fa fa-trophy fa-2x tournament-icon" />
+        <i className="fa fa-trophy fa-2x tournament-icon widget-icon" />
         <div className="tournament-info">
           <p className="tournament-status">Tournoi en cours</p>
           <p className="tournament-name">{ name }</p>
