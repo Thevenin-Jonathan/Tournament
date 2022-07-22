@@ -114,8 +114,6 @@ async function exist(user, id) {
     values
   }
 
-  console.log(query)
-
   if (id) {
     query.text += ` AND id = $${values.length + 1}`,
     query.values.push(id)
