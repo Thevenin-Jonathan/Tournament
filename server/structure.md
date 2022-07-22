@@ -7,7 +7,7 @@
   📦controllers (controle les endpoints)
     📄index.js
     📄tournamentController.js
-  📦database (échange avec la database)
+  📦datamapper (échange avec la database)
     📄tournament.js
   📦config
     📄database.js (configure le Pool et la connection)

@@ -18,6 +18,15 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+input {
+  color: inherit;
+  font-family: inherit;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .app {
   background-color: var(--bg-color);
   color: var(--ligth-color-text);
@@ -73,6 +82,11 @@ body {
         margin-right: 1rem;
         width: 5rem;
         height: 5rem;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+        }
       }
 
       .pannel-link {
@@ -194,53 +208,139 @@ body {
   }
 }
 
-/************************/
-/****** RESPONSIVE ******/
-/************************/
+.login-page {
+  background-image: url(../../assets/img/login-bg.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: var(--ligth-color-text);
+  background-color: var(--bg-color);
+  height: 100vh;
 
-@media only screen and (max-width: 640px) {
-  .content {
-    width: 100%;
+  img {
+    display: block;
+    max-width: 100%;
   }
-  .menu {
-    display: none;
-  }
-  .header {
-    height: 15rem;
+
+  .wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding-top: 1rem;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-  
-    &-logo {
-      padding: 1rem 0;
-    }
-  
-    &-user-welcome {
-      line-height: 2rem;
-      padding: 1rem;
-    }
-  
-    &-user-menu {
-      margin: 0;
-  
-      &-pannel {
-        position: relative;
-  
-        .user-image {
-          margin: 0 0 1rem 0;
+    justify-content: space-between;
+    align-items: stretch;
+    padding:1rem;
+
+      .logo-tournament {
+        max-width: 20rem;
+        margin-bottom: 1rem;
+        transition: filter .2s;
+        @media only screen and (max-width: 810px) {
+          margin: auto;
         }
+        
       }
-    }
-  
-    &-user-menu:hover {  
-      .header-user-menu-pannel {
-        display: flex;
-        flex-direction: column;
+      .logo-tournament:hover {
+        filter: drop-shadow(0 0 100px var(--ligth-color-text));
+      }
+
+      .login-form {
+        flex-shrink: 1;
+        margin: 0 auto;
         text-align: center;
       }
-    }
-  }
-  .club-profil-image {
-    display: none;
+
+      .login-form h1 {
+        font-size: 2.5rem;
+        font-weight: 900;
+      }
+      .login-form h1 span {
+        color:#bf9c5a;
+      }
+      .login-form .non-necessary-label {
+        font-size: 0;
+      }
+      .login-form .text-input,
+      .login-form .button-input{
+        font-size: 1.2rem;
+        display: block;
+        width: 100%;
+        line-height: 3.5rem;
+        padding: 0 1rem;
+        padding-left: 4rem;
+        border-radius: 20rem;
+        border: solid .35rem white;
+        background-color: transparent;
+        color:white;
+        outline: none;
+        background-repeat: no-repeat;
+        background-position: .7rem center;
+        transition: .2s;
+      }
+      .login-form .text-input:focus,
+      .login-form .button-input:focus {
+        border-color: #bf9c5a;
+        background-position: .9rem center;
+      }
+      .login-form .login-input {
+        background-image: url(../../assets/img/login-input-bg.png);
+      }
+      .login-form .password-input {
+        background-image: url(../../assets/img/password-input-bg.png);
+      }
+      .login-form .rememberme {
+        font-size: 1.3rem;
+        padding: 2rem 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+      }
+      .login-form .rememberme input {
+        width: 1.3rem;
+        height: 1.3rem;
+        outline: none;
+      }
+      .login-form .submit-input {
+        padding:0 1rem;
+        color: #bf9c5a;
+        border-color: #bf9c5a;
+        font-size: 1.5rem;
+        font-weight: 900;
+        cursor: pointer;
+        transition: .2s;
+      }
+      .login-form .submit-input:hover,
+      .login-form .submit-input:focus {
+        color: white;
+        background-color: #bf9c5a;
+        box-shadow: 0 0 30px rgba(255,255,255,.3);
+      }
+      .help-links {
+        text-align: left;
+        padding: 2rem;
+        font-size: .8rem;
+      }
+      .help-link a {
+        display: block;
+        padding: .4rem 0;
+      }
+      .help-link a:hover {
+        color: #bf9c5a;
+      }
+      footer {
+        text-align: right;
+        border-top: solid .1rem rgba(255,255,255,.3);
+        padding: 1rem;
+        font-size: .7rem;
+        @media only screen and (max-width: 810px) {
+          text-align: center;
+        }
+      }
+      ::placeholder {
+        color: lightgray
+      }
   }
 }
-

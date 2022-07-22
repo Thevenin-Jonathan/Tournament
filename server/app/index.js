@@ -4,14 +4,31 @@ const debug = require('debug')('app:server');
 const app = express();
 const router = require("./routers");
 
-// On active le middleware pour parser le payload JSON
+/** Parser **/
 app.use(express.json());
-// On active le middleware pour parser le payload urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api", router);
+/** Cors **/
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Accept, Authorization');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
-const port = process.env.PORT ?? 3000;
+  // response to preflight request
+  if (req.method === 'OPTIONS') {
+    res.sendStatus(200);
+  }
+  else {
+    next();
+  }
+});
+
+/** Router **/
+app.use(
+  "/",
+  router);
+
+const port = process.env.PORT ?? 3001;
 app.listen(port, () => {
   console.log(`API demarrée sur http://localhost:${port}`);
 });

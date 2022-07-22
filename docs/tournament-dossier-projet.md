@@ -142,6 +142,7 @@ Les utilisateurs seront les gestionnaires de club et les adhérents du club.
     - date de naissance
     - sexe
     - adresse
+    - telephone
     - email
     - photo de profil
     - si actif

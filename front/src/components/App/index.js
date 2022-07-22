@@ -1,7 +1,6 @@
 // == Import
 import { Routes, Route } from 'react-router-dom';
-
-import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import Dashboard from '../Dashboard';
 import Club from '../Club';
@@ -10,18 +9,18 @@ import Menu from '../Menu';
 import Tournaments from '../Tournaments';
 import Error from '../Error';
 import './styles.scss';
+import LoginForm from '../LoginForm';
 
 // == Composant
 function App() {
-  const [isLogged, setIsLogged] = useState(true);
-
+  const isLogged = useSelector((state) => (state.user.logged));
   // if not connected
   if (!isLogged) {
     // display public content
     return (
       <Routes>
         <Route path="/" element={<h1>Hello public content (page promo)</h1>} />
-        <Route path="/connexion" element={<h1>Formulaire de connexion</h1>} />
+        <Route path="/connexion" element={<LoginForm />} />
         <Route path="/mot-de-passe-perdu" element={<h1>Formulaire de récupération de mot de passe</h1>} />
         <Route path="*" element={<Error />} />
       </Routes>
