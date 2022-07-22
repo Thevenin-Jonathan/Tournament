@@ -65,7 +65,7 @@ function App() {
         <Route path="/tableau-de-bord" element={<Dashboard />} />
         <Route path="/tournois" element={<Tournaments />} />
         <Route path="/club" element={<Club />} />
-        <Route path="/members" element={<Members />} />
+        <Route path="/membres" element={<Members />} />
         <Route path="/profil" element={<Profil />} />
         <Route path="*" element={<Error />} />
       </Routes>
