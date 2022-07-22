@@ -1,4 +1,3 @@
-require("dotenv").config({path: __dirname + "./../../.env"});
 const pool = require("../config/database");
 
 /**
@@ -28,7 +27,7 @@ async function findById(id) {
  * @returns {object} user
  */
 async function insertOne(user) {
-  const columns = Object.keys(user).map((name, i) => `"${name}"`);
+  const columns = Object.keys(user).map(name => `"${name}"`);
   const values = Object.values(user);
   const symbols = values.map((_, i) => `$${i + 1}`);
 
