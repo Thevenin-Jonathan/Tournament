@@ -62,7 +62,7 @@ async function deleteOne(id) {
 async function updateOne(tournamentId, id) {
     const result = await pool.query(
         `UPDATE "team" 
-        SET "name" = $1
+        SET "tournament_id" = $1
         WHERE "id" = $2
         RETURNING *;`,[tournamentId, id]
     );
@@ -78,18 +78,3 @@ async function updateOne(tournamentId, id) {
     updateOne
   };
 
-//   (async () => {
-//     console.log(await findAll())
-// })()
-//   (async () => {
-//     console.log(await findById(1))
-// })()
-//   (async () => {
-//     console.log(await insertOne(4))
-// })()
-//   (async () => {
-//     console.log(await deleteOne(19))
-// })()
-//   (async () => {
-//     console.log(await updateOne())
-// })()
