@@ -5,7 +5,7 @@
   --emphase-color: #BF9C5A;
   --header-color: #16273E;
   --ligth-color-text: #FFFFFF;
-
+  
   // margin variables
   --margin-base: 1rem;
 }
@@ -18,15 +18,6 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-input {
-  color: inherit;
-  font-family: inherit;
-}
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
 .app {
   background-color: var(--bg-color);
   color: var(--ligth-color-text);
@@ -34,11 +25,25 @@ a {
   flex-wrap: wrap;
 }
 
-// page title (Tableau de bord, Tournois, Mon profil, etc...)
-.title {
-  font-size: 3rem;
-  font-weight: 200;
-  margin-bottom: 1rem;
+.content {
+  width: calc(100% - 18rem);
+  padding: 1rem 2rem;
+
+  // page title (Tableau de bord, Tournois, Mon profil, etc...)
+  .title {
+    font-size: 3rem;
+    font-weight: 200;
+    margin-bottom: 1rem;
+  }
+}
+
+input {
+  color: inherit;
+  font-family: inherit;
+}
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
 // pen button (=> edit button)
@@ -156,10 +161,6 @@ a {
   }
 }
 
-.content {
-  width: calc(100% - 18rem);
-  padding: 1rem 2rem;
-}
 
 .dashboard {
 }
