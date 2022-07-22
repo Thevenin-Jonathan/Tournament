@@ -18,7 +18,8 @@ async function findAll() {
 */
 async function findById(id) {
     const result = await pool.query(
-        `SELECT * FROM "tournament_has_user" WHERE "tournament_id"= $1;`,[id]
+        `SELECT * FROM "tournament_has_user" 
+        WHERE "tournament_id"= $1;`,[id]
     );
     return result.rows[0];
 };
@@ -46,7 +47,9 @@ async function insertOne(tournament_id, user_id) {
 */
 async function deleteOne(tournament_id, user_id) {
     const result = await pool.query(
-        `DELETE FROM "tournament_has_user" WHERE "tournament_id" = $1 AND "user_id" = $2;`,
+        `DELETE FROM "tournament_has_user" 
+        WHERE "tournament_id" = $1 
+        AND "user_id" = $2;`,
         [tournament_id, user_id]
     );
     return !!result.rowCount;
