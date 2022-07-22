@@ -40,7 +40,7 @@ function Club() {
           </ul>
         </div>
         <div className="club-profil-image">
-        <img src={clublogo} className="club-logo" alt="Logo Tournament" />
+          <img src={clublogo} className="club-logo" alt="Logo du club" />
         </div>
       </div>
       <div className="club-description">
