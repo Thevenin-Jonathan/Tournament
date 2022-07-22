@@ -32,7 +32,24 @@ async function create(req, res) {
 };
 
 async function update(req, res) {
+  const id = req.params.id;
+  const newData = req.body;
+  const user = await userDatamapper.findById(id);
 
+  if (!user) {
+    return res.json({message: "User does not exist in DB"})
+  }
+  
+  if (newData.email || newData.phone || newData.player_license) {
+    const existingData = await userDatamapper.exist(newData, id);
+    if (existingData) {
+      // throw new Error("Data is already exist on another user in DB");
+      return res.json({message: "Data is already exist on another user in DB"})
+    }
+  }
+
+  const updUser = await userDatamapper.updateOne(id, newData)
+  res.json(updUser)
 }
 
 async function destroy(req, res) {
