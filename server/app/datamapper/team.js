@@ -8,7 +8,6 @@ async function findAll() {
     const result = await pool.query(
         `SELECT * FROM "team"`
     );
-    pool.end();
     return result.rows;
 };
 
@@ -21,7 +20,6 @@ async function findById(id) {
     const result = await pool.query(
         `SELECT * FROM "team" WHERE "id"= $1;`,[id]
     );
-    pool.end();
     return result.rows[0];
 };
 
@@ -36,7 +34,6 @@ async function insertOne(tournament_id) {
         VALUES($1) 
         RETURNING *;`,[tournament_id]
     );  
-    pool.end();
     return result.rows[0];
 };
 
@@ -49,7 +46,6 @@ async function deleteOne(id) {
     const result = await pool.query(
         `DELETE FROM "team" WHERE "id" = $1;`,[id]
     );
-    pool.end();
     return !!result.rowCount;
 };
 
@@ -66,7 +62,6 @@ async function updateOne(tournamentId, id) {
         WHERE "id" = $2
         RETURNING *;`,[tournamentId, id]
     );
-    pool.end();
     return result.rows[0];
   };
 
