@@ -5,9 +5,9 @@ const matchRouter = require("./matchRouter");
 const teamRouter = require("./teamRouter");
 const userRouter = require("./userRouter");
 
-router.use("/tournament", tournamentRouter);
-router.use("/match", matchRouter);
-router.use("/team", teamRouter);
-router.use("/user", userRouter);
+router.use("/tournaments", tournamentRouter);
+router.use("/matchs", matchRouter);
+router.use("/teams", teamRouter);
+router.use("/users", userRouter);
 
 module.exports = router;
