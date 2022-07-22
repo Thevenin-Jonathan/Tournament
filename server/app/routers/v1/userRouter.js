@@ -7,5 +7,7 @@ router.route("/")
 
 router.route("/:id")
   .get(controller.getOne)
+  .patch(controller.update)
+  .delete(controller.destroy);
 
 module.exports = router;
