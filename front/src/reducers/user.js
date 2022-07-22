@@ -5,7 +5,7 @@ export const initialState = {
   id: null,
   displayName: '',
   avatar: '',
-  role: '',
+  roleId: '',
   token: null,
 
   // champs controlés
@@ -39,8 +39,9 @@ const reducer = (state = initialState, action = {}) => {
         token: action.value.token,
         logged: action.value.logged,
         id: action.value.id,
-        displayName: action.value.firstName,
-        avatar: action.value.avatar,
+        displayName: action.value.firstname,
+        avatar: action.value.url_avatar,
+        roleId: action.value.role_id,
         password: '',
         loginLoading: false,
       };
@@ -54,8 +55,8 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         logged: action.token.logged,
         id: action.token.id,
-        displayName: action.token.firstName,
-        avatar: action.token.avatar,
+        displayName: action.token.firstname,
+        avatar: action.token.url_avatar,
       };
     case 'LOGOUT':
       return {
