@@ -39,8 +39,8 @@ body {
 .content {
   width: calc(100% - 18rem);
   padding: 1rem 2rem;
-
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: scroll;
   height: calc(100% - 6rem);
 
   // page title (Tableau de bord, Tournois, Mon profil, etc...)
@@ -211,6 +211,9 @@ a {
     padding: 2rem;
     border-radius: var(--border-radius);
     min-height: 12rem;
+    @media only screen and (max-width: 1100px) {
+      width: calc( calc(100% - 2rem) / 2);
+    }
     &:hover {
       outline: solid var(--border-size) var(--emphase-color);
       .widget-icon {
@@ -251,6 +254,9 @@ a {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    @media only screen and (max-width: 1100px) {
+      width: 100%;
+    }
   }
   .create-tournament-button {
     background-image: url(../../assets/img/icon-arrow-right.svg);
@@ -261,6 +267,9 @@ a {
   }
   .hall-of-fame {
     font-size: .9rem;
+    @media only screen and (max-width: 1100px) {
+      width: 100%;
+    }
     .fa {
       font-size: inherit;
       color: inherit;
@@ -286,12 +295,23 @@ a {
       
     }
     ol {
-      list-style-type: decimal;
       text-align: left;
       li {
         display: flex;
         justify-content: space-between;
-
+        padding: .5rem;
+        border-radius: var(--border-radius);
+        transition: 1s;
+        .fa {
+          margin: 0;
+        }
+        &:hover {
+          background-color: rgba(255,255,255,.1);
+          transition: .2s;
+        }
+        &:hover .fa {
+          transform: scale(1.4);
+        }
       }
     }
   }
