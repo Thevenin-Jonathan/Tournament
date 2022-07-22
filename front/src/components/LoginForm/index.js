@@ -1,35 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
 
 import logoBig from 'src/assets/img/logo-grand-tournament.png';
 
 function LoginForm() {
   const dispatch = useDispatch();
-
-  // au chargement du composant
-  useEffect(() => {
-    // Met à jour le titre du document via l’API du navigateur
-    document.title = 'Identifiez-vous pour acceder au service';
-
-    // tester si token présent
-    // récuperer le token dans le local storage
-    const currentUser = JSON.parse(localStorage.getItem('authToken'));
-    // si pas de token
-    if (!currentUser) {
-      // on verouille l'acces
-      dispatch({
-        type: 'LOGOUT',
-      });
-    }
-    else {
-      // sinon on login
-      dispatch({
-        type: 'TOKEN_LOGIN',
-        token: currentUser,
-      });
-    }
-  });
 
   const changeField = (value, input) => {
     dispatch({
