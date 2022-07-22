@@ -42,3 +42,8 @@
 ## Securité en plus pour express avec Helmet
 
 - https://expressjs.com/fr/advanced/best-practice-security.html
+
+## Infos sur le currying
+
+- https://javascript.info/currying-partials
+- https://mindsers.blog/fr/post/composition-function-currying/
