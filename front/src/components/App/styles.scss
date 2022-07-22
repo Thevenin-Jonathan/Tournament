@@ -29,8 +29,16 @@ a {
 
 .app {
   background-color: var(--bg-color);
+  color: var(--ligth-color-text);
   display: flex;
   flex-wrap: wrap;
+}
+
+// pen button (=> edit button)
+.list-item-btn {
+  background-color: var(--bg-color);
+  color: var(--ligth-color-text);
+  border: none;
 }
 
 .header {
@@ -81,19 +89,16 @@ a {
         }
       }
 
-        
-        
-        .pannel-link {
-          width: 10rem;
-          padding: 0.5rem 0;
-          display: block;
-          color: var(--header-color);
-        }
+      .pannel-link {
+        width: 10rem;
+        padding: 0.5rem 0;
+        display: block;
+        color: var(--header-color);
+      }
 
-        .pannel-link:hover {
-          text-decoration: underline;
-        }
-      
+      .pannel-link:hover {
+        text-decoration: underline;
+      }
     }
   }
 
@@ -146,16 +151,62 @@ a {
 
 .content {
   width: calc(100% - 18rem);
+  padding: 1rem 2rem;
 }
 
 .dashboard {
-  background-color: lightcoral;
 }
 
 .tournaments {
-  background-color: lightpink;
 }
 
+.club {
+  display: flex;
+  flex-direction: column;
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    font-size: 3rem;
+  }
+  .members-nb {
+    font-size: 1rem;
+    margin: 1rem 0;
+  }
+  .club-profil {
+    display: flex;
+    justify-content: space-between;
+  
+      &-infos {
+        display: flex;
+        flex-direction: column;
+        margin-left: 2rem;
+      }
+
+      &-image {
+        background-color: blue;
+        width: 20rem;
+        height: 15rem;
+      }
+      
+      .club-name {
+        font-size: 2rem;
+        font-weight: bold;
+        color: var(--emphase-color);
+      }
+
+      .club-infos {
+        padding: 1rem 0;
+      }
+      .club-info {
+        padding-bottom: 1rem;
+      }
+  }
+  &-description {
+    margin-left: 2rem;
+    max-width: 40rem;
+  }
+}
 
 .login-page {
   background-image: url(../../assets/img/login-bg.jpg);
