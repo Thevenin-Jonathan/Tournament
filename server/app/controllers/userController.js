@@ -1,16 +1,40 @@
 const userDatamapper = require("../datamapper/user");
 
+/**
+ * Get all users from DB
+ * 
+ * ExpressMiddleware signature
+ * @param {object} _ express request object (not used)
+ * @param {object} res express response object
+ * @returns {json} JSON response with all users
+ */
 async function getAll(_, res) {
   const users = await userDatamapper.findAll();
   return res.json(users);
 };
 
+/**
+ * Get one user from DB
+ * 
+ * ExpressMiddleware signature
+ * @param {object} req express request object
+ * @param {object} res express response object
+ * @returns {json} JSON response with one user
+ */
 async function getOne(req, res) {
   const id = req.params.id;
   const user = await userDatamapper.findById(id);
   return res.json(user);
 };
 
+/**
+ * Add one user into DB
+ * 
+ * ExpressMiddleware signature
+ * @param {object} req express request object
+ * @param {object} res express response object
+ * @returns {json} JSON response with the created user
+ */
 async function create(req, res) {
   const userData = req.body;
   const user = await userDatamapper.exist(userData);
@@ -25,6 +49,14 @@ async function create(req, res) {
   return res.json(newUser);
 };
 
+/**
+ * Update one user into DB
+ * 
+ * ExpressMiddleware signature
+ * @param {object} req express request object
+ * @param {object} res express response object
+ * @returns {json} JSON response with the updated user
+ */
 async function update(req, res) {
   const id = req.params.id;
   const newData = req.body;
@@ -46,6 +78,14 @@ async function update(req, res) {
   return res.json(updUser)
 }
 
+/**
+ * Delete one user from DB
+ * 
+ * ExpressMiddleware signature
+ * @param {object} req express request object
+ * @param {object} res express response object
+ * @returns {json} JSON response with one user
+ */
 async function destroy(req, res) {
   const id = req.params.id;
   const user = await userDatamapper.findById(id);
