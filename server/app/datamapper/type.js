@@ -68,10 +68,6 @@ const pool = require("../config/database");
         return !!result.rowCount;
     };
 
-    (async function test() {
-        console.log(await findById());
-      })();
-
 module.exports = {
         findAll,
         findById,
