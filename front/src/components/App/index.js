@@ -1,6 +1,6 @@
 // == Import
 import { useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Dashboard from '../Dashboard';
@@ -41,9 +41,8 @@ function App() {
     }
   });
 
-  // if not connected
   if (!isLogged) {
-    // display public content
+    // Public Routes
     return (
       <Routes>
         <Route path="/" element={<h1>Hello public content (page promo)</h1>} />
@@ -54,12 +53,13 @@ function App() {
     );
   }
 
+  // Privates Routes
   return (
     <div className="app">
       <Header />
       <Menu />
       <Routes>
-        <Route path="/connexion" element={<Dashboard />} />
+        <Route path="/connexion" element={<Navigate to="/tableau-de-bord" />} />
         <Route path="/tableau-de-bord" element={<Dashboard />} />
         <Route path="/tournois" element={<Tournaments />} />
         <Route path="/club" element={<Club />} />
