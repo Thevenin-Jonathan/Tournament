@@ -6,7 +6,6 @@ const pool = require("../config/database");
  */
 async function findAll() {
   const result = await pool.query(`SELECT * FROM "user"`);
-  pool.end();
   return result.rows;
 }
 
@@ -17,7 +16,6 @@ async function findAll() {
  */
 async function findById(id) {
   const result = await pool.query(`SELECT * FROM "user" WHERE "id" = $1`, [id]);
-  pool.end();
   return result.rows[0];
 }
 
@@ -42,7 +40,6 @@ async function insertOne(user) {
     [...values]
   )
 
-  pool.end();
   return result.rows[0];
 }
 
@@ -66,7 +63,6 @@ async function updateOne(id, user) {
     [...values, id]
   );
 
-  pool.end();
   return result.rows[0];
 }
 
@@ -83,7 +79,6 @@ async function deleteOne(id) {
     [id]
   );
 
-  pool.end();
   return !!result.rowCount;
 }
 
@@ -117,7 +112,6 @@ async function exist(user, id) {
   }
 
   const result = await pool.query(query);
-  pool.end();
 
   return !!result.rowCount;
 }
