@@ -2,9 +2,9 @@ const pool = require("../config/database");
 
 
     /**
-     * @returns Tous les types dans la base de donnée
+     * Tous les types dans la base de donnée
+     * @returns {object[]} La liste des types
      */
-
     async function findAll() {
         const result = await pool.query(`SELECT * FROM "type"`);
         pool.end();
@@ -12,68 +12,67 @@ const pool = require("../config/database");
     };
 
     /**
-     * Récupère par sont id
-     * @param {number} typeId - L'id de la type souhaité
+     * findById(id) Recupere un type en function de son id
+     * @param {number} id- L'id du type souhaité
      * @returns Le type souhaité ou null si aucuns type à cet id
+     * @return {object} un type
      */
-
-    // findById(typeId) Recupere un type en function de son id
-    async function findById(typeId) {
-        const result = await pool.query(`SELECT * FROM "type" WHERE "id" = $1;`, [typeId]);
-        if (result.rowCount === 0) {
-            return undefined;
-        }
+    async function findById(id) {
+        const result = await pool.query(`SELECT * FROM "type" WHERE "id" = $1;`, [id]);
         pool.end();
         return result.rows[0];
     };
 
     /**
      * Ajoute dans la base de données
-     * @param {InputType} type - Les données à insérer
-     * @returns Le type insérer
+     * @param {string} - type - Les données à insérer, nom du nouveau type
+     * @returns {object} Le type insérer
      */
-    // insertOne() Ajoute un nouveau type à la BDD
     async function insertOne(type) {
-        const newType = await pool.query(
+        const result = await pool.query(
             `
         INSERT INTO type ("name")
-        VALUES($1);
-        RETURNING *
-        `,
-            [type.name],
+        VALUES($1)
+        RETURNING *;`, [type]
         );
-        pool.end();
-        return newType.rows[0];
-    };
-
-    // updateOne(id) Change les informations (name) d'un type
-    async function updateOne(typeId, typeName) {
-        const updateType = {
-            text: `
-              UPDATE "type" SET 
-              "name" = $1
-              WHERE "id" = $2
-              RETURNING *
-              `,
-            values: [typeName, typeId]
-        };
-        const result = await pool.query(sql);
         pool.end();
         return result.rows[0];
     };
 
-    // deleteOne(id) Enleve une discipline de la BDD
-    async function deleteOne(disciplineId) {
-        const result = await pool.query(`DELETE FROM "discipline" WHERE "id" = $1;`, [disciplineId]);
+    /**
+     * updateOne(id) Change les informations (name) d'un type
+     * @param {string} - nom du type 
+     * @param {number} - id du type 
+     * @returns {object} - type updated
+     */
+    async function updateOne(id, name) {
+        const result = await pool.query(
+              `
+              UPDATE "type" SET 
+              "name" = $1
+              WHERE "id" = $2
+              RETURNING *;`, [id,name]
+        );
         pool.end();
-        return result.rowCount;
+        return result.rows[0];
+    };
+
+    /**
+     * Supprimer un type de la DB
+     * @param {number} - id d'un type
+     * @returns {boolean} - true si le type est deleted
+     */
+    async function deleteOne(id) {
+        const result = await pool.query(`DELETE FROM "discipline" WHERE "id" = $1;`, [id]);
+        pool.end();
+        return !!result.rowCount;
     };
 
     (async function test() {
-        console.log(await findAll());
+        console.log(await findById());
       })();
 
-    module.exports = {
+module.exports = {
         findAll,
         findById,
         insertOne,
