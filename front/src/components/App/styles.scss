@@ -28,6 +28,8 @@ body {
 .content {
   width: calc(100% - 18rem);
   padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
 
   // page title (Tableau de bord, Tournois, Mon profil, etc...)
   .title {
@@ -161,16 +163,7 @@ a {
   }
 }
 
-
-.dashboard {
-}
-
-.tournaments {
-}
-
 .club {
-  display: flex;
-  flex-direction: column;
 
   .title {
     display: flex;
@@ -358,9 +351,6 @@ a {
 }
 
 .profil {
-  display: flex;
-  flex-direction: column;
-
   &-content {
     display: flex;
     max-width: 800px;
@@ -393,6 +383,61 @@ a {
     &-content, &-infos {
       flex-direction: column;
       padding: 1rem 0;
+    }
+  }
+}
+
+.members {
+  .group-1 {
+    display: flex;
+    margin: 2rem 0;
+    align-items: center;
+  }
+
+  &-search {
+    width: 25rem;
+    margin-right: 5rem;
+    padding: 1rem 1.5rem;
+  }
+
+    .action-btn {
+    background-color: var(--emphase-color);
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+  }  
+
+  li {
+    display: flex;
+    
+    :last-child {
+      margin-left: auto;
+    }
+  }
+
+  &-name, &-gender, &-email, &-phone {
+    padding: 0.5rem 5rem 0.5rem 0; 
+    flex: 1;
+  }
+
+  &-name {
+    font-weight: bold;
+  }
+
+  @media only screen and (max-width: 810px) {
+
+    align-items: center;
+
+    &-search {
+      width: 25rem;
+      margin: 0 0 2rem 0;
+      padding: 1rem 1.5rem;
+    }
+
+    .group-1 {
+      flex-direction: column;
+    }
+    &-email, &-phone {
+      display: none; 
     }
   }
 }

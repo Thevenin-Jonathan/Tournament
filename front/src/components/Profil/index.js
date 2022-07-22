@@ -1,9 +1,7 @@
 function Profil() {
   return (
     <main className="content profil">
-      <div className="title">
-        <h1>Mon profil</h1>
-      </div>
+      <h1 className="title">Mon profil</h1>
 
       <div className="profil-content">
         <div className="profil-infos">

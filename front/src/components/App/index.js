@@ -12,6 +12,7 @@ import Error from '../Error';
 import './styles.scss';
 import LoginForm from '../LoginForm';
 import Profil from '../Profil';
+import Members from '../Members';
 
 // == Composant
 function App() {
@@ -64,6 +65,7 @@ function App() {
         <Route path="/tableau-de-bord" element={<Dashboard />} />
         <Route path="/tournois" element={<Tournaments />} />
         <Route path="/club" element={<Club />} />
+        <Route path="/membres" element={<Members />} />
         <Route path="/profil" element={<Profil />} />
         <Route path="*" element={<Error />} />
       </Routes>
