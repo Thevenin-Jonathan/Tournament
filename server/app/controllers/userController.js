@@ -1,3 +1,4 @@
+const debug = require('debug')('app:server');
 const bcrypt = require("bcrypt");
 const userDatamapper = require("../datamapper/user");
 
@@ -21,10 +22,12 @@ async function create(req, res) {
   const user = await userDatamapper.exist(userData);
 
   if (user) {
-    throw new Error("User laready exist in DB");
+    // throw new Error("User already exist in DB");
+    res.json({message: "User already exist in DB"})
   }
 
   const newUser = await userDatamapper.insertOne(userData);
+
   res.json(newUser);
 };
 
