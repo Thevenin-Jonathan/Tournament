@@ -26,6 +26,7 @@ function LoginForm() {
       // sinon on login
       dispatch({
         type: 'TOKEN_LOGIN',
+        token: currentUser,
       });
     }
   });

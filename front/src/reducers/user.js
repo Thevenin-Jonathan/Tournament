@@ -4,6 +4,8 @@ export const initialState = {
 
   id: null,
   displayName: '',
+  avatar: '',
+  role: '',
   token: null,
 
   // champs controlés
@@ -17,7 +19,6 @@ export const initialState = {
   birthdate: '',
   gender: '',
   playerLicense: '',
-  avatar: '',
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -47,6 +48,14 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         loginLoading: false,
+      };
+    case 'TOKEN_LOGIN':
+      return {
+        ...state,
+        logged: action.token.logged,
+        id: action.token.id,
+        displayName: action.token.firstName,
+        avatar: action.token.avatar,
       };
     case 'LOGOUT':
       return {
