@@ -17,6 +17,15 @@ async function getOne(req, res) {
 };
 
 async function create(req, res) {
+  const userData = req.body;
+  const user = await userDatamapper.exist(userData);
+
+  if (user) {
+    throw new Error("User laready exist in DB");
+  }
+
+  const newUser = await userDatamapper.insertOne(userData);
+  res.json(newUser);
 };
 
 async function update(req, res) {
