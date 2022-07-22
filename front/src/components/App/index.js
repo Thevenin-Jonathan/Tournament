@@ -59,6 +59,7 @@ function App() {
       <Header />
       <Menu />
       <Routes>
+        <Route path="/connexion" element={<Dashboard />} />
         <Route path="/tableau-de-bord" element={<Dashboard />} />
         <Route path="/tournois" element={<Tournaments />} />
         <Route path="/club" element={<Club />} />

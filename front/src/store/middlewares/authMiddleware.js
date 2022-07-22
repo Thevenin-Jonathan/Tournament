@@ -21,6 +21,11 @@ const authMiddleware = (store) => (next) => (action) => {
           store.dispatch({ type: 'SUBMIT_LOGIN_SUCCESS', value: response.data });
           // set token in local storage
           localStorage.setItem('authToken', JSON.stringify(response.data));
+          // redirect on dashboard
+          // window.location.replace('/tableau-de-bord');
+          // window.history.replaceState(
+          //   { additionalInformation: 'Login Success' }, 'Tableau de Bord', '/tableau-de-bord'
+          // );
         })
         .catch((error) => {
           store.dispatch({ type: 'SUBMIT_LOGIN_FAILED', value: 'Login error' });
