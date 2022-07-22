@@ -20,6 +20,16 @@ async function findById(id) {
 }
 
 /**
+ * Return one user from database
+ * @param {string} email User email
+ * @returns {object} user
+ */
+ async function findByEmail(email) {
+  const result = await pool.query(`SELECT * FROM "user" WHERE "email" = $1`, [email]);
+  return result.rows[0];
+}
+
+/**
  * Insert one user in database
  * @param {object} user 
  * @returns {object} user
@@ -104,8 +114,6 @@ async function exist(user, id) {
     values
   }
 
-  console.log(query)
-
   if (id) {
     query.text += ` AND id = $${values.length + 1}`,
     query.values.push(id)
@@ -119,6 +127,7 @@ async function exist(user, id) {
 module.exports = {
   findAll,
   findById,
+  findByEmail,
   insertOne,
   updateOne,
   deleteOne,
