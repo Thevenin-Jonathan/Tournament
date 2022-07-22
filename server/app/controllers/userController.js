@@ -11,6 +11,9 @@ async function getAll(req, res) {
 };
 
 async function getOne(req, res) {
+  const id = Number(req.params.id);
+  const user = await userDatamapper.findById(id);
+  res.json(user);
 };
 
 async function create(req, res) {
