@@ -18,7 +18,7 @@ const pool = require("../config/database");
      */
 
     // findById(typeId) Recupere un type en function de son id
-    async function findByPk(typeId) {
+    async function findById(typeId) {
         const result = await pool.query(`SELECT * FROM "type" WHERE "id" = $1;`, [typeId]);
         if (result.rowCount === 0) {
             return undefined;
@@ -68,6 +68,10 @@ const pool = require("../config/database");
         pool.end();
         return result.rowCount;
     };
+
+    (async function test() {
+        console.log(await findAll());
+      })();
 
     module.exports = {
         findAll,
