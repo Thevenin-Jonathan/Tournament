@@ -18,8 +18,6 @@
   - Ouvrir le terminal
   - Lancer la commande ```apt-get install sqitch libdbd-pg-perl postgresql-client```
 
-
-
 ## Installation de la DB
 
 - Avoir sqitch installé sur le systeme
@@ -43,6 +41,32 @@
 
 - En haut du fichier insérez cette ligne: `const debug = require("debug")("nom-du-prefix-aux-choix")`
 - Remplacer les `console.log("msg");` par `debug("msg");`
+
+## Commandes Heroku
+
+- Push la branche main sur heroku:
+  >`git push heroku main`
+- Ajouter heroku en target de deploiement sqitch:
+  >`sqitch target add heroku postgres://user:pwd@host/db`
+- Lancer le deploiement de sqitch:
+  >`sqitch deploy heroku`
+- Seed la base de données:
+  >`heroku pg:psql -f ./sqitch/seed_db.sql`
+- Lancer une fenetre navigateur avec l'app sur heroku:
+  >`heroku open`
+- Lancer les logs du serveur heroku:
+  >`heroku logs --tail`
+- Lancer un bash sur le terminal d'heroku:
+  >`heroku run bash`
+- Lancer le CLI psql sur le terminal d'heroku:
+  >`heroku pg:psql`
+- Lancer le serveur heroko en local:
+  >`heroku local web`
+- Voir les addonc installés sur heroku:
+  >`heroku addons`
+- Installer et lancer un addon de logger heroku dans le navigateur
+  >`heroku addons:create papertrail`
+  >`heroku addons:open papertrail`
 
 ## Architecture actuelle du serveur
 
