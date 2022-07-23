@@ -20,8 +20,33 @@ async function findById(id) {
   return result.rows[0];
 }
 
+/**
+ * Insert one match in database
+ * @param {object} match match informations
+ * @returns {object} match
+ */
+async function insertOne(match) {
+  const columns = Object.keys(match).map(key => `"${key}"`);
+  const values = Object.values(match);
+  const symbols = values.map((_, i) => `$${i + 1}`);
+
+  const result = await pool.query(
+    `
+      INSERT INTO "match"
+        (${columns})
+      VALUES
+        (${symbols})
+      RETURNING *;
+    `,      
+    [...values]
+  )
+
+  return result.rows[0];
+}
+
 
 module.exports = {
   findAll,
   findById,
+  insertOne,
 }
