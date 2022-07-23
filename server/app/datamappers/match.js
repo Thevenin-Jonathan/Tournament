@@ -44,9 +44,33 @@ async function insertOne(match) {
   return result.rows[0];
 }
 
+/**
+ * Update one match in database
+ * @param {number} id match identifiant
+ * @param {object} match match informations
+ * @returns {object} match
+ */
+async function updateOne(id, match) {
+  const columns = Object.keys(match).map((key, i) => `"${key}" = $${i + 1}`);
+  const values = Object.values(match);
+  const result = await pool.query(
+    `
+      UPDATE "match" SET
+        ${columns}
+      WHERE
+        id = $${columns.length + 1}
+      RETURNING *;
+    `,
+    [...values, id]
+  );
+
+  return result.rows[0];
+}
+
 
 module.exports = {
   findAll,
   findById,
   insertOne,
+  updateOne,
 }
