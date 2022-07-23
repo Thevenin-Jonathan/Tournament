@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "db-seed": "psql -U tournament_admin -d tournament -f ./sqitch/seed_db.sql",
-    "dev": "nodemon app/index"
+    "dev": "nodemon app/index",
+    "start": "node ./app/index.js"
   },
   "repository": {
     "type": "git",
