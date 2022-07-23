@@ -89,7 +89,35 @@ async function insertOne(data) {
   return result.rows[0];
 }
 
+/**
+ * Update informations between one match and one team from database
+ * @param {object} data match and team informations
+ * @returns {object} match and team data updated
+ */
+async function updateOne(matchId, teamId, data) {
+  const columns = Object.keys(data).map((key, i) => `"${key}" = $${i + 1}`);
+  const values = Object.values(data);
+  const result = await pool.query(
+    `
+      UPDATE "match_has_team" SET
+        ${columns}
+      WHERE
+         "match_id" = $${columns.length + 1}
+      AND
+         "team_id" = $${columns.length + 2}
+      RETURNING *;
+    `,
+    [...values, matchId, teamId]
+  );
+
+  return result.rows[0];
+}
 
 module.exports = {
   findAll,
+  findByMatchIdAndTeamId,
+  findByMatchId,
+  findByTeamId,
+  insertOne,
+  updateOne
 }
