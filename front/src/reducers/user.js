@@ -1,5 +1,5 @@
 export const initialState = {
-  logged: true,
+  logged: false,
   loginLoading: false,
 
   id: null,
