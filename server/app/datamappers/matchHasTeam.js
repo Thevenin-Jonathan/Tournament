@@ -57,6 +57,38 @@ async function findByTeamId(teamId) {
   return result.rows;
 }
 
+/**
+ * Insert all relations and informations between one match and one team from database
+ * @param {object} data match and team informations 
+ * @returns {object} match and team data created
+ */
+async function insertOne(data) {
+  const columns = Object.keys(data).map(key => `"${key}"`);
+  const values = Object.values(data);
+  const symbols = values.map((_, i) => `$${i + 1}`);
+
+  debug(`
+  INSERT INTO "match_has_team"
+    (${columns})
+  VALUES
+    (${symbols})
+  RETURNING *;
+`)
+
+  const result = await pool.query(
+    `
+      INSERT INTO "match_has_team"
+        (${columns})
+      VALUES
+        (${symbols})
+      RETURNING *;
+    `,      
+    [...values]
+  )
+
+  return result.rows[0];
+}
+
 
 module.exports = {
   findAll,
