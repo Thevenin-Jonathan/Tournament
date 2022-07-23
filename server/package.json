@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "db-seed": "psql -U tournament_admin -d tournament -f ./sqitch/seed_db.sql",
-    "dev": "cross-env DEBUG=* nodemon app/index"
+    "dev": "cross-env DEBUG=*,-express:*,-nodemon* nodemon app/index"
   },
   "repository": {
     "type": "git",

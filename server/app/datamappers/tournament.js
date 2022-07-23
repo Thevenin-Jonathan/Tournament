@@ -1,4 +1,5 @@
 const pool = require("../config/database");
+const debug = require("debug")("dm-tournament")
 
 /**
  * Return all tournaments from database

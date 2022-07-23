@@ -1,6 +1,6 @@
 require("dotenv").config();
 const express = require("express");
-const debug = require('debug')('app:server');
+const debug = require('debug')('app');
 const app = express();
 const router = require("./routers");
 
