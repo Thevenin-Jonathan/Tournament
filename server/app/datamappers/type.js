@@ -1,7 +1,7 @@
 const pool = require("../config/database");
 
 /**
- * findAll() Return all "type" from database
+ * Return all "type" from database
  * @returns {Object[]} type
  */
 async function findAll() {
@@ -10,7 +10,7 @@ async function findAll() {
 };
 
 /**
- * findById(id) Return one "type" from database
+ * Return one "type" from database
  * @param {number} id type identifiant
  * @returns {object} type
  */
@@ -20,13 +20,12 @@ async function findById(id) {
 };
 
 /**
- * insertOne(type) Insert one "type" in database
+ * Insert one "type" in database
  * @param {string} name of type
  * @returns {object} Return new type
  */
 async function insertOne(type) {
     const result = await pool.query(`INSERT INTO type ("name") VALUES($1) RETURNING *`, [type]);
-    pool.end();
     return result.rows[0];
 };
 
