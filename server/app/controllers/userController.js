@@ -1,4 +1,4 @@
-const userDatamapper = require("../datamapper/user");
+const userDatamapper = require("../datamappers/user");
 
 /**
  * Get all users from DB
