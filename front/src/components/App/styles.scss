@@ -1,0 +1,766 @@
+:root {
+  // colors variables
+  --bg-color: #1A2F4C;
+  --main-color: #061B38;
+  --emphase-color: #BF9C5A;
+  --header-color: #16273E;
+  --ligth-color-text: #FFFFFF;
+
+  // font weights
+  --fine:100;
+  --normal:400;
+  --bold:700;
+  --black:900;
+  
+  // margin variables
+  --margin-base: 1rem;
+  // rounded
+  --border-radius: 10px;
+  // border size
+  --border-size: 4px;
+
+  // elements size
+  --header-height: 6rem;
+  --menu-width: 18rem; 
+
+  // responsive sizes
+  // les variables ne fonctionnent pas dans les @media
+  --laptop: 1100px;
+  --tablet: 810px;
+  --mobile: 450px;
+}
+
+html, body, #root, .app {
+  height: 100%;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  overflow: hidden;
+}
+
+.app {
+  background-color: var(--bg-color);
+  color: var(--ligth-color-text);
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.content {
+  width: calc(100% - var(--menu-width));
+  padding: 1rem 2rem;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: calc(100% - var(--header-height));
+  @media only screen and (max-width: 1100px) {
+    width: calc(100%);
+  }
+  @media only screen and (max-width: 450px) {
+    padding: 1rem;
+  }
+
+  // page title (Tableau de bord, Tournois, Mon profil, etc...)
+  .title {
+    font-size: 3rem;
+    font-weight: 200;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Generique */
+input {
+  color: inherit;
+  font-family: inherit;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+  display: block;
+}
+.button {
+  background-color: var(--main-color);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-weight: var(--fine);
+  background-repeat: no-repeat;
+  &:hover {
+    outline: solid var(--border-size) var(--emphase-color);
+  }
+}
+
+// pen button (=> edit button)
+.list-item-btn {
+  background-color: transparent;
+  color: var(--ligth-color-text);
+  border: none;
+}
+
+.header {
+  position: relative;
+  background-color: var(--header-color);
+  width: 100%;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  color: var(--ligth-color-text);
+
+  @media only screen and (max-width: 1100px) {
+    justify-content: center;
+  }
+  @media only screen and (max-width: 450px) {
+    justify-content: flex-start;
+  }
+
+  &-logo {
+    padding-left: 1rem;
+    img {
+      display: block;
+      width:80%;
+      margin: auto;
+    }
+    @media only screen and (max-width: 450px) {
+      max-width: 5rem;
+    }
+  }
+
+  &-club-name {
+    font-weight: var(--black);
+    font-size: 3rem;
+    @media only screen and (max-width: 1100px) {
+      font-size: 2rem;
+    }
+    @media only screen and (max-width: 450px) {
+      font-size: 1.5rem;
+    }
+  }
+
+  &-user-welcome {
+    line-height: var(--header-height);
+    padding: 0 2rem;
+  }
+
+  &-user-menu {
+    position: absolute;
+    z-index: 99;
+    right: 0;
+
+    &-pannel {
+      display: none;
+      position: absolute;
+      background-color: var(--ligth-color-text);
+      right: 0;
+      padding: 1rem;
+      box-shadow: 0 10px 8px rgba(0,0,0,.2);
+      border-radius: 0 0 0 var(--border-radius);
+
+      .user-image {
+        background-color: blue;
+        border-radius: 10px;
+        margin-right: 1rem;
+        width: 5rem;
+        height: 5rem;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+        }
+      }
+
+      .pannel-link {
+        width: 10rem;
+        padding: 0.5rem 0;
+        display: block;
+        color: var(--header-color);
+      }
+
+      .pannel-link:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &-user-menu:hover {
+    color: var(--header-color);
+    background-color: #FFFFFF;
+
+    .header-user-menu-pannel {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &-member-firstname {
+    font-weight: bold;
+  } 
+}
+
+.menu {
+  background-color: var(--main-color);
+  height: calc(100% - var(--header-height));
+  width: var(--menu-width);
+  padding: 2rem 0;
+  font-size: 1.2em;
+  @media only screen and (max-width: 1100px) {
+    position: fixed;
+    top: 0;
+    left: calc(-1 * var(--menu-width));
+    z-index: 999;
+    height: 100%;
+    padding-top: 5rem;
+    transition: left .4s;
+    &.open {
+      left: 0;
+      box-shadow: 0 0 100px black;
+    }
+    @media only screen and (max-width: 450px) {
+      width: 100%;
+      left: -100%;
+    }
+  }
+  ul {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    li:last-child {
+      margin-top: auto;
+    }
+  }
+  .menu-link {
+    display: block;
+    color: white;
+    padding: 1em;
+    margin: .1em 0;
+    border-right: solid 0rem var(--emphase-color);
+    transition: border .2s, background-color .1s;
+    &:hover {
+      background-color: rgba(255,255,255,.1);
+    }
+    &--selected {
+      color : var(--emphase-color);
+      background-color: rgba(255,255,255,.1);
+      border-right: solid .8rem var(--emphase-color);
+    }
+  }
+  .toggle-menu-button {
+    color: inherit;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 2rem;
+    position: fixed;
+    top: 1.5rem;
+    left: 1.5rem;
+    z-index: 1000;
+    display: none;
+    @media only screen and (max-width: 1100px) {
+      display: block;
+    }
+    @media only screen and (max-width: 450px) {
+      top: initial;
+      left: initial;
+      bottom: 1rem;
+      right: 1rem;
+    }
+  }
+}
+
+
+.dashboard {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 2rem;
+  @media only screen and (max-width: 450px) {
+    gap: 1rem;
+  }
+  .dashboard-widget {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    // flex: 1;
+    width: calc( calc(100% - 6rem) / 4);
+    background-color: var(--main-color);
+    text-align: center;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    min-height: 12rem;
+    @media only screen and (max-width: 1100px) {
+      width: calc( calc(100% - 2rem) / 2);
+    }
+    @media only screen and (max-width: 450px) {
+      width: 100%;
+    }
+    &:hover {
+      outline: solid var(--border-size) var(--emphase-color);
+      .widget-icon {
+        transform: scale(1.3);
+      }
+    }
+    .widget-icon {
+      transition: transform .2s;
+    }
+    .fa {
+      color: var(--emphase-color);
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    p:first-of-type {
+      font-size: 1.8rem;
+      font-weight: 900;
+    }
+  }
+  .logo {
+    display: flex;
+    img {
+      margin: auto;
+      max-width: 100%;
+    }
+  }
+  .members {
+    
+  }
+  .tournament {
+    
+  }
+  .club {
+    
+  }
+  .tournament-column {
+    width: calc( calc(100% - 6rem) / 4 * 3 + 4rem);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    @media only screen and (max-width: 1100px) {
+      width: 100%;
+    }
+    @media only screen and (max-width: 450px) {
+      gap: 1rem;
+    }
+  }
+  .create-tournament-button {
+    background-image: url(../../assets/img/icon-arrow-right.svg);
+    background-position: right 2rem center;
+    span {
+      font-weight: var(--bold);
+    }
+    @media only screen and (max-width: 450px) {
+      flex-direction: column;
+    }
+  }
+  .hall-of-fame {
+    font-size: .9rem;
+    @media only screen and (max-width: 1100px) {
+      width: 100%;
+    }
+    .fa {
+      font-size: inherit;
+      color: inherit;
+    }
+    .hof-icon {
+      font-size: 3rem;
+      position: relative;
+      margin-top: -3.5rem;
+      color: var(--emphase-color);
+
+    }
+    .hof-title {
+      margin-bottom: 1rem;
+    }
+    .champion {
+      color: var(--emphase-color);
+      font-weight: var(--black);
+    }
+    .player-name {
+      
+    }
+    .player-victory {
+      
+    }
+    ol {
+      text-align: left;
+      li {
+        display: flex;
+        justify-content: space-between;
+        padding: .5rem;
+        border-radius: var(--border-radius);
+        transition: 1s;
+        .fa {
+          margin: 0;
+        }
+        &:hover {
+          background-color: rgba(255,255,255,.1);
+          transition: .2s;
+        }
+        &:hover .fa {
+          transform: scale(1.4);
+        }
+      }
+    }
+  }
+}
+
+.tournaments {
+}
+
+.tournament-card {
+  display: block;
+  background-color: var(--main-color);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  min-height: 10rem;
+  background-size: 60%;
+  background-position: right -1rem center;
+  background-repeat: no-repeat;
+  position: relative;
+  @media only screen and (max-width: 450px) {
+    background-size: 100%;
+  }
+  &:hover {
+    outline: solid var(--border-size) var(--emphase-color);
+  }
+    .tournament-layer {
+      border-radius: var(--border-radius) var(--border-radius) 0 0;
+      background: linear-gradient(90deg, var(--main-color) 20%, rgba(0,0,0,0) 100%);
+      width: 60%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      @media only screen and (max-width: 450px) {
+        width: 100%;
+        background: linear-gradient(90deg, var(--main-color) 50%, rgba(0,0,0,0) 100%);
+      }
+    }
+    .tournament-text {
+      position: relative;
+      display: flex;
+      align-items: stretch;
+      gap: 1rem;
+      @media only screen and (max-width: 450px) {
+        flex-direction: column;
+      }
+    }
+    .tournament-info {
+
+    }
+    .tournament-icon {
+      color:var(--emphase-color);
+      font-size: 3rem;
+    }
+    .tournament-status {
+      font-weight: 300;
+    }
+    .tournament-name {
+      font-size: 2rem;
+      color: var(--emphase-color);
+    }
+    .tournament-discipline {
+      font-size: .8rem;
+      margin-bottom: 1rem;
+    }
+    .tournament-players-count {
+
+    }
+    .tournament-match {
+
+    }
+}
+
+.club {
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    font-size: 3rem;
+  }
+  .members-nb {
+    font-size: 1rem;
+    margin: 1rem 0;
+  }
+  .club-profil {
+    display: flex;
+    justify-content: space-between;
+  
+      &-infos {
+        display: flex;
+        flex-direction: column;
+        margin-left: 2rem;
+      }
+
+      &-image {
+        width: 20rem;
+        height: 15rem;
+      }
+      
+      .club-name {
+        font-size: 2rem;
+        font-weight: bold;
+        color: var(--emphase-color);
+      }
+
+      .club-infos {
+        padding: 1rem 0;
+      }
+      .club-info {
+        padding-bottom: 1rem;
+      }
+
+      @media only screen and (max-width: 810px) {
+        flex-direction: column;
+      }
+  }
+  &-description {
+    margin-left: 2rem;
+    padding-top: 1rem;
+    max-width: 40rem;
+  }
+}
+
+.login-page {
+  background-image: url(../../assets/img/login-bg.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: var(--ligth-color-text);
+  background-color: var(--bg-color);
+  height: 100vh;
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  .wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding-top: 1rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    padding:1rem;
+
+      .logo-tournament {
+        max-width: 20rem;
+        margin-bottom: 1rem;
+        transition: filter .2s;
+        @media only screen and (max-width: 810px) {
+          margin: auto;
+        }
+        
+      }
+      .logo-tournament:hover {
+        filter: drop-shadow(0 0 100px var(--ligth-color-text));
+      }
+
+      .login-form {
+        flex-shrink: 1;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .login-form h1 {
+        font-size: 2.5rem;
+        font-weight: 900;
+      }
+      .login-form h1 span {
+        color:#bf9c5a;
+      }
+      .login-form .non-necessary-label {
+        font-size: 0;
+      }
+      .login-form .text-input,
+      .login-form .button-input{
+        font-size: 1.2rem;
+        display: block;
+        width: 100%;
+        line-height: 3.5rem;
+        padding: 0 1rem;
+        padding-left: 4rem;
+        border-radius: 20rem;
+        border: solid .35rem white;
+        background-color: transparent;
+        color:white;
+        outline: none;
+        background-repeat: no-repeat;
+        background-position: .7rem center;
+        transition: .2s;
+      }
+      .login-form .text-input:focus,
+      .login-form .button-input:focus {
+        border-color: #bf9c5a;
+        background-position: .9rem center;
+      }
+      .login-form .login-input {
+        background-image: url(../../assets/img/login-input-bg.png);
+      }
+      .login-form .password-input {
+        background-image: url(../../assets/img/password-input-bg.png);
+      }
+      .login-form .rememberme {
+        font-size: 1.3rem;
+        padding: 2rem 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+      }
+      .login-form .rememberme input {
+        width: 1.3rem;
+        height: 1.3rem;
+        outline: none;
+      }
+      .login-form .submit-input {
+        padding:0 1rem;
+        color: #bf9c5a;
+        border-color: #bf9c5a;
+        font-size: 1.5rem;
+        font-weight: 900;
+        cursor: pointer;
+        transition: .2s;
+      }
+      .login-form .submit-input:hover,
+      .login-form .submit-input:focus {
+        color: white;
+        background-color: #bf9c5a;
+        box-shadow: 0 0 30px rgba(255,255,255,.3);
+      }
+      .help-links {
+        text-align: left;
+        padding: 2rem;
+        font-size: .8rem;
+      }
+      .help-link a {
+        display: block;
+        padding: .4rem 0;
+      }
+      .help-link a:hover {
+        color: #bf9c5a;
+      }
+      footer {
+        text-align: right;
+        border-top: solid .1rem rgba(255,255,255,.3);
+        padding: 1rem;
+        font-size: .7rem;
+        @media only screen and (max-width: 810px) {
+          text-align: center;
+        }
+      }
+      ::placeholder {
+        color: lightgray
+      }
+  }
+}
+
+.profil {
+  &-content {
+    display: flex;
+    max-width: 800px;
+    }
+  
+  &-infos {
+    display: flex;
+    width: 65%;
+    background-color: var(--main-color);
+    border-radius: 10px;
+    padding: 1rem;
+  }
+
+  &-image {
+    width: 7rem;
+    height: 7rem;
+    background-color: blue;
+    margin: 0.5rem;
+  }
+
+  &-stats {
+    padding: 1rem;
+  }
+
+  li {
+    padding: 0.5rem;
+  }
+
+  @media only screen and (max-width: 810px) {
+    &-content, &-infos {
+      flex-direction: column;
+      padding: 1rem 0;
+    }
+  }
+}
+
+// 404
+.app-error {
+  position: relative;
+  .cat-404 {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    @media only screen and (max-width: 450px) {
+      width: 100%;
+    }
+  }
+}
+
+.members {
+  .group-1 {
+    display: flex;
+    margin: 2rem 0;
+    align-items: center;
+  }
+
+  &-search {
+    width: 25rem;
+    margin-right: 5rem;
+    padding: 1rem 1.5rem;
+  }
+
+    .action-btn {
+    background-color: var(--emphase-color);
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+  }  
+
+  li {
+    display: flex;
+    
+    :last-child {
+      margin-left: auto;
+    }
+  }
+
+  &-name, &-gender, &-email, &-phone {
+    padding: 0.5rem 5rem 0.5rem 0; 
+    flex: 1;
+  }
+
+  &-name {
+    font-weight: bold;
+  }
+
+  @media only screen and (max-width: 810px) {
+
+    align-items: center;
+
+    &-search {
+      width: 25rem;
+      margin: 0 0 2rem 0;
+      padding: 1rem 1.5rem;
+    }
+
+    .group-1 {
+      flex-direction: column;
+    }
+    &-email, &-phone {
+      display: none; 
+    }
+  }
+}
