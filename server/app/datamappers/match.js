@@ -67,10 +67,26 @@ async function updateOne(id, match) {
   return result.rows[0];
 }
 
+/**
+ * Delete one match from database
+ * @param {number} id match identifiant
+ * @returns {boolean} true if match was delete
+ */
+async function deleteOne(id) {
+  const result = await pool.query(
+    `
+      DELETE FROM "match" WHERE id = $1
+    `,
+    [id]
+  );
+
+  return !!result.rowCount;
+}
 
 module.exports = {
   findAll,
   findById,
   insertOne,
   updateOne,
+  deleteOne
 }
