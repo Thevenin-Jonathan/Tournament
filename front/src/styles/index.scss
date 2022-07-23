@@ -1,18 +1,4 @@
 @use 'reset';
 @use 'vars';
-
-body {
-  font-family: sans-serif;
-}
-
-/* 
-  // or you can import your own font
-  @font-face {
-    font-family: 'Roboto';
-    src: url('../assets/fonts/Roboto-Regular.ttf');
-  }
-
-  body {
-    font-family: 'Roboto', sans-serif;
-  }
-*/
+@import url(../assets/css/font-awesome.min.css);
+// @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700;900&display=swap');
