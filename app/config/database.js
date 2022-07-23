@@ -6,7 +6,7 @@ const { Pool } = require('pg');
 // for connection information
 const pool = new Pool({
   connectionString,
-  ssl: true
+  ssl: { rejectUnauthorized: false }
 });
 
 module.exports = pool;
