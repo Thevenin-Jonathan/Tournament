@@ -1,68 +1,70 @@
 const pool = require("../config/database");
 
 /**
- * Return tous les resultats
+ * Return all result
  * @return {result[]} result
  */
  async function findAll() {
-    const result = await pool.query(`SELECT * FROM "result"`);
-    return result.rows;
+    const query = await pool.query(`SELECT * FROM "result"`);
+    return query.rows;
 };
 
 /**
- * Return un resultat
- * @param {number} id le resultat choisis
- * @return {object} le resultat en question
+ * Return one result from database
+ * @param {number} id result identifiant
+ * @returns {object} result
  */
  async function findById(id) {
-    const result = await pool.query(`SELECT * FROM "result" WHERE "id" = $1`, [id]);
-    return result.rows[0];
+    const query = await pool.query(`SELECT * FROM "result" WHERE "id" = $1`, [id]);
+    return query.rows[0];
 };
 
 /**
- * Insert un resultat
- * @param {string} - resulat rentré
- * @return {object} - nouveau resultat
+ * Insert one result in database
+ * @param {string} result of result
+ * @returns {object} Return new result
  */
  async function insertOne(result) {
-    const result = await pool.query(
-        `INSERT INTO "result"
+    const query = await pool.query(
+        `INSERT INTO "result" ("label")
         VALUES ($1)
         RETURNING *`, [result]
     );
-    return result.rows[0];
+    return query.rows[0];
 };
 
-/**
- * Supprimer un result
- * @param {number} -id du result
- * @return {boolean} - vrai si le result est supprimer
- */
+/** 
+ * Delete one result from DB
+ * @param {number} id of the result
+ * @returns {boolean} - true if the result is deleted
+*/
  async function deleteOne(id) {
-    const result = await pool.query(
+    const query = await pool.query(
         `DELETE FROM "result" WHERE "id" = $1`, [id]
     );
-    return !!result.rowCount;
+    return !!query.rowCount;
 };
 
-/**
- * update le nom du result
- * @param {string} -label du result
- * @param {number} - id du result
- * @return {object} -result mis à jour
- */
+/** 
+ * Update result
+ * @param {string}  result of the result
+ * @param {number}  id of the result 
+ * @returns {Object} - "result" updated
+*/
  async function updateOne(id, label) {
-    const result = await pool.query(
+    const query = await pool.query(
         `UPDATE "result"
         SET "name" = $1
         WHERE "id" = $2
         RETURNING *
         `, [id, label]
     );
-    return result.rows[0];
+    return query.rows[0];
 };
 
-
+(async function test() {
+    console.log(await deleteOne(1));
+  })();
 
 module.exports = {
     findAll,
