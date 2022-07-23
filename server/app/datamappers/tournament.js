@@ -66,6 +66,22 @@ async function updateOne(id, tournament) {
   return result.rows[0];
 }
 
+/**
+ * Delete one tournament from database
+ * @param {number} id tournament identifiant
+ * @returns {boolean} true if tournament was delete
+ */
+async function deleteOne(id) {
+  const result = await pool.query(
+    `
+      DELETE FROM "tournament" WHERE id = $1
+    `,
+    [id]
+  );
+
+  return !!result.rowCount;
+}
+
 
 module.exports = {
   findAll,
@@ -73,4 +89,5 @@ module.exports = {
   findByEmail,
   insertOne,
   updateOne,
+  deleteOne,
 }
