@@ -43,10 +43,34 @@ async function insertOne(tournament) {
   return result.rows[0];
 }
 
+/**
+ * Update one tournament in database
+ * @param {number} id tournament identifiant
+ * @param {object} tournament tournament informations
+ * @returns {object} tournament
+ */
+async function updateOne(id, tournament) {
+  const columns = Object.keys(tournament).map((key, i) => `"${key}" = $${i + 1}`);
+  const values = Object.values(tournament);
+  const result = await pool.query(
+    `
+      UPDATE "tournament" SET
+        ${columns}
+      WHERE
+        id = $${columns.length + 1}
+      RETURNING *;
+    `,
+    [...values, id]
+  );
+
+  return result.rows[0];
+}
+
 
 module.exports = {
   findAll,
   findById,
   findByEmail,
   insertOne,
+  updateOne,
 }
