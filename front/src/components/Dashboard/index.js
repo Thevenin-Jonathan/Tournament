@@ -37,8 +37,8 @@ function Dashboard() {
         <TournamentCard
           name="Tournoi des pros"
           discipline="Double Mixte"
-          players="24"
-          matchLeft="6"
+          players={24}
+          matchLeft={6}
           slug="tournoi-des-pros"
           cover="https://i0.wp.com/bayardbad.fr/wp-content/uploads/2022/07/20220702_102843-scaled.jpg"
         />
