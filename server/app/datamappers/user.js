@@ -93,7 +93,7 @@ async function deleteOne(id) {
 }
 
 /**
- * Verify if the user is already in DB by unique variables
+ * Verify if the user unique keys is already in DB
  * @param {object} user user informations
  * @param {number} id user identifiant
  * @returns {boolean} true if already exist

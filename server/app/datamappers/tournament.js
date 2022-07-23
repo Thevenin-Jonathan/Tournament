@@ -82,12 +82,10 @@ async function deleteOne(id) {
   return !!result.rowCount;
 }
 
-
 module.exports = {
   findAll,
   findById,
-  findByEmail,
   insertOne,
   updateOne,
-  deleteOne,
+  deleteOne
 }
