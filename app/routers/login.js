@@ -11,14 +11,20 @@ router.post("/", async (req, res) => {
 
   const user = await userDatamapper.findByEmail(email);
 
+  console.log("verif email");
+
   if (!user) {
     return res.status(404).json({message: "Login error email"});
   }
+
+  console.log("verif pwd");
 
   if (password !== user.password) {
     return res.status(404).json({message: "Login error password"});
   }
   
+  console.log("connexion verif ok");
+
   const token = jwt.sign(
     {
       id: user.id,
