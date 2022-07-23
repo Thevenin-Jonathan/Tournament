@@ -7,7 +7,7 @@ const pool = require("../config/database");
 async function findAll() {
     const result = await pool.query(`SELECT * FROM "role"`);
     return result.rows;
-};
+}; 
 
 /**
  * Return one role from database
