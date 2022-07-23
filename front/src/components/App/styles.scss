@@ -22,6 +22,12 @@
   // elements size
   --header-height: 6rem;
   --menu-width: 18rem; 
+
+  // responsive sizes
+  // les variables ne fonctionnent pas dans les @media
+  --laptop: 1100px;
+  --tablet: 810px;
+  --mobile: 450px;
 }
 
 html, body, #root, .app {
@@ -48,6 +54,9 @@ body {
   height: calc(100% - var(--header-height));
   @media only screen and (max-width: 1100px) {
     width: calc(100%);
+  }
+  @media only screen and (max-width: 450px) {
+    padding: 1rem;
   }
 
   // page title (Tableau de bord, Tournois, Mon profil, etc...)
@@ -104,6 +113,9 @@ a {
   @media only screen and (max-width: 1100px) {
     justify-content: center;
   }
+  @media only screen and (max-width: 450px) {
+    justify-content: flex-start;
+  }
 
   &-logo {
     padding-left: 1rem;
@@ -112,6 +124,9 @@ a {
       width:80%;
       margin: auto;
     }
+    @media only screen and (max-width: 450px) {
+      max-width: 5rem;
+    }
   }
 
   &-club-name {
@@ -119,6 +134,9 @@ a {
     font-size: 3rem;
     @media only screen and (max-width: 1100px) {
       font-size: 2rem;
+    }
+    @media only screen and (max-width: 450px) {
+      font-size: 1.5rem;
     }
   }
 
@@ -200,6 +218,10 @@ a {
       left: 0;
       box-shadow: 0 0 100px black;
     }
+    @media only screen and (max-width: 450px) {
+      width: 100%;
+      left: -100%;
+    }
   }
   ul {
     height: 100%;
@@ -239,6 +261,12 @@ a {
     @media only screen and (max-width: 1100px) {
       display: block;
     }
+    @media only screen and (max-width: 450px) {
+      top: initial;
+      left: initial;
+      bottom: 1rem;
+      right: 1rem;
+    }
   }
 }
 
@@ -249,6 +277,9 @@ a {
   align-items: flex-start;
   align-content: flex-start;
   gap: 2rem;
+  @media only screen and (max-width: 450px) {
+    gap: 1rem;
+  }
   .dashboard-widget {
     display: flex;
     flex-direction: column;
@@ -262,6 +293,9 @@ a {
     min-height: 12rem;
     @media only screen and (max-width: 1100px) {
       width: calc( calc(100% - 2rem) / 2);
+    }
+    @media only screen and (max-width: 450px) {
+      width: 100%;
     }
     &:hover {
       outline: solid var(--border-size) var(--emphase-color);
@@ -306,12 +340,18 @@ a {
     @media only screen and (max-width: 1100px) {
       width: 100%;
     }
+    @media only screen and (max-width: 450px) {
+      gap: 1rem;
+    }
   }
   .create-tournament-button {
     background-image: url(../../assets/img/icon-arrow-right.svg);
     background-position: right 2rem center;
     span {
       font-weight: var(--bold);
+    }
+    @media only screen and (max-width: 450px) {
+      flex-direction: column;
     }
   }
   .hall-of-fame {
@@ -379,6 +419,9 @@ a {
   background-position: right -1rem center;
   background-repeat: no-repeat;
   position: relative;
+  @media only screen and (max-width: 450px) {
+    background-size: 100%;
+  }
   &:hover {
     outline: solid var(--border-size) var(--emphase-color);
   }
@@ -390,12 +433,19 @@ a {
       position: absolute;
       top: 0;
       right: 0;
+      @media only screen and (max-width: 450px) {
+        width: 100%;
+        background: linear-gradient(90deg, var(--main-color) 50%, rgba(0,0,0,0) 100%);
+      }
     }
     .tournament-text {
       position: relative;
       display: flex;
       align-items: stretch;
       gap: 1rem;
+      @media only screen and (max-width: 450px) {
+        flex-direction: column;
+      }
     }
     .tournament-info {
 
