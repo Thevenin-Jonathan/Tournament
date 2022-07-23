@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
     "db-seed": "psql -U tournament_admin -d tournament -f ./sqitch/seed_db.sql",
     "dev": "nodemon app/index",

@@ -1,6 +1,6 @@
 require("dotenv").config();
 const express = require("express");
-const debug = require('debug')('app:server');
+const debug = require('debug')('app');
 const app = express();
 const router = require("./routers");
 
@@ -8,20 +8,20 @@ const router = require("./routers");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-/** Cors **/
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Accept, Authorization');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+// /** Cors **/
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
+//   res.header('Access-Control-Allow-Headers', 'Content-Type, Accept, Authorization');
+//   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
-  // response to preflight request
-  if (req.method === 'OPTIONS') {
-    res.sendStatus(200);
-  }
-  else {
-    next();
-  }
-});
+//   // response to preflight request
+//   if (req.method === 'OPTIONS') {
+//     res.sendStatus(200);
+//   }
+//   else {
+//     next();
+//   }
+// });
 
 /** Router **/
 app.use("/", router);
