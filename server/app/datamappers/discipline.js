@@ -69,6 +69,9 @@ async function updateOne(name, id) {
     pool.end();
     return result.rows[0];
   };
+  (async function test() {
+    console.log(await updateOne("poul"));
+  })();
 
   module.exports = {
     findAll,
