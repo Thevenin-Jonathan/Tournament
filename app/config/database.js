@@ -1,11 +1,12 @@
 require("dotenv").config( {path: `${__dirname}/../../.env` });
-const connectionString = process.env.DATABASE_URL + "?ssl=true";
+const connectionString = process.env.DATABASE_URL;
 
 const { Pool } = require('pg');
 // pools will use environment variables
 // for connection information
 const pool = new Pool({
-  connectionString
+  connectionString,
+  ssl: true
 });
 
 module.exports = pool;
