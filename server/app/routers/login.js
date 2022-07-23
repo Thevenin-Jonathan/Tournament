@@ -30,7 +30,7 @@ router.post("/", async (req, res) => {
     jwtSecret,
     {
       algorithm: 'HS256', 
-      expiresIn: '3h' 
+      expiresIn: '3h'
     }
   )
 

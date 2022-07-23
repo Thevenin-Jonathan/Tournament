@@ -1,21 +1,3 @@
-## Comment installer sqitch
-
-- Sur Windows
-  - Télécharger Strawberry-Perl [ici](https://strawberryperl.com/) et l'installer
-  - Ouvrir un le Perl CLI
-  - lancer la commande: ```cpan install App::Sqitch DBD::Pg```
-  - si erreur : ```cpan install DBD::Pg```
-  - si encore erreur : ```cpanm install DBD::Pg```
-
-- Sur MAC
-  - Ouvrir le terminal
-  - Lancer la commande ```brew tap sqitchers/sqitch```
-  - Puis lancer cette commande ```brew install sqitch --with-postgres-support```
-
-- Sur Linux
-  - Ouvrir le terminal
-  - Lancer la commande ```apt-get install sqitch libdbd-pg-perl postgresql-client```
-
 ## Méthode SCRUM
 
 - https://ignition-program.com/tuto/la-methode-scrum-pour-les-nuls?locale=fr#:~:text=D%C3%A9finition%20%3A%20L'approche%20SCRUM%20est,des%20feedbacks%20r%C3%A9guliers%20du%20march%C3%A9.

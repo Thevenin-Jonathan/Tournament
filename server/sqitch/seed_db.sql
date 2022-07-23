@@ -37,7 +37,7 @@ INSERT INTO "tournament" ("title", "date", "description", "picture_url", "nb_pla
   ('Tournois double mixe', '01/06/2022', 'Un tournoi en duo pour les hommes et les femmes', '/images/t-duo-mix', '5', '25', '5', '1', '4', '1');
 
 INSERT INTO "user" ("firstname", "lastname", "address", "birthdate", "gender_id", "is_active", "email", "password", "url_avatar", "player_license", "club_id", "role_id") VALUES
-  ('Tom', 'Roches', '3 rue de par la 38530 pontcharra', '25/12/1950', '1', true, 'tomroches0@gmail.com', 'tomtom', '/nisi/at/nibh.jpg', '355466604', '1', '1'),
+  ('Tom', 'Roches', '3 rue de par la 38530 pontcharra', '25/12/1950', '1', true, 'tomroche@gmail.com', 'tomtom', '/nisi/at/nibh.jpg', '355466604', '1', '1'),
   ('Anestassia', 'Hollow', '497 avenue xwrecks E 47615 sticker', '08/12/1933', '2', true, 'ahollow0@artisteer.com', 'r2ecVY7ook6RVw7s193067EF938zC5m9t38GB9285050Z5TfHGy117RoR1VAC45l', '/nisi/at/nibh.jpg', '3528826604', '1', '2'),
   ('Randi', 'Mullins', '60 avenue mfizz wind 94075 mumpss', '22/09/1955', '2', true, 'rmullins1@linkedin.com', '0762WKU8u66J9Vxcu92ykWxN25v2PK53Ub4TD82yRI8z9k8JMKx9bce870466Zx2', '/faucibus/orci/luctus/et.xml', '1625023554', '1', '2'),
   ('Evin', 'Ferron', '90 avenue tmarrow runny 33177 fiche', '20/11/1950', '1', false, 'eferron2@umn.edu', 'qwf56K71V6UNDm54hIDH99cv48M2qIInJ74wX195J50I7U7C6wgw28QmZm0da7ra', '/penatibus/et/magnis/dis/parturient/montes/nascetur.aspx', '5247867367', '1', '2'),
