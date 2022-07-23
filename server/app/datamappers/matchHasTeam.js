@@ -42,6 +42,21 @@ async function findByMatchId(matchId) {
   return result.rows;
 }
 
+/**
+ * Return all relations and informations between one team and his matches from database
+ * @param {number} teamId team identifiant
+ * @returns {data[]} team and his matches data
+ */
+async function findByTeamId(teamId) {
+  const result = await pool.query(
+    `
+      SELECT * FROM "match_has_team"
+      WHERE "team_id" = $1;
+    `,
+    [teamId]);
+  return result.rows;
+}
+
 
 module.exports = {
   findAll,
