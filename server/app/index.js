@@ -24,9 +24,7 @@ app.use((req, res, next) => {
 });
 
 /** Router **/
-app.use(
-  "/",
-  router);
+app.use("/", router);
 
 const port = process.env.PORT ?? 3001;
 app.listen(port, () => {
