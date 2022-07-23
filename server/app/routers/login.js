@@ -8,6 +8,7 @@ const jwtSecret = process.env.JWTSECRET;
 /** Route Login **/
 router.post("/", async (req, res) => {
   const { email, password } = req.body;
+  console.log("coucou");
 
   const user = await userDatamapper.findByEmail(email);
 

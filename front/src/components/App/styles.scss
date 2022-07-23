@@ -697,6 +697,19 @@ a {
   }
 }
 
+// 404
+.app-error {
+  position: relative;
+  .cat-404 {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    @media only screen and (max-width: 450px) {
+      width: 100%;
+    }
+  }
+}
+
 .members {
   .group-1 {
     display: flex;
