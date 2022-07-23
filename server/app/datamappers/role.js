@@ -11,8 +11,8 @@ async function findAll() {
 
 /**
  * Return one role from database
- * @param {number} id type identifiant
- * @returns {object} type
+ * @param {number} id role identifiant
+ * @returns {object} role
  */
 async function findById(id) {
     const result = await pool.query(`SELECT * FROM "role" WHERE "id" = $1`, [id]);
@@ -21,8 +21,8 @@ async function findById(id) {
 
 /**
  * Insert one "role" in database
- * @param {string} name of type
- * @returns {object} Return new type
+ * @param {string} role of role
+ * @returns {object} Return new role
  */
 async function insertOne(role) {
     const result = await pool.query(
@@ -35,24 +35,24 @@ async function insertOne(role) {
 
 /** 
  * Update the name of one role
- * @param {string} - name of the role
- * @param {number} - id of the role 
+ * @param {string} role of the role
+ * @param {number} id of the role 
  * @returns {Object} - "role" updated
 */
-async function updateOne(id, name) {
+async function updateOne(id, role) {
     const result = await pool.query(
         `UPDATE "role"
         SET "name" = $1
         WHERE "id" = $2
         RETURNING *
-        `, [id, name]
+        `, [id, role]
     );
     return result.rows[0];
 };
 
 /** 
  * Delete one role from DB
- * @param {number} - id of the role
+ * @param {number}  id of the role
  * @returns {boolean} - true if the role is deleted
 */
 async function deleteOne(id) {
