@@ -87,7 +87,7 @@ async function update(req, res) {
  * @returns {json} JSON response with one type
  */
 async function destroy(req, res) {
-    const id = req.params.id;
+    const id = parseInt(req.params.id);
     const type = await typeDatamapper.findById(id);
   
     if (!type) {
