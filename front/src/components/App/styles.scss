@@ -62,7 +62,7 @@ body {
   // page title (Tableau de bord, Tournois, Mon profil, etc...)
   .title {
     font-size: 3rem;
-    font-weight: 200;
+    font-weight: var(--fine);
     margin-bottom: 1rem;
   }
 }
@@ -474,12 +474,6 @@ a {
 }
 
 .club {
-
-  .title {
-    display: flex;
-    flex-direction: column;
-    font-size: 3rem;
-  }
   .members-nb {
     font-size: 1rem;
     margin: 1rem 0;
@@ -762,5 +756,34 @@ a {
     &-email, &-phone {
       display: none; 
     }
+  }
+}
+
+.help {
+  .question-card {
+    display: block;
+    background-color: var(--main-color);
+    // padding: 2rem;
+    margin: var(--margin-base) 0;
+    border-radius: var(--border-radius);
+    min-height: 2rem;
+    background-size: 60%;
+    background-position: right -1rem center;
+    background-repeat: no-repeat;
+    position: relative;
+    @media only screen and (max-width: 450px) {
+      background-size: 100%;
+    }
+    &:hover {
+      outline: solid var(--border-size) var(--emphase-color);
+    }
+  }
+  details > summary {
+    font-weight: var(--bold);
+    padding: 2rem;
+    cursor: pointer;
+  }
+  details > p {
+    padding: 0 2rem 2rem 2rem;
   }
 }
