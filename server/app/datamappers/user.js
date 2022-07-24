@@ -2,6 +2,7 @@ const pool = require("../config/database");
 
 /**
  * Return all users from database
+ * @async
  * @returns {users[]} users
  */
 async function findAll() {
@@ -11,6 +12,7 @@ async function findAll() {
 
 /**
  * Return one user from database
+ * @async
  * @param {number} id User identifiant
  * @returns {object} user
  */
@@ -21,6 +23,7 @@ async function findById(id) {
 
 /**
  * Return one user from database
+ * @async
  * @param {string} email User email
  * @returns {object} user
  */
@@ -31,6 +34,7 @@ async function findById(id) {
 
 /**
  * Insert one user in database
+ * @async
  * @param {object} user 
  * @returns {object} user
  */
@@ -55,6 +59,7 @@ async function insertOne(user) {
 
 /**
  * Update one user in database
+ * @async
  * @param {number} id user identifiant
  * @param {object} user user informations
  * @returns {object} user
@@ -78,6 +83,7 @@ async function updateOne(id, user) {
 
 /**
  * Delete one user from database
+ * @async
  * @param {number} id user identifiant
  * @returns {boolean} true if user was delete
  */
@@ -94,6 +100,7 @@ async function deleteOne(id) {
 
 /**
  * Verify if the user is already in DB by unique variables
+ * @async
  * @param {object} user user informations
  * @param {number} id user identifiant
  * @returns {boolean} true if already exist
