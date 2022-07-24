@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "db-seed": "psql -U tournament_admin -d tournament -f ./sqitch/seed_db.sql",
-    "dev": "nodemon app/index"
+    "dev": "cross-env DEBUG=*,-express:*,-nodemon*,-body-parser:*,-finalhandler nodemon app/index"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "joi": "^17.6.0",
