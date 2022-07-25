@@ -5,17 +5,19 @@ import logo from 'src/assets/logo-petit-tournament.svg';
 
 function Header() {
   const dispatch = useDispatch();
+  const user = useSelector((state) => (state.user));
 
   const handleLogout = () => {
     dispatch({
       type: 'LOGOUT',
     });
   };
-  const user = useSelector((state) => (state.user));
 
   return (
     <header className="header">
-      <img src={logo} className="header-logo" alt="Logo Tournament" />
+      <Link to="/tableau-de-bord" title="Retour au tableau de bord" className="header-logo">
+        <img src={logo} alt="Logo Tournament" />
+      </Link>
       <h1 className="header-club-name">Bayard Bad</h1>
       <div className="header-user-menu">
         <p className="header-user-welcome">

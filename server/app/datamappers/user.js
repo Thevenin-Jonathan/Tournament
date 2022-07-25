@@ -6,7 +6,6 @@ const pool = require("../config/database");
  */
 async function findAll() {
   const result = await pool.query(`SELECT * FROM "user"`);
-  pool.end();
   return result.rows;
 }
 
@@ -17,7 +16,16 @@ async function findAll() {
  */
 async function findById(id) {
   const result = await pool.query(`SELECT * FROM "user" WHERE "id" = $1`, [id]);
-  pool.end();
+  return result.rows[0];
+}
+
+/**
+ * Return one user from database
+ * @param {string} email User email
+ * @returns {object} user
+ */
+ async function findByEmail(email) {
+  const result = await pool.query(`SELECT * FROM "user" WHERE "email" = $1`, [email]);
   return result.rows[0];
 }
 
@@ -42,7 +50,6 @@ async function insertOne(user) {
     [...values]
   )
 
-  pool.end();
   return result.rows[0];
 }
 
@@ -66,7 +73,6 @@ async function updateOne(id, user) {
     [...values, id]
   );
 
-  pool.end();
   return result.rows[0];
 }
 
@@ -83,14 +89,47 @@ async function deleteOne(id) {
     [id]
   );
 
-  pool.end();
+  return !!result.rowCount;
+}
+
+/**
+ * Verify if the user unique keys is already in DB
+ * @param {object} user user informations
+ * @param {number} id user identifiant
+ * @returns {boolean} true if already exist
+ */
+async function exist(user, id) {
+  const columns = [];
+  const values = [];
+
+  Object.entries(user).forEach(([key, val]) => {
+    if (["email", "phone", "player_license"].includes(key)) {
+      columns.push(`"${key}" = $${columns.length + 1}`);
+      values.push(val);
+    }
+  })
+
+  const query = {
+    text: `SELECT * FROM "user" WHERE ${columns.join(" OR ")}`,
+    values
+  }
+
+  if (id) {
+    query.text += ` AND id = $${values.length + 1}`,
+    query.values.push(id)
+  }
+
+  const result = await pool.query(query);
+
   return !!result.rowCount;
 }
 
 module.exports = {
   findAll,
   findById,
+  findByEmail,
   insertOne,
   updateOne,
-  deleteOne
+  deleteOne,
+  exist
 }

@@ -1,21 +1,3 @@
-## Comment installer sqitch
-
-- Sur Windows
-  - Télécharger Strawberry-Perl [ici](https://strawberryperl.com/) et l'installer
-  - Ouvrir un le Perl CLI
-  - lancer la commande: ```cpan install App::Sqitch DBD::Pg```
-  - si erreur : ```cpan install DBD::Pg```
-  - si encore erreur : ```cpanm install DBD::Pg```
-
-- Sur MAC
-  - Ouvrir le terminal
-  - Lancer la commande ```brew tap sqitchers/sqitch```
-  - Puis lancer cette commande ```brew install sqitch --with-postgres-support```
-
-- Sur Linux
-  - Ouvrir le terminal
-  - Lancer la commande ```apt-get install sqitch libdbd-pg-perl postgresql-client```
-
 ## Méthode SCRUM
 
 - https://ignition-program.com/tuto/la-methode-scrum-pour-les-nuls?locale=fr#:~:text=D%C3%A9finition%20%3A%20L'approche%20SCRUM%20est,des%20feedbacks%20r%C3%A9guliers%20du%20march%C3%A9.
@@ -37,4 +19,18 @@
 
 ## Generation de données fictives
 
--https://www.mockaroo.com/
+- https://www.mockaroo.com/
+
+## Securité en plus pour express avec Helmet
+
+- https://expressjs.com/fr/advanced/best-practice-security.html
+
+## Infos sur le currying
+
+- https://javascript.info/currying-partials
+- https://mindsers.blog/fr/post/composition-function-currying/
+
+## Infos sur le SSL avec pg pour Heroku
+
+- https://help.heroku.com/QVRZIEAH/why-am-i-seeing-connection-errors-for-my-heroku-postgres-database-from-an-unexpected-ip-address-what-are-these-unauthorized-connection-attempts
+- https://stackoverflow.com/questions/54302088/how-to-fix-error-the-server-does-not-support-ssl-connections-when-trying-to-a
