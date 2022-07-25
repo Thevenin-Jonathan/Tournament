@@ -31,17 +31,17 @@ async function insertOne(name) {
 
 /** 
  * Update the name of one type
- * @param {string} - name of the type
  * @param {number} - id of the type 
+ * @param {string} - name of the type 
  * @returns {Object} - "type" updated
 */
-async function updateOne(name, id) {
+async function updateOne(id, name) {
     const result = await pool.query(`
-          UPDATE "type" SET 
-          "name" = $1
-          WHERE "id" = $2
+          UPDATE "type" 
+          SET "name" = $2
+          WHERE "id" = $1
           RETURNING *
-          `, [name, id]);
+          `, [id, name]);
     return result.rows[0];
   };
 
