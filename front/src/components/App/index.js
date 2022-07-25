@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
+import Home from '../Home';
 import Dashboard from '../Dashboard';
 import Club from '../Club';
 import Header from '../Header';
@@ -60,7 +61,7 @@ function App() {
     // Public Routes
     return (
       <Routes>
-        <Route path="/" element={<h1>Hello public content (page promo)</h1>} />
+        <Route path="/" element={<Home />} />
         <Route path="/connexion" element={<LoginForm />} />
         <Route path="/mot-de-passe-perdu" element={<h1>Formulaire de récupération de mot de passe</h1>} />
         <Route path="*" element={<Error />} />
