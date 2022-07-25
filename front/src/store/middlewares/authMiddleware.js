@@ -6,7 +6,7 @@ const authMiddleware = (store) => (next) => (action) => {
       const state = store.getState();
       const config = {
         method: 'post',
-        url: 'https://cassini-tournament.herokuapp.com/login',
+        url: 'http://localhost:3001/login',
         headers: {
           'Content-Type': 'application/json',
         },
