@@ -25,12 +25,12 @@ function App() {
   const isLogged = useSelector((state) => (state.user.logged));
   const isLoading = useSelector((state) => (state.interface.isLoading));
 
-  // a chaque changement
-  useEffect(() => {
-    dispatch({
-      type: 'VERIFY_TOKEN',
-    });
-  }, [location]);
+  // a chaque changement d'url
+  // useEffect(() => {
+  //   dispatch({
+  //     type: 'VERIFY_TOKEN',
+  //   });
+  // }, [location]);
 
   // au montage du composant
   useEffect(() => {
