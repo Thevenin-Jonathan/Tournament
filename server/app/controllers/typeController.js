@@ -65,15 +65,15 @@ async function update(req, res) {
     if (!type) {
       return res.json({message: "Type does not exist in DB"})
     }
-      if (await typeDatamapper.findByName(name)) {
-        // throw new Error("Data is already exist on another type in DB");
-        return res.json({message: "Name is already exist on another type in DB"})
-      }
+    if (await typeDatamapper.findByName(name)) {
+      // throw new Error("Data is already exist on another type in DB");
+      return res.json({message: "Name is already exist on another type in DB"})
+    }
     const updType = await typeDatamapper.updateOne(id, name)
     return res.json(updType)
   }
 
-  /**
+/**
  * Delete one type from DB
  * 
  * ExpressMiddleware signature
