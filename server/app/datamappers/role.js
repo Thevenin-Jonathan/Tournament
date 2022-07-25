@@ -21,31 +21,31 @@ async function findById(id) {
 
 /**
  * Insert one "role" in database
- * @param {string} role of role
+ * @param {string} name of role
  * @returns {object} Return new role
  */
-async function insertOne(role) {
+async function insertOne(name) {
     const result = await pool.query(
         `INSERT INTO "role" ("name")
         VALUES ($1)
-        RETURNING *`, [role]
+        RETURNING *`, [name]
     );
     return result.rows[0];
 };
 
 /** 
  * Update the name of one role
- * @param {string} role of the role
+ * @param {string} name of the role
  * @param {number} id of the role 
  * @returns {Object} - "role" updated
 */
-async function updateOne(id, role) {
+async function updateOne(id, name) {
     const result = await pool.query(
         `UPDATE "role"
         SET "name" = $1
         WHERE "id" = $2
         RETURNING *
-        `, [id, role]
+        `, [id, name]
     );
     return result.rows[0];
 };
