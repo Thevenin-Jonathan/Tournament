@@ -1,8 +1,8 @@
 const pool = require("../config/database");
 
 /**
- * Return tous les resultats
- * @return {result[]} result
+ * Return all "result" from database
+ * @returns {result[]} result
  */
  async function findAll() {
     const result = await pool.query(`SELECT * FROM "result"`);
@@ -10,9 +10,9 @@ const pool = require("../config/database");
 };
 
 /**
- * Return un resultat
- * @param {number} id le resultat choisis
- * @return {object} le resultat en question
+ * Return one "result" from database
+ * @param {number} id result identifiant
+ * @returns {object} result
  */
  async function findById(id) {
     const result = await pool.query(`SELECT * FROM "result" WHERE "id" = $1`, [id]);
@@ -20,24 +20,24 @@ const pool = require("../config/database");
 };
 
 /**
- * Insert un resultat
- * @param {string} - resulat rentré
- * @return {object} - nouveau resultat
+ * Insert one "result" in database
+ * @param {string} label of result
+ * @returns {object} Return new result
  */
- async function insertOne(result) {
+ async function insertOne(label) {
     const result = await pool.query(
-        `INSERT INTO "result"
+        `INSERT INTO result("label")
         VALUES ($1)
-        RETURNING *`, [result]
+        RETURNING *`, [label]
     );
     return result.rows[0];
 };
 
-/**
- * Supprimer un result
- * @param {number} -id du result
- * @return {boolean} - vrai si le result est supprimer
- */
+/** 
+ * Delete one result from DB
+ * @param {number}  id of the result
+ * @returns {boolean} - true if the result is deleted
+*/
  async function deleteOne(id) {
     const result = await pool.query(
         `DELETE FROM "result" WHERE "id" = $1`, [id]
@@ -45,25 +45,23 @@ const pool = require("../config/database");
     return !!result.rowCount;
 };
 
-/**
- * update le nom du result
- * @param {string} -label du result
- * @param {number} - id du result
- * @return {object} -result mis à jour
- */
+/** 
+ * Update result
+ * @param {string}  label of the result
+ * @param {number}  id of the result 
+ * @returns {Object} - "result" updated
+*/
  async function updateOne(id, label) {
     const result = await pool.query(
         `UPDATE "result"
-        SET "name" = $1
+        SET "label" = $1
         WHERE "id" = $2
         RETURNING *
         `, [id, label]
     );
     return result.rows[0];
 };
-
-
-
+  
 module.exports = {
     findAll,
     findById,

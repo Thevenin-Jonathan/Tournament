@@ -657,7 +657,6 @@ a {
 .profil {
   &-content {
     display: flex;
-    max-width: 800px;
     }
   
   &-infos {
@@ -673,6 +672,7 @@ a {
     height: 7rem;
     background-color: blue;
     margin: 0.5rem;
+    border-radius: var(--border-radius);
   }
 
   &-stats {
@@ -786,4 +786,21 @@ a {
   details > p {
     padding: 0 2rem 2rem 2rem;
   }
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @keyframes fade {
+    0% {
+      opacity: .5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  font-size: 2em;
+  animation: fade .75s infinite alternate;
 }
