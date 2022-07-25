@@ -33,5 +33,9 @@
 ## Infos sur le SSL avec pg pour Heroku
 
 - https://help.heroku.com/QVRZIEAH/why-am-i-seeing-connection-errors-for-my-heroku-postgres-database-from-an-unexpected-ip-address-what-are-these-unauthorized-connection-attempts
+<<<<<<< HEAD
 - https://stackoverflow.com/questions/54302088/how-to-fix-error-the-server-does-not-support-ssl-connections-when-trying-to-a
 - 
+=======
+- https://stackoverflow.com/questions/54302088/how-to-fix-error-the-server-does-not-support-ssl-connections-when-trying-to-a
+>>>>>>> facf28050335341c3ee6a17fbdfde4178ef45d4c
