@@ -1,4 +1,6 @@
 const router = require("express").Router();
+const bcrypt = require("bcrypt");
+const debug = require("debug")("login");
 const userDatamapper = require("../datamappers/user");
 
 /** JWT **/
@@ -8,15 +10,15 @@ const jwtSecret = process.env.JWTSECRET;
 /** Route Login **/
 router.post("/", async (req, res) => {
   const { email, password } = req.body;
-  console.log("coucou");
 
+  /** Verification: user already exist? **/
   const user = await userDatamapper.findByEmail(email);
-
   if (!user) {
     return res.status(404).json({message: "Login error email"});
   }
 
-  if (password !== user.password) {
+  /** Verification: password match with hash in DB? */
+  if (!await bcrypt.compare(password, user.password)) {    
     return res.status(404).json({message: "Login error password"});
   }
   

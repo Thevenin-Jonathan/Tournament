@@ -1,5 +1,6 @@
 export const initialState = {
   menuIsOpen: false,
+  isLoading: false,
 };
 
 const reducer = (state = initialState, action = {}) => {
