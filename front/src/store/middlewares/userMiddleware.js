@@ -5,7 +5,7 @@ const userMiddleware = (store) => (next) => (action) => {
     case 'GET_PROFILE': {
       const config = {
         method: 'get',
-        url: `http://localhost:3001/api/v1/users/${action.value}`,
+        url: `https://cassini-tournament.herokuapp.com/api/v1/users/${action.value}`,
       };
       next(action);
       axios(config)
