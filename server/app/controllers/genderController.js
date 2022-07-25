@@ -36,14 +36,8 @@ async function getOne(req, res) {
  * @returns {json} JSON response with the created gender
  */
 async function create(req, res) {
-  const gender = req.body;
-
-  /** Verification: gender already in use in DB? **/
-  if (await includes(genderDatamapper.findAll({gender: gender.name}))) {
-    return res.json({message: "This gender exists already"})
-  }
-
-  const newGender = await genderDatamapper.insertOne(gender);
+  const name = req.body.name;
+  const newGender = await genderDatamapper.insertOne(name);
   return res.json(newGender);
 };
 
@@ -56,8 +50,8 @@ async function create(req, res) {
  * @returns {json} JSON response with the updated gender
  */
 async function update(req, res) {
-  const id = req.params.id;
-  const newData = req.body;
+  const id = parseInt(req.params.id);
+  const newData = req.body.name;
   const gender = await genderDatamapper.findById(id);
 
   if (!gender) {
