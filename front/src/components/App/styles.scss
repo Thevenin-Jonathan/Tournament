@@ -657,7 +657,6 @@ a {
 .profil {
   &-content {
     display: flex;
-    max-width: 800px;
     }
   
   &-infos {
@@ -673,6 +672,7 @@ a {
     height: 7rem;
     background-color: blue;
     margin: 0.5rem;
+    border-radius: var(--border-radius);
   }
 
   &-stats {
