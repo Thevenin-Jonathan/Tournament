@@ -13,6 +13,7 @@ import './styles.scss';
 import LoginForm from '../LoginForm';
 import Profil from '../Profil';
 import Members from '../Members';
+import Help from '../Help';
 
 // == Composant
 function App() {
@@ -67,6 +68,7 @@ function App() {
         <Route path="/club" element={<Club />} />
         <Route path="/membres" element={<Members />} />
         <Route path="/profil" element={<Profil />} />
+        <Route path="/aide" element={<Help />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </div>

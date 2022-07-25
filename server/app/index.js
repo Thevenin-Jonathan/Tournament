@@ -1,8 +1,12 @@
 require("dotenv").config();
 const express = require("express");
-const debug = require('debug')('app:server');
+const debug = require('debug')('app');
 const app = express();
 const router = require("./routers");
+const helmet = require("helmet");
+
+/** Helmet for security */
+app.use(helmet());
 
 /** Parser **/
 app.use(express.json());
