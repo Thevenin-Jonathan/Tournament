@@ -4,21 +4,19 @@ export const initialState = {
 
   id: null,
   displayName: '',
-  avatar: '',
-  roleId: '',
+  roleId: null,
   token: null,
 
-  // champs controlés
   email: '',
   password: '',
-  //
-  lastName: '',
-  firstName: '',
+  avatar: '',
+  firstname: '',
+  lastname: '',
   address: '',
-  phone: '',
   birthdate: '',
-  gender: '',
   playerLicense: '',
+  genderId: null,
+  phone: '',
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -58,13 +56,36 @@ const reducer = (state = initialState, action = {}) => {
         displayName: action.token.firstname,
         avatar: action.token.url_avatar,
       };
+    case 'GET_PROFILE_SUCCESS':
+      return {
+        ...state,
+        avatar: action.value.url_avatar,
+        firstname: action.value.firstname,
+        lastname: action.value.lastname,
+        address: action.value.address,
+        birthdate: action.value.birthdate,
+        email: action.value.email,
+        playerLicense: action.value.player_license,
+        genderId: action.value.gender_id,
+        phone: action.value.phone,
+        roleId: action.value.role_id,
+      };
     case 'LOGOUT':
       return {
         ...state,
-        logged: false,
+        id: null,
         displayName: '',
+        logged: false,
+        avatar: '',
+        firstname: '',
+        lastname: '',
+        address: '',
+        birthdate: '',
         email: '',
-        password: '',
+        playerLicense: '',
+        genderId: null,
+        phone: '',
+        roleId: null,
         token: null,
       };
     default:
