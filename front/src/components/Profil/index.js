@@ -11,6 +11,17 @@ function Profil() {
     });
   }, []);
 
+  const genderText = (genderId) => {
+    switch (genderId) {
+      case 1:
+        return 'Homme';
+      case 2:
+        return 'Femme';
+      default:
+        return 'undefined';
+    }
+  };
+
   return (
     <main className="content profil">
       <h1 className="title">Mon profil</h1>
@@ -29,13 +40,13 @@ function Profil() {
               <button type="button" className="list-item-btn">
                 <i className="fa fa-pencil" aria-hidden="true" />
               </button>
-              {user.playerLicense}
+              License FFBAD : <strong>{user.playerLicense}</strong>
             </li>
             <li>
               <button type="button" className="list-item-btn">
                 <i className="fa fa-pencil" aria-hidden="true" />
               </button>
-              {user.genderId}
+              {genderText(user.genderId)}
             </li>
             <li>
               <button type="button" className="list-item-btn">
