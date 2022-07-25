@@ -1,3 +1,5 @@
+const bcrypt = require("bcrypt");
+const debug = require("debug")("login");
 const userDatamapper = require("../datamappers/user");
 
 /**
@@ -36,16 +38,28 @@ async function getOne(req, res) {
  * @returns {json} JSON response with the created user
  */
 async function create(req, res) {
-  const userData = req.body;
-  const user = await userDatamapper.exist(userData);
+  const user = req.body;
 
-  if (user) {
-    // throw new Error("User is already exist in DB");
-    return res.json({message: "User is already exist in DB"})
+  /** Verification: email already in use in DB? **/
+  if (await userDatamapper.exist({email: user.email})) {
+    return res.json({message: "This email is already in use"})
   }
 
-  const newUser = await userDatamapper.insertOne(userData);
+  /** Verification: phone already in use in DB? **/
+  if (await userDatamapper.exist({phone: user.phone})) {
+    return res.json({message: "This phone number is already in use"})
+  }
 
+  /** Verification: player license already in use in DB? **/
+  if (await userDatamapper.exist({player_license: user.player_license})) {
+    return res.json({message: "This player license is already in use"})
+  }
+
+  /** Password hash **/
+  const saltRound = 10;
+  user.password = await bcrypt.hash(user.password, saltRound);
+
+  const newUser = await userDatamapper.insertOne(user);
   return res.json(newUser);
 };
 
