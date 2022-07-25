@@ -1,0 +1,35 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "db-seed": "psql -U tournament_admin -d tournament -f ./sqitch/seed_db.sql",
+    "dev": "cross-env NODE_ENV=dev DEBUG=*,-express:*,-nodemon*,-body-parser:*,-finalhandler nodemon app/index",
+    "start": "cross-env NODE_ENV=prod node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/O-clock-Cassini/projet-11-tournament"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "debug": "^4.3.4",
+    "eslint": "^8.20.0",
+    "jest": "^28.1.3",
+    "nodemon": "^2.0.19"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "helmet": "^5.1.1",
+    "joi": "^17.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.7.3"
+  }
+}
