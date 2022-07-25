@@ -35,7 +35,7 @@ const authMiddleware = (store) => (next) => (action) => {
     }
 
     case 'VERIFY_TOKEN': {
-      console.log('verify token');
+      // console.log('verify token');
       const config = {
         method: 'post',
         url: 'http://localhost:3001/refresh_token',
@@ -47,18 +47,23 @@ const authMiddleware = (store) => (next) => (action) => {
         },
       };
       next(action);
-      // axios(config)
-      //   .then((response) => {
-      //     // si je reçois un token
-      //     // Tout est ok on laisse la connexion et on rafraichit le token
-      //     // localStorage.setItem('authToken', JSON.stringify(response.data));
-      //     // Si error on logout
+      axios(config)
+        .then((response) => {
+          // si je reçois un token
+          if (response.data.token) {
+            localStorage.setItem('authToken', JSON.stringify(response.data.token));
+          }
+          else {
+            throw new Error(response.data.msg);
+          }
+          // Tout est ok on laisse la connexion et on rafraichit le token
 
-      //   })
-      //   .catch((error) => {
-      //     store.dispatch({ type: 'LOGOUT', value: 'Token error' });
-      //     throw new Error(error);
-      //   });
+          // Si error on logout
+        })
+        .catch((error) => {
+          store.dispatch({ type: 'LOGOUT' });
+          throw new Error(error);
+        });
       break;
     }
 

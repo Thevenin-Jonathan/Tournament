@@ -1,6 +1,8 @@
 // == Import
 import { useEffect } from 'react';
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import {
+  Routes, Route, Navigate, useLocation,
+} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Dashboard from '../Dashboard';
