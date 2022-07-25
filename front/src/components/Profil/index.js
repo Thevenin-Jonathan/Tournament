@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import { genderText, dateFr } from 'src/utils';
 
 function Profil() {
   const dispatch = useDispatch();
@@ -10,17 +11,6 @@ function Profil() {
       value: user.id,
     });
   }, []);
-
-  const genderText = (genderId) => {
-    switch (genderId) {
-      case 1:
-        return 'Homme';
-      case 2:
-        return 'Femme';
-      default:
-        return 'undefined';
-    }
-  };
 
   return (
     <main className="content profil">
@@ -52,13 +42,13 @@ function Profil() {
               <button type="button" className="list-item-btn">
                 <i className="fa fa-pencil" aria-hidden="true" />
               </button>
-              {user.birthdate}
+              Date de naissance : {dateFr(user.birthdate)}
             </li>
             <li>
               <button type="button" className="list-item-btn">
                 <i className="fa fa-pencil" aria-hidden="true" />
               </button>
-              {user.address}
+              Adresse : {user.address}
             </li>
             <li>
               <button type="button" className="list-item-btn">
