@@ -1,12 +1,13 @@
 import axios from 'axios';
+import config from 'src/config';
 
 const authMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case 'SUBMIT_LOGIN': {
       const state = store.getState();
-      const config = {
+      const axiosConfig = {
         method: 'post',
-        url: 'http://localhost:3001/login',
+        url: `${config.serverUrl}/login`,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -16,7 +17,7 @@ const authMiddleware = (store) => (next) => (action) => {
         },
       };
       next(action);
-      axios(config)
+      axios(axiosConfig)
         .then((response) => {
           store.dispatch({ type: 'SUBMIT_LOGIN_SUCCESS', value: response.data });
           // set token in local storage
@@ -36,9 +37,9 @@ const authMiddleware = (store) => (next) => (action) => {
 
     case 'VERIFY_TOKEN': {
       // console.log('verify token');
-      const config = {
+      const axiosConfig = {
         method: 'post',
-        url: 'http://localhost:3001/refresh_token',
+        url: `${config.serverUrl}/refresh_token`,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -47,7 +48,7 @@ const authMiddleware = (store) => (next) => (action) => {
         },
       };
       next(action);
-      axios(config)
+      axios(axiosConfig)
         .then((response) => {
           // si je reçois un token
           if (response.data.token) {

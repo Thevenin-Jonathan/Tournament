@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { genderText, dateFr } from 'src/utils';
+import config from 'src/config';
 
 function Profil() {
   const dispatch = useDispatch();
@@ -12,13 +13,15 @@ function Profil() {
     });
   }, []);
 
+  const userAvatar = `${config.path.uploads.avatar}/${user.avatar}`;
+
   return (
     <main className="content profil">
       <h1 className="title">Mon profil</h1>
 
       <div className="profil-content">
         <div className="profil-infos">
-          <img className="profil-image" src={user.avatar} alt={`${user.firstname} Avatar`} />
+          <img className="profil-image" src={userAvatar} alt={`${user.firstname} Avatar`} />
           <ul className="profil-details">
             <li>
               <button type="button" className="list-item-btn">

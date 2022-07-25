@@ -1,7 +1,7 @@
 // == Import
 import { useEffect } from 'react';
 import {
-  Routes, Route, Navigate, useLocation,
+  Routes, Route, Navigate, /* useLocation */
 } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -21,7 +21,7 @@ import Loader from '../Loader';
 // == Composant
 function App() {
   const dispatch = useDispatch();
-  const location = useLocation();
+  // const location = useLocation();
   const isLogged = useSelector((state) => (state.user.logged));
   const isLoading = useSelector((state) => (state.interface.isLoading));
 
