@@ -21,11 +21,11 @@ async function findById(id) {
 
 /**
  * Insert one "type" in database
- * @param {string} name of type
+ * @param {string} name name type
  * @returns {object} Return new type
  */
-async function insertOne(type) {
-    const result = await pool.query(`INSERT INTO type ("name") VALUES($1) RETURNING *`, [type]);
+async function insertOne(name) {
+    const result = await pool.query(`INSERT INTO type ("name") VALUES($1) RETURNING *`, [name]);
     return result.rows[0];
 };
 
