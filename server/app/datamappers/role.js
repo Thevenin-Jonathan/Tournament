@@ -1,75 +1,66 @@
 const pool = require("../config/database");
 
 /**
- * Return tous les rôles
- * @return {role[]} roles
+ * Return all roles
+ * @return {Object[]} roles
  */
 async function findAll() {
     const result = await pool.query(`SELECT * FROM "role"`);
-    pool.end();
     return result.rows;
-};
+}; 
 
 /**
- * Return un role
- * @param {number} id le role choisis
- * @return {object} le role en question
+ * Return one role from database
+ * @param {number} id role identifiant
+ * @returns {object} role
  */
 async function findById(id) {
     const result = await pool.query(`SELECT * FROM "role" WHERE "id" = $1`, [id]);
-    pool.end();
     return result.rows[0];
 };
 
 /**
- * Insert un role
- * @param {string} - role entré
- * @return {object} - nouveau role
+ * Insert one "role" in database
+ * @param {string} role of role
+ * @returns {object} Return new role
  */
 async function insertOne(role) {
     const result = await pool.query(
-        `INSERT INTO "role"
+        `INSERT INTO "role" ("name")
         VALUES ($1)
         RETURNING *`, [role]
     );
-    pool.end();
     return result.rows[0];
 };
 
-/**
- * Supprimer un role
- * @param {number} -id du role
- * @return {boolean} - vrai si le role est supprimer
- */
-async function deleteOne(id) {
-    const result = await pool.query(
-        `DELETE FROM "role" WHERE "id" = $1`, [id]
-    );
-    pool.end();
-    return !!result.rowCount;
-};
-
-/**
- * update le nom du role
- * @param {string} -nom du role
- * @param {number} - id du role
- * @return {object} -role mis à jour
- */
-async function updateOne(id, name) {
+/** 
+ * Update the name of one role
+ * @param {string} role of the role
+ * @param {number} id of the role 
+ * @returns {Object} - "role" updated
+*/
+async function updateOne(id, role) {
     const result = await pool.query(
         `UPDATE "role"
         SET "name" = $1
         WHERE "id" = $2
         RETURNING *
-        `, [id, name]
+        `, [id, role]
     );
-    pool.end();
     return result.rows[0];
 };
 
-(async function test() {
-    console.log(await findAll());
-  })();
+/** 
+ * Delete one role from DB
+ * @param {number}  id of the role
+ * @returns {boolean} - true if the role is deleted
+*/
+async function deleteOne(id) {
+    const result = await pool.query(
+        `DELETE FROM "role" WHERE "id" = $1`, [id]
+    );
+    return !!result.rowCount;
+};
 
 module.exports = {
     findAll,
