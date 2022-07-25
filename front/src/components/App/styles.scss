@@ -787,3 +787,20 @@ a {
     padding: 0 2rem 2rem 2rem;
   }
 }
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @keyframes fade {
+    0% {
+      opacity: .5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  font-size: 2em;
+  animation: fade .75s infinite alternate;
+}

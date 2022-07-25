@@ -16,12 +16,14 @@ import LoginForm from '../LoginForm';
 import Profil from '../Profil';
 import Members from '../Members';
 import Help from '../Help';
+import Loader from '../Loader';
 
 // == Composant
 function App() {
   const dispatch = useDispatch();
   const location = useLocation();
   const isLogged = useSelector((state) => (state.user.logged));
+  const isLoading = useSelector((state) => (state.interface.isLoading));
 
   // a chaque changement
   useEffect(() => {
@@ -71,6 +73,8 @@ function App() {
     <div className="app">
       <Header />
       <Menu />
+      {isLoading && <Loader />}
+      {!isLoading && (
       <Routes>
         <Route path="/connexion" element={<Navigate to="/tableau-de-bord" />} />
         <Route path="/tableau-de-bord" element={<Dashboard />} />
@@ -81,6 +85,7 @@ function App() {
         <Route path="/aide" element={<Help />} />
         <Route path="*" element={<Error />} />
       </Routes>
+      )}
     </div>
   );
 }
