@@ -1,6 +1,8 @@
 // == Import
 import { useEffect } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import {
+  Routes, Route, Navigate, useLocation,
+} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Dashboard from '../Dashboard';
@@ -18,7 +20,15 @@ import Help from '../Help';
 // == Composant
 function App() {
   const dispatch = useDispatch();
+  const location = useLocation();
   const isLogged = useSelector((state) => (state.user.logged));
+
+  // a chaque changement
+  useEffect(() => {
+    dispatch({
+      type: 'VERIFY_TOKEN',
+    });
+  }, [location]);
 
   // au montage du composant
   useEffect(() => {

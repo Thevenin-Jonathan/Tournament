@@ -34,6 +34,39 @@ const authMiddleware = (store) => (next) => (action) => {
       break;
     }
 
+    case 'VERIFY_TOKEN': {
+      // console.log('verify token');
+      const config = {
+        method: 'post',
+        url: 'http://localhost:3001/refresh_token',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        data: {
+          token: localStorage.getItem('authToken'),
+        },
+      };
+      next(action);
+      axios(config)
+        .then((response) => {
+          // si je reçois un token
+          if (response.data.token) {
+            localStorage.setItem('authToken', JSON.stringify(response.data.token));
+          }
+          else {
+            throw new Error(response.data.msg);
+          }
+          // Tout est ok on laisse la connexion et on rafraichit le token
+
+          // Si error on logout
+        })
+        .catch((error) => {
+          store.dispatch({ type: 'LOGOUT' });
+          throw new Error(error);
+        });
+      break;
+    }
+
     case 'LOGOUT': {
       localStorage.removeItem('authToken');
       next(action);
