@@ -8,6 +8,7 @@ const roleRouter = require("./roleRouter");
 const clubRouter = require("./clubRouter");
 const genderRouter = require("./genderRouter");
 const typeRouter = require("./typeRouter");
+const stateRouter = require("./stateRouter");
 
 
 router.use("/tournaments", tournamentRouter);
@@ -18,6 +19,7 @@ router.use("/roles", roleRouter);
 router.use("/clubs", clubRouter);
 router.use("/gender", genderRouter);
 router.use("/types", typeRouter);
+router.use("/states", stateRouter);
 
 
 module.exports = router;
