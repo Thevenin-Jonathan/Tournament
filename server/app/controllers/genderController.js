@@ -1,7 +1,8 @@
 const genderDatamapper = require("../datamappers/gender");
+const { ApiError, Api404Error } = require("../services/errorHandler");
 
 /**
- * Get and return all genders from DB
+ * Get all genders from DB
  * 
  * ExpressMiddleware signature
  * @param {object} _ express request object (not used)
@@ -37,8 +38,14 @@ async function getOne(req, res) {
  */
 async function create(req, res) {
   const name = req.body.name;
+
+  /** Verification: name already in use in DB? **/
+  if (await genderDatamapper.findByName(name)) {
+    throw new ApiError("This name is already in use");
+  }
+
   const newGender = await genderDatamapper.insertOne(name);
-  return res.json(newGender);
+  return res.status(201).json(newGender);
 };
 
 /**
@@ -55,11 +62,11 @@ async function update(req, res) {
   const gender = await genderDatamapper.findById(id);
 
   if (!gender) {
-    return res.json({message: "Gender does not exist in DB"})
+    throw new Api404Error("Gender does not exist in DB");
   }
 
-  const updGender = await genderDatamapper.updateOne(id, name)
-  return res.json(updGender)
+  const updatedGender = await genderDatamapper.updateOne(id, name)
+  return res.json(updatedGender)
 }
 
 /**
@@ -75,7 +82,7 @@ async function destroy(req, res) {
   const gender = await genderDatamapper.findById(id);
 
   if (!gender) {
-    return res.json({message: "Gender does not exist in DB"})
+    throw new Api404Error("Gender does not exist in DB");
   }
 
   await genderDatamapper.deleteOne(id);
