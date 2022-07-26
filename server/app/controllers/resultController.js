@@ -1,12 +1,12 @@
 const resultDatamapper = require("../datamappers/result");
 
 /**
- * Get and return all teams from DB
+ * Get and return all results from DB
  * 
  * ExpressMiddleware signature
  * @param {object} _ express request object (not used)
  * @param {object} res express response object
- * @returns {json} JSON response with all teams
+ * @returns {json} JSON response with all results
  */
 async function getAll(_, res) {
   const result = await resultDatamapper.findAll();
@@ -14,71 +14,71 @@ async function getAll(_, res) {
 };
 
 /**
- * Get one team from DB
+ * Get one result from DB
  * 
  * ExpressMiddleware signature
  * @param {object} req express request object
  * @param {object} res express response object
- * @returns {json} JSON response with one team
+ * @returns {json} JSON response with one result
  */
 async function getOne(req, res) {
   const id = req.params.id;
-  const team = await teamDatamapper.findById(id);
-  return res.json(team);
+  const result = await resultDatamapper.findById(id);
+  return res.json(result);
 };
 
 /**
- * Add one tournament into DB
+ * Add one result into DB
  * 
  * ExpressMiddleware signature
  * @param {object} req express request object
  * @param {object} res express response object
- * @returns {json} JSON response with the created tournament
+ * @returns {json} JSON response with the created result
  */
 async function create(req, res) {
-  const tournament = req.body;
-  const newTournament = await tournamentDatamapper.insertOne(tournament);
-  return res.json(newTournament);
+  const result = req.body.label;
+  const newResult = await resultDatamapper.insertOne(result);
+  return res.json(newResult);
 };
 
 /**
- * Update one tournament into DB
+ * Update one result into DB
  * 
  * ExpressMiddleware signature
  * @param {object} req express request object
  * @param {object} res express response object
- * @returns {json} JSON response with the updated tournament
+ * @returns {json} JSON response with the updated result
  */
 async function update(req, res) {
   const id = req.params.id;
-  const newData = req.body;
-  const tournament = await tournamentDatamapper.findById(id);
+  const newData = req.body.label;
+  const result = await resultDatamapper.findById(id);
 
-  if (!tournament) {
-    return res.json({message: "Tournament does not exist in DB"})
+  if (!result) {
+    return res.json({message: "Result does not exist in DB"})
   }
 
-  const updTournament = await tournamentDatamapper.updateOne(id, newData)
-  return res.json(updTournament)
+  const updResult = await resultDatamapper.updateOne(id, newData)
+  return res.json(updResult)
 }
 
 /**
- * Delete one tournament from DB
+ * Delete one result from DB
  * 
  * ExpressMiddleware signature
  * @param {object} req express request object
  * @param {object} res express response object
- * @returns {json} JSON response with one tournament
+ * @returns {json} JSON response with one result
  */
 async function destroy(req, res) {
   const id = req.params.id;
-  const tournament = await tournamentDatamapper.findById(id);
+  const result = await resultDatamapper.findById(id);
 
-  if (!tournament) {
-    return res.json({message: "Tournament does not exist in DB"})
+  if (!result) {
+    return res.json({message: "Result does not exist in DB"})
   }
 
-  await tournamentDatamapper.deleteOne(id);
+  await resultDatamapper.deleteOne(id);
   return res.status(204).json();
 };
 
