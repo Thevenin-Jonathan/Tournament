@@ -58,8 +58,8 @@ async function deleteOne(id) {
 async function updateOne(name, id) {
     const result = await pool.query(
         `UPDATE "state" 
-        SET "name" = $1
-        WHERE "id" = $2
+        SET "name" = $2
+        WHERE "id" = $1
         RETURNING *;`,[name, id]
     );
     return result.rows[0];
