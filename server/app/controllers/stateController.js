@@ -1,5 +1,5 @@
 const stateDatamapper = require("../datamappers/state");
-const { ApiError, Api404Error } = require("../services/errorHandler");
+const { Api404Error } = require("../services/errorHandler");
 
 /**
  * Get all states from DB
