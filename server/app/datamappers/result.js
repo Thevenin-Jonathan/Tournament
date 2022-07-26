@@ -20,6 +20,16 @@ const pool = require("../config/database");
 };
 
 /**
+ * Return one "result" from database
+ * @param {string} id result label
+ * @returns {object} result
+ */
+ async function findByLabel(label) {
+    const result = await pool.query(`SELECT * FROM "result" WHERE "label" = $1`, [label]);
+    return result.rows[0];
+};
+
+/**
  * Insert one "result" in database
  * @param {string} label of result
  * @returns {object} Return new result
@@ -65,6 +75,7 @@ const pool = require("../config/database");
 module.exports = {
     findAll,
     findById,
+    findByLabel,
     insertOne,
     deleteOne,
     updateOne
