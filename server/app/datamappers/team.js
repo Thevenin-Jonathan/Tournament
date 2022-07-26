@@ -16,11 +16,11 @@ async function findAll() {
  * @param {number} - id of the team
  * @returns {Object} - one team
 */
-async function findById(id) {
+async function findById(tournament_id) {
     const result = await pool.query(
-        `SELECT * FROM "team" WHERE "id"= $1;`,[id]
+        `SELECT * FROM "team" WHERE "tournament_id"= $1;`,[tournament_id]
     );
-    return result.rows[0];
+    return result.rows;
 };
 
 /** 
