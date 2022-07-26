@@ -1,4 +1,5 @@
 const typeDatamapper = require("../datamappers/type");
+const { ApiError, Api404Error } = require("../services/errorHandler");
 
 /**
  * Get all types from DB
