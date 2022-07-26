@@ -42,8 +42,8 @@ async function insertOne(name) {
 async function updateOne(id, name) {
     const result = await pool.query(
         `UPDATE "role"
-        SET "name" = $1
-        WHERE "id" = $2
+        SET "name" = $2
+        WHERE "id" = $1
         RETURNING *
         `, [id, name]
     );
@@ -62,10 +62,21 @@ async function deleteOne(id) {
     return !!result.rowCount;
 };
 
+/**
+ * Get one role from database
+ * @param {string} name role name
+ * @returns {object} name
+ */
+ async function findByName(name) {
+    const result = await pool.query(`SELECT * FROM "type" WHERE "name" = $1`, [name]);
+    return result.rows[0];
+}
+
 module.exports = {
     findAll,
     findById,
     insertOne,
     deleteOne,
-    updateOne
+    updateOne,
+    findByName
   }
