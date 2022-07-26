@@ -36,15 +36,15 @@ const roleDatamapper = require("../datamappers/role");
  * @returns {json} JSON response with the created role
  */
 async function create(req, res) {
-    const {name} = req.body;
-    const role = await roleDatamapper.exist(name);
+    const { name } = req.body;
+    const role = await roleDatamapper.findByName(name);
   
     if (role) {
       // throw new Error("Role is already exist in DB");
       return res.json({message: "Role is already exist in DB"})
     }
   
-    const newRole = await roleDatamapper.insertOne(roleData);
+    const newRole = await roleDatamapper.insertOne(name);
   
     return res.json(newRole);
   };
@@ -59,22 +59,17 @@ async function create(req, res) {
  */
 async function update(req, res) {
     const id = parseInt(req.params.id);
-    const newData = req.body;
+    const { name } = req.body;
     const role = await roleDatamapper.findById(id);
   
     if (!role) {
       return res.json({message: "Role does not exist in DB"})
     }
-
-    if (newData.name) {
-      const existingData = await roleDatamapper.exist(newData, id);
-      if (existingData) {
+    if (await roleDatamapper.findByName(name)) {
         // throw new Error("Data is already exist on another role in DB");
         return res.json({message: "Data is already exist on another role in DB"})
       }
-    }
-  
-    const updRole = await roleDatamapper.updateOne(id, newData)
+    const updRole = await roleDatamapper.updateOne(id, name)
     return res.json(updRole)
   }
 

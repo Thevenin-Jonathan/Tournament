@@ -8,7 +8,7 @@ router.route("/")
 
 router.route("/:id")
   .get(controllerWrapper(controller.getOne))
-  .patch(controllerWrapper(controller.update))
+  .put(controllerWrapper(controller.update))
   .delete(controllerWrapper(controller.destroy));
 
 module.exports = router;
