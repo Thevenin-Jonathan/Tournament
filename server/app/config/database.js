@@ -1,5 +1,7 @@
 require("dotenv").config( {path: `${__dirname}/../../.env` });
-const connectionString = process.env.DATABASE_URL;
+
+const connectionString = process.env.PG_URL;
+
 
 const { Pool } = require('pg');
 let config;
