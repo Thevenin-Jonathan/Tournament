@@ -20,7 +20,7 @@ async function findById(id) {
     const result = await pool.query(
         `SELECT * FROM "team" WHERE "id"= $1;`,[id]
     );
-    return result.rows[0];
+    return result.rows;
 };
 
 /** 

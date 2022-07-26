@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const debug = require("debug")("login");
 const userDatamapper = require("../datamappers/user");
+const { ApiError, Api404Error } = require("../services/errorHandler");
 
 /**
  * Get all users from DB
@@ -42,17 +43,17 @@ async function create(req, res) {
 
   /** Verification: email already in use in DB? **/
   if (await userDatamapper.exist({email: user.email})) {
-    return res.json({message: "This email is already in use"})
+    throw new ApiError("This email is already in use");
   }
 
   /** Verification: phone already in use in DB? **/
   if (await userDatamapper.exist({phone: user.phone})) {
-    return res.json({message: "This phone number is already in use"})
+    throw new ApiError("This phone number is already in use");
   }
 
   /** Verification: player license already in use in DB? **/
   if (await userDatamapper.exist({player_license: user.player_license})) {
-    return res.json({message: "This player license is already in use"})
+    throw new ApiError("This player license is already in use");
   }
 
   /** Password hash **/
@@ -77,14 +78,13 @@ async function update(req, res) {
   const user = await userDatamapper.findById(id);
 
   if (!user) {
-    return res.json({message: "User does not exist in DB"})
+    throw new Api404Error("User does not exist in DB");
   }
   
   if (newData.email || newData.phone || newData.player_license) {
     const existingData = await userDatamapper.exist(newData, id);
     if (existingData) {
-      // throw new Error("Data is already exist on another user in DB");
-      return res.json({message: "Data is already exist on another user in DB"})
+      throw new ApiError("Data is already exist on another user in DB");
     }
   }
 
@@ -105,7 +105,7 @@ async function destroy(req, res) {
   const user = await userDatamapper.findById(id);
 
   if (!user) {
-    return res.json({message: "User does not exist in DB"})
+    throw new ApiError("User does not exist in DB");
   }
 
   await userDatamapper.deleteOne(id);

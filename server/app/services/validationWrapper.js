@@ -1,3 +1,6 @@
+const debug = require("debug")("vl-wrapper");
+const { ApiError } = require("../services/errorHandler");
+
 /**
  * Validation wrapper with try catch for manage errors
  * @param {object} schema joi schema
@@ -8,8 +11,8 @@
     try {
       await schema.validateAsync(req.body);
       next();
-    } catch (error) {
-      next(error);
+    } catch (error) {      
+      next(new ApiError(error.message));
     }
   }
 }

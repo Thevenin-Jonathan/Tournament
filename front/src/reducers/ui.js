@@ -15,6 +15,17 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         menuIsOpen: false,
       };
+    case 'GET_MEMBERS':
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case 'GET_MEMBERS_SUCCESS':
+      return {
+        ...state,
+        isLoading: false,
+      };
+
     default:
       return state;
   }
