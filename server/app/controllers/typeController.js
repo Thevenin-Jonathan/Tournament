@@ -40,13 +40,11 @@ async function create(req, res) {
     const type = await typeDatamapper.findByName(name);
   
     if (type) {
-      // throw new Error("Type is already exist in DB");
-      return res.json({message: "Type is already exist in DB"})
+      throw new ApiError("This type is already in use");
     }
   
-    const newType = await typeDatamapper.insertOne(name);
-  
-    return res.json(newType);
+    const newType = await typeDatamapper.insertOne(name);  
+    return res.status(201).json(newType);
   };
 
   /**
@@ -63,14 +61,15 @@ async function update(req, res) {
     const type = await typeDatamapper.findById(id);
   
     if (!type) {
-      return res.json({message: "Type does not exist in DB"})
+      throw new Api404Error("Type does not exist in DB");
     }
+
     if (await typeDatamapper.findByName(name)) {
-      // throw new Error("Data is already exist on another type in DB");
-      return res.json({message: "Name is already exist on another type in DB"})
+      throw new ApiError("This name is already in use");
     }
-    const updType = await typeDatamapper.updateOne(id, name)
-    return res.json(updType)
+
+    const updatedType = await typeDatamapper.updateOne(id, name)
+    return res.json(updatedType)
   }
 
 /**
@@ -86,8 +85,9 @@ async function destroy(req, res) {
     const type = await typeDatamapper.findById(id);
   
     if (!type) {
-      return res.json({message: "type does not exist in DB"})
+      throw new Api404Error("Type does not exist in DB");
     }
+    
     await typeDatamapper.deleteOne(id);
     return res.status(204).json();
   };
