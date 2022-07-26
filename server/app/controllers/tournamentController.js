@@ -59,7 +59,7 @@ async function update(req, res) {
     throw new Api404Error("Tournament does not exist in DB");
   }
 
-  const updatedTournament = await tournamentDatamapper.updatedateOne(id, newData)
+  const updatedTournament = await tournamentDatamapper.updateOne(id, newData)
   return res.json(updatedTournament)
 }
 

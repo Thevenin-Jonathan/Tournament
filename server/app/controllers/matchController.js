@@ -1,5 +1,5 @@
 const matchDatamapper = require("../datamappers/match");
-const { ApiError, Api404Error } = require("../services/errorHandler");
+const { Api404Error } = require("../services/errorHandler");
 
 /**
  * Get all matchs from DB
