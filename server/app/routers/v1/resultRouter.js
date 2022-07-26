@@ -1,9 +1,9 @@
 const router = require("express").Router();
 const controllerWrapper = require("../../services/controllerWrapper");
-const controller = require("../../controllers/typeController");
+const controller = require("../../controllers/resultController");
 const validationWrapper = require("../../services/validationWrapper");
-const createSchema = require("../../schemas/typeCreate");
-const updateSchema = require("../../schemas/typeUpdate");
+const createSchema = require("../../schemas/result");
+
 
 router.route("/")
   .get(controllerWrapper(controller.getAll))
@@ -13,8 +13,8 @@ router.route("/")
 
 router.route("/:id")
   .get(controllerWrapper(controller.getOne))
-  .put(
-    validationWrapper(updateSchema),
+  .patch(
+    validationWrapper(createSchema),
     controllerWrapper(controller.update))
   .delete(controllerWrapper(controller.destroy));
 
