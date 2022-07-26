@@ -3,7 +3,6 @@ const controllerWrapper = require("../../services/controllerWrapper");
 const controller = require("../../controllers/genderController");
 const validationWrapper = require("../../services/validationWrapper");
 const createSchema = require("../../schemas/genderCreate");
-const updateSchema = require("../../schemas/genderUpdate");
 
 router.route("/")
   .get(controllerWrapper(controller.getAll))
@@ -13,9 +12,7 @@ router.route("/")
 
 router.route("/:id")
   .get(controllerWrapper(controller.getOne))
-  .patch(
-    validationWrapper(updateSchema),
-    controllerWrapper(controller.update))
+  .patch(controllerWrapper(controller.update))
   .delete(controllerWrapper(controller.destroy));
 
 module.exports = router;
