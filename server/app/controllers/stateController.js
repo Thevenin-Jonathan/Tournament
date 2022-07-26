@@ -1,5 +1,5 @@
 const stateDatamapper = require("../datamappers/state");
-const { Api404Error } = require("../services/errorHandler");
+const { ApiError, Api404Error } = require("../services/errorHandler");
 
 /**
  * Get all states from DB
@@ -38,6 +38,12 @@ const { Api404Error } = require("../services/errorHandler");
  */
   async function create(req, res) {
     const {name} = req.body;
+
+    /** Verification: name already in use in DB? **/
+    if (await stateDatamapper.findByName(name)) {
+      throw new ApiError("This name is already in use");
+    }
+
     const newState = await stateDatamapper.insertOne(name);
     return res.status(201).json(newState);
   };
