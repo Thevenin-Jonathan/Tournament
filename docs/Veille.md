@@ -16,6 +16,11 @@
 - https://www.digitalocean.com/community/tutorials/api-authentication-with-json-web-tokensjwt-and-passport
 - https://www.wawasensei.dev/tuto/tuto-authentification-refresh-json-web-token-en-nodejs-avec-express
 - https://www.geeksforgeeks.org/jwt-authentication-with-node-js/
+- https://betterprogramming.pub/jwt-ultimate-how-to-guide-with-best-practices-in-javascript-f7ba4c48dfbd
+
+## Refresh token JWT
+
+- https://codeforgeek.com/refresh-token-jwt-nodejs-authentication/
 
 ## Generation de données fictives
 

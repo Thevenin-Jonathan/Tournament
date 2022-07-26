@@ -1,14 +1,15 @@
 import axios from 'axios';
+import config from 'src/config';
 
 const userMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case 'GET_PROFILE': {
-      const config = {
+      const axiosConfig = {
         method: 'get',
-        url: `http://localhost:3001/api/v1/users/${action.value}`,
+        url: `${config.api.baseUrl}/users/${action.value}`,
       };
       next(action);
-      axios(config)
+      axios(axiosConfig)
         .then((response) => {
           store.dispatch({ type: 'GET_PROFILE_SUCCESS', value: response.data });
         })

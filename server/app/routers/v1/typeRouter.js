@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const controllerWrapper = require("../../services/controllerWrapper");
-const controller = require("../../controllers/tournamentController");
+const controller = require("../../controllers/typeController");
 
 router.route("/")
   .get(controllerWrapper(controller.getAll))
@@ -8,7 +8,7 @@ router.route("/")
 
 router.route("/:id")
   .get(controllerWrapper(controller.getOne))
-  .patch(controllerWrapper(controller.update))
+  .put(controllerWrapper(controller.update))
   .delete(controllerWrapper(controller.destroy));
 
 module.exports = router;
