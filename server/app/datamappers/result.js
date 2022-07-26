@@ -54,8 +54,8 @@ const pool = require("../config/database");
  async function updateOne(id, label) {
     const result = await pool.query(
         `UPDATE "result"
-        SET "label" = $1
-        WHERE "id" = $2
+        SET "label" = $2
+        WHERE "id" = $1
         RETURNING *
         `, [id, label]
     );
