@@ -17,6 +17,9 @@ export const initialState = {
   playerLicense: '',
   genderId: null,
   phone: '',
+
+  // state qui stocke la liste des membres
+  members: [],
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -73,16 +76,7 @@ const reducer = (state = initialState, action = {}) => {
     case 'GET_MEMBERS_SUCCESS':
       return {
         ...state,
-        // avatar: action.value.url_avatar,
-        firstname: action.value.firstname,
-        lastname: action.value.lastname,
-        // address: action.value.address,
-        // birthdate: action.value.birthdate,
-        email: action.value.email,
-        // playerLicense: action.value.player_license,
-        genderId: action.value.gender_id,
-        phone: action.value.phone,
-        // roleId: action.value.role_id,
+        members: action.value,
       };
     case 'LOGOUT':
       return {

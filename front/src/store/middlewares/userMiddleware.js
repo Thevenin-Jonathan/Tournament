@@ -29,7 +29,6 @@ const userMiddleware = (store) => (next) => (action) => {
       axios(axiosConfig)
         .then((response) => {
           store.dispatch({ type: 'GET_MEMBERS_SUCCESS', value: response.data });
-          console.log(response.data);
         })
 
         .catch((error) => {
