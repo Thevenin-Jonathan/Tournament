@@ -51,14 +51,14 @@ async function create(req, res) {
  */
 async function update(req, res) {
   const id = parseInt(req.params.id);
-  const newData = req.body.name;
+  const name = req.body.name;
   const gender = await genderDatamapper.findById(id);
 
   if (!gender) {
     return res.json({message: "Gender does not exist in DB"})
   }
 
-  const updGender = await genderDatamapper.updateOne(id, newData)
+  const updGender = await genderDatamapper.updateOne(id, name)
   return res.json(updGender)
 }
 
