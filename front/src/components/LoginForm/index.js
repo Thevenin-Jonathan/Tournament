@@ -24,9 +24,9 @@ function LoginForm() {
   return (
     <main className="login-page">
       <div className="wrapper">
-        <a href="/" title="Retour à la home Tournament" className="logo-tournament">
+        <Link to="/" title="Retour à la home Tournament" className="logo-tournament">
           <img src={logoBig} alt="Logo Tournament" />
-        </a>
+        </Link>
 
         <form className="login-form" onSubmit={handleLoginSubmit}>
           <h1>Connexion <span>Club</span></h1>

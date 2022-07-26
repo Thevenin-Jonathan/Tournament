@@ -1,8 +1,11 @@
 // == Import
 import { useEffect } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import {
+  Routes, Route, Navigate, /* useLocation */
+} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
+import Home from '../Home';
 import Dashboard from '../Dashboard';
 import Club from '../Club';
 import Header from '../Header';
@@ -14,11 +17,21 @@ import LoginForm from '../LoginForm';
 import Profil from '../Profil';
 import Members from '../Members';
 import Help from '../Help';
+import Loader from '../Loader';
 
 // == Composant
 function App() {
   const dispatch = useDispatch();
+  // const location = useLocation();
   const isLogged = useSelector((state) => (state.user.logged));
+  const isLoading = useSelector((state) => (state.interface.isLoading));
+
+  // a chaque changement d'url
+  // useEffect(() => {
+  //   dispatch({
+  //     type: 'VERIFY_TOKEN',
+  //   });
+  // }, [location]);
 
   // au montage du composant
   useEffect(() => {
@@ -48,7 +61,7 @@ function App() {
     // Public Routes
     return (
       <Routes>
-        <Route path="/" element={<h1>Hello public content (page promo)</h1>} />
+        <Route path="/" element={<Home />} />
         <Route path="/connexion" element={<LoginForm />} />
         <Route path="/mot-de-passe-perdu" element={<h1>Formulaire de récupération de mot de passe</h1>} />
         <Route path="*" element={<Error />} />
@@ -61,6 +74,8 @@ function App() {
     <div className="app">
       <Header />
       <Menu />
+      {isLoading && <Loader />}
+      {!isLoading && (
       <Routes>
         <Route path="/connexion" element={<Navigate to="/tableau-de-bord" />} />
         <Route path="/tableau-de-bord" element={<Dashboard />} />
@@ -71,6 +86,7 @@ function App() {
         <Route path="/aide" element={<Help />} />
         <Route path="*" element={<Error />} />
       </Routes>
+      )}
     </div>
   );
 }

@@ -20,7 +20,7 @@
 
 ## Installation de la DB
 
-- Avoir sqitch installé sur le systeme
+- Avoir sqitch et psql installé sur le systeme (lancable via les commande `psql` ou `sqitch` directement)
 - Dans le terminal, se placer dans le dossier __"/server/sqitch"__
 - Lancer la commande `bash sqitch_init.sh`
 - Rentrer le password du Super-User __"postgres"__ (Vous pouvez modifier le nom du SU dans __"sqitch_init.sh"__ L2)

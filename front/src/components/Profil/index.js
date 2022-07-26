@@ -1,70 +1,82 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { genderText, dateFr } from 'src/utils';
+import config from 'src/config';
+
 function Profil() {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => (state.user));
+  useEffect(() => {
+    dispatch({
+      type: 'GET_PROFILE',
+      value: user.id,
+    });
+  }, []);
+
+  const userAvatar = `${config.path.uploads.avatar}/${user.avatar}`;
+
   return (
     <main className="content profil">
       <h1 className="title">Mon profil</h1>
 
       <div className="profil-content">
         <div className="profil-infos">
-          <img className="profil-image" src="" alt="profil" />
+          <img className="profil-image" src={userAvatar} alt={`${user.firstname} Avatar`} />
           <ul className="profil-details">
             <li>
               <button type="button" className="list-item-btn">
                 <i className="fa fa-pencil" aria-hidden="true" />
               </button>
-              John Kennedy
+              {user.firstname} {user.lastname}
             </li>
             <li>
               <button type="button" className="list-item-btn">
                 <i className="fa fa-pencil" aria-hidden="true" />
               </button>
-              1234567
+              License FFBAD : <strong>{user.playerLicense}</strong>
             </li>
             <li>
               <button type="button" className="list-item-btn">
                 <i className="fa fa-pencil" aria-hidden="true" />
               </button>
-              Hommme
+              {genderText(user.genderId)}
             </li>
             <li>
               <button type="button" className="list-item-btn">
                 <i className="fa fa-pencil" aria-hidden="true" />
               </button>
-              12/06/1996
+              Date de naissance : {dateFr(user.birthdate)}
             </li>
             <li>
               <button type="button" className="list-item-btn">
                 <i className="fa fa-pencil" aria-hidden="true" />
               </button>
-              165 rue des fleurs
+              Adresse : {user.address}
             </li>
             <li>
               <button type="button" className="list-item-btn">
                 <i className="fa fa-pencil" aria-hidden="true" />
               </button>
-              38880 Pontcharra
+              {user.email}
             </li>
             <li>
               <button type="button" className="list-item-btn">
                 <i className="fa fa-pencil" aria-hidden="true" />
               </button>
-              j.kennedy@gmail.com
-            </li>
-            <li>
-              <button type="button" className="list-item-btn">
-                <i className="fa fa-pencil" aria-hidden="true" />
-              </button>
-              01 23 45 67 89
+              {user.phone}
             </li>
           </ul>
         </div>
-        <ul className="profil-stats">
-          <li>Mes statistiques</li>
-          <li>Participations totales: 3</li>
-          <li>Matchs joués: 24</li>
-          <li>Victoires en simple: 1</li>
-          <li>Victoires en double: 0</li>
-          <li>Victoires en mixte: 2</li>
-        </ul>
+        <div className="profil-stats">
+          <h2>Mes statistiques</h2>
+          <ul>
+            <li>Participations totales: 3</li>
+            <li>Matchs joués: 24</li>
+            <li>Victoires en simple: 1</li>
+            <li>Victoires en double: 0</li>
+            <li>Victoires en mixte: 2</li>
+          </ul>
+        </div>
       </div>
     </main>
   );

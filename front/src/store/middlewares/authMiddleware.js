@@ -1,12 +1,13 @@
 import axios from 'axios';
+import config from 'src/config';
 
 const authMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case 'SUBMIT_LOGIN': {
       const state = store.getState();
-      const config = {
+      const axiosConfig = {
         method: 'post',
-        url: 'http://localhost:3001/login',
+        url: `${config.serverUrl}/login`,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -16,7 +17,7 @@ const authMiddleware = (store) => (next) => (action) => {
         },
       };
       next(action);
-      axios(config)
+      axios(axiosConfig)
         .then((response) => {
           store.dispatch({ type: 'SUBMIT_LOGIN_SUCCESS', value: response.data });
           // set token in local storage
@@ -29,6 +30,39 @@ const authMiddleware = (store) => (next) => (action) => {
         })
         .catch((error) => {
           store.dispatch({ type: 'SUBMIT_LOGIN_FAILED', value: 'Login error' });
+          throw new Error(error);
+        });
+      break;
+    }
+
+    case 'VERIFY_TOKEN': {
+      // console.log('verify token');
+      const axiosConfig = {
+        method: 'post',
+        url: `${config.serverUrl}/refresh_token`,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        data: {
+          token: localStorage.getItem('authToken'),
+        },
+      };
+      next(action);
+      axios(axiosConfig)
+        .then((response) => {
+          // si je reçois un token
+          if (response.data.token) {
+            localStorage.setItem('authToken', JSON.stringify(response.data.token));
+          }
+          else {
+            throw new Error(response.data.msg);
+          }
+          // Tout est ok on laisse la connexion et on rafraichit le token
+
+          // Si error on logout
+        })
+        .catch((error) => {
+          store.dispatch({ type: 'LOGOUT' });
           throw new Error(error);
         });
       break;
