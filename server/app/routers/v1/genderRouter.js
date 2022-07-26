@@ -2,7 +2,7 @@ const router = require("express").Router();
 const controllerWrapper = require("../../services/controllerWrapper");
 const controller = require("../../controllers/genderController");
 const validationWrapper = require("../../services/validationWrapper");
-const createUpdateSchema = require("../../schemas/genderCreate");
+const createUpdateSchema = require("../../schemas/gender");
 
 router.route("/")
   .get(controllerWrapper(controller.getAll))
