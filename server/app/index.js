@@ -13,6 +13,7 @@ app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
 /** Cors **/
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
