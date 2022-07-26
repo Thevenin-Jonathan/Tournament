@@ -55,12 +55,12 @@ async function deleteOne(id) {
  * @param {number} - id of the gender 
  * @returns {Object} - gender updated
 */
-async function updateOne(name, id) {
+async function updateOne(id, name) {
     const result = await pool.query(
         `UPDATE "gender" 
-        SET "name" = $1
-        WHERE "id" = $2
-        RETURNING *;`,[name, id]
+        SET "name" = $2
+        WHERE "id" = $1
+        RETURNING *;`,[id, name]
     );
     return result.rows[0];
   };
