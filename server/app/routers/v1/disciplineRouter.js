@@ -1,20 +1,20 @@
 const router = require("express").Router();
 const controllerWrapper = require("../../services/controllerWrapper");
-const controller = require("../../controllers/resultController");
+const controller = require("../../controllers/disciplineController");
 const validationWrapper = require("../../services/validationWrapper");
-const createSchema = require("../../schemas/result");
+const disciplineSchema = require("../../schemas/disciplineSchema");
 
 
 router.route("/")
   .get(controllerWrapper(controller.getAll))
   .post(
-    validationWrapper(createSchema),
+    validationWrapper(disciplineSchema),
     controllerWrapper(controller.create));
 
 router.route("/:id")
   .get(controllerWrapper(controller.getOne))
-  .patch(
-    validationWrapper(createSchema),
+  .put(
+    validationWrapper(disciplineSchema),
     controllerWrapper(controller.update))
   .delete(controllerWrapper(controller.destroy));
 
