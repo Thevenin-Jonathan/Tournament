@@ -73,14 +73,22 @@ async function update(req, res) {
   if (!club) {
     return res.json({message: "Club does not exist in DB"})
   }
-  
-  if (newData.email || newData.phone || newData.player_license) {
-    const existingData = await clubDatamapper.exist(newData, id);
-    if (existingData) {
-      // throw new Error("Data is already exist on another club in DB");
-      return res.json({message: "Data is already exist on another club in DB"})
-    }
+
+/** Verification: club_ref already in use in DB? **/
+if (await clubDatamapper.exist({club_ref: newData.club_ref})) {
+  return res.json({message: "This club_ref is already in use"})
   }
+  
+  /** Verification: email already in use in DB? **/
+  if (await clubDatamapper.exist({email: newData.email})) {
+  return res.json({message: "This email is already in use"})
+  }
+  
+  /** Verification: website already in use in DB? **/
+  if (await clubDatamapper.exist({website: newData.website})) {
+  return res.json({message: "This website is already in use"})
+  }
+
 
   const updClub = await clubDatamapper.updateOne(id, newData)
   return res.json(updClub)
