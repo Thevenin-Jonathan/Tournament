@@ -17,6 +17,18 @@ export const initialState = {
   playerLicense: '',
   genderId: null,
   phone: '',
+
+  // champs controlés add member
+  addMemberemail: '',
+  addMemberpassword: '',
+  addMemberavatar: '',
+  addMemberfirstname: '',
+  addMemberlastname: '',
+  addMemberaddress: '',
+  addMemberbirthdate: '',
+  addMemberplayerLicense: '',
+  addMembergenderId: null,
+  addMemberphone: '',
 };
 
 const reducer = (state = initialState, action = {}) => {

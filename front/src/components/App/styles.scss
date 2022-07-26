@@ -786,6 +786,18 @@ a {
   }
 }
 
+
+.add-members-form {
+  .mass-add {
+
+  }
+  .single-add {
+    background-color: var(--header-color);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+  }
+}
+
 .help {
   .question-card {
     display: block;
