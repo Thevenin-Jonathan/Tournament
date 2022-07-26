@@ -1,17 +1,13 @@
 const joi = require("joi");
 
 module.exports = joi.object({
-  firstname: joi.string().min(2).required(),
-  lastname: joi.string().min(2).required(),
-  address: joi.string().min(10),
-  birthdate: joi.date().greater('1-1-1930').required(),
-  is_active: joi.boolean().required(),
-  email: joi.string().email().required(),
-  password: joi.string().required(),
-  url_avatar: joi.string(),
+  name: joi.string().min(2).required(),
+  address: joi.string().min(10).required(),
   phone: joi.number(),
-  player_license: joi.number(),
-  club_id: joi.number().required(),
-  role_id: joi.number().required(),
-  gender_id: joi.number().required()
-});
+  email: joi.string().email().required(),
+  logo_url: joi.string(),
+  nb_playground: joi.number().required(),
+  website: joi.string().min(5),
+  club_ref: joi.string().min(5).required(),
+  description: joi.string().min(10)
+  });
