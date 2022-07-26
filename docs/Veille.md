@@ -21,6 +21,9 @@
 ## Refresh token JWT
 
 - https://codeforgeek.com/refresh-token-jwt-nodejs-authentication/
+- https://github.com/arkerone/express-security-example/blob/master/src/controllers/auth.js
+- https://www.codeheroes.fr/2020/02/02/securiser-une-api-rest-2-3-implementation-en-node-js/
+- https://www.codeheroes.fr/2020/06/20/securiser-une-api-rest-3-3-gestion-du-jwt-cote-client/
 
 ## Generation de données fictives
 
