@@ -42,3 +42,10 @@
 
 - https://help.heroku.com/QVRZIEAH/why-am-i-seeing-connection-errors-for-my-heroku-postgres-database-from-an-unexpected-ip-address-what-are-these-unauthorized-connection-attempts
 - https://stackoverflow.com/questions/54302088/how-to-fix-error-the-server-does-not-support-ssl-connections-when-trying-to-a
+
+## Infos sur les error handler
+
+- https://nodejs.org/api/errors.html
+- https://nodejs.dev/learn/error-handling-in-nodejs
+- https://sematext.com/blog/node-js-error-handling/#toc-4-catch-all-uncaught-exceptions-10
+- https://github.com/arkerone/express-security-example
