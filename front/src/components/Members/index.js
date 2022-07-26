@@ -1,6 +1,18 @@
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 function Members() {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => (state.user));
+
+  useEffect(() => {
+    dispatch({
+      type: 'GET_MEMBERS',
+      value: user.id,
+    });
+  }, []);
+
   return (
     <main className="content members">
       <h1 className="title">Membres du club</h1>
@@ -15,55 +27,10 @@ function Members() {
 
       <ol className="members-list">
         <li className="members-list-item">
-          <span className="members-name">Allibe Philippe</span>
+          <span className="members-name">{user.firstname} {user.lastname}</span>
           <span className="members-gender">homme</span>
           <span className="members-email">fifi@gmail.com</span>
           <span className="members-phone">06 77 56 98 23</span>
-          <button type="button" className="list-item-btn">
-            <i className="fa fa-pencil" aria-hidden="true" />
-          </button>
-        </li>
-        <li className="members-list-item">
-          <span className="members-name">Allibe Philippe</span>
-          <span className="members-gender">homme</span>
-          <span className="members-email">fifi@gmail.com</span>
-          <span className="members-phone">06 77 56 98 23</span>
-          <button type="button" className="list-item-btn">
-            <i className="fa fa-pencil" aria-hidden="true" />
-          </button>
-        </li>
-        <li className="members-list-item">
-          <span className="members-name">Allibe Philippe</span>
-          <span className="members-gender">homme</span>
-          <span className="members-email">fifi@gmail.com</span>
-          <span className="members-phone">06 77 56 98 23</span>
-          <button type="button" className="list-item-btn">
-            <i className="fa fa-pencil" aria-hidden="true" />
-          </button>
-        </li>
-        <li className="members-list-item">
-          <span className="members-name">Buguey Léa</span>
-          <span className="members-gender">femme</span>
-          <span className="members-email">leab@gmail.com</span>
-          <span className="members-phone">06 77 59 08 24</span>
-          <button type="button" className="list-item-btn">
-            <i className="fa fa-pencil" aria-hidden="true" />
-          </button>
-        </li>
-        <li className="members-list-item">
-          <span className="members-name">Buguey Léa</span>
-          <span className="members-gender">femme</span>
-          <span className="members-email">leab@gmail.com</span>
-          <span className="members-phone">06 77 59 08 24</span>
-          <button type="button" className="list-item-btn">
-            <i className="fa fa-pencil" aria-hidden="true" />
-          </button>
-        </li>
-        <li className="members-list-item">
-          <span className="members-name">Buguey Léa</span>
-          <span className="members-gender">femme</span>
-          <span className="members-email">leab@gmail.com</span>
-          <span className="members-phone">06 77 59 08 24</span>
           <button type="button" className="list-item-btn">
             <i className="fa fa-pencil" aria-hidden="true" />
           </button>

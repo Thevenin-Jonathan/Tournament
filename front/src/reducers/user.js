@@ -70,6 +70,20 @@ const reducer = (state = initialState, action = {}) => {
         phone: action.value.phone,
         roleId: action.value.role_id,
       };
+    case 'GET_MEMBERS_SUCCESS':
+      return {
+        ...state,
+        // avatar: action.value.url_avatar,
+        firstname: action.value.firstname,
+        lastname: action.value.lastname,
+        // address: action.value.address,
+        // birthdate: action.value.birthdate,
+        email: action.value.email,
+        // playerLicense: action.value.player_license,
+        genderId: action.value.gender_id,
+        phone: action.value.phone,
+        // roleId: action.value.role_id,
+      };
     case 'LOGOUT':
       return {
         ...state,
