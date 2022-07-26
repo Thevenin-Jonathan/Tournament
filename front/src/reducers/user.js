@@ -20,7 +20,6 @@ export const initialState = {
 
   // champs controlés add member
   addMemberemail: '',
-  addMemberpassword: '',
   addMemberavatar: '',
   addMemberfirstname: '',
   addMemberlastname: '',
