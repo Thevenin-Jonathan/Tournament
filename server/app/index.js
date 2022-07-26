@@ -4,6 +4,7 @@ const debug = require('debug')('app');
 const path = require("path");
 const app = express();
 const router = require("./routers");
+const { errorHandler } = require("./services/errorHandler");
 const helmet = require("helmet");
 
 /** Helmet for security */
@@ -13,22 +14,23 @@ app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
+/** Cors **/
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Accept, Authorization');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  
+  // response to preflight request
+  if (req.method === 'OPTIONS') {
+    res.sendStatus(200);
+  }
+  else {
+    next();
+  }
+});
+
 if (process.env.NODE_ENV === "prod") {
-  /** Cors **/
-  app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Accept, Authorization');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
-    // response to preflight request
-    if (req.method === 'OPTIONS') {
-      res.sendStatus(200);
-    }
-    else {
-      next();
-    }
-  });
-
   /** Static files **/
   app.use(express.static(path.join(__dirname, 'public')));
 }
@@ -37,12 +39,14 @@ if (process.env.NODE_ENV === "prod") {
 app.use("/", router);
 
 /** Route front**/
-
 if (process.env.NODE_ENV === "prod") {
   app.get('/*', (_, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
   });
 }
+
+/** Error handler **/
+app.use(errorHandler);
 
 const port = process.env.PORT ?? 3001;
 app.listen(port, () => {

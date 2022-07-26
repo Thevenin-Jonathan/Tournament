@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
 import clublogo from 'src/assets/logo-bayard-bad-blanc.png';
 
+import config from 'src/config';
 import TournamentCard from '../TournamentCard';
 
 function Dashboard() {
+  const tournamentCover = `${config.path.uploads.coverTournament}/cover-tournament-01.jpg`;
   return (
     <main className="dashboard content">
 
@@ -40,7 +42,7 @@ function Dashboard() {
           players={24}
           matchLeft={6}
           slug="tournoi-des-pros"
-          cover="https://i0.wp.com/bayardbad.fr/wp-content/uploads/2022/07/20220702_102843-scaled.jpg"
+          cover={tournamentCover}
         />
 
         <Link to="/tournois/creer-tournoi" className="button create-tournament-button">

@@ -16,6 +16,14 @@
 - https://www.digitalocean.com/community/tutorials/api-authentication-with-json-web-tokensjwt-and-passport
 - https://www.wawasensei.dev/tuto/tuto-authentification-refresh-json-web-token-en-nodejs-avec-express
 - https://www.geeksforgeeks.org/jwt-authentication-with-node-js/
+- https://betterprogramming.pub/jwt-ultimate-how-to-guide-with-best-practices-in-javascript-f7ba4c48dfbd
+
+## Refresh token JWT
+
+- https://codeforgeek.com/refresh-token-jwt-nodejs-authentication/
+- https://github.com/arkerone/express-security-example/blob/master/src/controllers/auth.js
+- https://www.codeheroes.fr/2020/02/02/securiser-une-api-rest-2-3-implementation-en-node-js/
+- https://www.codeheroes.fr/2020/06/20/securiser-une-api-rest-3-3-gestion-du-jwt-cote-client/
 
 ## Generation de données fictives
 
@@ -34,3 +42,10 @@
 
 - https://help.heroku.com/QVRZIEAH/why-am-i-seeing-connection-errors-for-my-heroku-postgres-database-from-an-unexpected-ip-address-what-are-these-unauthorized-connection-attempts
 - https://stackoverflow.com/questions/54302088/how-to-fix-error-the-server-does-not-support-ssl-connections-when-trying-to-a
+
+## Infos sur les error handler
+
+- https://nodejs.org/api/errors.html
+- https://nodejs.dev/learn/error-handling-in-nodejs
+- https://sematext.com/blog/node-js-error-handling/#toc-4-catch-all-uncaught-exceptions-10
+- https://github.com/arkerone/express-security-example

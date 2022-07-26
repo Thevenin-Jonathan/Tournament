@@ -23,6 +23,16 @@ async function findById(id) {
     return result.rows[0];
 };
 
+/**
+ * Get one gender from database
+ * @param {string} name gender name
+ * @returns {object} name
+ */
+ async function findByName(name) {
+    const result = await pool.query(`SELECT * FROM "gender" WHERE "name" = $1`, [name]);
+    return result.rows[0];
+}
+
 /** 
  * Add a new gender to the DB
  * @param {string} - name of gender
@@ -55,12 +65,12 @@ async function deleteOne(id) {
  * @param {number} - id of the gender 
  * @returns {Object} - gender updated
 */
-async function updateOne(name, id) {
+async function updateOne(id, name) {
     const result = await pool.query(
         `UPDATE "gender" 
-        SET "name" = $1
-        WHERE "id" = $2
-        RETURNING *;`,[name, id]
+        SET "name" = $2
+        WHERE "id" = $1
+        RETURNING *;`,[id, name]
     );
     return result.rows[0];
   };
@@ -68,6 +78,7 @@ async function updateOne(name, id) {
   module.exports = {
     findAll,
     findById,
+    findByName,
     insertOne,
     deleteOne,
     updateOne
