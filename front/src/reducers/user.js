@@ -25,9 +25,9 @@ export const initialState = {
   addMemberlastname: '',
   addMemberaddress: '',
   addMemberbirthdate: '',
-  addMemberplayerLicense: '',
+  addMemberplayerLicense: null,
   addMembergenderId: null,
-  addMemberphone: '',
+  addMemberphone: null,
 
   // state qui stocke la liste des membres
   members: [],
@@ -106,6 +106,19 @@ const reducer = (state = initialState, action = {}) => {
         phone: '',
         roleId: null,
         token: null,
+      };
+    case 'CREATE_MEMBER_SUCCESS':
+      return {
+        ...state,
+        addMemberemail: '',
+        addMemberavatar: '',
+        addMemberfirstname: '',
+        addMemberlastname: '',
+        addMemberaddress: '',
+        addMemberbirthdate: '',
+        addMemberplayerLicense: null,
+        addMembergenderId: null,
+        addMemberphone: null,
       };
     default:
       return state;
