@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import logo from 'src/assets/logo-petit-tournament.svg';
+import config from 'src/config';
 
 function Header() {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ function Header() {
       type: 'LOGOUT',
     });
   };
+  const userAvatar = `${config.path.uploads.avatar}/${user.avatar}`;
 
   return (
     <header className="header">
@@ -26,7 +28,7 @@ function Header() {
         </p>
         <div className="header-user-menu-pannel">
           <div className="user-image">
-            <img src={user.avatar} alt={user.displayName} />
+            <img src={userAvatar} alt={user.displayName} />
           </div>
           <ul>
             <li>
