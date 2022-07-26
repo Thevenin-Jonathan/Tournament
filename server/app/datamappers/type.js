@@ -25,7 +25,7 @@ async function findById(id) {
  * @returns {object} Return new type
  */
 async function insertOne(name) {
-    const result = await pool.query(`INSERT INTO type ("name") VALUES($1) RETURNING *`, [name]);
+    const result = await pool.query(`INSERT INTO "type" ("name") VALUES ($1) RETURNING *`, [name]);
     return result.rows[0];
 };
 

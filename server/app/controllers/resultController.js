@@ -1,7 +1,8 @@
 const resultDatamapper = require("../datamappers/result");
+const { ApiError, Api404Error } = require("../services/errorHandler");
 
 /**
- * Get and return all results from DB
+ * Get all results from DB
  * 
  * ExpressMiddleware signature
  * @param {object} _ express request object (not used)
@@ -36,9 +37,15 @@ async function getOne(req, res) {
  * @returns {json} JSON response with the created result
  */
 async function create(req, res) {
-  const result = req.body.label;
-  const newResult = await resultDatamapper.insertOne(result);
-  return res.json(newResult);
+  const { label } = req.body;
+
+  /** Verification: label already in use in DB? **/
+  if (await resultDatamapper.findByLabel(label)) {
+    throw new ApiError("This label is already in use");
+  }
+
+  const newResult = await resultDatamapper.insertOne(label);
+  return res.status(201).json(newResult);
 };
 
 /**
@@ -55,11 +62,11 @@ async function update(req, res) {
   const result = await resultDatamapper.findById(id);
 
   if (!result) {
-    return res.json({message: "Result does not exist in DB"})
+    throw new Api404Error("Result does not exist in DB");
   }
 
-  const updResult = await resultDatamapper.updateOne(id, newData)
-  return res.json(updResult)
+  const updatedResult = await resultDatamapper.updateOne(id, newData)
+  return res.json(updatedResult)
 }
 
 /**
@@ -75,7 +82,7 @@ async function destroy(req, res) {
   const result = await resultDatamapper.findById(id);
 
   if (!result) {
-    return res.json({message: "Result does not exist in DB"})
+    throw new Api404Error("Result does not exist in DB");
   }
 
   await resultDatamapper.deleteOne(id);

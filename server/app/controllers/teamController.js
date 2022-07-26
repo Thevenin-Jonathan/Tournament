@@ -1,4 +1,5 @@
 const teamDatamapper = require("../datamappers/team");
+const { Api404Error } = require("../services/errorHandler");
 
 /**
  * Get and return all teams from DB
@@ -38,7 +39,7 @@ async function getOne(req, res) {
 async function create(req, res) {
   const tournamentId = req.body.tournament_id;
   const newTeam = await teamDatamapper.insertOne(tournamentId);
-  return res.json(newTeam);
+  return res.status(201).json(newTeam);
 };
 
 /**
@@ -54,7 +55,7 @@ async function destroy(req, res) {
   const team = await teamDatamapper.findById(id);
 
   if (!team) {
-    return res.json({message: "Team does not exist in DB"})
+    throw new Api404Error("Team does not exist in DB");
   }
 
   await teamDatamapper.deleteOne(id);

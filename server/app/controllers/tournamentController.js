@@ -1,4 +1,5 @@
 const tournamentDatamapper = require("../datamappers/tournament");
+const { Api404Error } = require("../services/errorHandler");
 
 /**
  * Get and return all tournaments from DB
@@ -38,7 +39,7 @@ async function getOne(req, res) {
 async function create(req, res) {
   const tournament = req.body;
   const newTournament = await tournamentDatamapper.insertOne(tournament);
-  return res.json(newTournament);
+  return res.status(201).json(newTournament);
 };
 
 /**
@@ -55,11 +56,11 @@ async function update(req, res) {
   const tournament = await tournamentDatamapper.findById(id);
 
   if (!tournament) {
-    return res.json({message: "Tournament does not exist in DB"})
+    throw new Api404Error("Tournament does not exist in DB");
   }
 
-  const updTournament = await tournamentDatamapper.updateOne(id, newData)
-  return res.json(updTournament)
+  const updatedTournament = await tournamentDatamapper.updateOne(id, newData)
+  return res.json(updatedTournament)
 }
 
 /**
@@ -75,7 +76,7 @@ async function destroy(req, res) {
   const tournament = await tournamentDatamapper.findById(id);
 
   if (!tournament) {
-    return res.json({message: "Tournament does not exist in DB"})
+    throw new Api404Error("Tournament does not exist in DB");
   }
 
   await tournamentDatamapper.deleteOne(id);

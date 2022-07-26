@@ -61,7 +61,7 @@ async function create(req, res) {
   user.password = await bcrypt.hash(user.password, saltRound);
 
   const newUser = await userDatamapper.insertOne(user);
-  return res.json(newUser);
+  return res.status(201).json(newUser);
 };
 
 /**
@@ -80,12 +80,20 @@ async function update(req, res) {
   if (!user) {
     throw new Api404Error("User does not exist in DB");
   }
-  
-  if (newData.email || newData.phone || newData.player_license) {
-    const existingData = await userDatamapper.exist(newData, id);
-    if (existingData) {
-      throw new ApiError("Data is already exist on another user in DB");
-    }
+
+  /** Verification: email already in use in DB? **/
+  if (await userDatamapper.exist({email: newData.email})) {
+    throw new ApiError("This email is already in use");
+  }
+
+  /** Verification: phone already in use in DB? **/
+  if (await userDatamapper.exist({phone: newData.phone})) {
+    throw new ApiError("This phone number is already in use");
+  }
+
+  /** Verification: player license already in use in DB? **/
+  if (await userDatamapper.exist({player_license: newData.player_license})) {
+    throw new ApiError("This player license is already in use");
   }
 
   const updUser = await userDatamapper.updateOne(id, newData)

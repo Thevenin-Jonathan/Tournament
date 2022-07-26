@@ -1,4 +1,5 @@
 const stateDatamapper = require("../datamappers/state");
+const { ApiError, Api404Error } = require("../services/errorHandler");
 
 /**
  * Get all states from DB
@@ -8,7 +9,7 @@ const stateDatamapper = require("../datamappers/state");
  * @param {object} res express response object
  * @returns {json} JSON response with all states
  */
- async function getAll(_, res) {
+  async function getAll(_, res) {
     const states = await stateDatamapper.findAll();
     return res.json(states);
   };
@@ -21,7 +22,7 @@ const stateDatamapper = require("../datamappers/state");
  * @param {object} res express response object
  * @returns {json} JSON response with one state
  */
-   async function getOne(req, res) {
+  async function getOne(req, res) {
     const id = req.params.id;
     const state = await stateDatamapper.findById(id);
     return res.json(state);
@@ -35,10 +36,16 @@ const stateDatamapper = require("../datamappers/state");
  * @param {object} res express response object
  * @returns {json} JSON response with the created state
  */
-async function create(req, res) {
+  async function create(req, res) {
     const {name} = req.body;
+
+    /** Verification: name already in use in DB? **/
+    if (await stateDatamapper.findByName(name)) {
+      throw new ApiError("This name is already in use");
+    }
+
     const newState = await stateDatamapper.insertOne(name);
-    return res.json(newState);
+    return res.status(201).json(newState);
   };
 
   /**
@@ -49,16 +56,17 @@ async function create(req, res) {
  * @param {object} res express response object
  * @returns {json} JSON response with the updated state
  */
-async function update(req, res) {
+  async function update(req, res) {
     const id = req.params.id;
     const {name} = req.body
     const state = await stateDatamapper.findById(id);
   
-    if (!state) {
-      return res.json({message: "State does not exist in DB"})
+      if (!state) {
+        throw new Api404Error("State does not exist in DB");
     }
-    const updState = await stateDatamapper.updateOne(id, name)
-    return res.json(updState)
+
+    const updatedState = await stateDatamapper.updateOne(id, name)
+    return res.json(updatedState)
   }
 
 /**
@@ -69,12 +77,12 @@ async function update(req, res) {
  * @param {object} res express response object
  * @returns {json} JSON response with one state
  */
-async function destroy(req, res) {
+  async function destroy(req, res) {
     const id = req.params.id;
     const state = await stateDatamapper.findById(id);
   
     if (!state) {
-      return res.json({message: "State does not exist in DB"})
+      throw new Api404Error("State does not exist in DB");
     }
     await stateDatamapper.deleteOne(id);
     return res.status(204).json();

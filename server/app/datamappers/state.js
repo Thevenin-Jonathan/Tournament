@@ -23,6 +23,16 @@ async function findById(id) {
     return result.rows[0];
 };
 
+/**
+ * Get one state from database
+ * @param {string} name state name
+ * @returns {object} name
+ */
+ async function findByName(name) {
+    const result = await pool.query(`SELECT * FROM "state" WHERE "name" = $1`, [name]);
+    return result.rows[0];
+}
+
 /** 
  * Add a new state to the DB
  * @param {string} - name of state
@@ -68,6 +78,7 @@ async function updateOne(name, id) {
   module.exports = {
     findAll,
     findById,
+    findByName,
     insertOne,
     deleteOne,
     updateOne
