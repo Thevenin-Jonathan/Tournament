@@ -15,7 +15,7 @@ router.use("/teams", teamRouter);
 router.use("/users", userRouter);
 router.use("/roles", roleRouter);
 router.use("/clubs", clubRouter);
-router.use("/gender", genderRouter);
+router.use("/genders", genderRouter);
 router.use("/types", typeRouter);
 
 module.exports = router;
