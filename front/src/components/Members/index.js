@@ -1,6 +1,23 @@
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { genderText } from 'src/utils';
 
 function Members() {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => (state.user));
+  const ui = useSelector((state) => (state.interface));
+
+  useEffect(() => {
+    dispatch({
+      type: 'GET_MEMBERS',
+    });
+  }, []);
+
+  if (!ui.isLoading) {
+    console.log(user.members);
+  }
+
   return (
     <main className="content members">
       <h1 className="title">Membres du club</h1>
@@ -9,65 +26,21 @@ function Members() {
       <div className="group-1">
         <input className="members-search" type="search" value="" placeholder=" Rechercher un membre" />
 
-        {/* Lien pour ajouter un membre, page ? */}
-        <Link className="action-btn" to="/add-members">+ Ajouter un membre</Link>
+        <Link className="action-btn" to="/membres/ajouter-membres">+ Ajouter un membre</Link>
       </div>
 
       <ol className="members-list">
-        <li className="members-list-item">
-          <span className="members-name">Allibe Philippe</span>
-          <span className="members-gender">homme</span>
-          <span className="members-email">fifi@gmail.com</span>
-          <span className="members-phone">06 77 56 98 23</span>
-          <button type="button" className="list-item-btn">
-            <i className="fa fa-pencil" aria-hidden="true" />
-          </button>
-        </li>
-        <li className="members-list-item">
-          <span className="members-name">Allibe Philippe</span>
-          <span className="members-gender">homme</span>
-          <span className="members-email">fifi@gmail.com</span>
-          <span className="members-phone">06 77 56 98 23</span>
-          <button type="button" className="list-item-btn">
-            <i className="fa fa-pencil" aria-hidden="true" />
-          </button>
-        </li>
-        <li className="members-list-item">
-          <span className="members-name">Allibe Philippe</span>
-          <span className="members-gender">homme</span>
-          <span className="members-email">fifi@gmail.com</span>
-          <span className="members-phone">06 77 56 98 23</span>
-          <button type="button" className="list-item-btn">
-            <i className="fa fa-pencil" aria-hidden="true" />
-          </button>
-        </li>
-        <li className="members-list-item">
-          <span className="members-name">Buguey Léa</span>
-          <span className="members-gender">femme</span>
-          <span className="members-email">leab@gmail.com</span>
-          <span className="members-phone">06 77 59 08 24</span>
-          <button type="button" className="list-item-btn">
-            <i className="fa fa-pencil" aria-hidden="true" />
-          </button>
-        </li>
-        <li className="members-list-item">
-          <span className="members-name">Buguey Léa</span>
-          <span className="members-gender">femme</span>
-          <span className="members-email">leab@gmail.com</span>
-          <span className="members-phone">06 77 59 08 24</span>
-          <button type="button" className="list-item-btn">
-            <i className="fa fa-pencil" aria-hidden="true" />
-          </button>
-        </li>
-        <li className="members-list-item">
-          <span className="members-name">Buguey Léa</span>
-          <span className="members-gender">femme</span>
-          <span className="members-email">leab@gmail.com</span>
-          <span className="members-phone">06 77 59 08 24</span>
-          <button type="button" className="list-item-btn">
-            <i className="fa fa-pencil" aria-hidden="true" />
-          </button>
-        </li>
+        {user.members.map((member) => (
+          <li key={member.id} className="members-list-item">
+            <span className="members-name">{member.firstname} {member.lastname}</span>
+            <span className="members-gender">{genderText(member.gender_id)}</span>
+            <span className="members-email">{member.email}</span>
+            <span className="members-phone">{member.phone}</span>
+            <button type="button" className="list-item-btn">
+              <i className="fa fa-pencil" aria-hidden="true" />
+            </button>
+          </li>
+        ))}
       </ol>
     </main>
   );

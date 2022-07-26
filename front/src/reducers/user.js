@@ -29,6 +29,9 @@ export const initialState = {
   addMemberplayerLicense: '',
   addMembergenderId: null,
   addMemberphone: '',
+
+  // state qui stocke la liste des membres
+  members: [],
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -81,6 +84,11 @@ const reducer = (state = initialState, action = {}) => {
         genderId: action.value.gender_id,
         phone: action.value.phone,
         roleId: action.value.role_id,
+      };
+    case 'GET_MEMBERS_SUCCESS':
+      return {
+        ...state,
+        members: action.value,
       };
     case 'LOGOUT':
       return {

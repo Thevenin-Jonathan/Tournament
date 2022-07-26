@@ -76,7 +76,6 @@ function App() {
       <Header />
       <Menu />
       {isLoading && <Loader />}
-
       <Routes>
         <Route path="/connexion" element={<Navigate to="/tableau-de-bord" />} />
         <Route path="/tableau-de-bord" element={<Dashboard />} />
@@ -88,7 +87,6 @@ function App() {
         <Route path="/aide" element={<Help />} />
         <Route path="*" element={<Error />} />
       </Routes>
-
     </div>
   );
 }
