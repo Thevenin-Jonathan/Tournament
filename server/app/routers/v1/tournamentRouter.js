@@ -1,7 +1,14 @@
 const router = require("express").Router();
+const controllerWrapper = require("../../services/controllerWrapper");
+const controller = require("../../controllers/tournamentController");
 
-router.get("/", async (req, res) => {
-  res.send("Hello Tournament")
-})
+router.route("/")
+  .get(controllerWrapper(controller.getAll))
+  .post(controllerWrapper(controller.create));
+
+router.route("/:id")
+  .get(controllerWrapper(controller.getOne))
+  .patch(controllerWrapper(controller.update))
+  .delete(controllerWrapper(controller.destroy));
 
 module.exports = router;
