@@ -40,47 +40,65 @@ const userMiddleware = (store) => (next) => (action) => {
       break;
     }
 
-    case 'CREATE_MEMBER': {
-      const state = store.getState();
-
-      const data = {
-        firstname: state.user.addMemberfirstname,
-        lastname: state.user.addMemberlastname,
-        address: state.user.addMemberaddress,
-        birthdate: state.user.addMemberbirthdate,
-        email: state.user.addMemberemail,
-        player_license: state.user.addMemberplayerLicense,
-        phone: state.user.addMemberphone,
-        gender_id: state.user.addMembergenderId,
-        club_id: 1,
-        role_id: 2,
-        password: 'tomtom',
-        is_active: true,
-      };
-
-      // supprimer les clés invalides pour l'api
-      deleteNullOrFalsyKeyInObject(data);
-
+    case 'GET_MEMBER': {
       const axiosConfig = {
-        method: 'post',
-        url: `${config.api.baseUrl}/users`,
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        data: qs.stringify(data),
+        method: 'get',
+        url: `${config.api.baseUrl}/users/${action.value.id}`,
       };
       next(action);
       axios(axiosConfig)
         .then((response) => {
-          store.dispatch({ type: 'CREATE_MEMBER_SUCCESS', value: response.data });
+          console.log(response.data);
+          store.dispatch({ type: 'GET_MEMBER_SUCCESS', value: response.data });
         })
-
         .catch((error) => {
-          store.dispatch({ type: 'CREATE_MEMBER_FAILED', value: 'Data error' });
+          store.dispatch({ type: 'GET_MEMBER_FAILED', value: 'Data error' });
           throw new Error(error);
         });
       break;
     }
+
+    case 'CREATE_MEMBER': {
+          const state = store.getState();
+
+          const data = {
+            firstname: state.user.addMemberfirstname,
+            lastname: state.user.addMemberlastname,
+            address: state.user.addMemberaddress,
+            birthdate: state.user.addMemberbirthdate,
+            email: state.user.addMemberemail,
+            player_license: state.user.addMemberplayerLicense,
+            phone: state.user.addMemberphone,
+            gender_id: state.user.addMembergenderId,
+            club_id: 1,
+            role_id: 2,
+            password: 'tomtom',
+            is_active: true,
+          };
+
+          // supprimer les clés invalides pour l'api
+          deleteNullOrFalsyKeyInObject(data);
+
+          const axiosConfig = {
+            method: 'post',
+            url: ${config.api.baseUrl}/users,
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            data: qs.stringify(data),
+          };
+          next(action);
+          axios(axiosConfig)
+            .then((response) => {
+              store.dispatch({ type: 'CREATE_MEMBER_SUCCESS', value: response.data });
+            })
+
+            .catch((error) => {
+              store.dispatch({ type: 'CREATE_MEMBER_FAILED', value: 'Data error' });
+              throw new Error(error);
+            });
+          break;
+        }
 
     default:
       next(action);
