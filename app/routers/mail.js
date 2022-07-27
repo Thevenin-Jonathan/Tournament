@@ -6,6 +6,8 @@ const { ApiInternalError } = require("../services/errorHandler");
 /** Route to send mail **/
 router.post("/", async (_, res) => {
   try {
+    debug("start config !");
+
     let transporter = nodemailer.createTransport({
       host: process.env.MAILGUN_SMTP_SERVER,
       port: process.env.MAILGUN_SMTP_PORT,
@@ -15,6 +17,8 @@ router.post("/", async (_, res) => {
         pass: process.env.MAILGUN_SMTP_PASSWORD, // generated ethereal password
       },
     });
+
+    debug("transport create !");
   
     // send mail with defined transport object
     let info = await transporter.sendMail({
