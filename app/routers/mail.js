@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const debug = require("debug")("mail");
 const nodemailer = require("nodemailer");
+const templateHtml = require("../templates/mailHtml");
 const { ApiInternalError } = require("../services/errorHandler");
 
 /** Route to send mail **/
@@ -26,12 +27,10 @@ router.post("/", async (_, res) => {
       to: "warzonefury@hotmail.fr", // list of receivers
       subject: "Hello Tournament✔", // Subject line
       text: "Hello world?", // plain text body
-      html: "<b>Hello world?</b>", // html body
+      html: templateHtml, // html body
     });
-
-    debug(info);
-
-    res.json({msg: "Mail sent."});
+    
+    res.json(info);
     
   } catch (error) {
     error = new ApiInternalError(error.message);
