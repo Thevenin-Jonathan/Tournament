@@ -7,7 +7,9 @@ import TournamentCard from '../TournamentCard';
 
 function Dashboard() {
   const isAdmin = useSelector((state) => (state.user.isAdmin));
+
   const tournamentCover = `${config.path.uploads.coverTournament}/cover-tournament-01.jpg`;
+
   return (
     <main className="dashboard content">
 

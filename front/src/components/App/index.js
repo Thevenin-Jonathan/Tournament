@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
+import './styles.scss';
 import Home from '../Home';
 import Dashboard from '../Dashboard';
 import Club from '../Club';
@@ -12,7 +13,6 @@ import Header from '../Header';
 import Menu from '../Menu';
 import Tournaments from '../Tournaments';
 import Error from '../Error';
-import './styles.scss';
 import LoginForm from '../LoginForm';
 import Profil from '../Profil';
 import Members from '../Members';
@@ -23,17 +23,16 @@ import Loader from '../Loader';
 // == Composant
 function App() {
   const dispatch = useDispatch();
-  // const location = useLocation();
+
+  const isLoading = useSelector((state) => (state.interface.isLoading));
   const isLogged = useSelector((state) => (state.user.logged));
   const isAdmin = useSelector((state) => (state.user.isAdmin));
-  const isLoading = useSelector((state) => (state.interface.isLoading));
 
   // chargement de data globales (liste des roles, des genres...)
-  useEffect(() => {
-    dispatch({
-      type: 'GET_APP_DATA',
-    });
-  });
+  // useEffect(() => {
+  //   dispatch({ type: 'GET_ROLES' });
+  //   dispatch({ type: 'GET_GENDERS' });
+  // });
 
   // Connexion auto avec token
   useEffect(() => {

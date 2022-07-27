@@ -2,10 +2,12 @@ export const initialState = {
   logged: false,
   loginLoading: false,
 
+  // securité
   id: null,
   displayName: '',
   roleId: null,
-  isAdmin: true,
+  role: '',
+  isAdmin: false,
   token: null,
 
   email: '',
@@ -57,6 +59,11 @@ const reducer = (state = initialState, action = {}) => {
         password: '',
         loginLoading: false,
       };
+    case 'IS_ADMIN':
+      return {
+        ...state,
+        isAdmin: true,
+      };
     case 'SUBMIT_LOGIN_FAILED':
       return {
         ...state,
@@ -69,6 +76,7 @@ const reducer = (state = initialState, action = {}) => {
         id: action.token.id,
         displayName: action.token.firstname,
         avatar: action.token.url_avatar,
+        roleId: action.token.role_id,
       };
     case 'GET_PROFILE_SUCCESS':
       return {
@@ -106,6 +114,8 @@ const reducer = (state = initialState, action = {}) => {
         phone: '',
         roleId: null,
         token: null,
+        role: '',
+        isAdmin: false,
       };
     case 'CREATE_MEMBER_SUCCESS':
       return {
