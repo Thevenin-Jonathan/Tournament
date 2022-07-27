@@ -9,7 +9,7 @@ router.post("/", async (_, res) => {
     console.log("start config !");
 
     let transporter = nodemailer.createTransport({
-      host: "smtp.live.com",
+      host: "smtp-mail.outlook.com",
       port: 25,
       secure: false, // true for 465, false for other ports
       auth: {
