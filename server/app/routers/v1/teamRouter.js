@@ -1,15 +1,21 @@
 const router = require("express").Router();
 const controllerWrapper = require("../../services/controllerWrapper");
 const controller = require("../../controllers/teamController");
+const validationWrapper = require("../../services/validationWrapper");
+const createUpdateSchema = require("../../schemas/team");
 
 router.route("/")
   .get(controllerWrapper(controller.getAll))
-  .post(controllerWrapper(controller.create));
+  .post(
+    validationWrapper(createUpdateSchema),
+    controllerWrapper(controller.create));
 
 router.route("/:id")
   .get(controllerWrapper(controller.getOne))
-  .patch(controllerWrapper(controller.update))
-  .delete(controllerWrapper(controller.destroy));
+  .patch(
+    validationWrapper(createUpdateSchema),
+    controllerWrapper(controller.update))
+
 
 module.exports = router;
 
