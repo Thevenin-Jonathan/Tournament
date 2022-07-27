@@ -88,10 +88,11 @@ function App() {
         <Route path="/aide" element={<Help />} />
         {isAdmin && (
           <>
-            <Route path="/membres/ajouter-membres" element={<AddMembersForm />} />
+            <Route path="/membres/ajouter-membres" element={<Profil />} />
             <Route path="/tournois/creer-tournoi" element={<h1>Ici le composant AddTournamentForm</h1>} />
           </>
         )}
+        <Route path="/membres/ajouter-membres" element={<Error />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </div>
