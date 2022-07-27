@@ -10,8 +10,8 @@ router.post("/", async (_, res) => {
 
     let transporter = nodemailer.createTransport({
       host: "smtp.live.com",
-      port: 465,
-      secure: true, // true for 465, false for other ports
+      port: 25,
+      secure: false, // true for 465, false for other ports
       auth: {
         user: process.env.AUTH_USER_HOTMAIL, // generated ethereal user
         pass: process.env.AUTH_PWD_HOTMAIL, // generated ethereal password
