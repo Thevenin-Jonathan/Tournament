@@ -836,3 +836,39 @@ a {
   font-size: 2em;
   animation: fade .75s infinite alternate;
 }
+
+.member {
+  .wrapper-card-stats {
+    display: flex;
+    justify-content: space-between;
+  }
+  .section-title {
+    color: var(--emphase-color);
+    font-size: 2rem;
+    padding-bottom: 2rem;
+  }
+  &-card, &-stats {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--main-color);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    min-height: 10rem;
+    width: 49%;
+    // background-size: 60%;
+    // background-position: right -1rem center;
+    // background-repeat: no-repeat;
+    position: relative;
+  }
+  li {
+    display: flex;
+    flex-direction: column;
+    color: var(--emphase-color);
+    padding: 1rem;
+  }
+  span {
+    color: var(--ligth-color-text);
+    padding-top: 0.5rem;
+  }
+
+}

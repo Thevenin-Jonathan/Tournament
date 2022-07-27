@@ -20,6 +20,8 @@ export const initialState = {
 
   // state qui stocke la liste des membres
   members: [],
+  // state qui stocke un membre
+  member: {},
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -77,6 +79,11 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         members: action.value,
+      };
+    case 'GET_MEMBER_SUCCESS':
+      return {
+        ...state,
+        member: action.value,
       };
     case 'LOGOUT':
       return {

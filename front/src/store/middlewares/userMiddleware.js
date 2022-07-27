@@ -38,6 +38,24 @@ const userMiddleware = (store) => (next) => (action) => {
       break;
     }
 
+    case 'GET_MEMBER': {
+      const axiosConfig = {
+        method: 'get',
+        url: `${config.api.baseUrl}/users/${action.value.id}`,
+      };
+      next(action);
+      axios(axiosConfig)
+        .then((response) => {
+          console.log(response.data);
+          store.dispatch({ type: 'GET_MEMBER_SUCCESS', value: response.data });
+        })
+        .catch((error) => {
+          store.dispatch({ type: 'GET_MEMBER_FAILED', value: 'Data error' });
+          throw new Error(error);
+        });
+      break;
+    }
+
     default:
       next(action);
       break;

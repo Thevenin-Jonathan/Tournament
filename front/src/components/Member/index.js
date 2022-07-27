@@ -1,0 +1,48 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { genderText, dateFr } from 'src/utils';
+// import config from 'src/config';
+
+function Member() {
+  // Je récupère mon paramètre id
+  const id = useParams();
+
+  // Je récupère le state dans le reducer 'user'
+  const user = useSelector((state) => (state.user));
+
+  const dispatch = useDispatch();
+  // au chargement j'envoie l'action GET_MEMBER qui
+  // récupère le membre correspondant à l'id de l'url
+  useEffect(() => {
+    dispatch({
+      type: 'GET_MEMBER',
+      value: id,
+    });
+  }, []);
+
+  return (
+    <main className="content member">
+      <h1 className="title">{user.member.firstname} {user.member.lastname}</h1>
+      <div className="wrapper-card-stats">
+        <div className="member-card">
+          <h2 className="section-title">Profil</h2>
+          <ul>
+            <li>License FFBAD : <span>{user.member.player_license}</span></li>
+            <li>Genre : <span>{genderText(user.member.gender_id)}</span></li>
+            {user.member.gender_id === 1
+              ? <li>Né le : <span>{dateFr(user.member.birthdate)}</span></li>
+              : <li>Née le : <span>{dateFr(user.member.birthdate)}</span></li>}
+            <li>Adresse : <span>{user.member.address}</span></li>
+            <li>Email : <span>{user.member.email}</span></li>
+          </ul>
+        </div>
+        <div className="member-stats">
+          <h2 className="section-title">Statistiques</h2>
+        </div>
+      </div>
+    </main>
+  );
+}
+
+export default Member;

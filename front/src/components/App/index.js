@@ -16,6 +16,7 @@ import './styles.scss';
 import LoginForm from '../LoginForm';
 import Profil from '../Profil';
 import Members from '../Members';
+import Member from '../Member';
 import Help from '../Help';
 import Loader from '../Loader';
 
@@ -81,6 +82,7 @@ function App() {
         <Route path="/tournois" element={<Tournaments />} />
         <Route path="/club" element={<Club />} />
         <Route path="/membres" element={<Members />} />
+        <Route path="/membres/:id" element={<Member />} />
         <Route path="/profil" element={<Profil />} />
         <Route path="/aide" element={<Help />} />
         <Route path="*" element={<Error />} />
