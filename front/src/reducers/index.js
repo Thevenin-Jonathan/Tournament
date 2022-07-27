@@ -1,13 +1,15 @@
 import { combineReducers } from 'redux';
 
-import userReducer from './user';
+import appReducer from './app';
 import uiReducer from './ui';
 import clubReducer from './club';
+import userReducer from './user';
 
 const rootReducer = combineReducers({
-  user: userReducer,
+  app: appReducer,
   interface: uiReducer,
   club: clubReducer,
+  user: userReducer,
 });
 
 export default rootReducer;
