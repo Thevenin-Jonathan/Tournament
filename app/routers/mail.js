@@ -1,0 +1,39 @@
+const router = require("express").Router();
+const debug = require("debug")("mail");
+const nodemailer = require("nodemailer");
+const { ApiInternalError } = require("../services/errorHandler");
+
+/** Route sen **/
+router.post("/", async (_, res) => {
+  try {
+    let transporter = nodemailer.createTransport({
+      host: process.env.MAILGUN_SMTP_SERVER,
+      port: process.env.MAILGUN_SMTP_PORT,
+      secure: false, // true for 465, false for other ports
+      auth: {
+        user: process.env.MAILGUN_SMTP_LOGIN, // generated ethereal user
+        pass: process.env.MAILGUN_SMTP_PASSWORD, // generated ethereal password
+      },
+    });
+  
+    // send mail with defined transport object
+    let info = await transporter.sendMail({
+      from: '"Test jojo 👻" <war@gmail.com>', // sender address
+      to: "bar@example.com, baz@example.com", // list of receivers
+      subject: "Hello Tournament✔", // Subject line
+      text: "Hello world?", // plain text body
+      html: "<b>Hello world?</b>", // html body
+    });
+
+    debug(info);
+
+    res.status(202).json({msg: "Mail sent."});
+    
+  } catch (error) {
+    error = new ApiInternalError(error.message);
+  }
+
+  
+});
+
+module.exports = router;
