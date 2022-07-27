@@ -1,0 +1,16 @@
+## Modele logique de données
+
+- Tournament(**<ins>codeTournament</ins>**, title, date, description, pictureUrl, nbPlayground, playerLimit, createdAt, updatedAt, #codeDiscipline, #codeType, #codeState, #codeClub)
+- Discipline(**<ins>codeDiscipline</ins>**, name)
+- Type(**<ins>codeType</ins>**, name)
+- State(**<ins>codeState</ins>**, name)
+- Match(**<ins>codeMatch</ins>**, note, #codeState, #codeTournament)
+- Team(**<ins>codeTeam</ins>**, #codeTournament)
+- User(**<ins>codeUser</ins>**, firstname, lastname, address, birthdate, isActive, phone, email, password, urlAvatar, createdAt, updatedAt, #codeRole, #codeClub, #codeGender)
+- Gender(**<ins>codeGender</ins>**, name)
+- Role(**<ins>codeRole</ins>**, name)
+- Club(**<ins>codeClub</ins>**, name, address, phone, email, logoUrl, nbPlayground, website, clubRef, description )
+- Result(**<ins>codeResult</ins>**, score)
+- PLAY(isWinner, #resultId **<ins>#codeMatch</ins>**, **<ins>#codeTeam</ins>**)
+- BELONGS(**<ins>#codeTeam</ins>**, **<ins>#codeUser</ins>**)
+- MANAGE(**<ins>#codeTournament</ins>**, **<ins>#codeUser</ins>**)
