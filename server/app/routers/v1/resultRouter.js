@@ -1,8 +1,9 @@
 const router = require("express").Router();
 const controllerWrapper = require("../../services/controllerWrapper");
-const controller = require("../../controllers/genderController");
+const controller = require("../../controllers/resultController");
 const validationWrapper = require("../../services/validationWrapper");
-const schema = require("../../schemas/gender");
+const schema = require("../../schemas/result");
+
 
 router.route("/")
   .get(controllerWrapper(controller.getAll))

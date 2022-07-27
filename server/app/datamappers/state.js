@@ -23,6 +23,16 @@ async function findById(id) {
     return result.rows[0];
 };
 
+/**
+ * Get one state from database
+ * @param {string} name state name
+ * @returns {object} name
+ */
+ async function findByName(name) {
+    const result = await pool.query(`SELECT * FROM "state" WHERE "name" = $1`, [name]);
+    return result.rows[0];
+}
+
 /** 
  * Add a new state to the DB
  * @param {string} - name of state
@@ -58,8 +68,8 @@ async function deleteOne(id) {
 async function updateOne(name, id) {
     const result = await pool.query(
         `UPDATE "state" 
-        SET "name" = $1
-        WHERE "id" = $2
+        SET "name" = $2
+        WHERE "id" = $1
         RETURNING *;`,[name, id]
     );
     return result.rows[0];
@@ -68,6 +78,7 @@ async function updateOne(name, id) {
   module.exports = {
     findAll,
     findById,
+    findByName,
     insertOne,
     deleteOne,
     updateOne

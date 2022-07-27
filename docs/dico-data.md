@@ -12,8 +12,8 @@ Table "tournament" :
 |player_limit|integer||limite maximale de participants|
 |code_discipline|integer|foreign key, not null|identifiant unique qui référence discipline|
 |code_type|integer|foreign key, not null|identifiant unique qui référence type|
-|code_state|integer|foreign key, not null|identifiant unique qui référence state|
-|code_club|integer|foreign key, not null|identifiant unique qui référence club|
+|code_state|integer|foreign key, not null, default 1|identifiant unique qui référence state|
+|code_club|integer|foreign key, not null, default 1|identifiant unique qui référence club|
 
 Table "discipline" :
 |Champ|Type|Spécificités|Description|
@@ -38,7 +38,7 @@ Table "match" :
 | --- | --- | --- | --- |
 |code_match|integer|primary key|identifiant unique de la table|
 |note|text||commentaire libre|
-|code_state|integer|foreign key, not null|identifiant unique qui référence state|
+|code_state|integer|foreign key, not null, default 1|identifiant unique qui référence state|
 |code_tournament|integer|foreign key, not null|identifiant unique qui référence tournament|
 
 Table "team" :
@@ -54,16 +54,16 @@ Table "user" :
 |firstname|text|not null|prénom|
 |lastname|text|not null|nom|
 |address|text||adresse postale|
-|phone|text||numéro de téléphone|
+|phone|number||numéro de téléphone|
 |birthdate|date|not null|date de naissance|
 |is_active|boolean|not null default true| définit si un joueur est actif ou non|
-|email|text|not null|adresse courriel|
+|email|text|not null check()|adresse courriel|
 |password|text|not null|mot de passe chiffré|
 |url_avatar|text||photo de profil|
-|player_license|text||licence fédérale|
+|player_license|number not null||licence fédérale|
 |code_gender|integer|foreign key, not null|identifiant unique qui référence gender|
-|code_club|integer|foreign key, not null|identifiant unique qui référence club|
-|code_role|integer|foreign key, not null|identifiant unique qui référence role|
+|code_club|integer|foreign key, not null, default 1|identifiant unique qui référence club|
+|code_role|integer|foreign key, not null, default 2|identifiant unique qui référence role|
 
 Table "gender" :
 |Champ|Type|Spécificités|Description|
@@ -83,12 +83,12 @@ Table "club" :
 |code_club|integer|primary key|identifiant unique de la table|
 |name|text|not null|nom du club|
 |address|text||adresse postale|
-|phone|text||numéro de téléphone|
+|phone|number||numéro de téléphone|
 |email|text|not null|adresse courriel|
 |logo_url|text||adresse du logo|
 |nb_playground|integer|not null|nombre de terrain disponible simultanément du club|
 |website|text||adresse web du site du club|
-|club_ref|text||identifiant fédéral du club|
+|club_ref|text|not null|identifiant fédéral du club|
 |description|text||information libre du club|
 
 Table "result" :
@@ -100,7 +100,7 @@ Table "result" :
 Table d'association "play" :
 |Champ|Type|Spécificités|Description|
 | --- | --- | --- | --- |
-|is_winner|boolean|default false| définit si l'équipe est gagnante|
+|is_winner|boolean|not null| définit si l'équipe est gagnante|
 |code_result|integer|foreign key, not null|identifiant unique qui référence result|
 |code_team|integer|primary key, foreign key, not null|partie de l'identifiant unique de la table et identifiant unique qui référence team|
 |code_match|integer|primary key, foreign key, not null|partie de l'identifiant unique de la table et identifiant unique qui référence match|

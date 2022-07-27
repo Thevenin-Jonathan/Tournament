@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const controllerWrapper = require("../../services/controllerWrapper");
-const controller = require("../../controllers/genderController");
+const controller = require("../../controllers/stateController");
 const validationWrapper = require("../../services/validationWrapper");
-const schema = require("../../schemas/gender");
+const schema = require("../../schemas/state");
 
 router.route("/")
   .get(controllerWrapper(controller.getAll))
@@ -12,7 +12,7 @@ router.route("/")
 
 router.route("/:id")
   .get(controllerWrapper(controller.getOne))
-  .patch(
+  .put(
     validationWrapper(schema),
     controllerWrapper(controller.update))
   .delete(controllerWrapper(controller.destroy));
