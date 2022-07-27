@@ -9,8 +9,8 @@ module.exports = joi.object({
   email: joi.string().email().required(),
   password: joi.string().required(),
   url_avatar: joi.string(),
-  phone: joi.number(),
-  player_license: joi.number(),
+  phone: joi.string(),
+  player_license: joi.string().required(),
   club_id: joi.number().required(),
   role_id: joi.number().required(),
   gender_id: joi.number().required()
