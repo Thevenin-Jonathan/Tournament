@@ -17,6 +17,7 @@ import LoginForm from '../LoginForm';
 import Profil from '../Profil';
 import Members from '../Members';
 import Member from '../Member';
+// eslint-disable-next-line no-unused-vars
 import AddMembersForm from '../AddMembersForm';
 import Help from '../Help';
 import Loader from '../Loader';
@@ -88,7 +89,7 @@ function App() {
         <Route path="/aide" element={<Help />} />
         {isAdmin && (
           <>
-            <Route path="/membres/ajouter-membres" element={<Profil />} />
+            <Route path="/membres/ajouter-membres" element={<AddMembersForm />} />
             <Route path="/tournois/creer-tournoi" element={<h1>Ici le composant AddTournamentForm</h1>} />
           </>
         )}
