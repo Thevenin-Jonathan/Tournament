@@ -18,7 +18,8 @@ router.post("/", async (_, res) => {
       },
     });
 
-    console.log("transport create !");
+    console.log(transporter);
+    debug(transporter);
   
     // send mail with defined transport object
     let info = await transporter.sendMail({
