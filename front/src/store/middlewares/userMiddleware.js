@@ -1,5 +1,7 @@
 import axios from 'axios';
 import config from 'src/config';
+import { deleteNullOrFalsyKeyInObject } from 'src/utils';
+import qs from 'qs';
 
 const userMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
@@ -41,42 +43,36 @@ const userMiddleware = (store) => (next) => (action) => {
     case 'CREATE_MEMBER': {
       const state = store.getState();
 
-      const firstname = state.user.addMemberfirstname;
-      const lastname = state.user.addMemberlastname;
-      const address = state.user.addMemberaddress;
-      const birthdate = state.user.addMemberbirthdate;
-      const email = state.user.addMemberemail;
-      const player_license = Number(state.user.addMemberplayerLicense);
-      const phone = Number(state.user.addMemberphone);
-      const gender_id = Number(state.user.addMembergenderId);
+      const data = {
+        firstname: state.user.addMemberfirstname,
+        lastname: state.user.addMemberlastname,
+        address: state.user.addMemberaddress,
+        birthdate: state.user.addMemberbirthdate,
+        email: state.user.addMemberemail,
+        player_license: state.user.addMemberplayerLicense,
+        phone: state.user.addMemberphone,
+        gender_id: state.user.addMembergenderId,
+        club_id: 1,
+        role_id: 2,
+        password: 'tomtom',
+        is_active: true,
+      };
+
+      // supprimer les clés invalides pour l'api
+      deleteNullOrFalsyKeyInObject(data);
 
       const axiosConfig = {
         method: 'post',
         url: `${config.api.baseUrl}/users`,
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
-        data: {
-          firstname,
-          lastname,
-          address,
-          birthdate,
-          email,
-          player_license,
-          phone,
-          gender_id,
-          // pas coté front
-          club_id: 1,
-          role_id: 2,
-          password: 'tomtom',
-          is_active: true,
-        },
+        data: qs.stringify(data),
       };
       next(action);
       axios(axiosConfig)
         .then((response) => {
-          store.dispatch({ type: 'CREATE_MEMBER_SUCCESS' });
-          console.log(response.data);
+          store.dispatch({ type: 'CREATE_MEMBER_SUCCESS', value: response.data });
         })
 
         .catch((error) => {

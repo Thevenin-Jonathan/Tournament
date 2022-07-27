@@ -52,33 +52,33 @@ function AddMembersForm() {
 
           <div className="col">
             <div className="input-line">
-              <label htmlFor="firstname">Prénom</label>
-              <input type="text" name="firstname" id="firstname" onChange={(evt) => changeField(evt.target.value, 'addMemberfirstname')} />
+              <label htmlFor="firstname">Prénom *</label>
+              <input required="required" type="text" name="firstname" id="firstname" onChange={(evt) => changeField(evt.target.value, 'addMemberfirstname')} />
             </div>
 
             <div className="input-line">
-              <label htmlFor="lastname">Nom</label>
-              <input type="text" name="lastname" id="lastname" onChange={(evt) => changeField(evt.target.value, 'addMemberlastname')} />
+              <label htmlFor="lastname">Nom *</label>
+              <input required="required" type="text" name="lastname" id="lastname" onChange={(evt) => changeField(evt.target.value, 'addMemberlastname')} />
             </div>
 
             <div className="input-line">
-              <label htmlFor="gender">Genre</label>
-              <select id="gender" onChange={(evt) => changeField(evt.target.value, 'addMembergenderId')}>
+              <label htmlFor="gender">Genre *</label>
+              <select required="required" id="gender" onChange={(evt) => changeField(evt.target.value, 'addMembergenderId')}>
                 <option value="1">Homme</option>
                 <option value="2">Femme</option>
               </select>
             </div>
 
             <div className="input-line">
-              <label htmlFor="birthdate">Date de naissance</label>
-              <input type="date" name="birthdate" id="birthdate" onChange={(evt) => changeField(evt.target.value, 'addMemberbirthdate')} />
+              <label htmlFor="birthdate">Date de naissance *</label>
+              <input required="required" type="date" name="birthdate" id="birthdate" onChange={(evt) => changeField(evt.target.value, 'addMemberbirthdate')} />
             </div>
           </div>
 
           <div className="col">
             <div className="input-line">
-              <label htmlFor="email">Email</label>
-              <input type="email" name="email" id="email" onChange={(evt) => changeField(evt.target.value, 'addMemberemail')} />
+              <label htmlFor="email">Email *</label>
+              <input required="required" type="email" name="email" id="email" onChange={(evt) => changeField(evt.target.value, 'addMemberemail')} />
             </div>
 
             <div className="input-line">
@@ -95,8 +95,8 @@ function AddMembersForm() {
             </div>
 
             <div className="input-line">
-              <label htmlFor="license">Licence</label>
-              <input type="text" name="license" id="license" onChange={(evt) => changeField(evt.target.value, 'addMemberplayerLicense')} />
+              <label htmlFor="license">Licence *</label>
+              <input required="required" type="text" name="license" id="license" onChange={(evt) => changeField(evt.target.value, 'addMemberplayerLicense')} />
             </div>
 
           </div>

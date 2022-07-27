@@ -20,13 +20,12 @@ export const initialState = {
 
   // champs controlés add member
   addMemberemail: '',
-  addMemberavatar: '',
   addMemberfirstname: '',
   addMemberlastname: '',
-  addMemberaddress: '',
+  addMemberaddress: null,
   addMemberbirthdate: '',
   addMemberplayerLicense: null,
-  addMembergenderId: null,
+  addMembergenderId: 1,
   addMemberphone: null,
 
   // state qui stocke la liste des membres
