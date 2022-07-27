@@ -197,11 +197,107 @@ _Ce que tu comptes faire aujourd'hui:_
 - Reflexion sur la mise en place d'un fichier unique pour la gestion des erreurs
 - Essai de la reflexion sur le deploiement Heroku et tests
 
-**El Houceine:**
+### 27/07/2022 - Sprint 2 - Jour 12
 
-_Ce que tu as fait vendredi:_
--
+**Tom:**
+
+_Ce que tu as fait hier:_
+
+- creation de reducer et de middlewares
+- recherche sur format de date (mdn)
+- recherche sur refresh token
+- refactor des middlewares et mise en place d'un fichier de config global
+- preparation retropspective sprint 1
+- reflexion sur la logique is loading
+- logique dans divers composants
+- composant add user
+
 _Les problèmes rencontrés:_
--
+
+- mise a jour coté back (avec new module) du coup serveur plante et pas facile de savoir pourquoi ^^
+- Probleme avec le refresh token et sa logique.
+- axios et le url form encoded
+- utiliser la librairie qs
+
 _Ce que tu comptes faire aujourd'hui:_
--
+
+- assister à la retro
+- terminer le form de création de user avec les vérifs
+- mettre en place les toasts (notifications visuelles utilisateur)
+
+**Jonathan:**
+
+_Ce que tu as fait hier:_
+
+- Présentation de la partie back à la rétrospective
+- Implémentation d'un error handler avec surcharge de la classe Error
+- Ajoute de la gestion d'erreur, vérification, amélioration des controllers et datamapper
+
+_Les problèmes rencontrés:_
+
+- Un petit peu de veille sur le error handler car ca faisait un petit moment que j'avais pas toucher les classes
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- Vérifier les données en base de données, ajouter les contraintes manquantes
+- Implémenter JSDoc pour pouvoir documenter nos route
+- Ajouter les routes manquantes pour le front
+- Commencer à réflechir et à implementer des algos pour l'insciption et la création de tournoi
+
+**Cédric:**
+
+_Ce que tu as fait hier:_
+
+- préparation et presentation sprint 1 front
+- installation Sqitch
+- build du composant Loader
+- build en cours de la page profil d'un Membre
+- logique de la page liste des Membres
+- Design de divers composants
+
+_Les problèmes rencontrés:_88
+
+- boucle infinie due au isLoading => pd de logique
+- pb d'accès à la BDD, bug psql => réinstallation de psql
+- difficultés de compréhension avec Redux 
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- continuer la logique de la page profil d'un Membre 
+
+**Agustin:**
+
+_Ce que tu as fait hier:_
+
+- Retrosprective où il est presenté l'avancement des projets aux autres groupes.
+- Correction de deux datamappers pour les adapter aux besoin de l'app.
+- Veuille sur joi pour l'implementation de la validation des données.
+- Creation des schemas de joi.
+- Modification des routers pour ajout de middleware pour joi.
+- Test de tout ce qui a été realisé, par Postman.
+
+_Les problèmes rencontrés:_
+
+- Apprendre a utiliser joi et reussir a lui passer les schemas avec les informations correctes
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- Terminer les schemas de joi qui manquent
+- Retour sur la BDD pour verifier si elle correspond toujours aux besoins de l'app
+- Veille pour la gestion des erreurs
+
+et d'apo groupe par groupe, puis 
+_Les problèmes rencontrés:_
+jveAtatin prMuradatamapper, controller, schema, router **El Houceine:**
+
+_Ce que tu as fait hier:_
+
+- datamapper, controller, router, schema avec TEST concluant
+
+_Les problèmes rencontrés:_
+
+- des erreurs à la c** 
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- poursuivres et finir ce qu'il reste à faire, et voir ce qui peut être fait
