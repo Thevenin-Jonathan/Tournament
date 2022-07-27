@@ -20,6 +20,9 @@ const authMiddleware = (store) => (next) => (action) => {
       axios(axiosConfig)
         .then((response) => {
           store.dispatch({ type: 'SUBMIT_LOGIN_SUCCESS', value: response.data });
+          if (response.data.role_id === 1) {
+            store.dispatch({ type: 'IS_ADMIN' });
+          }
           // set token in local storage
           localStorage.setItem('authToken', JSON.stringify(response.data));
           // redirect on dashboard
@@ -35,38 +38,47 @@ const authMiddleware = (store) => (next) => (action) => {
       break;
     }
 
-    case 'VERIFY_TOKEN': {
-      // console.log('verify token');
-      const axiosConfig = {
-        method: 'post',
-        url: `${config.serverUrl}/refresh_token`,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        data: {
-          token: localStorage.getItem('authToken'),
-        },
-      };
+    case 'TOKEN_LOGIN': {
+      const currentUser = JSON.parse(localStorage.getItem('authToken'));
+      if (currentUser.role_id === 1) {
+        store.dispatch({ type: 'IS_ADMIN' });
+      }
       next(action);
-      axios(axiosConfig)
-        .then((response) => {
-          // si je reçois un token
-          if (response.data.token) {
-            localStorage.setItem('authToken', JSON.stringify(response.data.token));
-          }
-          else {
-            throw new Error(response.data.msg);
-          }
-          // Tout est ok on laisse la connexion et on rafraichit le token
-
-          // Si error on logout
-        })
-        .catch((error) => {
-          store.dispatch({ type: 'LOGOUT' });
-          throw new Error(error);
-        });
       break;
     }
+
+    // case 'VERIFY_TOKEN': {
+    //   // console.log('verify token');
+    //   const axiosConfig = {
+    //     method: 'post',
+    //     url: `${config.serverUrl}/refresh_token`,
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     data: {
+    //       token: localStorage.getItem('authToken'),
+    //     },
+    //   };
+    //   next(action);
+    //   axios(axiosConfig)
+    //     .then((response) => {
+    //       // si je reçois un token
+    //       if (response.data.token) {
+    //         localStorage.setItem('authToken', JSON.stringify(response.data.token));
+    //       }
+    //       else {
+    //         throw new Error(response.data.msg);
+    //       }
+    //       // Tout est ok on laisse la connexion et on rafraichit le token
+
+    //       // Si error on logout
+    //     })
+    //     .catch((error) => {
+    //       store.dispatch({ type: 'LOGOUT' });
+    //       throw new Error(error);
+    //     });
+    //   break;
+    // }
 
     case 'LOGOUT': {
       localStorage.removeItem('authToken');
