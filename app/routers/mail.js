@@ -1,43 +1,69 @@
 const router = require("express").Router();
 const debug = require("debug")("mail");
 const nodemailer = require("nodemailer");
+const mg = require('nodemailer-mailgun-transport');
 const { ApiInternalError } = require("../services/errorHandler");
+
+// This is your API key that you retrieve from www.mailgun.com/cp (free up to 10K monthly emails)
+const auth = {
+  auth: {
+    api_key: process.env.MAILGUN_API_KEY,
+    domain: process.env.MAILGUN_DOMAIN
+  }
+}
 
 /** Route to send mail **/
 router.post("/", async (_, res) => {
-  try {
-    console.log("start config !");
+  const nodemailerMailgun = nodemailer.createTransport(mg(auth));
 
-    let transporter = nodemailer.createTransport({
-      host: process.env.MAILGUN_SMTP_SERVER,
-      port: process.env.MAILGUN_SMTP_PORT,
-      secure: false, // true for 465, false for other ports
-      auth: {
-        user: process.env.MAILGUN_SMTP_LOGIN, // generated ethereal user
-        pass: process.env.MAILGUN_SMTP_PASSWORD, // generated ethereal password
-      },
-    });
+  nodemailerMailgun.sendMail({
+    from: 'myemail@example.com',
+    to: 'warzonefury@hotmail.fr', // An array if you have multiple recipients.
+    cc:'',
+    bcc:'',
+    subject: 'Hey you, awesome!',
+    'replyTo': '',
+    //You can use "html:" to send HTML email content. It's magic!
+    html: '<b>Wow Big powerful letters</b>',
+    //You can use "text:" to send plain-text content. It's oldschool!
+    text: 'Mailgun rocks, pow pow!'
+  }, (err, info) => {
+    if (err) {
+      console.log(`Error: ${err}`);
+    }
+    else {
+      console.log(`Response: ${info}`);
+    }
+  });
 
-    console.log("transport create !");
-  
-    // send mail with defined transport object
-    let info = await transporter.sendMail({
-      from: '"Test jojo 👻" <warzonefury@gmail.com>', // sender address
-      to: "warzonefury@hotmail.fr", // list of receivers
-      subject: "Hello Tournament✔", // Subject line
-      text: "Hello world?", // plain text body
-      html: "<b>Hello world?</b>", // html body
-    });
+  res.json({msg: "Mail sent."});
 
-    debug(info);
+  // console.log("start config !");
 
-    res.json({msg: "Mail sent."});
-    
-  } catch (error) {
-    error = new ApiInternalError(error.message);
-  }
+  // let transporter = nodemailer.createTransport({
+  //   host: process.env.MAILGUN_SMTP_SERVER,
+  //   port: process.env.MAILGUN_SMTP_PORT,
+  //   secure: false, // true for 465, false for other ports
+  //   auth: {
+  //     user: process.env.MAILGUN_SMTP_LOGIN, // generated ethereal user
+  //     pass: process.env.MAILGUN_SMTP_PASSWORD, // generated ethereal password
+  //   },
+  // });
 
-  
+  // console.log("transport create !");
+
+  // // send mail with defined transport object
+  // let info = await transporter.sendMail({
+  //   from: '"Test jojo 👻" <warzonefury@gmail.com>', // sender address
+  //   to: "warzonefury@hotmail.fr", // list of receivers
+  //   subject: "Hello Tournament✔", // Subject line
+  //   text: "Hello world?", // plain text body
+  //   html: "<b>Hello world?</b>", // html body
+  // });
+
+  // debug(info);
+
+  // res.json({msg: "Mail sent."});  
 });
 
 module.exports = router;
