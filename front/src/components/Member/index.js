@@ -24,7 +24,8 @@ function Member() {
   return (
     <main className="content member">
       <h1 className="title">{user.member.firstname} {user.member.lastname}</h1>
-      <div className="wrapper-card-stats">
+
+      <div className="wrapper">
         <div className="member-card">
           <h2 className="section-title">Profil</h2>
           <img className="avatar" src={user.member.url_avatar} alt={`${user.member.firstname} Avatar`} />
