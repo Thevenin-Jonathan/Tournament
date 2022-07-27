@@ -21,20 +21,21 @@ function Members() {
   return (
     <main className="content members">
       <h1 className="title">Membres du club</h1>
-      <span>92 membres</span>
-
-      <div className="group-1">
-        <input className="members-search" type="search" value="" placeholder=" Rechercher un membre" />
-
-        <Link className="action-btn" to="/membres/ajouter-membres">+ Ajouter un membre</Link>
+      <span>{user.members.length} membres</span>
+      <div className="wrapper">
+        <input
+          className="members-search"
+          type="search"
+          value=""
+          placeholder=" Rechercher un membre"
+        />
+        <Link className="action-btn" to="/membres/ajouter-membres">
+          <i className="fa fa-plus" aria-hidden="true" /> Ajouter un membre
+        </Link>
       </div>
-
       <ol className="members-list">
         {user.members.map((member) => (
-          <li
-            key={member.id}
-
-          >
+          <li key={member.id}>
             <Link className="members-list-item" to={`/membres/${member.id}`}>
               <span className="members-name">
                 {member.firstname} {member.lastname}
