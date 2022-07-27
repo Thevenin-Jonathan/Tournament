@@ -7,8 +7,8 @@ function Club() {
   // je récupère le state du reducer 'club'
   const club = useSelector((state) => (state.club));
   const user = useSelector((state) => (state.user));
-
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch({
       type: 'GET_CLUB',

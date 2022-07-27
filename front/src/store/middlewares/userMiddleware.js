@@ -48,7 +48,7 @@ const userMiddleware = (store) => (next) => (action) => {
       next(action);
       axios(axiosConfig)
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           store.dispatch({ type: 'GET_MEMBER_SUCCESS', value: response.data });
         })
         .catch((error) => {
@@ -90,11 +90,25 @@ const userMiddleware = (store) => (next) => (action) => {
       next(action);
       axios(axiosConfig)
         .then((response) => {
+          store.dispatch({
+            type: 'NEW_TOAST',
+            newToast: {
+              id: state.interface.toastCounter,
+              message: `Nouveau membre ${response.data.firstname} ${response.data.lastname} enregistré`,
+              type: 'success',
+            },
+          });
           store.dispatch({ type: 'CREATE_MEMBER_SUCCESS', value: response.data });
         })
-
         .catch((error) => {
-          store.dispatch({ type: 'CREATE_MEMBER_FAILED', value: 'Data error' });
+          store.dispatch({
+            type: 'NEW_TOAST',
+            newToast: {
+              id: state.interface.toastCounter,
+              message: `${error.response.data.message}`,
+              type: 'error',
+            },
+          });
           throw new Error(error);
         });
       break;

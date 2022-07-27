@@ -41,7 +41,7 @@ const dateFr = (date) => {
  */
 const deleteNullOrFalsyKeyInObject = (obj) => {
   Object.keys(obj).forEach((key) => {
-    if (obj[key] === null || obj[key] === false) {
+    if (obj[key] === null || obj[key] === false || obj[key] === '') {
       delete obj[key];
     }
   });

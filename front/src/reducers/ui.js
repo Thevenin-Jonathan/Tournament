@@ -1,6 +1,8 @@
 export const initialState = {
   menuIsOpen: false,
   isLoading: false,
+  toastCounter: 0,
+  toasts: [],
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -24,6 +26,20 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         isLoading: false,
+      };
+    case 'NEW_TOAST':
+      return {
+        ...state,
+        toastCounter: state.toastCounter + 1,
+        toasts: [
+          ...state.toasts,
+          action.newToast,
+        ],
+      };
+    case 'REMOVE_TOAST':
+      return {
+        ...state,
+        toasts: state.toasts.filter((toast) => toast.id !== action.toastId),
       };
 
     default:

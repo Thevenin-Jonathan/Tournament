@@ -21,6 +21,7 @@ import Member from '../Member';
 import AddMembersForm from '../AddMembersForm';
 import Help from '../Help';
 import Loader from '../Loader';
+import Toast from '../Toast';
 
 // == Composant
 function App() {
@@ -63,12 +64,15 @@ function App() {
   if (!isLogged) {
     // Public Routes
     return (
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/connexion" element={<LoginForm />} />
-        <Route path="/mot-de-passe-perdu" element={<h1>Formulaire de récupération de mot de passe</h1>} />
-        <Route path="*" element={<Error />} />
-      </Routes>
+      <>
+        <Toast />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/connexion" element={<LoginForm />} />
+          <Route path="/mot-de-passe-perdu" element={<h1>Formulaire de récupération de mot de passe</h1>} />
+          <Route path="*" element={<Error />} />
+        </Routes>
+      </>
     );
   }
 
@@ -77,6 +81,7 @@ function App() {
     <div className="app">
       <Header />
       <Menu />
+      <Toast />
       {isLoading && <Loader />}
       <Routes>
         <Route path="/connexion" element={<Navigate to="/tableau-de-bord" />} />
