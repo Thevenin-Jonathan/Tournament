@@ -3,7 +3,7 @@ const joi = require("joi");
 module.exports = joi.object({
   name: joi.string().min(2).required(),
   address: joi.string().min(10).required(),
-  phone: joi.number(),
+  phone: joi.string(),
   email: joi.string().email().required(),
   logo_url: joi.string(),
   nb_playground: joi.number().required(),
