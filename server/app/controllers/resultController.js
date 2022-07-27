@@ -65,6 +65,10 @@ async function update(req, res) {
     throw new Api404Error("Result does not exist in DB");
   }
 
+  if (await resultDatamapper.findByLabel(label)) {
+    throw new ApiError("This label is already in use");
+  }
+
   const updatedResult = await resultDatamapper.updateOne(id, newData)
   return res.json(updatedResult)
 }

@@ -65,6 +65,10 @@ async function update(req, res) {
     throw new Api404Error("Gender does not exist in DB");
   }
 
+  if (await genderDatamapper.findByName(name)) {
+    throw new ApiError("This name is already in use");
+  }
+
   const updatedGender = await genderDatamapper.updateOne(id, name)
   return res.json(updatedGender)
 }

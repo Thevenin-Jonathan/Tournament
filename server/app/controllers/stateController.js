@@ -61,8 +61,12 @@ const { ApiError, Api404Error } = require("../services/errorHandler");
     const {name} = req.body
     const state = await stateDatamapper.findById(id);
   
-      if (!state) {
-        throw new Api404Error("State does not exist in DB");
+    if (!state) {
+      throw new Api404Error("State does not exist in DB");
+    }
+
+    if (await stateDatamapper.findByName(name)) {
+      throw new ApiError("This name is already in use");
     }
 
     const updatedState = await stateDatamapper.updateOne(id, name)

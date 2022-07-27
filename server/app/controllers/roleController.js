@@ -67,7 +67,8 @@ const { ApiError, Api404Error } = require("../services/errorHandler");
 
     if (await roleDatamapper.findByName(name)) {
       throw new ApiError("This name is already in use");
-      }
+    }
+    
     const updatedRole = await roleDatamapper.updateOne(id, name)
     return res.json(updatedRole)
   }

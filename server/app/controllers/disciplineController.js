@@ -1,4 +1,5 @@
 const disciplineDatamapper = require("../datamappers/discipline");
+const { ApiError, Api404Error } = require("../services/errorHandler");
 
 /**
  * Get all disciplines from DB
@@ -37,11 +38,10 @@ const disciplineDatamapper = require("../datamappers/discipline");
  */
 async function create(req, res) {
     const { name } = req.body;
-    const discipline = await disciplineDatamapper.findByName(name);
   
-    if (discipline) {
-      // throw new Error("Discipline is already exist in DB");
-      return res.json({message: "Discipline is already exist in DB"})
+    /** Verification: Name already in use in DB? **/
+    if (await disciplineDatamapper.findByName(name)) {
+      throw new ApiError("This label is already in use");
     }
   
     const newDiscipline = await disciplineDatamapper.insertOne(name);
@@ -63,14 +63,16 @@ async function update(req, res) {
     const discipline = await disciplineDatamapper.findById(id);
   
     if (!discipline) {
-      return res.json({message: "Discipline does not exist in DB"})
+      throw new Api404Error("Discipline does not exist in DB");
     }
+
+    /** Verification: name already in use in DB? **/
     if (await disciplineDatamapper.findByName(name)) {
-      // throw new Error("Data is already exist on another discipline in DB");
-      return res.json({message: "Name is already exist on another discipline in DB"})
+      throw new ApiError("This name is already in use");
     }
-    const updDiscipline = await disciplineDatamapper.updateOne(id, name)
-    return res.json(updDiscipline)
+
+    const updatedDiscipline = await disciplineDatamapper.updateOne(id, name)
+    return res.json(updatedDiscipline)
   }
 
 /**
@@ -86,8 +88,9 @@ async function destroy(req, res) {
     const discipline = await disciplineDatamapper.findById(id);
   
     if (!discipline) {
-      return res.json({message: "discipline does not exist in DB"})
+      throw new Api404Error("Discipline does not exist in DB");
     }
+
     await disciplineDatamapper.deleteOne(id);
     return res.status(204).json();
   };
