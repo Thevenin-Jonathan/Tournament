@@ -15,7 +15,7 @@ function Members() {
   }, []);
 
   if (!ui.isLoading) {
-    console.log(user.members);
+    // console.log(user.members);
   }
 
   return (
@@ -31,14 +31,20 @@ function Members() {
 
       <ol className="members-list">
         {user.members.map((member) => (
-          <li key={member.id} className="members-list-item">
-            <span className="members-name">{member.firstname} {member.lastname}</span>
+          <li
+            key={member.id}
+            className="members-list-item"
+          >
+            <span className="members-name">
+              <Link to={`/membres/${member.id}`}>{member.firstname} {member.lastname}</Link>
+            </span>
             <span className="members-gender">{genderText(member.gender_id)}</span>
             <span className="members-email">{member.email}</span>
             <span className="members-phone">{member.phone}</span>
             <button type="button" className="list-item-btn">
               <i className="fa fa-pencil" aria-hidden="true" />
             </button>
+
           </li>
         ))}
       </ol>
