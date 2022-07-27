@@ -43,7 +43,7 @@ function Member() {
           <h2 className="section-title">Statistiques</h2>
         </div>
       </div>
-      <Link className="button" to="/membres">
+      <Link className="action-btn" to="/membres">
         <button type="button">
           <i className="fa fa-chevron-left" aria-hidden="true" />
           &nbsp;

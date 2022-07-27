@@ -6,12 +6,19 @@ import clublogo from 'src/assets/logo-bayard-bad-blanc.png';
 function Club() {
   // je récupère le state du reducer 'club'
   const club = useSelector((state) => (state.club));
+  const user = useSelector((state) => (state.user));
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch({
       type: 'GET_CLUB',
       value: 1,
+    });
+  }, []);
+
+  useEffect(() => {
+    dispatch({
+      type: 'GET_MEMBERS',
     });
   }, []);
 
@@ -23,7 +30,7 @@ function Club() {
         <h2 className="club-name">Bayard Bad</h2>
         <img className="club-avatar" src={clublogo} alt="Logo du club" />
         <ul>
-          <li>Nombre de membres :<span>92</span></li>
+          <li>Nombre de membres :<span>{user.members.length}</span></li>
           <li>Adresse :<span>{club.address}</span></li>
           <li>Contact :<span>{club.email}</span><span>{club.phone}</span></li>
           <li>Site internet : <span>{club.website}</span></li>
