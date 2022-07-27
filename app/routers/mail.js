@@ -29,7 +29,7 @@ router.post("/", async (_, res) => {
       html: "<b>Hello world?</b>", // html body
     });
 
-    console.log(info);
+    debug(info);
 
     res.json({msg: "Mail sent."});
     
