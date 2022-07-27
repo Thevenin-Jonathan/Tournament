@@ -18,8 +18,20 @@ export const initialState = {
   genderId: null,
   phone: '',
 
+  // champs controlés add member
+  addMemberemail: '',
+  addMemberfirstname: '',
+  addMemberlastname: '',
+  addMemberaddress: null,
+  addMemberbirthdate: '',
+  addMemberplayerLicense: null,
+  addMembergenderId: 1,
+  addMemberphone: null,
+
   // state qui stocke la liste des membres
   members: [],
+  // state qui stocke un membre
+  member: {},
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -78,6 +90,11 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         members: action.value,
       };
+    case 'GET_MEMBER_SUCCESS':
+      return {
+        ...state,
+        member: action.value,
+      };
     case 'LOGOUT':
       return {
         ...state,
@@ -95,6 +112,19 @@ const reducer = (state = initialState, action = {}) => {
         phone: '',
         roleId: null,
         token: null,
+      };
+    case 'CREATE_MEMBER_SUCCESS':
+      return {
+        ...state,
+        addMemberemail: '',
+        addMemberavatar: '',
+        addMemberfirstname: '',
+        addMemberlastname: '',
+        addMemberaddress: '',
+        addMemberbirthdate: '',
+        addMemberplayerLicense: null,
+        addMembergenderId: null,
+        addMemberphone: null,
       };
     default:
       return state;

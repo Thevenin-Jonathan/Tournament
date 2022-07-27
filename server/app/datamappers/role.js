@@ -68,7 +68,7 @@ async function deleteOne(id) {
  * @returns {object} name
  */
  async function findByName(name) {
-    const result = await pool.query(`SELECT * FROM "type" WHERE "name" = $1`, [name]);
+    const result = await pool.query(`SELECT * FROM "role" WHERE "name" = $1`, [name]);
     return result.rows[0];
 }
 
