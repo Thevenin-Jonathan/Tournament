@@ -6,7 +6,7 @@ const { ApiInternalError } = require("../services/errorHandler");
 /** Route to send mail **/
 router.post("/", async (_, res) => {
   try {
-    debug("start config !");
+    console.log("start config !");
 
     let transporter = nodemailer.createTransport({
       host: process.env.MAILGUN_SMTP_SERVER,
@@ -18,7 +18,7 @@ router.post("/", async (_, res) => {
       },
     });
 
-    debug("transport create !");
+    console.log("transport create !");
   
     // send mail with defined transport object
     let info = await transporter.sendMail({
@@ -29,7 +29,7 @@ router.post("/", async (_, res) => {
       html: "<b>Hello world?</b>", // html body
     });
 
-    debug(info);
+    console.log(info);
 
     res.json({msg: "Mail sent."});
     
