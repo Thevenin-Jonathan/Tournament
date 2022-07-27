@@ -25,16 +25,17 @@ function App() {
   const dispatch = useDispatch();
   // const location = useLocation();
   const isLogged = useSelector((state) => (state.user.logged));
+  const isAdmin = useSelector((state) => (state.user.isAdmin));
   const isLoading = useSelector((state) => (state.interface.isLoading));
 
-  // a chaque changement d'url
-  // useEffect(() => {
-  //   dispatch({
-  //     type: 'VERIFY_TOKEN',
-  //   });
-  // }, [location]);
+  // chargement de data globales (liste des roles, des genres...)
+  useEffect(() => {
+    dispatch({
+      type: 'GET_APP_DATA',
+    });
+  });
 
-  // au montage du composant
+  // Connexion auto avec token
   useEffect(() => {
     // si logged = false
     if (!isLogged) {
@@ -82,9 +83,14 @@ function App() {
         <Route path="/tournois" element={<Tournaments />} />
         <Route path="/club" element={<Club />} />
         <Route path="/membres" element={<Members />} />
-        <Route path="/membres/ajouter-membres" element={<AddMembersForm />} />
         <Route path="/profil" element={<Profil />} />
         <Route path="/aide" element={<Help />} />
+        {isAdmin && (
+          <>
+            <Route path="/membres/ajouter-membres" element={<AddMembersForm />} />
+            <Route path="/tournois/creer-tournoi" element={<h1>Ici le composant AddTournamentForm</h1>} />
+          </>
+        )}
         <Route path="*" element={<Error />} />
       </Routes>
     </div>

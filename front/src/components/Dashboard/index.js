@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import clublogo from 'src/assets/logo-bayard-bad-blanc.png';
 
 import config from 'src/config';
 import TournamentCard from '../TournamentCard';
 
 function Dashboard() {
+  const isAdmin = useSelector((state) => (state.user.isAdmin));
   const tournamentCover = `${config.path.uploads.coverTournament}/cover-tournament-01.jpg`;
   return (
     <main className="dashboard content">
@@ -44,10 +46,11 @@ function Dashboard() {
           slug="tournoi-des-pros"
           cover={tournamentCover}
         />
-
-        <Link to="/tournois/creer-tournoi" className="button create-tournament-button">
-          <i className="fa fa-trophy fa-2x tournament-icon" /> Organiser un <span>nouveau tournoi</span>
-        </Link>
+        {isAdmin && (
+          <Link to="/tournois/creer-tournoi" className="button create-tournament-button">
+            <i className="fa fa-trophy fa-2x tournament-icon" /> Organiser un <span>nouveau tournoi</span>
+          </Link>
+        )}
       </div>
 
       <Link to="/classements" className="dashboard-widget hall-of-fame">

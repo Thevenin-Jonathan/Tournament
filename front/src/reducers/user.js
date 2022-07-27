@@ -5,6 +5,7 @@ export const initialState = {
   id: null,
   displayName: '',
   roleId: null,
+  isAdmin: true,
   token: null,
 
   email: '',
