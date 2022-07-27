@@ -10,7 +10,7 @@ router.post("/", async (_, res) => {
 
     let transporter = nodemailer.createTransport({
       host: "smtp-mail.outlook.com",
-      port: 25,
+      port: 587,
       secure: false, // true for 465, false for other ports
       auth: {
         user: process.env.AUTH_USER_HOTMAIL, // generated ethereal user
@@ -19,7 +19,6 @@ router.post("/", async (_, res) => {
     });
 
     console.log(transporter);
-    debug(transporter);
   
     // send mail with defined transport object
     let info = await transporter.sendMail({
