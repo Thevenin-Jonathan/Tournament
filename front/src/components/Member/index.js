@@ -27,6 +27,7 @@ function Member() {
       <div className="wrapper-card-stats">
         <div className="member-card">
           <h2 className="section-title">Profil</h2>
+          <img className="avatar" src={user.member.url_avatar} alt={`${user.member.firstname} Avatar`} />
           <ul>
             <li>License FFBAD : <span>{user.member.player_license}</span></li>
             <li>Genre : <span>{genderText(user.member.gender_id)}</span></li>
