@@ -17,9 +17,9 @@ router.post("/", async (_, res) => {
   const nodemailerMailgun = nodemailer.createTransport(mg(auth));
 
   nodemailerMailgun.sendMail({
-    from: 'myemail@example.com',
-    to: 'warzonefury@hotmail.fr', // An array if you have multiple recipients.
-    cc:'',
+    from: 'warzonefury@gmail.com',
+    to: ['warzonefury@hotmail.fr', 'warzonefury3@hotmail.fr'], // An array if you have multiple recipients.
+    cc:'warzonefury3@hotmail.fr',
     bcc:'',
     subject: 'Hey you, awesome!',
     'replyTo': '',
