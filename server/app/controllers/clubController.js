@@ -1,4 +1,5 @@
 const clubDatamapper = require("../datamappers/club");
+const { ApiError, Api404Error } = require("../services/errorHandler");
 
 /**
  * Get all clubs from DB
@@ -40,21 +41,21 @@ async function create(req, res) {
 
   /** Verification: club_ref already in use in DB? **/
   if (await clubDatamapper.exist({club_ref: club.club_ref})) {
-    return res.json({message: "This club_ref is already in use"})
+    throw new ApiError("This club_ref is already in use");
   }
 
   /** Verification: email already in use in DB? **/
   if (await clubDatamapper.exist({email: club.email})) {
-    return res.json({message: "This email is already in use"})
+    throw new ApiError("This email is already in use");
   }
 
   /** Verification: website already in use in DB? **/
   if (await clubDatamapper.exist({website: club.website})) {
-    return res.json({message: "This website is already in use"})
+    throw new ApiError("This website is already in use");
   }
 
   const newClub = await clubDatamapper.insertOne(club);
-  return res.json(newClub);
+  return res.status(201).json(newClub);
 };
 
 /**
@@ -71,27 +72,26 @@ async function update(req, res) {
   const club = await clubDatamapper.findById(id);
 
   if (!club) {
-    return res.json({message: "Club does not exist in DB"})
+    throw new Api404Error("Club does not exist in DB");
   }
 
-/** Verification: club_ref already in use in DB? **/
-if (await clubDatamapper.exist({club_ref: newData.club_ref})) {
-  return res.json({message: "This club_ref is already in use"})
+  /** Verification: club_ref already in use in DB? **/
+  if (await clubDatamapper.exist({club_ref: newData.club_ref})) {
+    throw new ApiError("This club_ref is already in use");
   }
   
   /** Verification: email already in use in DB? **/
   if (await clubDatamapper.exist({email: newData.email})) {
-  return res.json({message: "This email is already in use"})
+    throw new ApiError("This email is already in use");
   }
   
   /** Verification: website already in use in DB? **/
   if (await clubDatamapper.exist({website: newData.website})) {
-  return res.json({message: "This website is already in use"})
+    throw new ApiError("This website is already in use");
   }
 
-
-  const updClub = await clubDatamapper.updateOne(id, newData)
-  return res.json(updClub)
+  const updatedClub = await clubDatamapper.updateOne(id, newData)
+  return res.json(updatedClub)
 }
 
 /**
@@ -107,7 +107,7 @@ async function destroy(req, res) {
   const club = await clubDatamapper.findById(id);
 
   if (!club) {
-    return res.json({message: "Club does not exist in DB"})
+    throw new Api404Error("Club does not exist in DB");
   }
 
   await clubDatamapper.deleteOne(id);

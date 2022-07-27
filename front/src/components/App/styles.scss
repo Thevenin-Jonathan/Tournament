@@ -67,10 +67,24 @@ body {
   }
 }
 
+.row {
+  display: flex;
+  gap: calc(2 * var(--margin-base));
+  .col {
+    flex: 1;
+  }
+  @media only screen and (max-width: 1100px) {
+    flex-direction: column;
+  }
+}
+
 /* Generique */
 input {
   color: inherit;
   font-family: inherit;
+  background-color: transparent;
+  border: 1px solid var(--ligth-color-text);
+  padding: .5rem 1rem;
 }
 a {
   color: inherit;
@@ -732,6 +746,7 @@ a {
 }
 
 .members {
+  // group-1 = champs de recherche + boutton 'ajouter un membre'
   .group-1 {
     display: flex;
     margin: 2rem 0;
@@ -744,27 +759,35 @@ a {
     padding: 1rem 1.5rem;
   }
 
-    .action-btn {
+  .action-btn {
     background-color: var(--emphase-color);
     padding: 1rem 1.5rem;
     border-radius: 10px;
   }  
+  .members-list {
+    li:nth-child(odd){
+      background-color: rgba(0,0,0,.2);
+    }
+  }
 
-  li {
+  .members-list-item {
+    &:hover {
+      background-color: rgba(0,0,0,.3);
+    }
     display: flex;
-    
+    padding: 1rem;
     :last-child {
       margin-left: auto;
     }
   }
 
   &-name, &-gender, &-email, &-phone {
-    padding: 0.5rem 5rem 0.5rem 0; 
-    flex: 1;
+    // padding: 0.5rem 5rem 0.5rem 0; 
+    width: 25%;
   }
 
   &-name {
-    font-weight: bold;
+    font-weight: var(--bold);
   }
 
   @media only screen and (max-width: 810px) {
@@ -772,7 +795,7 @@ a {
     align-items: center;
 
     &-search {
-      width: 25rem;
+      width: 90%;
       margin: 0 0 2rem 0;
       padding: 1rem 1.5rem;
     }
@@ -783,6 +806,76 @@ a {
     &-email, &-phone {
       display: none; 
     }
+  }
+}
+
+
+.add-members-form {
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .input-line {
+    margin:1rem 0;
+    overflow: hidden;
+    input, button, select, textarea {
+      width: 100%;
+    }
+  }
+  // surement a sortir en global
+  .action-btn {
+    width: auto!important;
+    background-color: transparent;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    border: solid var(--border-size) var(--emphase-color);
+    font-weight: var(--black);
+    font-size: 1.2rem;
+    color: var(--emphase-color);
+    transition: .2s cubic-bezier(.82,.21,.1,1.02);
+    &:hover {
+      background-color: var(--emphase-color);
+      color: var(--ligth-color-text);
+    }
+    @media only screen and (max-width: 1100px) {
+      width: 100%!important;
+    }
+  } 
+  input, select, textarea {
+    display: block;
+    padding: .5rem 1rem;
+    border: solid 1px rgba(255,255,255,.3);
+    &:focus {
+      border-color: var(--emphase-color);
+      outline: none;
+    }
+  }
+  select {
+    background-color: var(--header-color);
+  }
+  label {
+    display: block;
+    font-size: .8rem;
+    margin-bottom: .5rem;
+  }
+  .mass-add {
+    .input-line {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      input {
+        width: 20rem;
+      }
+    }
+    padding: 2rem;
+  }
+  .single-add {
+    background-color: var(--header-color);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+  }
+  #address {
+    height: 11.6rem;
   }
 }
 
@@ -831,4 +924,49 @@ a {
   }
   font-size: 2em;
   animation: fade .75s infinite alternate;
+}
+
+.member {
+  position: relative;
+  .wrapper-card-stats {
+    display: flex;
+    justify-content: space-between;
+  }
+  .section-title {
+    color: var(--emphase-color);
+    font-size: 2rem;
+    padding-bottom: 1rem;
+  }
+  .avatar {
+    background-color: blue;
+    width: 6rem;
+    height: 6rem;
+    position: absolute;
+    right: 2rem;
+  }
+  &-card, &-stats {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--main-color);
+    padding: 2rem;
+    margin-bottom: 1rem;
+    border-radius: var(--border-radius);
+    min-height: 10rem;
+    width: 49%;
+    // background-size: 60%;
+    // background-position: right -1rem center;
+    // background-repeat: no-repeat;
+    position: relative;
+  }
+  li {
+    display: flex;
+    flex-direction: column;
+    color: var(--emphase-color);
+    padding: 0.8rem 0;
+  }
+  span {
+    color: var(--ligth-color-text);
+    padding-top: 0.5rem;
+  }
+
 }

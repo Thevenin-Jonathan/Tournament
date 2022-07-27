@@ -4,6 +4,7 @@ const debug = require('debug')('app');
 const path = require("path");
 const app = express();
 const router = require("./routers");
+const { errorHandler } = require("./services/errorHandler");
 const helmet = require("helmet");
 
 /** Helmet for security */
@@ -38,12 +39,14 @@ if (process.env.NODE_ENV === "prod") {
 app.use("/", router);
 
 /** Route front**/
-
 if (process.env.NODE_ENV === "prod") {
   app.get('/*', (_, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
   });
 }
+
+/** Error handler **/
+app.use(errorHandler);
 
 const port = process.env.PORT ?? 3001;
 app.listen(port, () => {
