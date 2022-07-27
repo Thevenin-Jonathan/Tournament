@@ -3,7 +3,7 @@ const debug = require("debug")("mail");
 const nodemailer = require("nodemailer");
 const { ApiInternalError } = require("../services/errorHandler");
 
-/** Route sen **/
+/** Route to send mail **/
 router.post("/", async (_, res) => {
   try {
     let transporter = nodemailer.createTransport({
@@ -27,7 +27,7 @@ router.post("/", async (_, res) => {
 
     debug(info);
 
-    res.status(202).json({msg: "Mail sent."});
+    res.json({msg: "Mail sent."});
     
   } catch (error) {
     error = new ApiInternalError(error.message);
