@@ -9,7 +9,7 @@ module.exports = joi.object({
   email: joi.string().email().required(),
   password: joi.string().required(),
   url_avatar: joi.string(),
-  phone: joi.number(),
+  phone: joi.string().regex(/^\d{10}$/),
   player_license: joi.number(),
   club_id: joi.number().required(),
   role_id: joi.number().required(),
