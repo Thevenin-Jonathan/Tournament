@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { genderText, dateFr } from 'src/utils';
 // import config from 'src/config';
 
@@ -27,6 +27,7 @@ function Member() {
       <div className="wrapper-card-stats">
         <div className="member-card">
           <h2 className="section-title">Profil</h2>
+          <img className="avatar" src={user.member.url_avatar} alt={`${user.member.firstname} Avatar`} />
           <ul>
             <li>License FFBAD : <span>{user.member.player_license}</span></li>
             <li>Genre : <span>{genderText(user.member.gender_id)}</span></li>
@@ -41,6 +42,13 @@ function Member() {
           <h2 className="section-title">Statistiques</h2>
         </div>
       </div>
+      <Link className="button" to="/membres">
+        <button type="button">
+          <i className="fa fa-chevron-left" aria-hidden="true" />
+          &nbsp;
+          Retour à la liste des membres
+        </button>
+      </Link>
     </main>
   );
 }
