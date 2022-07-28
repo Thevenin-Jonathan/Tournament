@@ -49,3 +49,9 @@
 - https://nodejs.dev/learn/error-handling-in-nodejs
 - https://sematext.com/blog/node-js-error-handling/#toc-4-catch-all-uncaught-exceptions-10
 - https://github.com/arkerone/express-security-example
+
+## Inos sur envoi de mail sur express
+
+- https://www.youtube.com/watch?v=W7CDlpMFM_c
+- https://nodemailer.com/about/
+- https://www.bacancytechnology.com/blog/send-email-using-nodemailer
