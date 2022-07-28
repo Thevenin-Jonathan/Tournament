@@ -1,8 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
-import clublogo from 'src/assets/logo-bayard-bad-blanc.png';
-
 function Club() {
   // je récupère le state du reducer 'club'
   const club = useSelector((state) => (state.club));
@@ -27,8 +25,8 @@ function Club() {
       <h1 className="title">Profil du club</h1>
 
       <div className="club-card">
-        <h2 className="club-name">Bayard Bad</h2>
-        <img className="club-avatar" src={clublogo} alt="Logo du club" />
+        <h2 className="club-name">{club.name}</h2>
+        <img className="club-avatar" src={club.logo_url} alt={`Logo du club ${club.name}`} />
         <ul>
           <li>Nombre de membres :<span>{user.members.length}</span></li>
           <li>Adresse :<span>{club.address}</span></li>
