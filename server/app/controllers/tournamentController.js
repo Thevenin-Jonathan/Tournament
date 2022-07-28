@@ -96,12 +96,10 @@ async function destroy(req, res) {
   const matches = await tournamentDatamapper.findAllMatches(id);
 
   if (matches.length === 0) {
-    return res.json({message: "There is no match in this tournament"})
+    throw new Api404Error("There is no match in this tournament");
   }
   return res.json(matches);
 };
-
-
 
 module.exports = {
   getAll,

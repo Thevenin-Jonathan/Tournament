@@ -13,7 +13,7 @@ const stateRouter = require("./stateRouter");
 const disciplineRouter = require("./disciplineRouter");
 
 router.use("/tournaments", tournamentRouter);
-router.use("/matchs", matchRouter);
+router.use("/matches", matchRouter);
 router.use("/teams", teamRouter);
 router.use("/users", userRouter);
 router.use("/results", resultRouter);
