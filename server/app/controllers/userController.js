@@ -29,7 +29,7 @@ async function getAll(_, res) {
 async function getOne(req, res) {
   const id = req.params.id;
   const user = await userDatamapper.findById(id);
-  delete users.password;
+  delete user.password;
   return res.json(user);
 };
 
