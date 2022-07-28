@@ -15,6 +15,11 @@ function Members() {
     });
   }, []);
 
+  // supprime le résultat de la recherche searchMember
+  useEffect(() => {
+    user.searchMember = '';
+  }, [user.searchMember]);
+
   if (!ui.isLoading) {
     // console.log(user.members);
   }
@@ -45,7 +50,7 @@ function Members() {
           className="members-search"
           type="text"
           onChange={(evt) => changeField(evt.target.value, 'searchMember')}
-          placeholder=" Rechercher un membre"
+          placeholder="Rechercher un membre"
         />
         {isAdmin && (
         <Link className="action-btn" to="/membres/ajouter-membres">

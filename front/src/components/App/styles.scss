@@ -728,7 +728,6 @@ a {
 }
 
 .members {
-  // group-1 = champs de recherche + boutton 'ajouter un membre'
   .wrapper {
     display: flex;
     margin: 2rem 0;
@@ -736,6 +735,7 @@ a {
   }
 
   &-search {
+    // position: relative;
     width: 49%;
     display: block;
     padding: .5rem 1rem;
@@ -744,6 +744,11 @@ a {
       border-color: var(--emphase-color);
       outline: none;
     }
+    // &::before {
+    // font-family: "Font Awesome";
+    // content: "\f002";
+    // position: absolute;
+    // }
     @media only screen and (max-width: 810px) {
       width: 100%!important;
     }
