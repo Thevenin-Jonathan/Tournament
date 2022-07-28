@@ -14,6 +14,7 @@ const { ApiError, Api404Error } = require("../services/errorHandler");
  */
 async function getAll(_, res) {
   const users = await userDatamapper.findAll();
+  delete users.password;
   return res.json(users);
 };
 
@@ -28,6 +29,7 @@ async function getAll(_, res) {
 async function getOne(req, res) {
   const id = req.params.id;
   const user = await userDatamapper.findById(id);
+  delete users.password;
   return res.json(user);
 };
 
