@@ -101,11 +101,32 @@ async function destroy(req, res) {
   return res.json(matches);
 };
 
+/**
+ * Get all matches of a team by tournament from DB
+ * 
+ * ExpressMiddleware signature
+ * @param {object} req express request object
+ * @param {object} res express response object
+ * @returns {json} JSON response with all matches of a tournament
+ */
+ async function getAllMatchesByTeam(req, res) {
+  // const id = req.params.id;
+  // const teamId = req.params.teamId;
+  const {id, teamId} = req.params;
+  const matches = await tournamentDatamapper.findAllMatchesByTeam(id, teamId);
+
+  if (matches.length === 0) {
+    throw new Api404Error("There is no match for this team in this tournament");
+  }
+  return res.json(matches);
+};
+
 module.exports = {
   getAll,
   getOne,
   create,
   update,
   destroy,
-  getAllMatches
+  getAllMatches,
+  getAllMatchesByTeam
 }

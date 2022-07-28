@@ -8,7 +8,7 @@ const debug = require("debug")("dm-tournament")
 async function findAll() {
   const result = await pool.query(`SELECT * FROM "tournament"`);
   return result.rows;
-}
+};
 
 /**
  * Return one tournament from database
@@ -18,7 +18,7 @@ async function findAll() {
 async function findById(id) {
   const result = await pool.query(`SELECT * FROM "tournament" WHERE "id" = $1`, [id]);
   return result.rows[0];
-}
+};
 
 /**
  * Insert one tournament in database
@@ -42,7 +42,7 @@ async function insertOne(tournament) {
   )
 
   return result.rows[0];
-}
+};
 
 /**
  * Update one tournament in database
@@ -65,7 +65,7 @@ async function updateOne(id, tournament) {
   );
 
   return result.rows[0];
-}
+};
 
 /**
  * Delete one tournament from database
@@ -81,7 +81,7 @@ async function deleteOne(id) {
   );
 
   return !!result.rowCount;
-}
+};
 
 /**
  * Return all matches by tournament_id from database
@@ -91,7 +91,22 @@ async function deleteOne(id) {
  async function findAllMatches(id) {
   const result = await pool.query(`SELECT * FROM "match" WHERE "tournament_id" = $1`, [id]);
   return result.rows;
-}
+};
+
+/**
+ * Return all matches of a team by tournament_id from database
+ * @param {number} id match identifiant
+ * @param {number} teamId team identifiant
+ * @returns {object} match
+ */
+ async function findAllMatchesByTeam(id, teamId) {
+  const result = await pool.query(
+    `SELECT team_id, match_id, tournament_id FROM "match_has_team" 
+    JOIN "team" ON team.id = match_has_team.team_id
+    WHERE team.tournament_id = $1
+    AND team.id = $2`, [id, teamId]);
+  return result.rows;
+};
 
 module.exports = {
   findAll,
@@ -99,5 +114,6 @@ module.exports = {
   insertOne,
   updateOne,
   deleteOne,
-  findAllMatches
-}
+  findAllMatches,
+  findAllMatchesByTeam
+};
