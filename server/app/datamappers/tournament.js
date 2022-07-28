@@ -83,10 +83,21 @@ async function deleteOne(id) {
   return !!result.rowCount;
 }
 
+/**
+ * Return all matchs by tournament_id from database
+ * @param {number} id match identifiant
+ * @returns {object} match
+ */
+ async function findAllMatches(id) {
+  const result = await pool.query(`SELECT * FROM "match" WHERE "tournament_id" = $1`, [id]);
+  return result.rows;
+}
+
 module.exports = {
   findAll,
   findById,
   insertOne,
   updateOne,
-  deleteOne
+  deleteOne,
+  findAllMatches
 }

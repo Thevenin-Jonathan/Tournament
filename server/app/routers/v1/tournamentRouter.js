@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const controllerWrapper = require("../../services/controllerWrapper");
 const controller = require("../../controllers/tournamentController");
-const matchController = require("../../controllers/matchController");
 const validationWrapper = require("../../services/validationWrapper");
 const createSchema = require("../../schemas/tournamentCreate");
 const updateSchema = require("../../schemas/tournamentUpdate");
@@ -19,6 +18,6 @@ router.route("/:id")
     controllerWrapper(controller.update))
   .delete(controllerWrapper(controller.destroy));
 
-router.route("/:id/matchs").get(controllerWrapper(matchController.getAllByTournament))
+router.route("/:id/matchs").get(controllerWrapper(controller.getAllMatches));
 
 module.exports = router;

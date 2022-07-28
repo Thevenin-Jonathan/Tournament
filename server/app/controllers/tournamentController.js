@@ -61,7 +61,7 @@ async function update(req, res) {
 
   const updatedTournament = await tournamentDatamapper.updateOne(id, newData)
   return res.json(updatedTournament)
-}
+};
 
 /**
  * Delete one tournament from DB
@@ -83,10 +83,31 @@ async function destroy(req, res) {
   return res.status(204).json();
 };
 
+/**
+ * Get all matchs by tournament from DB
+ * 
+ * ExpressMiddleware signature
+ * @param {object} req express request object
+ * @param {object} res express response object
+ * @returns {json} JSON response with all matchs of a tournament
+ */
+ async function getAllMatches(req, res) {
+  const id = req.params.id;
+  const matchs = await tournamentDatamapper.findAllMatches(id);
+
+  if (matchs.length === 0) {
+    return res.json({message: "There is no match in this tournament"})
+  }
+  return res.json(matchs);
+};
+
+
+
 module.exports = {
   getAll,
   getOne,
   create,
   update,
-  destroy
+  destroy,
+  getAllMatches
 }

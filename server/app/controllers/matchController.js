@@ -82,29 +82,12 @@ async function destroy(req, res) {
   return res.status(204).json();
 };
 
-/**
- * Get all matchs by tournament from DB
- * 
- * ExpressMiddleware signature
- * @param {object} req express request object
- * @param {object} res express response object
- * @returns {json} JSON response with all matchs of a tournament
- */
- async function getAllByTournament(req, res) {
-  const tournamentId = req.params.id;
-  const matchs = await matchDatamapper.findAllByTournament(tournamentId);
 
-  if (matchs.length === 0) {
-    return res.json({message: "There is no match in this tournament"})
-  }
-  return res.json(matchs);
-};
 
 module.exports = {
   getAll,
   getOne,
   create,
   update,
-  destroy,
-  getAllByTournament
+  destroy 
 }
