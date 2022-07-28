@@ -2,7 +2,10 @@ export const initialState = {
   menuIsOpen: false,
   isLoading: false,
   toastCounter: 0,
-  toasts: [],
+  toasts: [
+    // { id: 0, type: 'success', message: 'coucou' },
+    // { id: 1, type: 'error', message: 'bouh!' },
+  ],
 };
 
 const reducer = (state = initialState, action = {}) => {
