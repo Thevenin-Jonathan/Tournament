@@ -15,12 +15,12 @@ async function getAll(_, res) {
 };
 
 /**
- * Get one user from DB
+ * Get one player stats from DB
  * 
  * ExpressMiddleware signature
  * @param {object} req express request object
  * @param {object} res express response object
- * @returns {json} JSON response with one user
+ * @returns {json} JSON response with one player stats
  */
 async function getOne(req, res) {
   const id = req.params.id;
