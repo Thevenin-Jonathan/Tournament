@@ -64,12 +64,17 @@
 **Tom:**
 
 _Ce que tu as fait hier:_
+
 - Premiers essais JWT.
 - Login form front branché sur redux.
 - Mise en place des champs contrôlés sur loginForm et de la logique de connexion
+  
 _Les problèmes rencontrés:_
+
 - Echec avec les CORS, mise en place du middleware coté server pour les gérer
+  
 _Ce que tu comptes faire aujourd'hui:_
+
 - Logique JWT gestion du token
 - Nouveau composant priorité sur la gestion user
 - Composants affichés en fonction du role
@@ -77,28 +82,39 @@ _Ce que tu comptes faire aujourd'hui:_
 **Jonathan:**
 
 _Ce que tu as fait hier:_
+
 - JWT, user controller, DB upd to V3
+  
 _Les problèmes rencontrés:_
+
 - Un peu de veille nécessaire pour comprendre JWT et son fonctionnement
 - Problème avec le nommage des noms de colonne, longue réflexion pour décider si on passait en camel case mais      finalement non, pas assez de recul pour savoir si ca poserait encore plus de problèmes
+
 _Ce que tu comptes faire aujourd'hui:_
+
 - Des datamapper et le error handler et le controller wrapper
 
 **Cédric:**
 
 _Ce que tu as fait hier:_
+
 - construction du composant Club (contenu statique et CSS), desktop et mobile
+  
 _Les problèmes rencontrés:_
+
 - Problème VSC/Eslint : VSC enregistre automatiquement la séquence de fin ligne en LF alors qu'Eslint attend du CRLF
 - Solution non trouvée, en attendant je demande à Eslint d'ignorer l'erreur.
+
 _Ce que tu comptes faire aujourd'hui:_
+
 - Composant Club : image-club (logo) à conserver en vue mobile
 - Logique du composant Club avec Redux
 - Commencer un autre composant
-- 
+
 **Augustin:**
 
 _Ce que tu as fait hier:_
+
 - Veille pour découvrir et apprendre le fonctionnement de JWT (Jason Web Token)
 - Mise en place de JWT
 - Mise en place de la communication entre Front et Back du token.
@@ -301,3 +317,107 @@ _Les problèmes rencontrés:_
 _Ce que tu comptes faire aujourd'hui:_
 
 - poursuivres et finir ce qu'il reste à faire, et voir ce qui peut être fait
+
+### 28/07/2022 - Sprint 2 - Jour 13
+
+**Tom:**
+
+_Ce que tu as fait hier:_
+
+- form add user complet-
+- fontion pour delete des keys inutiles dans le json envoyé a l'api
+- recherche : pourquoi une valeur null par defaut dans le state (sur une valeur non numerique) bloque le render de React ?
+- ajout des messages toasts
+- recherche sur le dismount d'un composant en timeout
+- veille pour error joi en fr
+- veille sur l'animation dans React (framer, react-transition)
+
+_Les problèmes rencontrés:_
+
+- poster de la data compatible avec l'api
+- animation dans react
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- commencer les composants de gestion tournament
+- reflexion algo
+
+**Jonathan:**
+
+_Ce que tu as fait hier:_
+
+- Verifications et mise à jour de la DB
+- Amélioration du déploiement
+- Implémentation d'un gestionnaire de mail avec template HTML
+
+_Les problèmes rencontrés:_
+
+- J'ai toujours du mal à déployer, il me faut transformer le repo actuel en déplacant les fichiers serveurs à la racine et ca met le bazar sur git. J'ai eu aussi plusieurs probleme en créant le mail handler, des problemes d'email bloqué pour spam et aussi des bug de configuration en essayant de passer par de addons qui finalement était inutile.
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- Etudier les besoins au niveau des routes complexes
+- Réflechir aux algo de création de tournois
+- Voir la Doc swagger
+
+**Cédric:**
+
+_Ce que tu as fait hier:_
+
+- composant Member : logique qui permet d'afficher le profil d'un membre
+- Design composants Club, Members, Member
+- Logique composant Club (reducer, middleware...)
+
+_Les problèmes rencontrés:_
+
+- problème de récupération des données d'un menbre due au state initial => il ne fallait pas mettre 'null'
+- il faut probablement utiliser le state initial 'null' uniquement pour les valeurs numériques.
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- champs controlé "recherche d'un membre" dans le composant Members
+- composant Members : affichage conditionnel (uniquement si user = admin) du bouton 'ajouter un membre'
+- composant Members : afficher seulement les 'is_active'
+
+**Agustin:**
+
+_Ce que tu as fait hier:_
+
+- Révision de tous les controllers et datamappers : correction des erreurs et des incohérences de syntaxe
+- Utilisation de PGAdmin pour rechecker toute la BDD et apporter les modifications nécessaires.
+- Creation d’un nouveau deploy sur sqitch pour mettre à jour la BDD
+- Veille pour réussir à valider avec regex, sur postgres, un champ avec datatype integer. Je n’ai pas réussi à trouver la solution : décision de laisser le champ en question en integer.
+
+
+_Les problèmes rencontrés:_
+
+- Avec joi les champs vides qui viennent du front ne passent pas la validation. Nous avons le message d’erreur "must not be empty" Nous ajoutons allow("").
+- Erreur quand j’essaie de changer le datatype de text a integer, sur la BDD. L’erreur était provoquée par une contrainte, qu’il a fallu enlever avant de faire le changement. 
+- Problème pour faire fonctionner la regex de validation d’un champ number sur la BDD que j’ai pas réussie a résoudre.
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- Personnalisation des messages d'erreur sur joi
+- Reflexion sur la creation des routes complexes
+
+**Houceine**
+_Ce que tu as fait hier:_
+
+- Controller, datamapper, router, schema, on été fini normalement, V4 revert, swagger-doc, implementation dans certains router
+
+_Les problèmes rencontrés:_
+
+- V4 revert "SET DEFAULT NULL", "DROP NOT NULL", "SET DEFAULT FALSE"
+- Swagger-doc, implémentation de la doc, et des erreurs dans la creation, l'update, et le delete sur swagger
+- CREATE=> {
+  "code": 400,
+  "name": "SyntaxError",
+  "message": "Unexpected number in JSON at position 62"
+}
+- DELETE => "code": 500,
+            "name": "Internal-Error",
+            "message": "UPDATE ou DELETE sur la table « user » viole la contrainte de clé étrangère « team_has_user_user_id_fkey » de la table « team_has_user »"
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- Faire tous les router avec la doc swagger, et voir le problème CREATE, UPDATE DELETE
