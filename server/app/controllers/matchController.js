@@ -92,14 +92,12 @@ async function destroy(req, res) {
  */
  async function getAllByTournament(req, res) {
   const tournamentId = req.params.id;
-  const match = await matchDatamapper.findAllByTournament(tournamentId);
-  
-  const checkEmpty = match.length
+  const matchs = await matchDatamapper.findAllByTournament(tournamentId);
 
-  if (checkEmpty === 0) {
+  if (matchs.length === 0) {
     return res.json({message: "There is no match in this tournament"})
   }
-  return res.json(match);
+  return res.json(matchs);
 };
 
 module.exports = {
