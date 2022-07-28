@@ -7,6 +7,7 @@ function Members() {
   const dispatch = useDispatch();
   const user = useSelector((state) => (state.user));
   const ui = useSelector((state) => (state.interface));
+  const isAdmin = useSelector((state) => (state.user.isAdmin));
 
   useEffect(() => {
     dispatch({
@@ -18,6 +19,23 @@ function Members() {
     // console.log(user.members);
   }
 
+  const changeField = (value, input) => {
+    dispatch({
+      type: 'CHANGE_FIELD',
+      input,
+      value,
+    });
+  };
+
+  // fonction qui filtre les membres selon la recherche
+  // eslint-disable-next-line arrow-body-style
+  const filteredMembers = () => {
+    return user.members.filter((member) => (
+      member.firstname.toLowerCase().includes(user.searchMember)
+      || member.lastname.toLowerCase().includes(user.searchMember)
+    ));
+  };
+
   return (
     <main className="content members">
       <h1 className="title">Membres du club</h1>
@@ -25,16 +43,18 @@ function Members() {
       <div className="wrapper">
         <input
           className="members-search"
-          type="search"
-          value=""
+          type="text"
+          onChange={(evt) => changeField(evt.target.value, 'searchMember')}
           placeholder=" Rechercher un membre"
         />
+        {isAdmin && (
         <Link className="action-btn" to="/membres/ajouter-membres">
           <i className="fa fa-plus" aria-hidden="true" /> Ajouter un membre
         </Link>
+        )}
       </div>
       <ol className="members-list">
-        {user.members.map((member) => (
+        {filteredMembers().map((member) => (
           <li key={member.id}>
             <Link className="members-list-item" to={`/membres/${member.id}`}>
               <span className="members-name">
