@@ -18,6 +18,7 @@ const config = {
         uploads: {
             avatar: 'uploads/avatar',
             coverTournament: 'uploads/cover-tournament',
+            logoClub: 'uploads/logo-club',
         } 
     }
 }

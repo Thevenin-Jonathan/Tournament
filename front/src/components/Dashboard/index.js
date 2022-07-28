@@ -10,7 +10,7 @@ function Dashboard() {
   const isAdmin = useSelector((state) => (state.user.isAdmin));
   const user = useSelector((state) => (state.user));
   const club = useSelector((state) => (state.club));
-  const tournament = useSelector((state) => (state.tournament));
+  const tournaments = useSelector((state) => (state.tournament.tournaments));
 
   useEffect(() => {
     dispatch({
@@ -48,7 +48,7 @@ function Dashboard() {
     <main className="dashboard content">
 
       <Link to="/tableau-de-bord" className="dashboard-widget logo">
-        <img src={club.logo} alt="Logo Bayard Bad" />
+        <img src={`${config.path.uploads.logoClub}/${club.logo}`} alt="Logo Bayard Bad" />
       </Link>
 
       <Link to="/membres" className="dashboard-widget members">
@@ -59,7 +59,7 @@ function Dashboard() {
 
       <Link to="/tournois" className="dashboard-widget tournament">
         <i className="fa fa-trophy fa-2x widget-icon" />
-        <p className="tournament-count">{tournament.tournaments.length}</p>
+        <p className="tournament-count">{tournaments.length}</p>
         <p className="tournament-text">Tournois Archivés</p>
       </Link>
 
@@ -70,25 +70,19 @@ function Dashboard() {
       </Link>
 
       <div className="tournament-column">
-        {tournament.tournaments.map((tourn) => (
+        {tournaments.map((tournament) => (
           <TournamentCard
-            key={tourn.id}
-            name={tourn.title}
-            discipline={tourn.discipline_id}
+            key={tournament.id}
+            state={tournament.state_id}
+            name={tournament.title}
+            discipline={tournament.discipline_id}
             players={18}
             matchLeft={11}
-            slug={tourn.title}
-            cover={tourn.picture_url}
+            slug={tournament.title}
+            cover={`${config.path.uploads.coverTournament}/${tournament.picture_url}`}
           />
         ))}
-        {/* <TournamentCard
-          name="Tournoi des pros"
-          discipline="Double Mixte"
-          players={24}
-          matchLeft={6}
-          slug="tournoi-des-pros"
-          cover={tournamentCover}
-        /> */}
+
         {isAdmin && (
           <Link to="/tournois/creer-tournoi" className="button create-tournament-button">
             <i className="fa fa-trophy fa-2x tournament-icon" /> Organiser un <span>nouveau tournoi</span>
