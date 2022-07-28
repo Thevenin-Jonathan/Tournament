@@ -18,6 +18,6 @@ router.route("/:id")
     controllerWrapper(controller.update))
   .delete(controllerWrapper(controller.destroy));
 
-router.route("/:id/matchs").get(controllerWrapper(controller.getAllMatches));
+router.route("/:id/matches").get(controllerWrapper(controller.getAllMatches));
 
 module.exports = router;

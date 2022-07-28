@@ -2,16 +2,16 @@ const matchDatamapper = require("../datamappers/match");
 const { Api404Error } = require("../services/errorHandler");
 
 /**
- * Get all matchs from DB
+ * Get all matches from DB
  * 
  * ExpressMiddleware signature
  * @param {object} _ express request object (not used)
  * @param {object} res express response object
- * @returns {json} JSON response with all matchs
+ * @returns {json} JSON response with all matches
  */
 async function getAll(_, res) {
-  const matchs = await matchDatamapper.findAll();
-  return res.json(matchs);
+  const matches = await matchDatamapper.findAll();
+  return res.json(matches);
 };
 
 /**

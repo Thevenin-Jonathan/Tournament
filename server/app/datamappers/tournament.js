@@ -84,7 +84,7 @@ async function deleteOne(id) {
 }
 
 /**
- * Return all matchs by tournament_id from database
+ * Return all matches by tournament_id from database
  * @param {number} id match identifiant
  * @returns {object} match
  */
