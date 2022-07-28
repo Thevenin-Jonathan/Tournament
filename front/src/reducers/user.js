@@ -25,11 +25,11 @@ export const initialState = {
   addMemberemail: '',
   addMemberfirstname: '',
   addMemberlastname: '',
-  addMemberaddress: null,
+  addMemberaddress: '',
   addMemberbirthdate: '',
   addMemberplayerLicense: null,
-  addMembergenderId: 1,
-  addMemberphone: null,
+  addMembergenderId: '1',
+  addMemberphone: '',
 
   // state qui stocke la liste des membres
   members: [],
@@ -128,14 +128,13 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         addMemberemail: '',
-        addMemberavatar: '',
         addMemberfirstname: '',
         addMemberlastname: '',
         addMemberaddress: '',
         addMemberbirthdate: '',
         addMemberplayerLicense: null,
-        addMembergenderId: null,
-        addMemberphone: null,
+        addMembergenderId: '1',
+        addMemberphone: '',
       };
     default:
       return state;

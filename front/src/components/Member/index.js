@@ -24,7 +24,8 @@ function Member() {
   return (
     <main className="content member">
       <h1 className="title">{user.member.firstname} {user.member.lastname}</h1>
-      <div className="wrapper-card-stats">
+
+      <div className="wrapper">
         <div className="member-card">
           <h2 className="section-title">Profil</h2>
           <img className="avatar" src={user.member.url_avatar} alt={`${user.member.firstname} Avatar`} />
@@ -42,7 +43,7 @@ function Member() {
           <h2 className="section-title">Statistiques</h2>
         </div>
       </div>
-      <Link className="button" to="/membres">
+      <Link className="action-btn" to="/membres">
         <button type="button">
           <i className="fa fa-chevron-left" aria-hidden="true" />
           &nbsp;
