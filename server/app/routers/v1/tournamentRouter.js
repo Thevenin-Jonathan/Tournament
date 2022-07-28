@@ -19,6 +19,6 @@ router.route("/:id")
   .delete(controllerWrapper(controller.destroy));
 
 router.route("/:id/matches").get(controllerWrapper(controller.getAllMatches));
-router.route("/:id/matches/:teamId/teams").get(controllerWrapper(controller.getAllMatchesByTeam));
+router.route("/:id/teams/:teamId/matches").get(controllerWrapper(controller.getAllMatchesByTeam));
 
 module.exports = router;
