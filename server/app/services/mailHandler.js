@@ -7,7 +7,7 @@ const templates = require("./templates/index");
 const transporter = nodemailer.createTransport({
   host: "smtp.mailtrap.io",
   port: 2525,
-  secure: false,
+  secure: false, // true only for 465
   auth: {
     user: process.env.AUTH_USER_EMAIL,
     pass: process.env.AUTH_PWD_EMAIL
@@ -18,7 +18,7 @@ const transporter = nodemailer.createTransport({
  * Send email to user
  * @param {object} user user informations
  * @param {string} subject email subject
- * @param {("signup"|"recovery")} templateName template name
+ * @param {("signup"|"recovery")} templateName template key
  * @returns {object} return email send informations
  */
 async function sendEmail(user, subject, templateName) {

@@ -39,7 +39,7 @@ async function getOne(req, res) {
  * @param {object} res express response object
  * @returns {json} JSON response with the created user
  */
-async function create(req, res, next) {
+async function create(req, res) {
   const user = req.body;
 
   /** Verification: email already in use in DB? **/
@@ -58,7 +58,7 @@ async function create(req, res, next) {
   }
 
   /** Save password for email mw */
-  const { password } = user;
+  const { password } = user; //jonjon
 
   /** Password hash **/
   const saltRound = 10;
