@@ -1,8 +1,21 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
+
+const today = () => {
+  const date = new Date();
+  return date.toISOString().slice(0, 10);
+  // wanted : 2022-07-29
+};
 
 function AddTournamentForm() {
   const dispatch = useDispatch();
   const tournament = useSelector((state) => (state.tournament));
+  const redirectTo = useSelector((state) => (state.interface.redirectTo));
+
+  if (redirectTo) {
+    dispatch({ type: 'REDIRECT', value: null });
+    return <Navigate to={redirectTo} />;
+  }
 
   const changeField = (value, input) => {
     dispatch({
@@ -65,6 +78,7 @@ function AddTournamentForm() {
                 id="tournamanentDate"
                 value={tournament.tournamanentDate}
                 onChange={(evt) => changeField(evt.target.value, evt.target.name)}
+                min={today()}
               />
             </div>
 

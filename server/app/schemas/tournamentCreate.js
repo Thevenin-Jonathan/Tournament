@@ -1,7 +1,7 @@
 const joi = require("joi");
 
 module.exports = joi.object({
-  title: joi.string().min(1).required(),
+  title: joi.string().min(5).required(),
   date: joi.date().min(2).required(),
   description: joi.string().min(10),
   picture_url: joi.string(),

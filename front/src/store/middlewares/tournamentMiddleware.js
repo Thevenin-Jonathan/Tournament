@@ -64,6 +64,8 @@ const tournamentMiddleware = (store) => (next) => (action) => {
             },
           });
           store.dispatch({ type: 'CREATE_TOURNAMENT_SUCCESS', value: response.data });
+
+          store.dispatch({ type: 'REDIRECT', value: '/tableau-de-bord' });
         })
         .catch((error) => {
           store.dispatch({
