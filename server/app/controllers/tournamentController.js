@@ -121,6 +121,32 @@ async function destroy(req, res) {
   return res.json(matches);
 };
 
+  /**
+ * Update one tournament of a team into DB
+ * 
+ * ExpressMiddleware signature
+ * @param {object} req express request object
+ * @param {object} res express response object
+ * @returns {json} JSON response with the updated team
+ */
+   async function updateTeam(req, res) {
+    const {id, teamId} = req.params.id;
+    const {name} = req.body
+    const team = await teamDatamapper.findById(id);
+  
+    if (!team) {
+      throw new Api404Error("team does not exist in DB");
+    }
+
+    if (await teamDatamapper.findByName(name)) {
+      throw new ApiError("This name is already in use");
+    }
+
+    const updatedTeam = await teamDatamapper.updateOne(id, name)
+    return res.json(updatedTeam)
+  }
+
+
 module.exports = {
   getAll,
   getOne,
@@ -128,5 +154,6 @@ module.exports = {
   update,
   destroy,
   getAllMatches,
-  getAllMatchesByTeam
+  getAllMatchesByTeam,
+  updateTeam
 }
