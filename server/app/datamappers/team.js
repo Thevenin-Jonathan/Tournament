@@ -49,27 +49,10 @@ async function deleteOne(id) {
     return !!result.rowCount;
 };
 
-/** 
- * Update the tournament of one team
- * @param {number} - id of the tournament
- * @param {number} - id of the team 
- * @returns {Object} - team updated
-*/
-async function updateOne(tournamentId, id) {
-    const result = await pool.query(
-        `UPDATE "team" 
-        SET "tournament_id" = $1
-        WHERE "id" = $2
-        RETURNING *;`,[tournamentId, id]
-    );
-    return result.rows[0];
-  };
-
   module.exports = {
     findAll,
     findById,
     insertOne,
-    deleteOne,
-    updateOne
+    deleteOne
   };
 
