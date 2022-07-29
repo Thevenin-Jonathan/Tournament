@@ -401,6 +401,7 @@ _Ce que tu comptes faire aujourd'hui:_
 - Reflexion sur la creation des routes complexes
 
 **Houceine**
+
 _Ce que tu as fait hier:_
 
 - Controller, datamapper, router, schema, on été fini normalement, V4 revert, swagger-doc, implementation dans certains router
@@ -421,3 +422,105 @@ _Les problèmes rencontrés:_
 _Ce que tu comptes faire aujourd'hui:_
 
 - Faire tous les router avec la doc swagger, et voir le problème CREATE, UPDATE DELETE
+
+### 29/07/2022 - Sprint 2 - Jour 14
+
+**Tom:**
+
+_Ce que tu as fait hier:_
+
+- Note : route api user : renvoyer le mot de passe ?
+- Branchement du dashboard sur la db.
+- travail sur le composant TournamentCard
+- Ajout du reducer et middleware tournament.
+- Ajout de fonction de conversion en texte des genres/discipline/tournament state
+- Reflexion sur la maniere de recevoir les stats, gestion des stats ? ajout de champ en db, tournament winner ?
+- tentative de déploiement sur hebergeur non géré en github. raté.
+
+_Les problèmes rencontrés:_
+
+- tri sur tableau d'objet
+- comment traiter les réponses api (gestion des data sous forme d'id)
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- avancer sur ce qui touche a tournament
+
+**Jonathan:**
+
+_Ce que tu as fait hier:_
+
+- On a échangé avec l'équipe sur les routes qu'il nous restait à faire
+- J'ai fais un datamapper et controller stat, avec une grosse requete qui nous renvoie toutes les stats d'un joueur
+- Correction d'une PR avec des conflits qui m'a pris un peu de temps
+
+_Les problèmes rencontrés:_
+
+- Les conflits de merge, il y en a de plus en plus
+- La requete SQL, un peu eu du mal au départ avec les sous requetes, j'ai du fair eun peu de veille pour me rappeler de quelques notions
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- Des routes complexes
+- update la doc swagger
+- Algo de tournois et inscription
+
+**Cédric:**
+
+_Ce que tu as fait hier:_
+
+- logique du composant Club
+- Gestion du champs de recherche d'un membre (composant Members)
+- Afficher le bouton "Ajouter un membre" seulement si l'utilisateur est Admin
+- Design divers
+
+_Les problèmes rencontrés:_
+
+- intégrer une icone dans un input
+- logique Redux...
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- trier par ordre alphabétique la liste des membres
+- gérer l'affichage de la liste des membres actifs
+- ??? à voir selon les priorités
+
+**Agustin:**
+
+_Ce que tu as fait hier:_
+
+- Creation des routes supplementaires pour recuperer des informations des differentes tables
+- Modification des routers, controllers et datamappers pour faire functionner les nouvelles routes
+- Creation des requëtes et functions necessaires pour obtenir les informations necessaires pour les nouvelles routes
+
+_Les problèmes rencontrés:_
+
+- Comprenhension du functionnement des differentes tables et les interactions entre elles
+- Savoir à partir de quel contexte effectuer les requetes
+- Syntaxe des routes pour rester coherent
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- Finalisation des routes restantes à faire
+- Veuille sur swagger 
+
+**Houceine**
+
+_Ce que tu as fait hier:_
+
+- swagger-doc sur tous les routers
+- ORDER BY ajouter sur les findAll dans tous les datamapper
+
+_Les problèmes rencontrés:_
+ 
+- dans swagger-doc, j'ai mis "tag" au lieu de "tags" dans la doc, et problème de rangement dans le visuel
+
+- pas fonctionnelle à 100% quelques erreur lors des test PATCHS et CREATE notamment sur swagger
+talonne sdajouter clug
+- ajout de la colonne "winner_ido - ORDER BY ajouter en sur les f"indAll dans tous lesORDER BY ajouter en sur les findAll dans tous les swagger-doc sur tous les routers, pas fonctionnelle à 100% quelques erreur lors des test PATCHS et CREATE notamment
+
+_Ce que tu comptes faire a
+-et ce qu'il y a d'au"tre "à faireujourd'hui:_
+
+"" -ajouter une colonne slug
+-ajouter colonne winner_id
