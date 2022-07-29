@@ -29,12 +29,12 @@ INSERT INTO "state" ("name") VALUES
   ('started'),
   ('closed');
 
-INSERT INTO "tournament" ("title", "date", "description", "picture_url", "nb_playground", "player_limit", "discipline_id", "type_id", "state_id", "club_id") VALUES
-  ('Tournois simple homme', '01/08/2022', 'Un tournoi en solo uniquement pour les hommes', '/images/t-solo-homme', '6', '25', '1', '1', '1', '1'),
-  ('Tournois simple femme', '08/08/2022', 'Un tournoi en solo uniquement pour les femmes', '/images/t-solo-femme', '7', null, '2', '1', '1', '1'),
-  ('Tournois double homme', '23/07/2022', 'Un tournoi en duo uniquement pour les hommes', '/images/t-duo-homme', '7', '30', '3', '1', '2', '1'),
-  ('Tournois double femme', '19/07/2022', 'Un tournoi en duo uniquement pour les hommes', '/images/t-duo-femme', '7', null, '4', '1', '3', '1'),
-  ('Tournois double mixe', '01/06/2022', 'Un tournoi en duo pour les hommes et les femmes', '/images/t-duo-mix', '5', '25', '5', '1', '4', '1');
+INSERT INTO "tournament" ("title","slug", "date", "description", "picture_url", "nb_playground", "player_limit", "discipline_id", "type_id", "state_id", "club_id") VALUES
+  ('Tournois simple homme', 'Tournois-simple-homme', '01/08/2022', 'Un tournoi en solo uniquement pour les hommes', '/images/t-solo-homme', '6', '25', '1', '1', '1', '1'),
+  ('Tournois simple femme', 'Tournois-simple-femme', '08/08/2022', 'Un tournoi en solo uniquement pour les femmes', '/images/t-solo-femme', '7', null, '2', '1', '1', '1'),
+  ('Tournois double homme', 'Tournois-double-homme', '23/07/2022', 'Un tournoi en duo uniquement pour les hommes', '/images/t-duo-homme', '7', '30', '3', '1', '2', '1'),
+  ('Tournois double femme', 'Tournois-double-femme', '19/07/2022', 'Un tournoi en duo uniquement pour les hommes', '/images/t-duo-femme', '7', null, '4', '1', '3', '1'),
+  ('Tournois double mixe', 'Tournois-double-mixe', '01/06/2022', 'Un tournoi en duo pour les hommes et les femmes', '/images/t-duo-mix', '5', '25', '5', '1', '4', '1');
 
 INSERT INTO "user" ("firstname", "lastname", "address", "birthdate", "gender_id", "is_active", "email", "password", "url_avatar", "player_license", "club_id", "role_id") VALUES
   ('Tom', 'Roches', '3 rue de par la 38530 pontcharra', '25/12/1950', '1', true, 'tomroche@gmail.com', '$2b$10$L9dYfseN3V7dz1eX9yP7t.fkqTFk8bSN.tTrMlsdTYUacU9cD3HfW', '/nisi/at/nibh.jpg', '355466604', '1', '1'),
