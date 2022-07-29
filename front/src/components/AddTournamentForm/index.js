@@ -12,7 +12,20 @@ function AddTournamentForm() {
     });
   };
 
-  const handleNewUserSubmit = (evt) => {
+  const changePicture = (evt, value, input) => {
+    dispatch({
+      type: 'CHANGE_FIELD_TOURNAMENT',
+      input,
+      value,
+    });
+    dispatch({
+      type: 'CHANGE_FIELD_TOURNAMENT',
+      input: 'tournamentPicturePreview',
+      value: URL.createObjectURL(evt.target.files[0]),
+    });
+  };
+
+  const handleNewTournamentSubmit = (evt) => {
     evt.preventDefault();
     dispatch({
       type: 'CREATE_TOURNAMENT',
@@ -24,10 +37,11 @@ function AddTournamentForm() {
       <h1 className="title">Organiser un nouveau tournoi</h1>
 
       <h2>Etape 1/4 </h2>
-      <form className="single-add" onSubmit={handleNewUserSubmit}>
+      <form className="single-add" onSubmit={handleNewTournamentSubmit}>
+
+        <h3>Parametres du tournoi</h3>
 
         <div className="row">
-
           <div className="col">
 
             <div className="input-line">
@@ -57,24 +71,34 @@ function AddTournamentForm() {
             <div className="input-line">
               <label htmlFor="tournamentPictureUrl">Illustration du tournoi </label>
               <input
-                type="text"
+                type="file"
                 name="tournamentPictureUrl"
                 id="tournamentPictureUrl"
-                value={tournament.tournamentPictureUrl}
-                onChange={(evt) => changeField(evt.target.value, evt.target.name)}
+                onChange={(evt) => changePicture(evt, evt.target.value, evt.target.name)}
               />
             </div>
 
-            <div className="input-line">
-              <label htmlFor="tournamentDescription">Description</label>
-              <textarea
-                name="tournamentDescription"
-                id="tournamentDescription"
-                value={tournament.tournamentDescription}
-                onChange={(evt) => changeField(evt.target.value, evt.target.name)}
-              />
-            </div>
+          </div> {/* col */}
 
+          <div className="col img-preview">
+            { tournament.tournamentPicturePreview
+              && <img src={tournament.tournamentPicturePreview} alt="Illustration du tournoi" />}
+          </div> {/* /col */}
+
+        </div>{/* /row */}
+
+        <div className="input-line">
+          <label htmlFor="tournamentDescription">Description</label>
+          <textarea
+            name="tournamentDescription"
+            id="tournamentDescription"
+            value={tournament.tournamentDescription}
+            onChange={(evt) => changeField(evt.target.value, evt.target.name)}
+          />
+        </div>
+
+        <div className="row">
+          <div className="col">
             <div className="input-line">
               <label htmlFor="tournamentType">Type</label>
               <select
@@ -88,7 +112,9 @@ function AddTournamentForm() {
                 <option value="3" disabled>Phase de poule</option>
               </select>
             </div>
+          </div> {/* /col */}
 
+          <div className="col">
             <div className="input-line">
               <label htmlFor="tournamentDiscipline">Discipline</label>
               <select
@@ -104,7 +130,9 @@ function AddTournamentForm() {
                 <option value="5">Double Mixte</option>
               </select>
             </div>
+          </div> {/* col */}
 
+          <div className="col">
             <div className="input-line">
               <label htmlFor="tournamentNbPlayground">Nombre de terrains</label>
               <input
@@ -115,7 +143,9 @@ function AddTournamentForm() {
                 onChange={(evt) => changeField(evt.target.value, evt.target.name)}
               />
             </div>
+          </div> {/* /col */}
 
+          <div className="col">
             <div className="input-line">
               <label htmlFor="tournamentPlayerLimit">Limite de joueurs</label>
               <input
@@ -126,8 +156,15 @@ function AddTournamentForm() {
                 onChange={(evt) => changeField(evt.target.value, evt.target.name)}
               />
             </div>
+          </div> {/* /col */}
+        </div>{/* /row */}
 
-            <div className="input-line">
+        <div className="row">
+          <div className="col align-right">
+            <div
+              className="input-line checkbox-line"
+              title="Cochez cette case pour que tous les adhérent soient notifiés par email de l'ouverture d'un nouveau tournoi"
+            >
               <input
                 type="checkbox"
                 name="tournamentNotification"
@@ -135,18 +172,20 @@ function AddTournamentForm() {
                 onChange={(evt) => changeField(evt.target.checked, evt.target.name)}
                 checked={tournament.tournamentNotification}
               />
-              <label htmlFor="tournamentNotification">Notifier les adhérents</label>
+              <label htmlFor="tournamentNotification">Notifier les adhérents </label>
+              <i
+                className="fa fa-question-circle"
+                aria-hidden="true"
+              />
             </div>
 
             <div className="input-line">
-              <button type="submit" className="action-btn pull-right">
+              <button type="submit" className="action-btn ">
                 <i className="fa fa-plus" aria-hidden="true" /> Créer ce tournoi
               </button>
             </div>
-
-          </div> {/* fin de col */}
-
-        </div>
+          </div>{/* /col */}
+        </div>{/* /row */}
 
       </form>
     </main>

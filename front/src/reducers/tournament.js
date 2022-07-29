@@ -12,6 +12,7 @@ export const initialState = {
   tournamanentDate: today(),
   tournamentDescription: '',
   tournamentPictureUrl: '',
+  tournamentPicturePreview: null,
   tournamentNbPlayground: 7,
   tournamentPlayerLimit: null,
   tournamentType: 1,
@@ -30,6 +31,20 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         tournaments: action.value,
+      };
+    case 'CREATE_TOURNAMENT_SUCCESS':
+      return {
+        ...state,
+        tournamanentName: '',
+        tournamanentDate: today(),
+        tournamentDescription: '',
+        tournamentPictureUrl: '',
+        tournamentPicturePreview: null,
+        tournamentNbPlayground: 7,
+        tournamentPlayerLimit: null,
+        tournamentType: 1,
+        tournamentDiscipline: 1,
+        tournamentNotification: false,
       };
 
     default:
