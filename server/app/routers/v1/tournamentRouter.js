@@ -20,10 +20,6 @@ router.route("/:id")
 
 router.route("/:id/matches").get(controllerWrapper(controller.getAllMatches));
 
-router.route("/:id/teams/:teamId/matches").get(controllerWrapper(controller.getAllMatchesByTeam)); 
-
 router.route("/:id/teams/").get(controllerWrapper(controller.getAllTeams)); 
-
-//recuperer toutes les teams d'un tournoi ()
 
 module.exports = router;
