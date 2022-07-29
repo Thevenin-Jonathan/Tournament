@@ -100,4 +100,3 @@ async function findAllUsers(id) {
     findAllMatches,
     findAllUsers
   };
-

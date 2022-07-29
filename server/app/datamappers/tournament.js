@@ -93,21 +93,6 @@ async function deleteOne(id) {
   return result.rows;
 };
 
-/**
- * Return all matches of a team by tournament_id from database
- * @param {number} id match identifiant
- * @param {number} teamId team identifiant
- * @returns {object} match
- */
- async function findAllMatchesByTeam(id, teamId) {
-  const result = await pool.query(
-    `SELECT team_id, match_id, tournament_id FROM "match_has_team" 
-    JOIN "team" ON team.id = match_has_team.team_id
-    WHERE team.tournament_id = $1
-    AND team.id = $2`, [id, teamId]);
-  return result.rows;
-};
-
 //recuperer toutes les teams d'un tournoi
 /**
  * Return all teams of a tournament
@@ -128,6 +113,5 @@ module.exports = {
   updateOne,
   deleteOne,
   findAllMatches,
-  findAllMatchesByTeam,
   findAllTeams
   };
