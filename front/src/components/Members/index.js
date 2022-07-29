@@ -32,7 +32,7 @@ function Members() {
     });
   };
 
-  // fonction qui filtre les membres selon la recherche
+  // member search filter
   // eslint-disable-next-line arrow-body-style
   const filteredMembers = () => {
     return user.members.filter((member) => (
@@ -40,6 +40,12 @@ function Members() {
       || member.lastname.toLowerCase().includes(user.searchMember)
     ));
   };
+
+  // members list sorted by lastname
+  // /!\ localeCompare() only works with strings
+  const sortedfilteredMembers = filteredMembers().sort(
+    (a, b) => a.lastname.localeCompare(b.lastname),
+  );
 
   return (
     <main className="content members">
@@ -59,7 +65,7 @@ function Members() {
         )}
       </div>
       <ol className="members-list">
-        {filteredMembers().map((member) => (
+        {sortedfilteredMembers.map((member) => (
           <li key={member.id}>
             <Link className="members-list-item" to={`/membres/${member.id}`}>
               <span className="members-name">
