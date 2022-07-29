@@ -47,6 +47,15 @@ function Members() {
     (a, b) => a.lastname.localeCompare(b.lastname),
   );
 
+  // format phone numbers function
+  // eslint-disable-next-line arrow-body-style
+  const toFormatPhoneNumber = (phoneNumber) => {
+    if (phoneNumber !== null) {
+      return phoneNumber.replace(/(.{2})(?=.)/g, '$1 ');
+    }
+    return null;
+  };
+
   return (
     <main className="content members">
       <h1 className="title">Membres du club</h1>
@@ -73,7 +82,7 @@ function Members() {
               </span>
               <span className="members-gender">{genderText(member.gender_id)}</span>
               <span className="members-email">{member.email}</span>
-              <span className="members-phone">{member.phone}</span>
+              <span className="members-phone">{toFormatPhoneNumber(member.phone)}</span>
               <button type="button" className="list-item-btn">
                 <i className="fa fa-pencil" aria-hidden="true" />
               </button>
