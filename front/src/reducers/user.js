@@ -31,6 +31,8 @@ export const initialState = {
   addMembergenderId: '1',
   addMemberphone: '',
 
+  // champs contrôlé search member
+  searchMember: '',
   // state qui stocke la liste des membres
   members: [],
   // state qui stocke un membre

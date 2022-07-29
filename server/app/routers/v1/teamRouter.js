@@ -11,10 +11,7 @@ router.route("/")
     controllerWrapper(controller.create));
 
 router.route("/:id")
-  .get(controllerWrapper(controller.getOne))
-  .patch(
-    validationWrapper(createUpdateSchema),
-    controllerWrapper(controller.update));
+  .get(controllerWrapper(controller.getOne));
 
 router.route("/:id/matches").get(controllerWrapper(controller.getAllMatches));
 router.route("/:id/users").get(controllerWrapper(controller.getAllUsers));

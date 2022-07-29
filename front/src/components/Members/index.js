@@ -7,6 +7,7 @@ function Members() {
   const dispatch = useDispatch();
   const user = useSelector((state) => (state.user));
   const ui = useSelector((state) => (state.interface));
+  const isAdmin = useSelector((state) => (state.user.isAdmin));
 
   useEffect(() => {
     dispatch({
@@ -14,9 +15,46 @@ function Members() {
     });
   }, []);
 
+  // supprime le résultat de la recherche searchMember
+  useEffect(() => {
+    user.searchMember = '';
+  }, [user.searchMember]);
+
   if (!ui.isLoading) {
     // console.log(user.members);
   }
+
+  const changeField = (value, input) => {
+    dispatch({
+      type: 'CHANGE_FIELD',
+      input,
+      value,
+    });
+  };
+
+  // member search filter
+  // eslint-disable-next-line arrow-body-style
+  const filteredMembers = () => {
+    return user.members.filter((member) => (
+      member.firstname.toLowerCase().includes(user.searchMember.toLowerCase())
+      || member.lastname.toLowerCase().includes(user.searchMember.toLowerCase())
+    ));
+  };
+
+  // members list sorted by lastname
+  // /!\ localeCompare() only works with strings
+  const sortedfilteredMembers = filteredMembers().sort(
+    (a, b) => a.lastname.localeCompare(b.lastname),
+  );
+
+  // format phone numbers function
+  // eslint-disable-next-line arrow-body-style
+  const toFormatPhoneNumber = (phoneNumber) => {
+    if (phoneNumber !== null) {
+      return phoneNumber.replace(/(.{2})(?=.)/g, '$1 ');
+    }
+    return null;
+  };
 
   return (
     <main className="content members">
@@ -25,16 +63,18 @@ function Members() {
       <div className="wrapper">
         <input
           className="members-search"
-          type="search"
-          value=""
-          placeholder=" Rechercher un membre"
+          type="text"
+          onChange={(evt) => changeField(evt.target.value, 'searchMember')}
+          placeholder="Rechercher un membre"
         />
+        {isAdmin && (
         <Link className="action-btn" to="/membres/ajouter-membres">
           <i className="fa fa-plus" aria-hidden="true" /> Ajouter un membre
         </Link>
+        )}
       </div>
       <ol className="members-list">
-        {user.members.map((member) => (
+        {sortedfilteredMembers.map((member) => (
           <li key={member.id}>
             <Link className="members-list-item" to={`/membres/${member.id}`}>
               <span className="members-name">
@@ -42,7 +82,7 @@ function Members() {
               </span>
               <span className="members-gender">{genderText(member.gender_id)}</span>
               <span className="members-email">{member.email}</span>
-              <span className="members-phone">{member.phone}</span>
+              <span className="members-phone">{toFormatPhoneNumber(member.phone)}</span>
               <button type="button" className="list-item-btn">
                 <i className="fa fa-pencil" aria-hidden="true" />
               </button>
