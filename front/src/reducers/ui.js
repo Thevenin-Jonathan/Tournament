@@ -6,6 +6,7 @@ export const initialState = {
     // { id: 0, type: 'success', message: 'coucou' },
     // { id: 1, type: 'error', message: 'bouh!' },
   ],
+  redirectTo: null,
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -43,6 +44,11 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         toasts: state.toasts.filter((toast) => toast.id !== action.toastId),
+      };
+    case 'REDIRECT':
+      return {
+        ...state,
+        redirectTo: action.value,
       };
 
     default:
