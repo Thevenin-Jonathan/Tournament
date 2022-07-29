@@ -129,9 +129,9 @@ async function destroy(req, res) {
  * @param {object} res express response object
  * @returns {json} JSON response with all teams
  */
- async function getAllTeamsByTournament(req, res) {
+ async function getAllTeams(req, res) {
   const id = req.params.id;
-  const tournament = await tournamentDatamapper.getAllTeams(id);
+  const tournament = await tournamentDatamapper.findAllTeams(id);
   return res.json(tournament);
 };
 
@@ -143,5 +143,5 @@ module.exports = {
   destroy,
   getAllMatches,
   getAllMatchesByTeam,
-  getAllTeamsByTournament
+  getAllTeams
 }

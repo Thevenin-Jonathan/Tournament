@@ -114,7 +114,7 @@ async function deleteOne(id) {
  * @param {number} id tournament identifiant
  * @returns {object} teams
  */
- async function getAllTeams(id) {
+ async function findAllTeams(id) {
   const result = await pool.query(`SELECT * FROM "team" WHERE tournament_id = $1
   `, [id]);
   return result.rows;
@@ -129,5 +129,5 @@ module.exports = {
   deleteOne,
   findAllMatches,
   findAllMatchesByTeam,
-  getAllTeams
+  findAllTeams
   };
