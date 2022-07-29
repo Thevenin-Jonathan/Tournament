@@ -6,7 +6,7 @@ import { genderText } from 'src/utils';
 function Members() {
   const dispatch = useDispatch();
   const user = useSelector((state) => (state.user));
-  const ui = useSelector((state) => (state.interface));
+  // const ui = useSelector((state) => (state.interface));
   const isAdmin = useSelector((state) => (state.user.isAdmin));
 
   useEffect(() => {
@@ -15,14 +15,9 @@ function Members() {
     });
   }, []);
 
-  // supprime le résultat de la recherche searchMember
-  useEffect(() => {
-    user.searchMember = '';
-  }, [user.searchMember]);
-
-  if (!ui.isLoading) {
-    // console.log(user.members);
-  }
+  // if (!ui.isLoading) {
+  //   console.log(user.members);
+  // }
 
   const changeField = (value, input) => {
     dispatch({
@@ -64,6 +59,7 @@ function Members() {
         <input
           className="members-search"
           type="text"
+          value={user.searchMember}
           onChange={(evt) => changeField(evt.target.value, 'searchMember')}
           placeholder="Rechercher un membre"
         />
