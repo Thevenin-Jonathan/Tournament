@@ -36,8 +36,8 @@ function Members() {
   // eslint-disable-next-line arrow-body-style
   const filteredMembers = () => {
     return user.members.filter((member) => (
-      member.firstname.toLowerCase().includes(user.searchMember)
-      || member.lastname.toLowerCase().includes(user.searchMember)
+      member.firstname.toLowerCase().includes(user.searchMember.toLowerCase())
+      || member.lastname.toLowerCase().includes(user.searchMember.toLowerCase())
     ));
   };
 
