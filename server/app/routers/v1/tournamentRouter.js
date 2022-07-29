@@ -18,4 +18,8 @@ router.route("/:id")
     controllerWrapper(controller.update))
   .delete(controllerWrapper(controller.destroy));
 
+router.route("/:id/matches").get(controllerWrapper(controller.getAllMatches));
+
+router.route("/:id/teams/").get(controllerWrapper(controller.getAllTeams)); 
+
 module.exports = router;

@@ -62,9 +62,39 @@ async function destroy(req, res) {
   return res.status(204).json();
 };
 
+/**
+ * Get all matches
+ * 
+ * ExpressMiddleware signature
+ * @param {object} req express request object
+ * @param {object} res express response object
+ * @returns {json} JSON response with all matches
+ */
+ async function getAllMatches(req, res) {
+  const id = req.params.id;
+  const matches = await teamDatamapper.findAllMatches(id);
+  return res.json(matches);
+};
+
+/**
+ * Get all users
+ * 
+ * ExpressMiddleware signature
+ * @param {object} req express request object
+ * @param {object} res express response object
+ * @returns {json} JSON response with all users
+ */
+ async function getAllUsers(req, res) {
+  const id = req.params.id;
+  const matches = await teamDatamapper.findAllUsers(id);
+  return res.json(matches);
+};
+
 module.exports = {
   getAll,
   getOne,
   create,
-  destroy
+  destroy,
+  getAllMatches,
+  getAllUsers
 }
