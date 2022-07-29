@@ -108,6 +108,19 @@ async function deleteOne(id) {
   return result.rows;
 };
 
+//recuperer toutes les teams d'un tournoi
+/**
+ * Return all teams of a tournament
+ * @param {number} id tournament identifiant
+ * @returns {object} teams
+ */
+ async function getAllTeams(id) {
+  const result = await pool.query(`SELECT * FROM "team" WHERE tournament_id = $1
+  `, [id]);
+  return result.rows;
+};
+
+
 module.exports = {
   findAll,
   findById,
@@ -115,6 +128,6 @@ module.exports = {
   updateOne,
   deleteOne,
   findAllMatches,
-  findAllMatchesByTeam
-  
-};
+  findAllMatchesByTeam,
+  getAllTeams
+  };

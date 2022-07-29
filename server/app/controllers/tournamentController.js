@@ -121,6 +121,20 @@ async function destroy(req, res) {
   return res.json(matches);
 };
 
+/**
+ * Get all teams of a tournament
+ * 
+ * ExpressMiddleware signature
+ * @param {object} req express request object
+ * @param {object} res express response object
+ * @returns {json} JSON response with all teams
+ */
+ async function getAllTeamsByTournament(req, res) {
+  const id = req.params.id;
+  const tournament = await tournamentDatamapper.getAllTeams(id);
+  return res.json(tournament);
+};
+
 module.exports = {
   getAll,
   getOne,
@@ -128,5 +142,6 @@ module.exports = {
   update,
   destroy,
   getAllMatches,
-  getAllMatchesByTeam  
+  getAllMatchesByTeam,
+  getAllTeamsByTournament
 }
