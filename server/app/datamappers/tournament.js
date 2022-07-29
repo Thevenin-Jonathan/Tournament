@@ -108,24 +108,6 @@ async function deleteOne(id) {
   return result.rows;
 };
 
-// | /api/tournament/:id/team/:id | PATCH | mettre à jour une team| renvoi une team modifié
-
-/** 
- * Update the tournament of one team 
- * @param {number} - id of the tournament
- * @param {number} - id of the team 
- * @returns {Object} - team updated
-*/
-async function updateOneTeam(id, teamId) {
-  const result = await pool.query(
-      `UPDATE "team" 
-      SET "tournament_id" = $1
-      WHERE "team_id" = $2
-      RETURNING *;`,[id, teamId]
-  );
-  return result.rows[0];
-};
-
 module.exports = {
   findAll,
   findById,
@@ -133,6 +115,6 @@ module.exports = {
   updateOne,
   deleteOne,
   findAllMatches,
-  findAllMatchesByTeam,
-  updateOneTeam
+  findAllMatchesByTeam
+  
 };
