@@ -708,42 +708,74 @@ a {
 }
 
 .profil {
-  &-content {
+  .wrapper {
     display: flex;
-      @media only screen and (max-width: 810px) {
-          flex-direction: column;
-      }
-    }
-  
-  &-infos {
-    display: flex;
-    width: 65%;
-    background-color: var(--main-color);
-    border-radius: 10px;
-    padding: 1rem;
+    justify-content: space-between;
     @media only screen and (max-width: 810px) {
-      width: 100%;
-    }
-    @media only screen and (max-width: 450px) {
       flex-direction: column;
     }
   }
-
-  &-image {
-    width: 7rem;
-    height: 7rem;
-    background-color: var(--bg-color);
-    margin: 0.5rem;
+  .section-title {
+    color: var(--emphase-color);
+    font-size: 2rem;
+    padding-bottom: 1rem;
+  }
+  .infos, .stats {
+    span {
+      color: var(--ligth-color-text);
+    }
+    display: flex;
+    flex-direction: column;
+    background-color: var(--main-color);
+    padding: 2rem;
+    margin-bottom: 1rem;
     border-radius: var(--border-radius);
+    min-height: 10rem;
+    width: 49%;
+    @media only screen and (max-width: 810px) {
+      width: 100%;
+    }
   }
-
-  &-stats {
-    padding: 1rem;
+  .avatar {
+    background-color: blue;
+    width: 8rem;
+    height: 10rem;
   }
-
+  .infos {
+    span {
+      padding-top: 0.5rem;
+    }
+  }
+  .stats {
+    li {
+      flex-direction: row;
+    }
+  }
   li {
-    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    color: var(--emphase-color);
+    padding: 0.8rem 0;
   }
+  .action-btn {
+    text-align: center;
+    width: auto!important;
+    background-color: transparent;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    border: solid var(--border-size) var(--emphase-color);
+    font-weight: var(--black);
+    font-size: 1.2rem;
+    color: var(--emphase-color);
+    transition: .2s cubic-bezier(.82,.21,.1,1.02);
+    &:hover {
+      background-color: var(--emphase-color);
+      color: var(--ligth-color-text);
+    }
+    @media only screen and (max-width: 1100px) {
+      width: 100%!important;
+    }
+  } 
 }
 
 // 404
