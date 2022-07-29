@@ -5,7 +5,7 @@ const pool = require("../config/database");
  * @returns {Object[]} type
  */
 async function findAll() {
-    const result = await pool.query(`SELECT * FROM "type"`);
+    const result = await pool.query(`SELECT * FROM "type" ORDER BY "id" ASC`);
     return result.rows;
 };
 

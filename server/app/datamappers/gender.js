@@ -5,9 +5,7 @@ const pool = require("../config/database");
  * @returns {Object[]} - the list of all genders
 */
 async function findAll() {
-    const result = await pool.query(
-        `SELECT * FROM "gender"`
-    );
+    const result = await pool.query(`SELECT * FROM "gender" ORDER BY "id" ASC`);
     return result.rows;
 };
 

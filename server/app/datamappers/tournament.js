@@ -6,7 +6,7 @@ const debug = require("debug")("dm-tournament")
  * @returns {tournaments[]} tournaments
  */
 async function findAll() {
-  const result = await pool.query(`SELECT * FROM "tournament"`);
+  const result = await pool.query(`SELECT * FROM "tournament" ORDER BY "id" ASC`);
   return result.rows;
 }
 
