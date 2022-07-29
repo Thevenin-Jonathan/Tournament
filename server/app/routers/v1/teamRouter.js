@@ -16,6 +16,7 @@ router.route("/:id")
     validationWrapper(createUpdateSchema),
     controllerWrapper(controller.update))
 
+router.route("/:id/matches").get(controllerWrapper(controller.getAllMatches))
 
 module.exports = router;
 
