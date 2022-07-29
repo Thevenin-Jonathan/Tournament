@@ -15,6 +15,7 @@ import Tournaments from '../Tournaments';
 import Error from '../Error';
 import LoginForm from '../LoginForm';
 import Profil from '../Profil';
+import UpdateProfil from '../UpdateProfil';
 import Members from '../Members';
 import Member from '../Member';
 // eslint-disable-next-line no-unused-vars
@@ -91,6 +92,7 @@ function App() {
         <Route path="/membres" element={<Members />} />
         <Route path="/membres/:id" element={<Member />} />
         <Route path="/profil" element={<Profil />} />
+        <Route path="/modifier-profil" element={<UpdateProfil />} />
         <Route path="/aide" element={<Help />} />
         {isAdmin && (
           <>
