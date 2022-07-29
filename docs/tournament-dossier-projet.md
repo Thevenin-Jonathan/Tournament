@@ -96,7 +96,6 @@ Les utilisateurs seront les gestionnaires de club et les adhérents du club.
 | /api/tournament/:id/match/:id | PATCH | mettre à jour le match | renvoi un match à jour
 | /api/tournament/:id/team/ | GET | récuperer toutes les teams d'un tournoi | renvoi les teams du tournoi avec ces joueurs
 | /api/tournament/:id/team/:id | PATCH | mettre à jour une team| renvoi une team modifié
-| /api/tournament/:id/team/:id/match | GET | récupere tous les matchs d'une team | renvoi les matchs d'une team
 | /api/user| GET | Recupèrer la liste des membres | Liste des membres
 | /api/user | POST | Ajouter un membre | Membre crée
 | /api/user/:id | PATCH | Modifie un membre | Membre modifier

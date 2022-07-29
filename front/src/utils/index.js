@@ -1,10 +1,74 @@
-// Display gender in text
+// return role in text
+const roleText = (roleId) => {
+  switch (roleId) {
+    case 1:
+      return 'admin';
+    case 2:
+      return 'member';
+    default:
+      return 'undefined';
+  }
+};
+
+// return gender in text
 const genderText = (genderId) => {
   switch (genderId) {
     case 1:
       return 'Homme';
     case 2:
       return 'Femme';
+    default:
+      return 'undefined';
+  }
+};
+
+// return tournament state in text
+const tournamentStateText = (tournamentStateId) => {
+  switch (tournamentStateId) {
+    case 1:
+      return 'Ouvert';
+    case 2:
+      return 'Construit';
+    case 3:
+      return 'En cours';
+    case 4:
+      return 'Archivé';
+    default:
+      return 'undefined';
+  }
+};
+
+// return discipline in full text
+const disciplineText = (disciplineId) => {
+  switch (disciplineId) {
+    case 1:
+      return 'Simple Homme';
+    case 2:
+      return 'Simple Dame';
+    case 3:
+      return 'Double Homme';
+    case 4:
+      return 'Double Dame';
+    case 5:
+      return 'Double Mixte';
+    default:
+      return 'undefined';
+  }
+};
+
+// return discipline in abbr
+const disciplineShortText = (disciplineId) => {
+  switch (disciplineId) {
+    case 1:
+      return 'SH';
+    case 2:
+      return 'SD';
+    case 3:
+      return 'DH';
+    case 4:
+      return 'DD';
+    case 5:
+      return 'DX';
     default:
       return 'undefined';
   }
@@ -48,5 +112,11 @@ const deleteNullOrFalsyKeyInObject = (obj) => {
 };
 
 export {
-  genderText, dateFr, deleteNullOrFalsyKeyInObject,
+  roleText,
+  genderText,
+  tournamentStateText,
+  disciplineText,
+  disciplineShortText,
+  dateFr,
+  deleteNullOrFalsyKeyInObject,
 };
