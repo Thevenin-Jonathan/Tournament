@@ -79,7 +79,7 @@ function Dashboard() {
             players={18}
             matchLeft={11}
             slug={tournament.title}
-            cover={`${config.path.uploads.coverTournament}/${tournament.picture_url}`}
+            cover={tournament.picture_url}
           />
         ))}
 
