@@ -72,8 +72,8 @@ async function destroy(req, res) {
  */
  async function getAllMatches(req, res) {
   const id = req.params.id;
-  const team = await teamDatamapper.findAllMatches(id);
-  return res.json(team);
+  const matches = await teamDatamapper.findAllMatches(id);
+  return res.json(matches);
 };
 
 module.exports = {
