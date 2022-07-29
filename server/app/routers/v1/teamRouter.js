@@ -17,6 +17,7 @@ router.route("/:id")
     controllerWrapper(controller.update))
 
 router.route("/:id/matches").get(controllerWrapper(controller.getAllMatches))
+router.route("/:id/users").get(controllerWrapper(controller.getAllUsers))
 
 module.exports = router;
 

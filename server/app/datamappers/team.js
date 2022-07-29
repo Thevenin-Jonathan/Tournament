@@ -78,12 +78,26 @@ async function findAllMatches(id) {
     return result.rows;
 };
 
+/** 
+ * Get and return all the matches of a team
+ * @param {number} - id of the team
+ * @returns {Object} - all matches
+*/
+async function findAllUsers(id) {
+    const result = await pool.query(
+        `SELECT * FROM team_has_user
+        WHERE team_id = $1;`,[id]
+    );
+    return result.rows;
+};
+
   module.exports = {
     findAll,
     findById,
     insertOne,
     deleteOne,
     updateOne,
-    findAllMatches
+    findAllMatches,
+    findAllUsers
   };
 

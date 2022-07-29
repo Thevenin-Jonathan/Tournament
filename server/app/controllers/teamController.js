@@ -76,10 +76,25 @@ async function destroy(req, res) {
   return res.json(matches);
 };
 
+/**
+ * Get all users
+ * 
+ * ExpressMiddleware signature
+ * @param {object} req express request object
+ * @param {object} res express response object
+ * @returns {json} JSON response with all users
+ */
+ async function getAllUsers(req, res) {
+  const id = req.params.id;
+  const matches = await teamDatamapper.findAllUsers(id);
+  return res.json(matches);
+};
+
 module.exports = {
   getAll,
   getOne,
   create,
   destroy,
-  getAllMatches
+  getAllMatches,
+  getAllUsers
 }
