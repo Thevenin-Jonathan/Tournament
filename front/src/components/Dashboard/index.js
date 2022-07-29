@@ -41,6 +41,10 @@ function Dashboard() {
     ));
   };
 
+  const tournamentsFilter = (tournamentState) => tournaments.filter((tournament) => (
+    tournament.state_id === tournamentState
+  ));
+
   // const tournamentCover = `${config.path.uploads.coverTournament}/cover-tournament-01.jpg`;
   // import clublogo from 'src/assets/logo-bayard-bad-blanc.png';
 
@@ -70,7 +74,14 @@ function Dashboard() {
       </Link>
 
       <div className="tournament-column">
-        {tournaments.map((tournament) => (
+
+        {isAdmin && (
+        <Link to="/tournois/creer-tournoi" className="button create-tournament-button">
+          <i className="fa fa-trophy fa-2x tournament-icon" /> Organiser un <span>nouveau tournoi</span>
+        </Link>
+        )}
+
+        {tournamentsFilter(1).map((tournament) => (
           <TournamentCard
             key={tournament.id}
             state={tournament.state_id}
@@ -83,11 +94,18 @@ function Dashboard() {
           />
         ))}
 
-        {isAdmin && (
-          <Link to="/tournois/creer-tournoi" className="button create-tournament-button">
-            <i className="fa fa-trophy fa-2x tournament-icon" /> Organiser un <span>nouveau tournoi</span>
-          </Link>
-        )}
+        {tournamentsFilter(3).map((tournament) => (
+          <TournamentCard
+            key={tournament.id}
+            state={tournament.state_id}
+            name={tournament.title}
+            discipline={tournament.discipline_id}
+            players={18}
+            matchLeft={11}
+            slug={tournament.title}
+            cover={tournament.picture_url}
+          />
+        ))}
       </div>
 
       <Link to="/classements" className="dashboard-widget hall-of-fame">

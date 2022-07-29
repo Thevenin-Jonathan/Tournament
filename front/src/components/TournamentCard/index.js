@@ -13,7 +13,7 @@ function TournamentCard({
       <div className="tournament-special" />
       <div className="tournament-background" style={{ backgroundImage: `url(${cover})` }} />
       <div className="tournament-layer" />
-      <div className="tournament-text">
+      <div className={`tournament-text ${disciplineShortText(discipline)}`}>
         <i className="fa fa-trophy fa-2x tournament-icon widget-icon" />
         <div className="tournament-info">
           <p className="tournament-status">{ tournamentStateText(state) }</p>
@@ -22,6 +22,13 @@ function TournamentCard({
           <p className="tournament-players-count">{ players } Participants</p>
           <p className="tournament-match">{ matchLeft } matchs à jouer</p>
         </div>
+      </div>
+      <div className="tournament-hover">
+        <span>
+          {(state === 1) && 'Détails et inscriptions ' }
+          {(state !== 1) && 'Détails ' }
+        </span>
+        <i className="fa fa-arrow-right" aria-hidden="true" />
       </div>
     </Link>
   );
