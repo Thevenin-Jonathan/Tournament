@@ -130,6 +130,25 @@ async function updateOne(id, match) {
 } 
 
 /**
+ * Remove one team from match
+ * @param {number} id match identifiant
+ * @param {object} team_id match informations
+ * @returns {object} infos match
+ */
+ async function deleteTeam(id, teamId) {
+  const result = await pool.query(
+    `    
+    DELETE FROM "match_has_team"
+    WHERE "team_id" = $2
+      AND "match_id" = $1
+    `,
+    [id, teamId]
+  );
+
+  return result.rowCount;
+} 
+
+/**
  * Delete one match from database
  * @param {number} id match identifiant
  * @returns {boolean} true if match was delete
@@ -151,5 +170,6 @@ module.exports = {
   insertOne,
   updateOne,
   insertTeam,
+  deleteTeam,
   deleteOne 
 }

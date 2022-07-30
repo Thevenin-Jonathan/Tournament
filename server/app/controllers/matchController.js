@@ -100,12 +100,34 @@ async function update(req, res) {
   return res.json(updMatch)
 }
 
+/**
+ * Remove one team from match
+ * 
+ * ExpressMiddleware signature
+ * @param {object} req express request object
+ * @param {object} res express response object
+ * @returns {json} JSON response with the updated match
+ */
+ async function removeTeam(req, res) {
+  const id = req.params.id;
+  const { team_id } = req.body;
 
+  const match = await matchDatamapper.findById(id);
   if (!match) {
     throw new Api404Error("Match does not exist in DB");
   }
+
+  if (!await matchHasTeamDatamapper.findByMatchIdAndTeamId(id, team_id)) {
+    throw new Api404Error("Team does not exist in this match");
+  }
+
+  if ((await tournamentDatamapper.findById(match.tournament_id)).state_id >= 3) {
+    throw new Api404Error("Unable to change teams, tournament already started");
+  }
   
-  const updMatch = await matchDatamapper.updateOne(id, newMatch)
+  await matchDatamapper.deleteTeam(id, team_id)
+
+  const updMatch = await matchDatamapper.findById(id);
   return res.json(updMatch)
 }
 
@@ -134,5 +156,6 @@ module.exports = {
   create,
   update,
   addTeam,
+  removeTeam,
   destroy
 }
