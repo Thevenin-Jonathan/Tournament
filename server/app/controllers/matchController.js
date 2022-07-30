@@ -55,7 +55,15 @@ async function create(req, res) {
  */
 async function update(req, res) {
   const id = req.params.id;
-  const newMatch = req.body;
+  const match = await matchDatamapper.findById(id);
+
+  if (!match) {
+    throw new Api404Error("Match does not exist in DB");
+  }
+  
+  const updMatch = await matchDatamapper.updateOne(id, req.body)
+  return res.json(updMatch)
+}
   const match = await matchDatamapper.findById(id);
 
   if (!match) {
