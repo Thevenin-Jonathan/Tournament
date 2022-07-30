@@ -64,7 +64,42 @@ async function update(req, res) {
   const updMatch = await matchDatamapper.updateOne(id, req.body)
   return res.json(updMatch)
 }
+
+/**
+ * Add one team into match
+ * 
+ * ExpressMiddleware signature
+ * @param {object} req express request object
+ * @param {object} res express response object
+ * @returns {json} JSON response with the updated match
+ */
+ async function addTeam(req, res) {
+  const id = req.params.id;
+  const { team_id } = req.body;
+
   const match = await matchDatamapper.findById(id);
+  if (!match) {
+    throw new Api404Error("Match does not exist in DB");
+  }
+
+  if ((await tournamentDatamapper.findById(match.tournament_id)).state_id >= 3) {
+    throw new Api404Error("Unable to change teams, tournament already started");
+  }
+
+  if ((await matchHasTeamDatamapper.findByMatchId(id)).length >= 2) {
+    throw new Api404Error("The match already has two teams");
+  }
+
+  if (await matchHasTeamDatamapper.findByMatchIdAndTeamId(id, team_id)) {
+    throw new Api404Error("This team is already in the match");
+  }
+  
+  await matchDatamapper.insertTeam(id, team_id)
+
+  const updMatch = await matchDatamapper.findById(id);
+  return res.json(updMatch)
+}
+
 
   if (!match) {
     throw new Api404Error("Match does not exist in DB");
@@ -93,25 +128,11 @@ async function destroy(req, res) {
   return res.status(204).json();
 };
 
-/**
- * Get all teams
- * 
- * ExpressMiddleware signature
- * @param {object} req express request object
- * @param {object} res express response object
- * @returns {json} JSON response with all teams
- */
- async function getAllTeams(req, res) {
-  const id = req.params.id;
-  const teams = await matchDatamapper.findAllTeams(id);
-  return res.json(teams);
-};
-
 module.exports = {
   getAll,
   getOne,
   create,
   update,
-  destroy,
-  getAllTeams
+  addTeam,
+  destroy
 }

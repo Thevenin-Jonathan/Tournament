@@ -109,6 +109,27 @@ async function updateOne(id, match) {
 }
 
 /**
+ * Add one team into match
+ * @param {number} id match identifiant
+ * @param {object} team_id match informations
+ * @returns {object} infos match
+ */
+ async function insertTeam(id, teamId) {
+  const result = await pool.query(
+    `    
+    INSERT INTO "match_has_team"
+      (match_id, "team_id")
+    VALUES
+      ($1, $2)
+    RETURNING *;
+    `,
+    [id, teamId]
+  );
+
+  return result.rows[0];
+} 
+
+/**
  * Delete one match from database
  * @param {number} id match identifiant
  * @returns {boolean} true if match was delete
@@ -116,7 +137,7 @@ async function updateOne(id, match) {
 async function deleteOne(id) {
   const result = await pool.query(
     `
-      DELETE FROM "match" WHERE id = $1
+    DELETE FROM "match" WHERE "id" = $1;
     `,
     [id]
   );
@@ -124,24 +145,11 @@ async function deleteOne(id) {
   return !!result.rowCount;
 }
 
-/** 
- * Get and return all the matches of a team
- * @param {number} - id of the team
- * @returns {Object} - all matches
-*/
-async function findAllTeams(id) {
-  const result = await pool.query(
-      `SELECT * FROM match_has_team
-      WHERE match_id = $1;`,[id]
-  );
-  return result.rows;
-};
-
 module.exports = {
   findAll,
   findById,
   insertOne,
   updateOne,
-  deleteOne,
-  findAllTeams  
+  insertTeam,
+  deleteOne 
 }
