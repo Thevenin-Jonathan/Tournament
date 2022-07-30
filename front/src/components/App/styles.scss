@@ -65,6 +65,17 @@ body {
     font-weight: var(--fine);
     margin-bottom: 1rem;
   }
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--emphase-color);
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
 }
 
 .row {
@@ -72,6 +83,12 @@ body {
   gap: calc(2 * var(--margin-base));
   .col {
     flex: 1;
+    &.align-right{
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: var(--margin-base);
+    }
   }
   @media only screen and (max-width: 1100px) {
     flex-direction: column;
@@ -308,7 +325,18 @@ a {
   }
 }
 
+.create-tournament-button {
+  background-image: url(../../assets/img/icon-arrow-right.svg);
+  background-position: right 2rem center;
+  span {
+    font-weight: var(--bold);
+  }
+  @media only screen and (max-width: 450px) {
+    flex-direction: column;
+  }
+}
 
+// Tableau de bord
 .dashboard {
   display: flex;
   flex-wrap: wrap;
@@ -333,7 +361,7 @@ a {
       width: calc( calc(100% - 2rem) / 2);
     }
     @media only screen and (max-width: 450px) {
-      width: 100%;
+      width: calc( calc(100% - 1rem) / 2);
     }
     &:hover {
       outline: solid var(--border-size) var(--emphase-color);
@@ -373,16 +401,7 @@ a {
       gap: 1rem;
     }
   }
-  .create-tournament-button {
-    background-image: url(../../assets/img/icon-arrow-right.svg);
-    background-position: right 2rem center;
-    span {
-      font-weight: var(--bold);
-    }
-    @media only screen and (max-width: 450px) {
-      flex-direction: column;
-    }
-  }
+  
   .hall-of-fame {
     font-size: .9rem;
     @media only screen and (max-width: 1100px) {
@@ -394,8 +413,6 @@ a {
     }
     .hof-icon {
       font-size: 3rem;
-      position: relative;
-      margin-top: -3.5rem;
       color: var(--emphase-color);
 
     }
@@ -436,6 +453,28 @@ a {
 }
 
 .tournaments {
+  section {
+    padding: 1rem 0;
+    .title-h2 {
+      position: sticky;
+      top: -1rem;
+      z-index: 99;
+      background-color: var(--bg-color);
+      padding: 2rem;
+      margin: 0 -2rem;
+    }
+  }
+  .archived-tournaments {
+    background-image: url(../../assets/img/bg-archived-tournaments.png);
+    background-repeat: repeat;
+    background-size: 10px;
+    padding: 2rem;
+    padding-top: 0;
+    margin:0 -2rem -2rem -2rem;
+  }
+  .tournament-card {
+    margin: 2rem 0;
+  }
 }
 
 
@@ -444,6 +483,8 @@ a {
   min-height: 10rem;
   position: relative;
   border-radius: var(--border-radius);
+  outline: solid 0 var(--emphase-color);
+  transition: outline .1s;
   > div {
     position: absolute;
     top: 0;
@@ -452,8 +493,26 @@ a {
     height: 100%;
     border-radius: var(--border-radius);
   }
+  .tournament-hover {
+    width: auto;
+    height: auto;
+    bottom: var(--margin-base);
+    right: var(--margin-base);
+    top: initial;
+    left: initial;
+    background-color: var(--main-color);
+    padding: var(--margin-base);
+    font-weight: var(--fine);
+    opacity: 0;
+    transform: translateY(.5rem);
+    transition: .4s;
+  }
   &:hover {
     outline: solid var(--border-size) var(--emphase-color);
+    .tournament-hover {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   .tournament-background {
       background-size: cover;
@@ -462,7 +521,6 @@ a {
       background-color: var(--main-color);
   }
   &.state-1 .tournament-special {
-    content: "";
     width: calc(100% + 1rem);
     height: calc(100% + 1rem);
     position: absolute;
@@ -471,6 +529,13 @@ a {
     border-radius: calc(var(--border-radius) * 2);
     outline: solid 10px transparent;
     overflow: hidden;
+    @media only screen and (max-width: 450px) {
+      width: calc(100% + .4rem);
+      height: calc(100% + .4rem);
+      top: -.2rem;
+      left: -.2rem;
+      border-radius: calc(var(--border-radius) * 1.2);
+    }
     @keyframes animBg {
       0% {background-position: 0 0% ;}
       100% {background-position: 1000px 0% ;}
@@ -489,49 +554,72 @@ a {
       transform-origin: center;
     }
   }
-    .tournament-layer {
-      background: linear-gradient(90deg, var(--main-color) 40%, rgba(0,0,0,0) 100%);
-      position: absolute;
-      top: 0;
-      right: 0;
-      @media only screen and (max-width: 450px) {
-        width: 100%;
-        background: linear-gradient(90deg, var(--main-color) 50%, rgba(0,0,0,0) 100%);
-      }
+  .tournament-layer {
+    background: linear-gradient(90deg, var(--main-color) 40%, rgba(0,0,0,0) 100%);
+    position: absolute;
+    top: 0;
+    right: 0;
+    @media only screen and (max-width: 450px) {
+      width: 100%;
+      background: linear-gradient(0deg, var(--main-color) 30%, rgba(0,0,0,0) 100%);
     }
-    .tournament-text {
-      padding: 1rem;
-      display: flex;
-      align-items: stretch;
-      gap: 1rem;
-      @media only screen and (max-width: 450px) {
-        flex-direction: column;
-      }
-    }
-    .tournament-info {
-
-    }
-    .tournament-icon {
-      color:var(--emphase-color);
-      font-size: 3rem;
-    }
-    .tournament-status {
-      font-weight: 300;
-    }
-    .tournament-name {
+  }
+  .tournament-text {
+    position: relative;
+    padding: 1rem;
+    display: flex;
+    align-items: stretch;
+    gap: 1rem;
+    &::before {
+      font-family: FontAwesome;
       font-size: 2rem;
-      color: var(--emphase-color);
+      position: absolute;
+      left: var(--margin-base);
+      bottom: 0;
+      text-shadow: 0 0 2px black;
+      @media only screen and (max-width: 450px) {
+        left: initial;
+        bottom: initial;
+        right: var(--margin-base);
+        top: var(--margin-base);
+      }
     }
-    .tournament-discipline {
-      font-size: .8rem;
-      margin-bottom: 1rem;
+    &.SH::before{ content:"\f183"; }
+    &.SD::before{ content:"\f182"; }
+    &.DH::before{ content:"\f183\f183"; }
+    &.DD::before{ content:"\f182\f182"; }
+    &.DX::before{ content:"\f182\f183"; }
+    @media only screen and (max-width: 450px) {
+      flex-direction: column;
     }
-    .tournament-players-count {
+  }
+  .tournament-info {
 
-    }
-    .tournament-match {
-
-    }
+  }
+  .tournament-icon {
+    color:var(--emphase-color);
+    font-size: 3rem;
+  }
+  .tournament-status {
+    font-weight: 300;
+  }
+  .tournament-name {
+    font-size: 2rem;
+    color: var(--emphase-color);
+  }
+  .tournament-discipline {
+    font-size: .8rem;
+    margin-bottom: 1rem;
+  }
+  .tournament-players-count {
+    font-size: .8rem;
+  }
+  .tournament-match {
+    font-size: .8rem;
+  }
+  .tournament-date {
+    font-weight: var(--black);
+  }
 }
 
 .club {
@@ -708,42 +796,77 @@ a {
 }
 
 .profil {
-  &-content {
+  .wrapper {
     display: flex;
-      @media only screen and (max-width: 810px) {
-          flex-direction: column;
-      }
-    }
-  
-  &-infos {
-    display: flex;
-    width: 65%;
-    background-color: var(--main-color);
-    border-radius: 10px;
-    padding: 1rem;
+    justify-content: space-between;
     @media only screen and (max-width: 810px) {
-      width: 100%;
-    }
-    @media only screen and (max-width: 450px) {
       flex-direction: column;
     }
   }
-
-  &-image {
-    width: 7rem;
-    height: 7rem;
-    background-color: var(--bg-color);
-    margin: 0.5rem;
+  .section-title {
+    color: var(--emphase-color);
+    font-size: 2rem;
+    padding-bottom: 1rem;
+  }
+  .infos, .stats {
+    span {
+      color: var(--ligth-color-text);
+    }
+    display: flex;
+    flex-direction: column;
+    background-color: var(--main-color);
+    padding: 2rem;
+    margin-bottom: 1rem;
     border-radius: var(--border-radius);
+    min-height: 10rem;
+    width: 49%;
+    @media only screen and (max-width: 810px) {
+      width: 100%;
+    }
   }
-
-  &-stats {
-    padding: 1rem;
+  .avatar {
+    background-color: var(--bg-color);
+    width: 10rem;
+    height: 10rem;
+    border-radius: var(--border-radius);
+    object-fit: cover;
+    object-position: center;
   }
-
+  .infos {
+    span {
+      padding-top: 0.5rem;
+    }
+  }
+  .stats {
+    li {
+      flex-direction: row;
+    }
+  }
   li {
-    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    color: var(--emphase-color);
+    padding: 0.8rem 0;
   }
+  .action-btn {
+    text-align: center;
+    width: auto!important;
+    background-color: transparent;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    border: solid var(--border-size) var(--emphase-color);
+    font-weight: var(--black);
+    font-size: 1.2rem;
+    color: var(--emphase-color);
+    transition: .2s cubic-bezier(.82,.21,.1,1.02);
+    &:hover {
+      background-color: var(--emphase-color);
+      color: var(--ligth-color-text);
+    }
+    @media only screen and (max-width: 1100px) {
+      width: 100%!important;
+    }
+  } 
 }
 
 // 404
@@ -853,16 +976,46 @@ a {
 }
 
 
-.add-members-form {
-  h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-  }
+.add-members-form,
+.add-tournament-form  {
+  
   .input-line {
     margin:1rem 0;
     overflow: hidden;
+
     input, button, select, textarea {
       width: 100%;
+    }
+    input[type="checkbox"] {
+      display:initial;
+      width: auto;
+      margin: var(--margin-base);
+      transform: scale(1.5);
+      outline: none
+    }
+    input[type="file"]::-webkit-file-upload-button {
+      color: black;
+      background-color: white;
+      border: none;
+      padding: .2rem  .5rem;
+    }
+  }
+  .img-preview{
+    img {
+      width: 100%;
+      max-height: 20rem;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+      border-radius: var(--border-radius);
+      border: solid 1px rgba(255,255,255,.3);
+    }
+   }
+  .checkbox-line {
+    padding: 1rem;
+    label {
+      display: initial;
+
     }
   }
   // surement a sortir en global
@@ -892,6 +1045,10 @@ a {
       border-color: var(--emphase-color);
       outline: none;
     }
+  }
+  :disabled {
+    color:rgba(255,255,255,.2);
+    font-style: italic;
   }
   select {
     background-color: var(--header-color);
@@ -983,11 +1140,16 @@ a {
     padding-bottom: 1rem;
   }
   .avatar {
-    background-color: blue;
+    background-color: var(--bg-color);
     width: 8rem;
     height: 10rem;
     position: absolute;
     right: 2rem;
+    width: 10rem;
+    height: 10rem;
+    border-radius: var(--border-radius);
+    object-fit: cover;
+    object-position: center;
   }
   &-card, &-stats {
     position: relative;
@@ -1041,7 +1203,7 @@ a {
   z-index: 9999;
   position: fixed;
   top: var(--header-height);
-  right: 0;
+  right: 1rem;
   padding: 1rem;
   display: flex;
   flex-direction: column-reverse;

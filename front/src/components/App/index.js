@@ -15,10 +15,12 @@ import Tournaments from '../Tournaments';
 import Error from '../Error';
 import LoginForm from '../LoginForm';
 import Profil from '../Profil';
+import UpdateProfil from '../UpdateProfil';
 import Members from '../Members';
 import Member from '../Member';
 // eslint-disable-next-line no-unused-vars
 import AddMembersForm from '../AddMembersForm';
+import AddTournamentForm from '../AddTournamentForm';
 import Help from '../Help';
 import Loader from '../Loader';
 import Toast from '../Toast';
@@ -91,11 +93,12 @@ function App() {
         <Route path="/membres" element={<Members />} />
         <Route path="/membres/:id" element={<Member />} />
         <Route path="/profil" element={<Profil />} />
+        <Route path="/modifier-profil" element={<UpdateProfil />} />
         <Route path="/aide" element={<Help />} />
         {isAdmin && (
           <>
             <Route path="/membres/ajouter-membres" element={<AddMembersForm />} />
-            <Route path="/tournois/creer-tournoi" element={<h1>Ici le composant AddTournamentForm</h1>} />
+            <Route path="/tournois/creer-tournoi" element={<AddTournamentForm />} />
           </>
         )}
         <Route path="/membres/ajouter-membres" element={<Error />} />
