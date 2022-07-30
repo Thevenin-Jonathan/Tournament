@@ -81,7 +81,6 @@ async function insertOne(match) {
  * @returns {object} match
  */
 async function updateOne(id, match) {
-  debug(match)
   const columns = Object.keys(match).map((key, i) => `"${key}" = $${i + 1}`);
   const values = Object.values(match);
   const result = await pool.query(
