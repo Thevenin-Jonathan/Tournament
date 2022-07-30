@@ -514,13 +514,10 @@ _Ce que tu as fait hier:_
 _Les problèmes rencontrés:_
  
 - dans swagger-doc, j'ai mis "tag" au lieu de "tags" dans la doc, et problème de rangement dans le visuel
-
 - pas fonctionnelle à 100% quelques erreur lors des test PATCHS et CREATE notamment sur swagger
-talonne sdajouter clug
 - ajout de la colonne "winner_ido - ORDER BY ajouter en sur les f"indAll dans tous lesORDER BY ajouter en sur les findAll dans tous les swagger-doc sur tous les routers, pas fonctionnelle à 100% quelques erreur lors des test PATCHS et CREATE notamment
 
-_Ce que tu comptes faire a
--et ce qu'il y a d'au"tre "à faireujourd'hui:_
+_Ce que tu comptes faire aujourd'hui:_
 
-"" -ajouter une colonne slug
+-ajouter une colonne slug
 -ajouter colonne winner_id
