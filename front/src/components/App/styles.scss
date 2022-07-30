@@ -812,9 +812,12 @@ a {
     }
   }
   .avatar {
-    background-color: blue;
-    width: 8rem;
+    background-color: var(--bg-color);
+    width: 10rem;
     height: 10rem;
+    border-radius: var(--border-radius);
+    object-fit: cover;
+    object-position: center;
   }
   .infos {
     span {
@@ -1124,11 +1127,16 @@ a {
     padding-bottom: 1rem;
   }
   .avatar {
-    background-color: blue;
+    background-color: var(--bg-color);
     width: 8rem;
     height: 10rem;
     position: absolute;
     right: 2rem;
+    width: 10rem;
+    height: 10rem;
+    border-radius: var(--border-radius);
+    object-fit: cover;
+    object-position: center;
   }
   &-card, &-stats {
     position: relative;

@@ -27,7 +27,7 @@ function Profil() {
             <li><img className="avatar" src={userAvatar} alt={`${user.firstname} Avatar`} /></li>
             <li>License FFBAD : <span>{user.playerLicense}</span></li>
             <li>Genre : <span>{genderText(user.genderId)}</span></li>
-            {user.gender_id === 1
+            { (user.gender_id === 1)
               ? <li>Né le : <span>{dateFr(user.birthdate)}</span></li>
               : <li>Née le : <span>{dateFr(user.birthdate)}</span></li>}
             <li>Adresse : <span>{user.address}</span></li>

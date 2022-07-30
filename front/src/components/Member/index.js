@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { genderText, dateFr } from 'src/utils';
-// import config from 'src/config';
+import config from 'src/config';
 
 function Member() {
   // Je récupère mon paramètre id
@@ -21,6 +21,8 @@ function Member() {
     });
   }, []);
 
+  const userAvatar = `${config.path.uploads.avatar}/${user.member.url_avatar}`;
+
   return (
     <main className="content member">
       <h1 className="title">{user.member.firstname} {user.member.lastname}</h1>
@@ -28,7 +30,7 @@ function Member() {
       <div className="wrapper">
         <div className="member-card">
           <h2 className="section-title">Profil</h2>
-          <img className="avatar" src={user.member.url_avatar} alt={`${user.member.firstname} Avatar`} />
+          <img className="avatar" src={userAvatar} alt={`${user.member.firstname} Avatar`} />
           <ul>
             <li>License FFBAD : <span>{user.member.player_license}</span></li>
             <li>Genre : <span>{genderText(user.member.gender_id)}</span></li>
