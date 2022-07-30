@@ -5,6 +5,7 @@ Table "tournament" :
 | --- | --- | --- | --- |
 |code_tournament|integer|primary key|identifiant unique de la table|
 |title|text|not null|nom du tournoi|
+|slug|text|not null unique|nom du tournoi|
 |date|date|not null|date de l'évènement|
 |description|text||information libre de l'évènement|
 |picture_url|text||adresse de la photo de couverture|
@@ -14,6 +15,7 @@ Table "tournament" :
 |code_type|integer|foreign key, not null|identifiant unique qui référence type|
 |code_state|integer|foreign key, not null, default 1|identifiant unique qui référence state|
 |code_club|integer|foreign key, not null, default 1|identifiant unique qui référence club|
+|code_team|integer|foreign key|identifiant unique qui référence la team gagnante du tournoi|
 
 Table "discipline" :
 |Champ|Type|Spécificités|Description|
