@@ -12,6 +12,7 @@ class ApiInternalError extends BaseError {
    * @param {object} infos The informations' error
    */
   constructor (
+    // message = "An error with the server has occured.",
     message = "An error with the server has occured.",
     statusCode = 500,
     name = "Internal-Error",

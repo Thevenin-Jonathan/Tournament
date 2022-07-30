@@ -16,8 +16,12 @@ const InvalidTokenError = require("../errors/InvalidTokenError");
  */
 async function errorHandler(err, _, res, __) {
 
-  debug(err.statusCode)
-  debug(err.message)
+  if (process.env.NODE_ENV === "dev") {
+    debug(err.statusCode)
+    debug(err.message)
+    debug(err.stack)
+  }
+
 
   if (err instanceof ApiInternalError && process.env.NODE_ENV === "prod") {
     err.message = "An error with the server has occured."
