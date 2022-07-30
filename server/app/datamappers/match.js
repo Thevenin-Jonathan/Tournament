@@ -16,8 +16,28 @@ async function findAll() {
  * @returns {object} match
  */
 async function findById(id) {
-  const result = await pool.query(`SELECT * FROM "match" WHERE "id" = $1`, [id]);
-  return result.rows[0];
+  const result = (await pool.query(
+    `
+    SELECT
+      "match"."id", "match_has_team"."team_id", "state_id",
+      "note", "match"."tournament_id", "is_winner", "result_id",
+      ARRAY_AGG("team_has_user"."user_id") AS "user_id"
+    FROM "match"
+    LEFT JOIN "match_has_team"
+      ON "match_has_team"."match_id" = "match"."id"
+    LEFT JOIN "team"
+      ON "match_has_team"."team_id" = "team"."id"
+    LEFT JOIN "team_has_user"
+      ON "team_has_user"."team_id" = "team"."id"
+    LEFT JOIN "result"
+      ON "result"."id" = "result_id"
+    LEFT JOIN "state"
+      ON "state"."id" = "state_id"
+    WHERE "match"."id" = $1
+    GROUP BY 1, 2, 3, 4, 5, 6, 7
+    `,
+    [id])).rows;
+  return result;
 }
 
 /**
@@ -26,22 +46,32 @@ async function findById(id) {
  * @returns {object} match
  */
 async function insertOne(match) {
-  const columns = Object.keys(match).map(key => `"${key}"`);
-  const values = Object.values(match);
-  const symbols = values.map((_, i) => `$${i + 1}`);
-
-  const result = await pool.query(
+  let result = (await pool.query (
     `
-      INSERT INTO "match"
-        (${columns})
-      VALUES
-        (${symbols})
-      RETURNING *;
-    `,      
-    [...values]
-  )
+    INSERT INTO "match"
+    ("tournament_id")
+    VALUES
+    ($1)
+    RETURNING *
+    `, [match.tournament_id]
+    )).rows[0];
+    
+  result.team = [];
 
-  return result.rows[0];
+  for (const team of match.team) {
+    const newTeam = await pool.query (
+      `
+      INSERT INTO "match_has_team"
+        ("match_id", "team_id")
+      VALUES
+        ($1, $2)
+      RETURNING "team_id" AS "id", "is_winner", "result_id";
+      `, [result.id, team.id]
+    );
+    result.team.push(newTeam.rows[0]);
+  };
+  
+  return result;
 }
 
 /**
@@ -51,6 +81,7 @@ async function insertOne(match) {
  * @returns {object} match
  */
 async function updateOne(id, match) {
+  debug(match)
   const columns = Object.keys(match).map((key, i) => `"${key}" = $${i + 1}`);
   const values = Object.values(match);
   const result = await pool.query(
