@@ -21,7 +21,7 @@ function TournamentCard({ tournament }) {
           <p className="tournament-discipline">{ disciplineText(tournament.discipline_id) }</p>
           <p className="tournament-date">{ dateFr(tournament.date) }</p>
           <p className="tournament-players-count">{ tournament.nb_playground } Terrains</p>
-          <p className="tournament-match">Nombres de place : { tournament.player_limit } </p>
+          <p className="tournament-match">{tournament.player_limit && `Nombres de place : ${tournament.player_limit}`}</p>
         </div>
       </div>
       <div className="tournament-hover">

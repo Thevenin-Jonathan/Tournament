@@ -20,6 +20,9 @@ const config = {
             coverTournament: 'http://kinoah.com/images/tournament/cover',
             logoClub: 'uploads/logo-club',
         } 
+    },
+    toast: {
+      duration: 5000,
     }
 }
 
