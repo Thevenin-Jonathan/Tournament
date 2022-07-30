@@ -31,12 +31,12 @@ INSERT INTO "state" ("name") VALUES
 
 
 INSERT INTO "tournament" ("title", "slug", "date", "description", "picture_url", "nb_playground", "player_limit", "discipline_id", "type_id", "state_id", "club_id") VALUES
-  ('Champion''s trophy', 'champions-trophy', '01/08/2022', 'La fin de saison est proche !', 'http://kinoah.com/images/tournament/cover/bad-03.jpg', '6', '25', '1', '1', '1', '1'),
-  ('Tournoi Elegance 2022', 'tournoi-elegance-2022', '08/08/2022', 'Le tournoi pour celles qui veulent en découdre !', 'http://kinoah.com/images/tournament/cover/bad-01.jpg', '7', null, '2', '1', '1', '1'),
-  ('Tournoi des brutes', 'tournoi-des-brutes', '23/07/2022', 'Un tournoi en duo uniquement pour les hommes virils', 'http://kinoah.com/images/tournament/cover/the-witcher.jpg', '7', '30', '3', '1', '2', '1'),
-  ('Tournoi Lady Double', 'tournoi-lady-double', '19/07/2022', 'Un tournoi en duo pour l''élite féminine', 'http://kinoah.com/images/tournament/cover/bad-05.jpg', '7', null, '4', '1', '3', '1'),
-  ('Tournoi Téléportal III', 'tournoi-teleportal-iii', '01/06/2022', 'Célebre et difficile...', 'http://kinoah.com/images/tournament/cover/portal2.jpg', '5', '25', '5', '1', '4', '1'),
-  ('Tournoi du trône de fer', 'tournoi-du-trone-de-fer', '06/06/2022', 'Presque tous les coups sont permis', 'http://kinoah.com/images/tournament/cover/got01.jpg', '5', '25', '5', '1', '4', '1');
+  ('Champion''s trophy', 'champions-trophy', '01/08/2022', 'La fin de saison est proche !', 'https://kinoah.com/images/tournament/cover/bad-03.jpg', '6', '25', '1', '1', '1', '1'),
+  ('Tournoi Elegance 2022', 'tournoi-elegance-2022', '08/08/2022', 'Le tournoi pour celles qui veulent en découdre !', 'https://kinoah.com/images/tournament/cover/bad-01.jpg', '7', null, '2', '1', '1', '1'),
+  ('Tournoi des brutes', 'tournoi-des-brutes', '23/07/2022', 'Un tournoi en duo uniquement pour les hommes virils', 'https://kinoah.com/images/tournament/cover/the-witcher.jpg', '7', '30', '3', '1', '2', '1'),
+  ('Tournoi Lady Double', 'tournoi-lady-double', '19/07/2022', 'Un tournoi en duo pour l''élite féminine', 'https://kinoah.com/images/tournament/cover/bad-05.jpg', '7', null, '4', '1', '3', '1'),
+  ('Tournoi Téléportal III', 'tournoi-teleportal-iii', '01/06/2022', 'Célebre et difficile...', 'https://kinoah.com/images/tournament/cover/portal2.jpg', '5', '25', '5', '1', '4', '1'),
+  ('Tournoi du trône de fer', 'tournoi-du-trone-de-fer', '06/06/2022', 'Presque tous les coups sont permis', 'https://kinoah.com/images/tournament/cover/got01.jpg', '5', '25', '5', '1', '4', '1');
 
 INSERT INTO "user" ("firstname", "lastname", "address", "birthdate", "gender_id", "is_active", "email", "password", "url_avatar", "player_license", "club_id", "role_id") VALUES
   ('Tom', 'Roche', 'Passage de la clé des champs, 38530 Pontcharra', '25/03/1980', '1', true, 'tom@gmail.com', '$2a$10$vOUYY2w4YemevAAsed8S/u./U9PLwvcmsrk7srPekaPtgxS89hZXa', 'tom.jpg', '3554666', '1', '1'),

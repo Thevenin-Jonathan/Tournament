@@ -16,8 +16,8 @@ const config = {
     },
     path: {
         uploads: {
-            avatar: 'http://kinoah.com/images/tournament/avatar',
-            coverTournament: 'http://kinoah.com/images/tournament/cover',
+            avatar: 'https://kinoah.com/images/tournament/avatar',
+            coverTournament: 'https://kinoah.com/images/tournament/cover',
             logoClub: 'uploads/logo-club',
         } 
     },
