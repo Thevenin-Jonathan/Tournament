@@ -1,7 +1,7 @@
 let url, urlApi;
 
 if (process.env.NODE_ENV === "production") {
-  url = "https://cassini-tournament.herokuapp.com/";
+  url = "https://cassini-tournament.herokuapp.com";
   urlApi = "https://cassini-tournament.herokuapp.com/api/v1";
 } else {
   url = "http://localhost:3001";
