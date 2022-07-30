@@ -1,7 +1,8 @@
 const joi = require("joi");
 
 module.exports = joi.object({
-  note: joi.string(),
-  state_id: joi.string().min(1).required(),
-  tournament_id: joi.string().min(1).required()
+  tournament_id: joi.number().min(1).required(),
+  teams: joi.array().items(
+      joi.number().required()
+  ).length(2).required()
 });
