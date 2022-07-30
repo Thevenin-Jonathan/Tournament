@@ -1,0 +1,38 @@
+@hostname = http://localhost:3001/api/v1
+
+###
+# Get all matches
+GET {{hostname}}/api/v1/matchs/ HTTP/1.1
+content-type: application/json
+
+###
+# Get one match
+GET {{hostname}}/matchs/10 HTTP/1.1
+content-type: application/json
+
+###
+# Create one match
+POST {{hostname}}/matchs/ HTTP/1.1
+content-type: application/json
+
+{
+  "tournament_id": 5,
+  "team": [
+    {
+      "id":1
+    },
+    {
+      "id":3
+    }
+  ]
+}
+
+###
+# Update one match
+PATCH {{hostname}}/matchs/66 HTTP/1.1
+content-type: application/json
+
+{
+  "note": "Une note",
+  "state_id": 1
+}
