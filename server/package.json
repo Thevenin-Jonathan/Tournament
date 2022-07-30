@@ -8,8 +8,8 @@
   },
   "scripts": {
     "db-seed": "psql -U tournament_admin -d tournament -f ./sqitch/seed_db.sql",
-    "dev": "cross-env NODE_ENV=dev DEBUG=*,-express:*,-nodemon*,-body-parser:*,-finalhandler nodemon app/index",
-    "start": "cross-env NODE_ENV=prod node app/index.js"
+    "dev": "cross-env NODE_ENV=development DEBUG=*,-express:*,-nodemon*,-body-parser:*,-finalhandler nodemon app/index",
+    "start": "cross-env NODE_ENV=production node app/index.js"
   },
   "repository": {
     "type": "git",

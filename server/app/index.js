@@ -30,7 +30,7 @@ app.use((req, res, next) => {
   }
 });
 
-if (process.env.NODE_ENV === "prod") {
+if (process.env.NODE_ENV === "production") {
   /** Static files **/
   app.use(express.static(path.join(__dirname, 'public')));
 }
@@ -39,7 +39,7 @@ if (process.env.NODE_ENV === "prod") {
 app.use("/", router);
 
 /** Route front**/
-if (process.env.NODE_ENV === "prod") {
+if (process.env.NODE_ENV === "production") {
   app.get('/*', (_, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
   });

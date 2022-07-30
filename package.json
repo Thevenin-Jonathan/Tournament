@@ -1,0 +1,29 @@
+{
+  "name": "projet-11-tournament",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "18.x"
+  },
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "postinstall": "npm run postinstall-client && npm run postinstall-server",
+    "postinstall-client": "cd front && npm install && npm run build",
+    "postinstall-server": "cd server && npm install",
+    "start": "node server/app/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/O-clock-Cassini/projet-11-tournament.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/O-clock-Cassini/projet-11-tournament/issues"
+  },
+  "homepage": "https://github.com/O-clock-Cassini/projet-11-tournament#readme"
+}
