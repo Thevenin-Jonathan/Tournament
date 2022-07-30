@@ -2,37 +2,53 @@
 
 ###
 # Get all matches
-GET {{hostname}}/api/v1/matchs/ HTTP/1.1
+GET {{hostname}}/api/v1/matches/ HTTP/1.1
 content-type: application/json
 
 ###
 # Get one match
-GET {{hostname}}/matchs/10 HTTP/1.1
+GET {{hostname}}/matches/10 HTTP/1.1
 content-type: application/json
 
 ###
 # Create one match
-POST {{hostname}}/matchs/ HTTP/1.1
+POST {{hostname}}/matches/ HTTP/1.1
 content-type: application/json
 
 {
   "tournament_id": 5,
-  "team": [
-    {
-      "id":1
-    },
-    {
-      "id":3
-    }
-  ]
+  "teams": [6,7]
 }
 
 ###
 # Update one match
-PATCH {{hostname}}/matchs/66 HTTP/1.1
+PATCH {{hostname}}/matches/17 HTTP/1.1
 content-type: application/json
 
 {
-  "note": "Une note",
-  "state_id": 1
+  "note": "Une noteuh",
+  "state_id": 4
 }
+
+###
+# Add one team into match
+PATCH {{hostname}}/matches/17/addTeam HTTP/1.1
+content-type: application/json
+
+{
+  "team_id": 4
+}
+
+###
+# Remove one team from match
+PATCH {{hostname}}/matches/17/removeTeam HTTP/1.1
+content-type: application/json
+
+{
+  "team_id": 4
+}
+
+###
+# Delete one match
+DELETE {{hostname}}/matches/16 HTTP/1.1
+content-type: application/json
