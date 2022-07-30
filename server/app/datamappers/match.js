@@ -6,7 +6,7 @@ const debug = require("debug")("dm-match");
  * @returns {matches[]} matches
  */
 async function findAll() {
-  const result = await pool.query(`SELECT * FROM "match"`);
+  const result = await pool.query(`SELECT * FROM "match" ORDER BY "id" ASC`);
   return result.rows;
 }
 
@@ -113,10 +113,24 @@ async function deleteOne(id) {
   return !!result.rowCount;
 }
 
+/** 
+ * Get and return all the matches of a team
+ * @param {number} - id of the team
+ * @returns {Object} - all matches
+*/
+async function findAllTeams(id) {
+  const result = await pool.query(
+      `SELECT * FROM match_has_team
+      WHERE match_id = $1;`,[id]
+  );
+  return result.rows;
+};
+
 module.exports = {
   findAll,
   findById,
   insertOne,
   updateOne,
-  deleteOne
+  deleteOne,
+  findAllTeams  
 }

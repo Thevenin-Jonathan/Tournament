@@ -16,10 +16,13 @@ const config = {
     },
     path: {
         uploads: {
-            avatar: 'uploads/avatar',
-            coverTournament: 'uploads/cover-tournament',
+            avatar: 'http://kinoah.com/images/tournament/avatar',
+            coverTournament: 'http://kinoah.com/images/tournament/cover',
             logoClub: 'uploads/logo-club',
         } 
+    },
+    toast: {
+      duration: 5000,
     }
 }
 

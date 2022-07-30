@@ -6,7 +6,7 @@ const pool = require("../config/database");
 */
 async function findAll() {
     const result = await pool.query(
-        `SELECT * FROM "team"`
+        `SELECT * FROM "team" ORDER BY "id" ASC`
     );
     return result.rows;
 };
@@ -49,10 +49,54 @@ async function deleteOne(id) {
     return !!result.rowCount;
 };
 
+/** 
+ * Update the tournament of one team
+ * @param {number} - id of the tournament
+ * @param {number} - id of the team 
+ * @returns {Object} - team updated
+*/
+async function updateOne(tournamentId, id) {
+    const result = await pool.query(
+        `UPDATE "team" 
+        SET "tournament_id" = $1
+        WHERE "id" = $2
+        RETURNING *;`,[tournamentId, id]
+    );
+    return result.rows[0];
+  };
+
+/** 
+ * Get and return all the matches of a team
+ * @param {number} - id of the team
+ * @returns {Object} - all matches
+*/
+async function findAllMatches(id) {
+    const result = await pool.query(
+        `SELECT * FROM match_has_team
+        WHERE team_id = $1;`,[id]
+    );
+    return result.rows;
+};
+
+/** 
+ * Get and return all the matches of a team
+ * @param {number} - id of the team
+ * @returns {Object} - all matches
+*/
+async function findAllUsers(id) {
+    const result = await pool.query(
+        `SELECT * FROM team_has_user
+        WHERE team_id = $1;`,[id]
+    );
+    return result.rows;
+};
+
   module.exports = {
     findAll,
     findById,
     insertOne,
-    deleteOne
+    deleteOne,
+    updateOne,
+    findAllMatches,
+    findAllUsers
   };
-

@@ -1,10 +1,11 @@
 import axios from 'axios';
+import qs from 'qs';
 import config from 'src/config';
 import { deleteNullOrFalsyKeyInObject } from 'src/utils';
-import qs from 'qs';
 
 const userMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
+    // mon profil
     case 'GET_PROFILE': {
       const axiosConfig = {
         method: 'get',
@@ -22,6 +23,7 @@ const userMiddleware = (store) => (next) => (action) => {
       break;
     }
 
+    // Tous les users
     case 'GET_MEMBERS': {
       const axiosConfig = {
         method: 'get',
@@ -40,6 +42,7 @@ const userMiddleware = (store) => (next) => (action) => {
       break;
     }
 
+    // un seul user
     case 'GET_MEMBER': {
       const axiosConfig = {
         method: 'get',
@@ -58,6 +61,7 @@ const userMiddleware = (store) => (next) => (action) => {
       break;
     }
 
+    // enregistrer un user
     case 'CREATE_MEMBER': {
       const state = store.getState();
 

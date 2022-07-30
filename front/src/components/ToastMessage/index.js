@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import config from 'src/config';
 // import { Transition } from 'react-transition-group';
 
 function ToastMessage({ id, message, type }) {
@@ -12,17 +13,7 @@ function ToastMessage({ id, message, type }) {
         type: 'REMOVE_TOAST',
         toastId: id,
       });
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      dispatch({
-        type: 'REMOVE_TOAST',
-        toastId: id,
-      });
-    }, 3000);
+    }, config.toast.duration);
     return () => clearTimeout(timer);
   }, []);
 

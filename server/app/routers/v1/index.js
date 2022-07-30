@@ -14,7 +14,7 @@ const disciplineRouter = require("./disciplineRouter");
 const statRouter = require("./statRouter");
 
 router.use("/tournaments", tournamentRouter);
-router.use("/matchs", matchRouter);
+router.use("/matches", matchRouter);
 router.use("/teams", teamRouter);
 router.use("/users", userRouter);
 router.use("/results", resultRouter);
