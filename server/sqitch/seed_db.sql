@@ -29,20 +29,21 @@ INSERT INTO "state" ("name") VALUES
   ('started'),
   ('closed');
 
-INSERT INTO "tournament" ("title", "date", "description", "picture_url", "nb_playground", "player_limit", "discipline_id", "type_id", "state_id", "club_id") VALUES
-  ('Champion''s trophy', '01/08/2022', 'La fin de saison est proche !', 'http://kinoah.com/images/tournament/cover/bad-03.jpg', '6', '25', '1', '1', '1', '1'),
-  ('Tournoi Elegance 2022', '08/08/2022', 'Le tournoi pour celles qui veulent en découdre !', 'http://kinoah.com/images/tournament/cover/bad-01.jpg', '7', null, '2', '1', '1', '1'),
-  ('Tournoi des brutes', '23/07/2022', 'Un tournoi en duo uniquement pour les hommes virils', 'http://kinoah.com/images/tournament/cover/the-witcher.jpg', '7', '30', '3', '1', '2', '1'),
-  ('Tournoi Lady Double', '19/07/2022', 'Un tournoi en duo pour l''élite féminine', 'http://kinoah.com/images/tournament/cover/bad-05.jpg', '7', null, '4', '1', '3', '1'),
-  ('Tournoi Téléportal III', '01/06/2022', 'Célebre et difficile...', 'http://kinoah.com/images/tournament/cover/portal2.jpg', '5', '25', '5', '1', '4', '1'),
-  ('Tournoi du trône de fer', '06/06/2022', 'Presque tous les coups sont permis', 'http://kinoah.com/images/tournament/cover/got01.jpg', '5', '25', '5', '1', '4', '1');
+
+INSERT INTO "tournament" ("title", "slug", "date", "description", "picture_url", "nb_playground", "player_limit", "discipline_id", "type_id", "state_id", "club_id") VALUES
+  ('Champion''s trophy', 'champions-trophy', '01/08/2022', 'La fin de saison est proche !', 'http://kinoah.com/images/tournament/cover/bad-03.jpg', '6', '25', '1', '1', '1', '1'),
+  ('Tournoi Elegance 2022', 'tournoi-elegance-2022', '08/08/2022', 'Le tournoi pour celles qui veulent en découdre !', 'http://kinoah.com/images/tournament/cover/bad-01.jpg', '7', null, '2', '1', '1', '1'),
+  ('Tournoi des brutes', 'tournoi-des-brutes', '23/07/2022', 'Un tournoi en duo uniquement pour les hommes virils', 'http://kinoah.com/images/tournament/cover/the-witcher.jpg', '7', '30', '3', '1', '2', '1'),
+  ('Tournoi Lady Double', 'tournoi-lady-double', '19/07/2022', 'Un tournoi en duo pour l''élite féminine', 'http://kinoah.com/images/tournament/cover/bad-05.jpg', '7', null, '4', '1', '3', '1'),
+  ('Tournoi Téléportal III', 'tournoi-teleportal-iii', '01/06/2022', 'Célebre et difficile...', 'http://kinoah.com/images/tournament/cover/portal2.jpg', '5', '25', '5', '1', '4', '1'),
+  ('Tournoi du trône de fer', 'tournoi-du-trone-de-fer', '06/06/2022', 'Presque tous les coups sont permis', 'http://kinoah.com/images/tournament/cover/got01.jpg', '5', '25', '5', '1', '4', '1');
 
 INSERT INTO "user" ("firstname", "lastname", "address", "birthdate", "gender_id", "is_active", "email", "password", "url_avatar", "player_license", "club_id", "role_id") VALUES
   ('Tom', 'Roche', 'Passage de la clé des champs, 38530 Pontcharra', '25/03/1980', '1', true, 'tom@gmail.com', '$2a$10$vOUYY2w4YemevAAsed8S/u./U9PLwvcmsrk7srPekaPtgxS89hZXa', 'tom.jpg', '3554666', '1', '1'),
   ('Jonathan', 'Thevenin', 'Rue des fleurs, 31100 Toulouse', '12/04/1990', '1', true, 'jonathan@gmail.com', '$2a$10$vOUYY2w4YemevAAsed8S/u./U9PLwvcmsrk7srPekaPtgxS89hZXa', 'jonathan.jpg', '6945214', '1', '2'),
   ('Cédric', 'Bernard', 'Avenue de la gare, 75005 Paris', '04/07/1979', '1', true, 'cedric@gmail.com', '$2a$10$vOUYY2w4YemevAAsed8S/u./U9PLwvcmsrk7srPekaPtgxS89hZXa', 'cedric.jpg', '6945648', '1', '2'),
-  ('Tino', 'Pajaro', 'Disneyland, 77420 Marne-la-vallée', '21/11/1977', '1', true, 'tino@gmail.com', '$2a$10$vOUYY2w4YemevAAsed8S/u./U9PLwvcmsrk7srPekaPtgxS89hZXa', 'tino.jpg', '66315648', '1', '2'),
-  ('El Houceine', 'El Handouz', 'Impasse du lila, 75016 Paris', '10/02/1995', '1', true, 'houceine@gmail.com', '$2a$10$vOUYY2w4YemevAAsed8S/u./U9PLwvcmsrk7srPekaPtgxS89hZXa', 'houceine.jpg', '66315548', '1', '2'),
+  ('Tino', 'Pajaro', 'Disneyland, 77420 Marne-la-vallée', '21/11/1977', '1', true, 'tino@gmail.com', '$2a$10$vOUYY2w4YemevAAsed8S/u./U9PLwvcmsrk7srPekaPtgxS89hZXa', 'tino.jpg', '61315648', '1', '2'),
+  ('El Houceine', 'El Handouz', 'Impasse du lila, 75016 Paris', '10/02/1995', '1', true, 'houceine@gmail.com', '$2a$10$vOUYY2w4YemevAAsed8S/u./U9PLwvcmsrk7srPekaPtgxS89hZXa', 'houceine.jpg', '66315648', '1', '2'),
   ('Anestassia', 'Hollow', '497 avenue xwrecks E 47615 sticker', '08/12/1933', '2', true, 'ahollow0@artisteer.com', 'r2ecVY7ook6RVw7s193067EF938zC5m9t38GB9285050Z5TfHGy117RoR1VAC45l', '/nisi/at/nibh.jpg', '3528826604', '1', '2'),
   ('Randi', 'Mullins', '60 avenue mfizz wind 94075 mumpss', '22/09/1955', '2', true, 'rmullins1@linkedin.com', '0762WKU8u66J9Vxcu92ykWxN25v2PK53Ub4TD82yRI8z9k8JMKx9bce870466Zx2', '/faucibus/orci/luctus/et.xml', '1625023554', '1', '2'),
   ('Evin', 'Ferron', '90 avenue tmarrow runny 33177 fiche', '20/11/1950', '1', false, 'eferron2@umn.edu', 'qwf56K71V6UNDm54hIDH99cv48M2qIInJ74wX195J50I7U7C6wgw28QmZm0da7ra', '/penatibus/et/magnis/dis/parturient/montes/nascetur.aspx', '5247867367', '1', '2'),
