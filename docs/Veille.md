@@ -38,6 +38,10 @@
 - https://javascript.info/currying-partials
 - https://mindsers.blog/fr/post/composition-function-currying/
 
+## Infos sur le déploiement sur heroku
+
+- https://towardsdev.com/deploying-a-monorepo-to-heroku-74c0d5a1f79e
+
 ## Infos sur le SSL avec pg pour Heroku
 
 - https://help.heroku.com/QVRZIEAH/why-am-i-seeing-connection-errors-for-my-heroku-postgres-database-from-an-unexpected-ip-address-what-are-these-unauthorized-connection-attempts
@@ -50,8 +54,13 @@
 - https://sematext.com/blog/node-js-error-handling/#toc-4-catch-all-uncaught-exceptions-10
 - https://github.com/arkerone/express-security-example
 
-## Inos sur envoi de mail sur express
+## Infos sur envoi de mail sur express
 
 - https://www.youtube.com/watch?v=W7CDlpMFM_c
 - https://nodemailer.com/about/
 - https://www.bacancytechnology.com/blog/send-email-using-nodemailer
+
+## Infos sur l'upload d'image
+
+- https://cloudinary.com/
+- https://www.npmjs.com/package/multer-storage-cloudinary
