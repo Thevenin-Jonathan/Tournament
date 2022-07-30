@@ -6,7 +6,7 @@ const debug = require("debug")("dm-match-has-team")
  * @returns {data[]} matches and teams data
  */
 async function findAll() {
-  const result = await pool.query(`SELECT * FROM "match_has_team"`);
+  const result = await pool.query(`SELECT * FROM "match_has_team" ORDER BY "team_id" ASC, "match_id" ASC`);
   return result.rows;
 }
 

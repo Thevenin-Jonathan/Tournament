@@ -6,7 +6,7 @@ const debug = require("debug")("dm-match");
  * @returns {matches[]} matches
  */
 async function findAll() {
-  const result = await pool.query(`SELECT * FROM "match"`);
+  const result = await pool.query(`SELECT * FROM "match" ORDER BY "id" ASC`);
   return result.rows;
 }
 
