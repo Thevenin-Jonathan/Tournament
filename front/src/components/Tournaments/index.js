@@ -33,14 +33,8 @@ function Tournaments() {
         <p>Ces tournois sont ouverts aux inscriptions</p>
         {tournamentsFilter(1).map((tournament) => (
           <TournamentCard
+            tournament={tournament}
             key={tournament.id}
-            state={tournament.state_id}
-            name={tournament.title}
-            discipline={tournament.discipline_id}
-            players={18}
-            matchLeft={11}
-            slug={tournament.title}
-            cover={tournament.picture_url}
           />
         ))}
       </section>
@@ -50,14 +44,8 @@ function Tournaments() {
         <p>Ces tournois sont en cours de jeu</p>
         {tournamentsFilter(3).map((tournament) => (
           <TournamentCard
+            tournament={tournament}
             key={tournament.id}
-            state={tournament.state_id}
-            name={tournament.title}
-            discipline={tournament.discipline_id}
-            players={18}
-            matchLeft={11}
-            slug={tournament.title}
-            cover={tournament.picture_url}
           />
         ))}
       </section>
@@ -67,14 +55,8 @@ function Tournaments() {
         <p>Ces tournois vont se jouer sous peu, les inscriptions sont fermées</p>
         {tournamentsFilter(2).map((tournament) => (
           <TournamentCard
+            tournament={tournament}
             key={tournament.id}
-            state={tournament.state_id}
-            name={tournament.title}
-            discipline={tournament.discipline_id}
-            players={18}
-            matchLeft={11}
-            slug={tournament.title}
-            cover={tournament.picture_url}
           />
         ))}
       </section>
@@ -84,14 +66,8 @@ function Tournaments() {
         <p>Ces tournois sont terminés, vous pouvez consulter les résultats</p>
         {tournamentsFilter(4).map((tournament) => (
           <TournamentCard
+            tournament={tournament}
             key={tournament.id}
-            state={tournament.state_id}
-            name={tournament.title}
-            discipline={tournament.discipline_id}
-            players={18}
-            matchLeft={11}
-            slug={tournament.title}
-            cover={tournament.picture_url}
           />
         ))}
       </section>

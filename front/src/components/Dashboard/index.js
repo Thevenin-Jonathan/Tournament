@@ -83,27 +83,15 @@ function Dashboard() {
 
         {tournamentsFilter(1).map((tournament) => (
           <TournamentCard
+            tournament={tournament}
             key={tournament.id}
-            state={tournament.state_id}
-            name={tournament.title}
-            discipline={tournament.discipline_id}
-            players={18}
-            matchLeft={11}
-            slug={tournament.title}
-            cover={tournament.picture_url}
           />
         ))}
 
         {tournamentsFilter(3).map((tournament) => (
           <TournamentCard
+            tournament={tournament}
             key={tournament.id}
-            state={tournament.state_id}
-            name={tournament.title}
-            discipline={tournament.discipline_id}
-            players={18}
-            matchLeft={11}
-            slug={tournament.title}
-            cover={tournament.picture_url}
           />
         ))}
       </div>

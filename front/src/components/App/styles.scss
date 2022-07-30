@@ -602,10 +602,13 @@ a {
     margin-bottom: 1rem;
   }
   .tournament-players-count {
-
+    font-size: .8rem;
   }
   .tournament-match {
-
+    font-size: .8rem;
+  }
+  .tournament-date {
+    font-weight: var(--black);
   }
 }
 
