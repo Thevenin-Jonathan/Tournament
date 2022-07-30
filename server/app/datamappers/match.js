@@ -1,5 +1,6 @@
 const pool = require("../config/database");
 const debug = require("debug")("dm-match");
+const matchHasTeamDatamapper = require("./matchHasTeam");
 
 /**
  * Return all matches from database
@@ -19,24 +20,34 @@ async function findById(id) {
   const result = (await pool.query(
     `
     SELECT
-      "match"."id", "match_has_team"."team_id", "state_id",
-      "note", "match"."tournament_id", "is_winner", "result_id",
-      ARRAY_AGG("team_has_user"."user_id") AS "user_id"
-    FROM "match"
-    LEFT JOIN "match_has_team"
-      ON "match_has_team"."match_id" = "match"."id"
-    LEFT JOIN "team"
-      ON "match_has_team"."team_id" = "team"."id"
-    LEFT JOIN "team_has_user"
-      ON "team_has_user"."team_id" = "team"."id"
-    LEFT JOIN "result"
-      ON "result"."id" = "result_id"
-    LEFT JOIN "state"
-      ON "state"."id" = "state_id"
-    WHERE "match"."id" = $1
-    GROUP BY 1, 2, 3, 4, 5, 6, 7
+    "M"."id",
+    "M"."note",
+    "M"."tournament_id",
+    "M"."state_id",
+    (SELECT JSON_AGG(
+      JSON_BUILD_OBJECT(
+        'team_id', "MT"."team_id",
+        'is_winner', "MT"."is_winner",
+        'result_id', "MT"."result_id",
+        'user', (SELECT JSON_AGG(
+                  JSON_BUILD_OBJECT(
+                    'user_id', "U"."id"
+                  )
+                )
+                FROM "user" AS "U"
+                LEFT JOIN "team_has_user" AS "TU"
+                  ON "TU"."user_id" = "U"."id"
+                WHERE "TU"."team_id" = "T"."id"
+                ))) AS "team"
+    FROM "team" AS "T"
+    JOIN "match_has_team" AS "MT"
+      ON "MT"."team_id" = "T"."id"
+    WHERE "MT"."match_id" = "M"."id"
+    )
+    FROM "match" AS "M"
+    WHERE "M"."id" = $1
     `,
-    [id])).rows;
+    [id])).rows[0];
   return result;
 }
 

@@ -1,4 +1,7 @@
+const debug = require("debug")("ct-match");
 const matchDatamapper = require("../datamappers/match");
+const matchHasTeamDatamapper = require("../datamappers/matchHasTeam");
+const tournamentDatamapper = require("../datamappers/tournament");
 const { Api404Error } = require("../services/errorHandler");
 
 /**
@@ -24,46 +27,7 @@ async function getAll(_, res) {
  */
 async function getOne(req, res) {
   const id = req.params.id;
-  const data = await matchDatamapper.findById(id);
-  const match = {
-    id: data[0].id,
-    note: data[0].note,
-    tournament_id: data[0].tournament_id,
-    state: [
-      {
-        id: data[0].state_id
-      }
-    ],
-    teams: [
-      {
-        id: data[0].team_id,
-        users: [
-          {
-            id: data[0].user_id[0],
-          },
-          {
-            id: data[0].user_id[1],
-          }
-        ],
-        is_winner: data[0].is_winner,
-        result_id: data[0].result_id,
-        result_label: data[0].result_label
-      },
-      {
-        id: data[1].team_id,
-        users: [
-          {
-            id: data[1].user_id[1],
-          },
-          {
-            id: data[1].user_id[1],
-          }
-        ],
-        is_winner: data[1].is_winner,
-        result_id: data[1].result_id
-      }
-    ]
-  }
+  const match = await matchDatamapper.findById(id);  
   return res.json(match);
 };
 
