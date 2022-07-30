@@ -4,6 +4,7 @@ const controller = require("../../controllers/matchController");
 const validationWrapper = require("../../services/validationWrapper");
 const createSchema = require("../../schemas/matchCreate");
 const updateSchema = require("../../schemas/matchUpdate");
+const matchUpdTeamSchema = require("../../schemas/matchUpdTeam");
 
 router.route("/")
   .get(controllerWrapper(controller.getAll))
@@ -18,7 +19,14 @@ router.route("/:id")
     controllerWrapper(controller.update))
   .delete(controllerWrapper(controller.destroy));
 
-  router.route("/:id/teams").get(controllerWrapper(controller.getAllTeams))
+router.route("/:id/addTeam")
+  .patch(
+    validationWrapper(matchUpdTeamSchema),
+    controllerWrapper(controller.addTeam));
 
+router.route("/:id/removeTeam")
+  .patch(
+    validationWrapper(matchUpdTeamSchema),
+    controllerWrapper(controller.removeTeam));
 
 module.exports = router;
