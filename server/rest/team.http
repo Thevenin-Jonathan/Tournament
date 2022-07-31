@@ -17,17 +17,7 @@ content-type: application/json
 
 {
   "tournament_id": 5,
-  "teams": [6,7]
-}
-
-###
-# Update one team
-PATCH {{hostname}}/teams/17 HTTP/1.1
-content-type: application/json
-
-{
-  "note": "Une noteuh",
-  "state_id": 4
+  "user_ids": [6,7]
 }
 
 ###
