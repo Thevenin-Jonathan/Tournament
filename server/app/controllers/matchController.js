@@ -40,9 +40,19 @@ async function getOne(req, res) {
  * @returns {json} JSON response with the created match
  */
 async function create(req, res) {
-  const match = req.body;
-  const newMatch = await matchDatamapper.insertOne(match);
-  return res.status(201).json(newMatch);
+  const data = req.body;
+
+  /** Add match */
+  const matchId = (await matchDatamapper.insertOne(data)).id;
+
+  /** Add team into match */
+  for (const teamId of data.team_ids) {
+    await matchDatamapper.insertTeam(matchId, teamId)
+  }
+
+  /** Get and return all match informations */
+  const match = await matchDatamapper.findById(matchId);
+  return res.status(201).json(match);
 };
 
 /**
