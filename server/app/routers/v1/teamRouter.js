@@ -2,18 +2,15 @@ const router = require("express").Router();
 const controllerWrapper = require("../../services/controllerWrapper");
 const controller = require("../../controllers/teamController");
 const validationWrapper = require("../../services/validationWrapper");
-const createUpdateSchema = require("../../schemas/team");
+const createSchema = require("../../schemas/teamCreate");
 
 router.route("/")
   .get(controllerWrapper(controller.getAll))
   .post(
-    validationWrapper(createUpdateSchema),
+    validationWrapper(createSchema),
     controllerWrapper(controller.create));
 
 router.route("/:id")
   .get(controllerWrapper(controller.getOne));
-
-router.route("/:id/matches").get(controllerWrapper(controller.getAllMatches));
-router.route("/:id/users").get(controllerWrapper(controller.getAllUsers));
 
 module.exports = router;
