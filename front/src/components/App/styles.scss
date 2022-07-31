@@ -453,21 +453,69 @@ a {
 }
 
 .tournaments {
+  display: flex;
+  // padding: 1rem 2rem;
+  padding: 0;
+  .tournaments-list {
+    flex:1;
+    padding: 1rem 2rem;
+  }
+  .tournaments-filter {
+    position: sticky;
+    top: 1rem;
+    width: 15rem;
+    background-color: var(--main-color);
+    border-radius: var(--border-radius);
+    margin: 1rem;
+    margin-right: 2rem;
+    padding: 2rem;
+    align-self: flex-start;
+    @media only screen and (max-width: 870px) {
+      position: fixed;
+      z-index: 98;
+      top: var(--header-height);
+      right: 0;
+      display: none;
+    }
+    h3 {
+      margin: 0;
+      margin-top: 1rem;
+    }
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      padding: 1rem 0;
+    }
+    label {
+      font-weight: var(--fine);
+    }
+    input[type="checkbox"] {
+      margin-right: .5rem;
+    }
+  }
   section {
     padding: 1rem 0;
     .title-h2 {
       position: sticky;
       top: -1rem;
-      z-index: 99;
+      z-index: 55;
       background-color: var(--bg-color);
       padding: 2rem;
       margin: 0 -2rem;
     }
   }
   .archived-tournaments {
+    .title-h2{
+      background-image: url(../../assets/img/bg-archived-tournaments.png);
+      background-repeat: repeat;
+      background-size: 10px;
+      background-attachment: fixed;
+    }
     background-image: url(../../assets/img/bg-archived-tournaments.png);
     background-repeat: repeat;
     background-size: 10px;
+    background-attachment: fixed;
     padding: 2rem;
     padding-top: 0;
     margin:0 -2rem -2rem -2rem;
@@ -619,6 +667,7 @@ a {
   }
   .tournament-date {
     font-weight: var(--black);
+    text-transform: capitalize;
   }
 }
 
