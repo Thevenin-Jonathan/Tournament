@@ -486,6 +486,9 @@ a {
       flex-direction: column;
       gap: .5rem;
       padding: 1rem 0;
+      li:first-child label {
+        font-weight: var(--normal);
+      }
     }
     label {
       font-weight: var(--fine);
