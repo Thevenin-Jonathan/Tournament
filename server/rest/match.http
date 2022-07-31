@@ -17,7 +17,7 @@ content-type: application/json
 
 {
   "tournament_id": 5,
-  "teams": [6,7]
+  "team_ids": [6,7]
 }
 
 ###
@@ -50,5 +50,5 @@ content-type: application/json
 
 ###
 # Delete one match
-DELETE {{hostname}}/matches/16 HTTP/1.1
+DELETE {{hostname}}/matches/18 HTTP/1.1
 content-type: application/json

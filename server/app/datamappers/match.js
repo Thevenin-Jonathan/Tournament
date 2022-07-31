@@ -66,22 +66,7 @@ async function insertOne(match) {
     RETURNING *
     `, [match.tournament_id]
     )).rows[0];
-    
-  result.team = [];
-
-  for (const team of match.teams) {
-    const newTeam = await pool.query (
-      `
-      INSERT INTO "match_has_team"
-        ("match_id", "team_id")
-      VALUES
-        ($1, $2)
-      RETURNING "team_id" AS "id", "is_winner", "result_id";
-      `, [result.id, team]
-    );
-    result.team.push({team_id: newTeam.rows[0]});
-  };
-  
+      
   return result;
 }
 
