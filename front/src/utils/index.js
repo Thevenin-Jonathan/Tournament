@@ -99,6 +99,15 @@ const dateFr = (date) => {
   return maDate.toLocaleDateString('fr-FR', options);
 };
 
+// Display text formated date --> mardi 19 juillet 2022
+const longDateFr = (date) => {
+  const options = {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+  };
+  const maDate = new Date(date);
+  return maDate.toLocaleDateString('fr-FR', options);
+};
+
 /**
  * supprimmer les clés d'un objet qui ont pour valeur null ou false
  * @param {object} obj - l'objet a nettoyer
@@ -118,5 +127,6 @@ export {
   disciplineText,
   disciplineShortText,
   dateFr,
+  longDateFr,
   deleteNullOrFalsyKeyInObject,
 };
