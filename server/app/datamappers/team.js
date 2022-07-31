@@ -1,7 +1,7 @@
 const pool = require("../config/database");
 
 /** 
- * Get and return all teams that participate to a tournament from DB
+ * Get and return all teams
  * @returns {Object[]} - the list of all teams
 */
 async function findAll() {
@@ -12,9 +12,9 @@ async function findAll() {
 };
 
 /** 
- * Get and return one team that participate to a tournament based on its id from DB
- * @param {number} - id of the team
- * @returns {Object} - one team
+ * Get and return one team
+ * @param {number} id Team id
+ * @returns {Object} One team
 */
 async function findById(id) {
 	const result = await pool.query(
@@ -44,15 +44,15 @@ async function findById(id) {
 };
 
 /** 
- * Add a new team to a tournament in the DB
- * @param {number} - id of the team
- * @returns {Object} - team added
+ * Add a new team to a tournament
+ * @param {number} tournament_id Tournament id
+ * @returns {Object} New team
 */
 async function insertOne(tournament_id) {
 	const result = await pool.query(
 		`
-		INSERT INTO team ("tournament_id")
-		VALUES($1) 
+		INSERT INTO "team" ("tournament_id")
+		VALUES ($1) 
 		RETURNING *;
 		`,[tournament_id]
 	);  
@@ -60,24 +60,29 @@ async function insertOne(tournament_id) {
 };
 
 /** 
- * Delete one team from a tournament in the DB
- * @param {number} - id of the team
- * @returns {boolean} - true if the team is deleted
+ * Add one user into team
+ * @param {number} id Team id
+ * @param {number} userId User id to add
+ * @returns {Object} - New team
 */
-async function deleteOne(id) {
+async function insertUser(id, userId) {
 	const result = await pool.query(
-		`DELETE FROM "team" WHERE "id" = $1;`,[id]
-	);
-	return !!result.rowCount;
+		`
+		INSERT INTO "team_has_user" ("team_id", "user_id")
+		VALUES ($1, $2) 
+		RETURNING *;
+		`,[id, userId]
+	);  
+	return result.rows[0];
 };
 
 /** 
- * Update the tournament of one team
- * @param {number} - id of the tournament
- * @param {number} - id of the team 
- * @returns {Object} - team updated
+ * Update team tournament id
+ * @param {number} id Team id
+ * @param {number} tournamentId Tournament id
+ * @returns {Object} - Team updated
 */
-async function updateOne(tournamentId, id) {
+async function updateOne(id, tournamentId) {
 	const result = await pool.query(
 		`
 		UPDATE "team" 
@@ -90,41 +95,22 @@ async function updateOne(tournamentId, id) {
 };
 
 /** 
- * Get and return all the matches of a team
- * @param {number} - id of the team
- * @returns {Object} - all matches
+ * Delete one team
+ * @param {number} id Team id
+ * @returns {boolean} True if the team is deleted
 */
-async function findAllMatches(id) {
+async function deleteOne(id) {
 	const result = await pool.query(
-		`
-		SELECT * FROM match_has_team
-		WHERE team_id = $1;
-		`,[id]
+		`DELETE FROM "team" WHERE "id" = $1;`,[id]
 	);
-	return result.rows;
-};
-
-/** 
- * Get and return all the matches of a team
- * @param {number} - id of the team
- * @returns {Object} - all matches
-*/
-async function findAllUsers(id) {
-	const result = await pool.query(
-		`
-		SELECT * FROM team_has_user
-		WHERE team_id = $1;
-		`,[id]
-	);
-	return result.rows;
+	return !!result.rowCount;
 };
 
 module.exports = {
 	findAll,
 	findById,
 	insertOne,
-	deleteOne,
+	insertUser,
 	updateOne,
-	findAllMatches,
-	findAllUsers
+	deleteOne
 };
