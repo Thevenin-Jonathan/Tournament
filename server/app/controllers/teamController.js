@@ -27,8 +27,16 @@ async function getAll(_, res) {
  */
 async function getOne(req, res) {
   const id = req.params.id;
-  const team = await teamDatamapper.findById(id);
-  return res.json(team);
+  if (id && !isNaN(Number(id))) {
+    const team = await teamDatamapper.findById(id);
+
+    if (!team) throw new Api404Error("Team does not exist in DB");
+  
+    await teamDatamapper.deleteOne(id);
+    return res.json(team);
+  } else {
+    throw new Api404Error("Invalid id, Team not found");
+  }
 };
 
 /**
@@ -179,14 +187,19 @@ async function create(req, res) {
  */
 async function destroy(req, res) {
   const id = req.params.id;
-  const team = await teamDatamapper.findById(id);
 
-  if (!team) {
-    throw new Api404Error("Team does not exist in DB");
+  if (id && !isNaN(Number(id))) {
+    const team = await teamDatamapper.findById(id);
+
+    if (!team) {
+      throw new Api404Error("Team does not exist in DB");
+    }
+  
+    await teamDatamapper.deleteOne(id);
+    return res.status(204).json();
+  } else {
+    throw new Api404Error("Invalid id, Team not found");
   }
-
-  await teamDatamapper.deleteOne(id);
-  return res.status(204).json();
 };
 
 module.exports = {
