@@ -31,6 +31,12 @@ ALTER TABLE "match_has_team"
     ADD CONSTRAINT match_has_team_match_id_fkey FOREIGN KEY ("match_id") REFERENCES "match"("id") ON DELETE CASCADE,
     ADD CONSTRAINT match_has_team_team_id_fkey FOREIGN KEY ("team_id") REFERENCES "team"("id") ON DELETE CASCADE;
 
+ALTER TABLE "team_has_user"
+    DROP CONSTRAINT team_has_user_user_id_fkey,
+    DROP CONSTRAINT team_has_user_team_id_fkey,
+    ADD CONSTRAINT team_has_user_user_id_fkey FOREIGN KEY ("user_id") REFERENCES "user"("id") ON DELETE CASCADE,
+    ADD CONSTRAINT team_has_user_team_id_fkey FOREIGN KEY ("team_id") REFERENCES "team"("id") ON DELETE CASCADE;
+
 ALTER TABLE IF EXISTS "club" ALTER COLUMN "club_ref" SET not null;
 
 COMMIT;

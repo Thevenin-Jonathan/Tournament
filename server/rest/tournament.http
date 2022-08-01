@@ -1,0 +1,36 @@
+@hostname = http://localhost:3001/api/v1
+
+###
+# Get all tournaments
+GET {{hostname}}/tournaments/ HTTP/1.1
+content-type: application/json
+
+###
+# Get one tournament
+GET {{hostname}}/tournaments/5 HTTP/1.1
+content-type: application/json
+
+###
+# Create one tournament
+POST {{hostname}}/tournaments/ HTTP/1.1
+content-type: application/json
+
+{
+  "tournament_id": 5,
+  "team_ids": [6,7]
+}
+
+###
+# Update one tournament
+PATCH {{hostname}}/tournaments/17 HTTP/1.1
+content-type: application/json
+
+{
+  "note": "Une noteuh",
+  "state_id": 4
+}
+
+###
+# Delete one tournament
+DELETE {{hostname}}/tournaments/18 HTTP/1.1
+content-type: application/json

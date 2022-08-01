@@ -117,8 +117,8 @@ async function updateOne(id, match) {
 /**
  * Remove one team from match
  * @param {number} id match identifiant
- * @param {object} team_id match informations
- * @returns {object} infos match
+ * @param {object} team_id team id
+ * @returns {object} true if team was delete
  */
  async function deleteTeam(id, teamId) {
   const result = await pool.query(
