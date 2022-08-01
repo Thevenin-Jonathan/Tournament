@@ -1,5 +1,7 @@
 BEGIN;
 
+ALTER TABLE IF EXISTS "match" ADD COLUMN "phase" INT;
+
 CREATE OR REPLACE FUNCTION "get_match_by_id" (integer)
 RETURNS table(
   "id" integer,
