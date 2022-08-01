@@ -11,6 +11,8 @@ router.route("/")
     controllerWrapper(controller.create));
 
 router.route("/:id")
-  .get(controllerWrapper(controller.getOne));
+  .get(controllerWrapper(controller.getOne))
+  .delete(controllerWrapper(controller.destroy));
+
 
 module.exports = router;
