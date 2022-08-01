@@ -7,7 +7,7 @@ content-type: application/json
 
 ###
 # Get one team
-GET {{hostname}}/teams/20 HTTP/1.1
+GET {{hostname}}/teams/10 HTTP/1.1
 content-type: application/json
 
 ###
@@ -17,7 +17,7 @@ content-type: application/json
 
 {
   "tournament_id": 3,
-  "user_ids": [6]
+  "user_ids": [1]
 }
 
 ###
@@ -39,6 +39,6 @@ content-type: application/json
 }
 
 ###
-# Delete one match
+# Delete one team
 DELETE {{hostname}}/teams/21 HTTP/1.1
 content-type: application/json

@@ -57,7 +57,8 @@ RETURNS table(
   "nb_registered" integer,
   "managers" json,
   "registered" json,
-  "matches" json) 
+  "matches" json,
+  "teams" json)
 LANGUAGE SQL 
 AS $$
 
@@ -82,7 +83,7 @@ JOIN "team" AS "TE"
   ON "TE"."tournament_id" = "T"."id"
 JOIN "team_has_user" AS "TEU"
   ON "TEU"."team_id" = "TE"."id"
-WHERE "TEU"."user_id" = "U"."id") AS nb_registered,
+WHERE "TEU"."user_id" = "U"."id") AS "nb_registered",
 
 COALESCE ((SELECT JSON_AGG(
   JSON_BUILD_OBJECT(
@@ -112,7 +113,20 @@ COALESCE ((SELECT JSON_AGG(
   ))
 FROM "match" AS "M"
 WHERE "M"."tournament_id" = "T"."id"
-), '[]') AS "matches"
+), '[]') AS "matches",
+
+COALESCE ((SELECT JSON_AGG(
+  JSON_BUILD_OBJECT(
+    'id', "TE"."id",
+    'users', COALESCE ((SELECT JSON_AGG(
+                JSON_BUILD_OBJECT(
+                'id', "TU"."user_id"
+                ))
+                FROM "team_has_user" AS "TU"
+                WHERE "TU"."team_id" = "TE"."id"), '[]'))) AS "users"
+FROM "team" AS "TE"
+WHERE "TE"."tournament_id" = "T"."id"
+), '[]') AS "teams"
 
 FROM "tournament" AS "T"
 WHERE "T"."slug" = $1;
@@ -136,7 +150,8 @@ RETURNS table(
   "nb_registered" integer,
   "managers" json,
   "registered" json,
-  "matches" json) 
+  "matches" json,
+  "teams" json) 
 LANGUAGE SQL 
 AS $$
 
@@ -161,7 +176,7 @@ JOIN "team" AS "TE"
   ON "TE"."tournament_id" = "T"."id"
 JOIN "team_has_user" AS "TEU"
   ON "TEU"."team_id" = "TE"."id"
-WHERE "TEU"."user_id" = "U"."id") AS nb_registered,
+WHERE "TEU"."user_id" = "U"."id") AS "nb_registered",
 
 COALESCE ((SELECT JSON_AGG(
   JSON_BUILD_OBJECT(
@@ -191,7 +206,20 @@ COALESCE ((SELECT JSON_AGG(
   ))
 FROM "match" AS "M"
 WHERE "M"."tournament_id" = "T"."id"
-), '[]') AS "matches"
+), '[]') AS "matches",
+
+COALESCE ((SELECT JSON_AGG(
+  JSON_BUILD_OBJECT(
+    'id', "TE"."id",
+    'users', COALESCE ((SELECT JSON_AGG(
+                JSON_BUILD_OBJECT(
+                'id', "TU"."user_id"
+                ))
+                FROM "team_has_user" AS "TU"
+                WHERE "TU"."team_id" = "TE"."id"), '[]'))) AS "users"
+FROM "team" AS "TE"
+WHERE "TE"."tournament_id" = "T"."id"
+), '[]') AS "teams"
 
 FROM "tournament" AS "T"
 WHERE "T"."id" = $1;
@@ -230,6 +258,32 @@ FROM "match_has_team" AS "MT"
 WHERE "MT"."team_id" = "T"."id"), '[]') AS "matches"  
 FROM "team" AS "T"
 WHERE "id"= $1;
+
+$$;
+
+CREATE OR REPLACE FUNCTION "get_all_team" ()
+RETURNS table(
+  "id" integer,
+  "tournament_id" integer,
+  "users" json)
+LANGUAGE SQL 
+AS $$
+
+SELECT
+  "T"."id",
+  "T"."tournament_id",
+COALESCE ((SELECT JSON_AGG(
+  JSON_BUILD_OBJECT(
+    'user_id', "TU"."user_id",
+    'gender_id', (SELECT
+                  "gender_id"
+                  FROM "user" AS "U"
+                  WHERE "U"."id" = "TU"."user_id")
+  ))
+FROM "team_has_user" AS "TU"
+WHERE "TU"."team_id" = "T"."id"), '[]') AS "users"
+FROM "team" AS "T"
+ORDER BY "T"."id";
 
 $$;
 

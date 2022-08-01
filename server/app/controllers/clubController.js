@@ -24,8 +24,14 @@ async function getAll(_, res) {
  */
 async function getOne(req, res) {
   const id = req.params.id;
-  const club = await clubDatamapper.findById(id);
-  return res.json(club);
+  if (id && !isNaN(Number(id))) {
+    const club = await clubDatamapper.findById(id);
+
+    if (!club) throw new Api404Error("Club does not exist in DB");
+    return res.json(club);
+  } else {
+    throw new Api404Error("Invalid id, club not found");
+  }
 };
 
 /**
@@ -103,15 +109,17 @@ async function update(req, res) {
  * @returns {json} JSON response with one club
  */
 async function destroy(req, res) {
-  const id = req.params.id;
-  const club = await clubDatamapper.findById(id);
+  const id = req.params.id;  
 
-  if (!club) {
-    throw new Api404Error("Club does not exist in DB");
+  if (id && !isNaN(Number(id))) {
+    const club = await clubDatamapper.findById(id);
+
+    if (!club) throw new Api404Error("Club does not exist in DB");  
+    await clubDatamapper.deleteOne(id);
+    return res.status(204).json();
+  } else {
+    throw new Api404Error("Invalid id, club not found");
   }
-
-  await clubDatamapper.deleteOne(id);
-  return res.status(204).json();
 };
 
 module.exports = {
