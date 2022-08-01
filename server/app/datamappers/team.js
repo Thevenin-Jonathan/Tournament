@@ -77,6 +77,23 @@ async function insertUser(id, userId) {
 };
 
 /** 
+ * Remove one user from team
+ * @param {number} id Team id
+ * @param {number} userId User id to remove
+ * @returns {Object} - True if user was delete
+*/
+async function deleteUser(id, userId) {
+	const result = await pool.query(
+		`
+		DELETE FROM "team_has_user"
+		WHERE "user_id" = $2
+		AND "team_id" = $1;
+		`,[id, userId]
+	);  
+	return result.rowCount;
+};
+
+/** 
  * Delete one team
  * @param {number} id Team id
  * @returns {boolean} True if the team is deleted
@@ -93,5 +110,6 @@ module.exports = {
 	findById,
 	insertOne,
 	insertUser,
+	deleteUser,
 	deleteOne
 };
