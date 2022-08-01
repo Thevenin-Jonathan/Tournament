@@ -16,6 +16,9 @@ export const initialState = {
   // teams du tournoi courant
   teams: [],
 
+  // suis je dans le tournoi courant ?
+  alreadyRegistred: false,
+
   // champs controlés AddTournamentForm
   tournamanentName: '',
   tournamanentDate: today(),
@@ -85,6 +88,16 @@ const reducer = (state = initialState, action = {}) => {
           ...state.filter,
           state_id: action.newFilter,
         },
+      };
+    case 'IM_ON_THIS_TOURNAMENT':
+      return {
+        ...state,
+        alreadyRegistred: true,
+      };
+    case 'IM_NOT_ON_THIS_TOURNAMENT':
+      return {
+        ...state,
+        alreadyRegistred: false,
       };
     default:
       return state;

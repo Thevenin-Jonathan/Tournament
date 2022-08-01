@@ -576,10 +576,12 @@ a {
     }
     .flex-wrapper {
       display: flex;
+      align-items: flex-start;
       gap: 2rem;
       margin-bottom: 2rem;
     }
     .infos {
+      font-size: 1.2rem;
       line-height: 2em;
       padding: 2rem;
       background: var(--main-color);
@@ -590,6 +592,18 @@ a {
       margin-bottom: 1rem;
       &::before {
         content:"“";
+      }
+    }
+    .registred-users {
+      background-color: var(--header-color);
+      ul {
+        list-style-type: square;
+        padding-left: 1rem;
+        a {
+          &:hover {
+            color: var(--emphase-color);
+          }
+        }
       }
     }
 }
