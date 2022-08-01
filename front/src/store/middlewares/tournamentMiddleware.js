@@ -47,6 +47,48 @@ const tournamentMiddleware = (store) => (next) => (action) => {
         });
       break;
     }
+    // inscription à un tournoi de simple (pas de gestion d'équipe)
+    case 'SINGLE_TOURNAMENT_SUBSCRIBE': {
+      const state = store.getState();
+      const data = {
+        tournament_id: state.tournament.tournament.id,
+        user_ids: [state.user.id],
+      };
+      console.log(data);
+      
+      const axiosConfig = {
+        method: 'post',
+        url: `${config.api.baseUrl}/teams`,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        data: qs.stringify(data),
+      };
+      next(action);
+      axios(axiosConfig)
+        .then((response) => {
+          store.dispatch({
+            type: 'NEW_TOAST',
+            newToast: {
+              id: state.interface.toastCounter,
+              message: 'inscription réussie',
+              type: 'success',
+            },
+          });
+        })
+        .catch((error) => {
+          store.dispatch({
+            type: 'NEW_TOAST',
+            newToast: {
+              id: state.interface.toastCounter,
+              message: `${error.response.data.message}`,
+              type: 'error',
+            },
+          });
+          throw new Error(error);
+        });
+      break;
+    }
 
     // créer un tournoi
     case 'CREATE_TOURNAMENT': {

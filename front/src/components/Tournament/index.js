@@ -35,11 +35,24 @@ function Tournament() {
     });
   }, []);
 
-  function findInMembers(playerId) {
+  // action de souscrprton
+  const handleSubscribe = () => {
+    dispatch({
+      type: 'SINGLE_TOURNAMENT_SUBSCRIBE',
+    });
+  }
+
+  const findInMembers = (playerId) => {
     const { firstname } = members.find((member) => member.id === playerId);
     const { lastname } = members.find((member) => member.id === playerId);
     return `${firstname} ${lastname}`;
-  }
+  };
+
+  const findTeamMembers = (teamId) => {
+    const { firstname } = members.find((member) => member.id === playerId);
+    const { lastname } = members.find((member) => member.id === playerId);
+    return `${firstname} ${lastname}`;
+  };
 
   if (isLoading) {
     return <Loader />;
@@ -67,10 +80,9 @@ function Tournament() {
             <h2>Participants</h2>
             <ul>
               { tournament.registered.map((player) => (
-                <li>
+                <li key={`player-${player.id}`}>
                   <Link
                     to={`/membres/${player.id}`}
-                    key={player.id}
                   >
                     { findInMembers(player.id) }
                   </Link>
@@ -80,13 +92,32 @@ function Tournament() {
 
           </div>
 
-          <div className="infos registred-teams">
+          {/* <div className="infos registred-teams">
             <h2>Equipes</h2>
-            { teams.map((team) => (
-              <li key={team.id}> {team.id} </li>
-            ))}
+            <ul>
+              { teams.map((team) => (
+                <li
+                  key={`team-${team.id}`}
+                >
+                  {team.id}
+                </li>
+              ))}
+            </ul>
 
-          </div>
+          </div> */}
+        </div>
+
+        <div>
+          { tournament.state_id === 1 ? (
+            <button
+              onClick={() => handleSubscribe()}
+              type="button"
+              className="action-btn"
+            >
+              Je m'inscris
+            </button>
+          )
+            : null}
 
         </div>
 

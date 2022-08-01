@@ -125,6 +125,26 @@ a {
   }
 }
 
+.action-btn {
+  text-align: center;
+  width: auto!important;
+  background-color: transparent;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  border: solid var(--border-size) var(--emphase-color);
+  font-weight: var(--black);
+  font-size: 1.2rem;
+  color: var(--emphase-color);
+  transition: .2s cubic-bezier(.82,.21,.1,1.02);
+  &:hover {
+    background-color: var(--emphase-color);
+    color: var(--ligth-color-text);
+  }
+  @media only screen and (max-width: 1100px) {
+    width: 100%!important;
+  }
+} 
+
 // pen button (=> edit button)
 .list-item-btn {
   background-color: transparent;
@@ -557,6 +577,7 @@ a {
     .flex-wrapper {
       display: flex;
       gap: 2rem;
+      margin-bottom: 2rem;
     }
     .infos {
       line-height: 2em;
