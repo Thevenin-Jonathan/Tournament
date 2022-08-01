@@ -1,3 +1,4 @@
+const debug = require("debug")("ct-team");
 const teamDatamapper = require("../datamappers/team");
 const tournamentDatamapper = require("../datamappers/tournament");
 const userDatamapper = require("../datamappers/user");
@@ -57,6 +58,12 @@ async function create(req, res) {
     throw new ApiError("Too many user, only one user for this discipline");
   }
 
+  if (((tournament.discipline_id <= 2) && (tournament.nb_registered >= tournament.player_limit)) ||
+    ((tournament.discipline_id >= 3) && users.length === 1 && (tournament.nb_registered >= tournament.player_limit)) ||
+    ((tournament.discipline_id >= 3) && users.length === 2 && (tournament.nb_registered >= tournament.player_limit - 1))) {
+    throw new ApiError("Registration not possible, the tournament is full");
+  }
+
   for (const user of users) {
     if (user.gender_id === 1 && (tournament.discipline_id === 2 || tournament.discipline_id === 4)){
       throw new ApiError("This discipline is reserved for women");
@@ -67,13 +74,13 @@ async function create(req, res) {
 
   if ((users.length === 2 && tournament.discipline_id === 5) 
     && ((users[0].gender_id === 1 && users[1].gender_id === 1) || (users[0].gender_id === 2 && users[1].gender_id === 2))) {
-    throw new ApiError("This discipline is reserved for one men and one women");
+    throw new ApiError("This discipline is reserved for one men and one women by team");
   }
 
-  /** Add team */
+  // /** Add team */
   const teamId = (await teamDatamapper.insertOne(data.tournament_id)).id;
 
-  /** Add user into team */
+  // /** Add user into team */
   for (const userId of data.user_ids) {
     await teamDatamapper.insertUser(teamId, userId);
   }
