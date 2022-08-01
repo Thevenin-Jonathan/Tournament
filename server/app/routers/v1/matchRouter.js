@@ -19,12 +19,12 @@ router.route("/:id")
     controllerWrapper(controller.update))
   .delete(controllerWrapper(controller.destroy));
 
-router.route("/:id/addTeam")
+router.route("/:id/add-team")
   .patch(
     validationWrapper(matchUpdTeamSchema),
     controllerWrapper(controller.addTeam));
 
-router.route("/:id/removeTeam")
+router.route("/:id/remove-team")
   .patch(
     validationWrapper(matchUpdTeamSchema),
     controllerWrapper(controller.removeTeam));
