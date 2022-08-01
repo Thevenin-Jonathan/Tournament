@@ -140,6 +140,36 @@ async function create(req, res) {
 }
 
 /**
+ * Remove one user from team
+ * 
+ * ExpressMiddleware signature
+ * @param {object} req express request object
+ * @param {object} res express response object
+ * @returns {json} JSON response with the updated team
+ */
+ async function removeUser(req, res) {
+  const id = req.params.id;
+  const { user_id } = req.body;
+
+  /** Verify */
+  const team = await teamDatamapper.findById(id);
+  if (!team) {
+    throw new Api404Error("Team does not exist in DB");
+  }
+
+  if (!team.users.find(user => user.user_id === user_id)) {
+    throw new Api404Error("User does not exist in team");
+  }
+  
+  /** Remove user into team */
+  await teamDatamapper.deleteUser(id, user_id);
+
+  /** Get and return all team informations */
+  const updTeam = await teamDatamapper.findById(id);
+  return res.json(updTeam)
+}
+
+/**
  * Delete one team from DB
  * 
  * ExpressMiddleware signature
@@ -164,5 +194,6 @@ module.exports = {
   getOne,
   create,
   addUser,
+  removeUser,
   destroy
 }
