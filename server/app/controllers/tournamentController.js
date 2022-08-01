@@ -1,5 +1,7 @@
+const debug = require("debug")("ct-tournament")
 const tournamentDatamapper = require("../datamappers/tournament");
-const { Api404Error } = require("../services/errorHandler");
+const slugify = require("../services/slugify");
+const { ApiError, Api404Error } = require("../services/errorHandler");
 
 /**
  * Get and return all tournaments from DB
@@ -23,9 +25,19 @@ async function getAll(_, res) {
  * @returns {json} JSON response with one tournament
  */
 async function getOne(req, res) {
-  const id = req.params.id;
-  const tournament = await tournamentDatamapper.findById(id);
-  return res.json(tournament);
+  const { id, slug } = req.params;
+  let tournament = null;
+
+  if (id && !isNaN(Number(id))) {
+    tournament = await tournamentDatamapper.findById(id);
+  }
+
+  if (slug) {
+    tournament = await tournamentDatamapper.findBySlug(slug);
+  }
+
+  if (tournament) return res.json(tournament);
+  else throw new ApiError(`${id ? "ID" : "Slug"} invalid, tournament not found`);
 };
 
 /**
@@ -38,6 +50,15 @@ async function getOne(req, res) {
  */
 async function create(req, res) {
   const tournament = req.body;
+  
+  /** Transform title string to slug */
+  tournament.slug = slugify(tournament.title);
+
+  /** Verify */
+  if (await tournamentDatamapper.findBySlug(tournament.slug)) {
+    throw new ApiError(`Slug already exist, invalid title tournament`);
+  }
+
   const newTournament = await tournamentDatamapper.insertOne(tournament);
   return res.status(201).json(newTournament);
 };
