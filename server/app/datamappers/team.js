@@ -77,24 +77,6 @@ async function insertUser(id, userId) {
 };
 
 /** 
- * Update team tournament id
- * @param {number} id Team id
- * @param {number} tournamentId Tournament id
- * @returns {Object} - Team updated
-*/
-async function updateOne(id, tournamentId) {
-	const result = await pool.query(
-		`
-		UPDATE "team" 
-		SET "tournament_id" = $1
-		WHERE "id" = $2
-		RETURNING *;
-		`,[tournamentId, id]
-	);
-	return result.rows[0];
-};
-
-/** 
  * Delete one team
  * @param {number} id Team id
  * @returns {boolean} True if the team is deleted
@@ -111,6 +93,5 @@ module.exports = {
 	findById,
 	insertOne,
 	insertUser,
-	updateOne,
 	deleteOne
 };
