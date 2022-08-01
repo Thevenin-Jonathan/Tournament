@@ -24,8 +24,14 @@ const { ApiError, Api404Error } = require("../services/errorHandler");
  */
    async function getOne(req, res) {
     const id = req.params.id;
-    const discipline = await disciplineDatamapper.findById(id);
-    return res.json(discipline);
+    if (id && !isNaN(Number(id))) {
+      const discipline = await disciplineDatamapper.findById(id);
+  
+      if (!discipline) throw new Api404Error("Discipline does not exist in DB");
+      return res.json(discipline);
+    } else {
+      throw new Api404Error("Invalid id, discipline not found");
+    }
   };
 
   /**
@@ -84,16 +90,21 @@ async function update(req, res) {
  * @returns {json} JSON response with one discipline
  */
 async function destroy(req, res) {
-    const id = req.params.id;
-    const discipline = await disciplineDatamapper.findById(id);
+  const id = req.params.id;
   
+  if (id && !isNaN(Number(id))) {
+    const discipline = await disciplineDatamapper.findById(id);
+
     if (!discipline) {
       throw new Api404Error("Discipline does not exist in DB");
     }
-
+  
     await disciplineDatamapper.deleteOne(id);
     return res.status(204).json();
-  };
+  } else {
+    throw new Api404Error("Invalid id, discipline not found");
+  }
+};
 
   module.exports = {
     getAll,

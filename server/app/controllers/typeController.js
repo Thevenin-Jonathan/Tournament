@@ -24,8 +24,14 @@ const { ApiError, Api404Error } = require("../services/errorHandler");
  */
    async function getOne(req, res) {
     const id = req.params.id;
-    const type = await typeDatamapper.findById(id);
-    return res.json(type);
+    if (id && !isNaN(Number(id))) {
+      const type = await typeDatamapper.findById(id);
+  
+      if (!type) throw new Api404Error("Type does not exist in DB");
+      return res.json(type);
+    } else {
+      throw new Api404Error("Invalid id, type not found");
+    }
   };
 
   /**
@@ -83,14 +89,19 @@ async function update(req, res) {
  */
 async function destroy(req, res) {
     const id = req.params.id;
-    const type = await typeDatamapper.findById(id);
-  
-    if (!type) {
-      throw new Api404Error("Type does not exist in DB");
-    }
     
-    await typeDatamapper.deleteOne(id);
-    return res.status(204).json();
+    if (id && !isNaN(Number(id))) {
+      const type = await typeDatamapper.findById(id);
+  
+      if (!type) {
+        throw new Api404Error("Type does not exist in DB");
+      }
+    
+      await typeDatamapper.deleteOne(id);
+      return res.status(204).json();
+    } else {
+      throw new Api404Error("Invalid id, type not found");
+    }
   };
 
   module.exports = {

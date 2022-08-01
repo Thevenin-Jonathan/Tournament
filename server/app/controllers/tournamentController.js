@@ -37,7 +37,7 @@ async function getOne(req, res) {
   }
 
   if (tournament) return res.json(tournament);
-  else throw new ApiError(`${id ? "ID" : "Slug"} invalid, tournament not found`);
+  else throw new ApiError(`Invalid ${id ? "id" : "slug"}, tournament not found`);
 };
 
 /**
@@ -94,28 +94,19 @@ async function update(req, res) {
  */
 async function destroy(req, res) {
   const id = req.params.id;
-  const tournament = await tournamentDatamapper.findById(id);
 
-  if (!tournament) {
-    throw new Api404Error("Tournament does not exist in DB");
+  if (id && !isNaN(Number(id))) {
+    const tournament = await tournamentDatamapper.findById(id);
+
+    if (!tournament) {
+      throw new Api404Error("Tournament does not exist in DB");
+    }
+  
+    await tournamentDatamapper.deleteOne(id);
+    return res.status(204).json();
+  } else {
+    throw new Api404Error("Invalid id, tournament not found");
   }
-
-  await tournamentDatamapper.deleteOne(id);
-  return res.status(204).json();
-};
-
-/**
- * Get all teams of a tournament
- * 
- * ExpressMiddleware signature
- * @param {object} req express request object
- * @param {object} res express response object
- * @returns {json} JSON response with all teams
- */
- async function getAllTeams(req, res) {
-  const id = req.params.id;
-  const tournament = await tournamentDatamapper.findAllTeams(id);
-  return res.json(tournament);
 };
 
 module.exports = {
@@ -123,6 +114,5 @@ module.exports = {
   getOne,
   create,
   update,
-  destroy,
-  getAllTeams
+  destroy
 }
