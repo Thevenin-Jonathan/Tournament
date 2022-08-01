@@ -6,8 +6,13 @@ GET {{hostname}}/tournaments/ HTTP/1.1
 content-type: application/json
 
 ###
-# Get one tournament
+# Get one tournament by id
 GET {{hostname}}/tournaments/5 HTTP/1.1
+content-type: application/json
+
+###
+# Get one tournament by slug
+GET {{hostname}}/tournaments/slug/champions-trophy HTTP/1.1
 content-type: application/json
 
 ###
@@ -16,8 +21,11 @@ POST {{hostname}}/tournaments/ HTTP/1.1
 content-type: application/json
 
 {
-  "tournament_id": 5,
-  "team_ids": [6,7]
+  "title": "Test de titre qui passe en slug héhé!",
+  "date": "28/07/2022",
+  "nb_playground": 5,
+  "discipline_id": 2,
+  "type_id": 1
 }
 
 ###
@@ -32,5 +40,5 @@ content-type: application/json
 
 ###
 # Delete one tournament
-DELETE {{hostname}}/tournaments/18 HTTP/1.1
+DELETE {{hostname}}/tournaments/8 HTTP/1.1
 content-type: application/json
