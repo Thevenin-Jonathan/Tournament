@@ -6,7 +6,25 @@ const pool = require("../config/database");
  * @returns {users[]} users
  */
 async function findAll() {
-  const result = await pool.query(`SELECT * FROM "user" ORDER BY "lastname" ASC`);
+  const result = await pool.query(
+    `
+    SELECT
+      "id",
+      "firstname",
+      "lastname",
+      "address",
+      "birthdate",
+      "is_active",
+      "email",
+      "url_avatar",
+      "player_license",
+      "club_id",
+      "role_id",
+      "phone",
+      "gender_id"
+    FROM "user"
+    ORDER BY "lastname" ASC
+    `);
   return result.rows;
 }
 
@@ -17,7 +35,25 @@ async function findAll() {
  * @returns {object} user
  */
 async function findById(id) {
-  const result = await pool.query(`SELECT * FROM "user" WHERE "id" = $1`, [id]);
+  const result = await pool.query(
+    `
+    SELECT
+      "id",
+      "firstname",
+      "lastname",
+      "address",
+      "birthdate",
+      "is_active",
+      "email",
+      "url_avatar",
+      "player_license",
+      "club_id",
+      "role_id",
+      "phone",
+      "gender_id"
+    FROM "user"
+    WHERE "id" = $1
+    `, [id]);
   return result.rows[0];
 }
 
