@@ -521,3 +521,103 @@ _Ce que tu comptes faire aujourd'hui:_
 
 -ajouter une colonne slug
 -ajouter colonne winner_id
+
+### 29/07/2022 - Sprint 2 - Jour 14
+
+**Tom:**
+
+_Ce que tu as fait vendredi:_
+
+- Add tournament Form
+- Gestion de la date dans le champ controlé date (formatage spécifique )
+- Gestion d'une chexbox en champ controlé
+- input file preview avec js `(URL.createObjectURL(evt.target.files[0])`
+- pas évident le design de l'input file (CSS) `input[type="file"]::-webkit-file-upload-button`
+- déploiement semi manuel chez o2switch.
+- Recherches sur l'algo de création de tournoi all vs all
+
+_Les problèmes rencontrés:_
+
+- comment changer d'url au submit (apres un succes sur un async) 
+--> dispatcher une action au submit (REDIRECT), dans le reducer alimenter le state correspondant, de retour dans le composant verifier ce state et rediriger avec navigate si nécéssaire.
+- gestion des CSP (CONTENT POLICY MANAGEMENT un peu comme les CORS)
+- Helmet a configurer (bloque les images distantes)
+- Probleme ssl chez l'hebergeur
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- Algo Creation de tournoi
+- composant Tournament
+
+
+**Jonathan:**
+
+_Ce que tu as fait vendredi:_
+
+- Mise a jour des controller et datamapper match et team
+- Amélioration du déploiement en une ligne de commande sur heroku
+- Améliorations des schema joi et des messages d'erreur
+- Ajout de fichier match et team pour REST Client
+- Amélioration des message d'erreurs en mode dev
+- Update de la DB
+
+_Les problèmes rencontrés:_
+
+- Beaucoup de reflexion pour bien identifier les besoin dans les datamapper et controller avec les tables d'associations
+- Un peu difficile de trouver de bonne infos pour le déploiement mono repo sur heroku
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- Améliorer les routes team et tournament pour qu'elle prennent en compte les tables d'associations.
+- Check toutes les routes pour etre sur qu'on a tout ce dont on a besoin cote front
+- Modifier la DB pour mettre en CASCADE certaine FK au DELETE
+
+**Cédric:**
+
+_Ce que tu as fait vendredi:_
+
+- trier par ordre alphabétique la liste des membres
+- format (affichage) des numéros de téléphone
+- concerver la recherche dans le champ de recherche d'un membre
+- commencer le composant UpdateProfil
+
+_Les problèmes rencontrés:_
+ 
+- redux
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- composant UpdateProfil
+- composant Members : effacer la saisie avec un bouton
+
+**Agustin:**
+
+_Ce que tu as fait vendredi:_
+
+- Veuille sur swagger mais aucune mise en pratique.
+- Travaille sur les datamappers pour  chercher des reqêtes plus complexes
+
+_Les problèmes rencontrés:_
+
+- La complexité de nos tables. Malgré le MCD ou le MLD je melange encore les functions de chaque table.
+- Lesj requêtes imbriquées me donnent des erreurs, surtout dans les "FROM" imbriqués.
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- Réussir les requêtes imbriquées et finir les datamapper restants
+
+**Houceine**
+
+_Ce que tu as fait vendredi:_
+
+- en v1 au lieu de le mettre en V4V, trop comp
+- ajout de la colonne slug et winner_id
+
+_Les problèmes rencontrés:_
+
+- amis en V1 u lieu de le mettre en V4, trop compliquer, j'ai pas réussi, et on est limiter par le temps
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- je suis dispo
+- 
