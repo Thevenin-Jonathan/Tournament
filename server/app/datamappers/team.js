@@ -19,29 +19,7 @@ async function findAll() {
 async function findById(id) {
 	const result = await pool.query(
 		`
-		SELECT
-			"T"."id",
-			"T"."tournament_id",
-		COALESCE ((SELECT JSON_AGG(
-			JSON_BUILD_OBJECT(
-				'user_id', "TU"."user_id",
-        'gender_id', (SELECT
-                     	"gender_id"
-                     FROM "user" AS "U"
-                     WHERE "U"."id" = "TU"."user_id")
-			))
-		FROM "team_has_user" AS "TU"
-		WHERE "TU"."team_id" = "T"."id"), '[]') AS "users",
-		COALESCE ((SELECT JSON_AGG(
-			JSON_BUILD_OBJECT(
-				'match_id', "MT"."match_id",
-				'is_winner', "MT"."is_winner",
-				'result_id', "MT"."result_id"
-			))
-		FROM "match_has_team" AS "MT"
-		WHERE "MT"."team_id" = "T"."id"), '[]') AS "matches"  
-		FROM "team" AS "T"
-		WHERE "id"= $1;
+		SELECT * FROM "get_team_by_id"($1);
 		`,[id]
 	);
 	return result.rows[0];
