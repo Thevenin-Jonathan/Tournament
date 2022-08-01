@@ -7,7 +7,7 @@ content-type: application/json
 
 ###
 # Get one team
-GET {{hostname}}/teams/10 HTTP/1.1
+GET {{hostname}}/teams/20 HTTP/1.1
 content-type: application/json
 
 ###
@@ -16,11 +16,29 @@ POST {{hostname}}/teams/ HTTP/1.1
 content-type: application/json
 
 {
-  "tournament_id": 5,
-  "user_ids": [6,7]
+  "tournament_id": 3,
+  "user_ids": [6]
+}
+
+###
+# Add one user into team
+PATCH {{hostname}}/teams/11/add-user HTTP/1.1
+content-type: application/json
+
+{
+  "user_id": 18
+}
+
+###
+# Remove one user from team
+PATCH {{hostname}}/teams/11/remove-user HTTP/1.1
+content-type: application/json
+
+{
+  "user_id": 51
 }
 
 ###
 # Delete one match
-DELETE {{hostname}}/teams/16 HTTP/1.1
+DELETE {{hostname}}/teams/21 HTTP/1.1
 content-type: application/json
