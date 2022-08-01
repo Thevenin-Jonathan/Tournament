@@ -38,6 +38,15 @@ async function getOne(req, res) {
  */
 async function create(req, res) {
   const tournament = req.body;
+  
+  /** Transform title string to slug */
+  tournament.slug = slugify(tournament.title);
+
+  /** Verify */
+  if (await tournamentDatamapper.findBySlug(tournament.slug)) {
+    throw new ApiError(`Slug already exist, invalid title tournament`);
+  }
+
   const newTournament = await tournamentDatamapper.insertOne(tournament);
   return res.status(201).json(newTournament);
 };
