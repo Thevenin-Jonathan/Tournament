@@ -5,7 +5,16 @@ const today = () => {
 };
 
 export const initialState = {
+  // liste des tournois
   tournaments: [],
+
+  // tournoi courant
+  tournament: {
+    managers: [],
+    registered: [],
+  },
+  // teams du tournoi courant
+  teams: [],
 
   // champs controlés AddTournamentForm
   tournamanentName: '',
@@ -44,6 +53,16 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         tournaments: action.value,
+      };
+    case 'GET_TOURNAMENT_SUCCESS':
+      return {
+        ...state,
+        tournament: action.value,
+      };
+    case 'GET_TEAMS_SUCCESS':
+      return {
+        ...state,
+        teams: action.value,
       };
     case 'CREATE_TOURNAMENT_SUCCESS':
       return {

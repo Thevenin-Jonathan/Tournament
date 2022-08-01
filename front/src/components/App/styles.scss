@@ -528,6 +528,51 @@ a {
   }
 }
 
+.tournament {
+    position: relative;
+    padding: 0;
+    .bg-layer,
+    .gradient-layer {
+      background-position: center top;
+      background-size: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      min-height:100vh;
+      // filter: blur(5px);
+      @media only screen and (max-width: 810px) {
+        background-size: 150%;
+        min-height:70vh;
+      }
+    }
+    .gradient-layer {
+      background: linear-gradient(0deg, var(--bg-color) 50%, rgba(0,0,0,.7) 100%);
+    }
+    .content-layer {
+      position: relative;
+      padding: 1rem 2rem;
+      min-height: 20rem;
+    }
+    .flex-wrapper {
+      display: flex;
+      gap: 2rem;
+    }
+    .infos {
+      line-height: 2em;
+      padding: 2rem;
+      background: var(--main-color);
+      border-radius: var(--border-radius);
+    }
+    .tournament-description {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      &::before {
+        content:"“";
+      }
+    }
+}
+
 
 .tournament-card {
   display: block;

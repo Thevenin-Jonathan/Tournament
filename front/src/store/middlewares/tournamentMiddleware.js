@@ -5,8 +5,8 @@ import { deleteNullOrFalsyKeyInObject } from 'src/utils';
 
 const tournamentMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
+    // récupérer tous les tournois
     case 'GET_TOURNAMENTS': {
-      // requête Axios pour récupérer tous les tournois
       const axiosConfig = {
         method: 'get',
         url: `${config.api.baseUrl}/tournaments`,
@@ -18,6 +18,31 @@ const tournamentMiddleware = (store) => (next) => (action) => {
         })
         .catch((error) => {
           store.dispatch({ type: 'GET_TOURNAMENTS_FAILED', value: 'Data error' });
+          throw new Error(error);
+        });
+      break;
+    }
+
+    // récupérer UN tournoi par son id
+    case 'GET_TOURNAMENT': {
+      next(action);
+      axios.get(`${config.api.baseUrl}/tournaments/${action.value.id}`)
+        .then((response) => {
+          store.dispatch({ type: 'GET_TOURNAMENT_SUCCESS', value: response.data });
+        })
+        .catch((error) => {
+          throw new Error(error);
+        });
+      break;
+    }
+    // récupérer les teams d'un tournoi
+    case 'GET_TEAMS': {
+      next(action);
+      axios.get(`${config.api.baseUrl}/tournaments/${action.value.id}/teams`)
+        .then((response) => {
+          store.dispatch({ type: 'GET_TEAMS_SUCCESS', value: response.data });
+        })
+        .catch((error) => {
           throw new Error(error);
         });
       break;
