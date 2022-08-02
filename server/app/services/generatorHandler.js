@@ -3,6 +3,12 @@ const { ValidationError, ApiError } = require("./errorHandler");
 const allVsAllSchema = require("../schemas/allVsAll");
 const generateAllVsAll = require("./generatorFunc/allVsAll");
 
+/**
+ * Generate matches grid depending of the tournament type
+ * @param {number} typeId type identifiant
+ * @param {number[]} teams array of team id of each team
+ * @returns {[[...[number, number]]]} return a matches grid
+ */
 async function generate(typeId, teams) {  
   try {
     switch (typeId) {
