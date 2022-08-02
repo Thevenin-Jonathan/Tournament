@@ -1,3 +1,7 @@
+# Journal d'équipe
+
+## projet Tournament
+
 ### 11/07/2022 - Sprint 0 - Jour 1
 
 - Matinée cockpit en groupe pour la présentation de l'apothéose
@@ -275,11 +279,11 @@ _Les problèmes rencontrés:_88
 
 - boucle infinie due au isLoading => pd de logique
 - pb d'accès à la BDD, bug psql => réinstallation de psql
-- difficultés de compréhension avec Redux 
+- difficultés de compréhension avec Redux
 
 _Ce que tu comptes faire aujourd'hui:_
 
-- continuer la logique de la page profil d'un Membre 
+- continuer la logique de la page profil d'un Membre
 
 **Agustin:**
 
@@ -302,7 +306,7 @@ _Ce que tu comptes faire aujourd'hui:_
 - Retour sur la BDD pour verifier si elle correspond toujours aux besoins de l'app
 - Veille pour la gestion des erreurs
 
-et d'apo groupe par groupe, puis 
+et d'apo groupe par groupe, puis
 _Les problèmes rencontrés:_
 jveAtatin prMuradatamapper, controller, schema, router **El Houceine:**
 
@@ -312,7 +316,7 @@ _Ce que tu as fait hier:_
 
 _Les problèmes rencontrés:_
 
-- des erreurs à la c** 
+- des erreurs à la c**
 
 _Ce que tu comptes faire aujourd'hui:_
 
@@ -388,11 +392,10 @@ _Ce que tu as fait hier:_
 - Creation d’un nouveau deploy sur sqitch pour mettre à jour la BDD
 - Veille pour réussir à valider avec regex, sur postgres, un champ avec datatype integer. Je n’ai pas réussi à trouver la solution : décision de laisser le champ en question en integer.
 
-
 _Les problèmes rencontrés:_
 
 - Avec joi les champs vides qui viennent du front ne passent pas la validation. Nous avons le message d’erreur "must not be empty" Nous ajoutons allow("").
-- Erreur quand j’essaie de changer le datatype de text a integer, sur la BDD. L’erreur était provoquée par une contrainte, qu’il a fallu enlever avant de faire le changement. 
+- Erreur quand j’essaie de changer le datatype de text a integer, sur la BDD. L’erreur était provoquée par une contrainte, qu’il a fallu enlever avant de faire le changement.
 - Problème pour faire fonctionner la regex de validation d’un champ number sur la BDD que j’ai pas réussie a résoudre.
 
 _Ce que tu comptes faire aujourd'hui:_
@@ -400,7 +403,7 @@ _Ce que tu comptes faire aujourd'hui:_
 - Personnalisation des messages d'erreur sur joi
 - Reflexion sur la creation des routes complexes
 
-**Houceine**
+**Houceine:**
 
 _Ce que tu as fait hier:_
 
@@ -502,9 +505,9 @@ _Les problèmes rencontrés:_
 _Ce que tu comptes faire aujourd'hui:_
 
 - Finalisation des routes restantes à faire
-- Veuille sur swagger 
+- Veuille sur swagger
 
-**Houceine**
+**Houceine:**
 
 _Ce que tu as fait hier:_
 
@@ -512,7 +515,7 @@ _Ce que tu as fait hier:_
 - ORDER BY ajouter sur les findAll dans tous les datamapper
 
 _Les problèmes rencontrés:_
- 
+
 - dans swagger-doc, j'ai mis "tag" au lieu de "tags" dans la doc, et problème de rangement dans le visuel
 - pas fonctionnelle à 100% quelques erreur lors des test PATCHS et CREATE notamment sur swagger
 - ajout de la colonne "winner_ido - ORDER BY ajouter en sur les f"indAll dans tous lesORDER BY ajouter en sur les findAll dans tous les swagger-doc sur tous les routers, pas fonctionnelle à 100% quelques erreur lors des test PATCHS et CREATE notamment
@@ -522,7 +525,7 @@ _Ce que tu comptes faire aujourd'hui:_
 -ajouter une colonne slug
 -ajouter colonne winner_id
 
-### 29/07/2022 - Sprint 2 - Jour 14
+### 01/08/2022 - Sprint 2 - Jour 15
 
 **Tom:**
 
@@ -538,7 +541,7 @@ _Ce que tu as fait vendredi:_
 
 _Les problèmes rencontrés:_
 
-- comment changer d'url au submit (apres un succes sur un async) 
+- comment changer d'url au submit (apres un succes sur un async)
 --> dispatcher une action au submit (REDIRECT), dans le reducer alimenter le state correspondant, de retour dans le composant verifier ce state et rediriger avec navigate si nécéssaire.
 - gestion des CSP (CONTENT POLICY MANAGEMENT un peu comme les CORS)
 - Helmet a configurer (bloque les images distantes)
@@ -548,7 +551,6 @@ _Ce que tu comptes faire aujourd'hui:_
 
 - Algo Creation de tournoi
 - composant Tournament
-
 
 **Jonathan:**
 
@@ -582,7 +584,7 @@ _Ce que tu as fait vendredi:_
 - commencer le composant UpdateProfil
 
 _Les problèmes rencontrés:_
- 
+
 - redux
 
 _Ce que tu comptes faire aujourd'hui:_
@@ -606,7 +608,7 @@ _Ce que tu comptes faire aujourd'hui:_
 
 - Réussir les requêtes imbriquées et finir les datamapper restants
 
-**Houceine**
+**Houceine:**
 
 _Ce que tu as fait vendredi:_
 
@@ -620,4 +622,96 @@ _Les problèmes rencontrés:_
 _Ce que tu comptes faire aujourd'hui:_
 
 - je suis dispo
+
+### 02/08/2022 - Sprint 3 - Jour 16
+
+**Tom:**
+
+_Ce que tu as fait hier:_
+
+- ALGO !
+- Reussi à poser l'algo de all vs all en faisant appel a des notions de mathématiques
+--> probabilités : factorielle, dénombrement, combinatoire...
+- finition du composant tournois (tous les tournois)
+- filtres multi criteres
+- création du composant tournoi.
+- Penser a verifier le type des données qui arrive par le front !
+
+_Les problèmes rencontrés:_
+- condtionner les possibilité d'inscription
 - 
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- coder !
+- lancement du tournoi
+
+**Jonathan:**
+
+_Ce que tu as fait hier:_
+
+- Terminer le controleur team, ajout de fonctions pour ajouter et retirer des utilisateurs à une team. Validation des données en entrée via les schema joi.
+- Implémentation de fonctions SQL pour toutes les route get qui demande beaucoup d'infos pour gagner en lisibilité dans les datamapper et en performances
+- Ajout d'une route slug pour récuprer un tournoi via son slug enregistré en db. Ajout d'une version 5 de sqitch.
+- Ajout une fonction qui permet de transformer une string en slug, utile pour transformer les titres des tournois. Ajout d'une verification de slug existant.
+- Controle de tout les controller et ajout des validation de parametres qui manquait.
+
+_Les problèmes rencontrés:_
+
+- J'ai eu besoin de relire quelques notions sur les fonctions
+- J'ai eu un soucis de schema joi pour créer le tournoi, le format de date prenait le mois en premier.. J'ai réussi apres un peu de recherche a corriger ca en installant une extension de joi (joi-date) et en faisant un extend de la classe joi avec l'extension.
+- J'ai aussi ajouté du parsing sur les id en parametre d'entrée car le front envoi des string et on a eu un bug à cause de ca sur une comparaison integer vs string qui nous a fait perdre 1h de temps..
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- Implémenter la route de génération de tournoi All vs All grace à l'algo de Tom
+- Implémenter les routes pour ajouter et retirer un organisateur d'un tournoi (rt => add-manager & remove-manager)
+- Implémenter les routes pour modifier le score d'une équipe (rt => team update)
+- Voir les tokens temporaires pour les mails
+- Si il me reste du temps, voir pour un logger et la doc swagger
+
+**Cédric:**
+
+_Ce que tu as fait hier:_
+
+- composant UpdateProfil
+
+_Les problèmes rencontrés:_
+
+- composant UpdateProfil : retour à la page "Mon Profil" lorsqu'on valide les modifications
+  - Solution : action REDIRECT
+- composant UpdateProfil : récupérer les infos de l'utilisateur au premier chargement de la page "modifier-profil"
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- terminer 🤞 ce p***** de composant UpdateProfil (pouvoir changer son de mot de passe notamment) !
+
+**Agustin:**
+
+_Ce que tu as fait hier:_
+
+- Veille sur jest et mise en place des tests "simples".
+- Requêtes complexes avec postgres
+_Les problèmes rencontrés:_
+
+- Faire des tests des functions et l'utilisation de mock qui m'envoi toujours des erreurs.
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- Utiliser mock, de jest pour les tests des functions.
+
+**Houceine:**
+
+_Ce que tu as fait hier:_
+
+- entrainement sur des requetes SQL, replay de BEN 
+
+_Les problèmes rencontrés:_
+
+- comprehension mais ça va rentré
+
+_Ce que tu comptes faire aujourd'hui:_
+
+-
+opsider em
+opsider em
