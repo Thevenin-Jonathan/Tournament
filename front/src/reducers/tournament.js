@@ -16,9 +16,6 @@ export const initialState = {
   // teams du tournoi courant
   teams: [],
 
-  // suis je dans le tournoi courant ?
-  alreadyRegistred: false,
-
   // champs controlés AddTournamentForm
   tournamanentName: '',
   tournamanentDate: today(),

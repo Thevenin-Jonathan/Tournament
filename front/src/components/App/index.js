@@ -32,12 +32,6 @@ function App() {
   const isLogged = useSelector((state) => (state.user.logged));
   const isAdmin = useSelector((state) => (state.user.isAdmin));
 
-  // chargement de data globales (liste des roles, des genres...)
-  // useEffect(() => {
-  //   dispatch({ type: 'GET_ROLES' });
-  //   dispatch({ type: 'GET_GENDERS' });
-  // });
-
   // Connexion auto avec token
   useEffect(() => {
     // si logged = false

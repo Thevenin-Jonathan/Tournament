@@ -2,7 +2,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import {
-  tournamentStateText, disciplineText, longDateFr,
+  tournamentStateText, 
+  disciplineText, 
+  longDateFr, 
+  AmIAlreadyRegisteredForThisTournament, 
+  canISubscribeToThisTournament,
 } from 'src/utils';
 
 import Loader from '../Loader';
@@ -14,7 +18,7 @@ function Tournament() {
   // Je récupère le state dans le reducer 'tournament'
   const tournament = useSelector((state) => (state.tournament.tournament));
   const teams = useSelector((state) => (state.tournament.teams));
-  const alreadyRegistred = useSelector((state) => (state.tournament.alreadyRegistred));
+  const user = useSelector((state) => (state.user.loggedUser));
   const userId = useSelector((state) => (state.user.id));
   const members = useSelector((state) => (state.user.members));
   const isLoading = useSelector((state) => (state.interface.isLoading));
@@ -35,13 +39,22 @@ function Tournament() {
       type: 'GET_TEAMS',
       value: id,
     });
-    dispatch({ type: 'IM_NOT_ON_THIS_TOURNAMENT' });
   }, []);
 
-  // action de souscrprton
+  useEffect(() => {
+    // récupère le tournoi si changement du state
+  }, [tournament]);
+
+  // action de souscription
   const handleSubscribe = () => {
     dispatch({
       type: 'SINGLE_TOURNAMENT_SUBSCRIBE',
+    });
+  };
+  // action de désinscription
+  const handleUnSubscribe = () => {
+    dispatch({
+      type: 'SINGLE_TOURNAMENT_UNSUBSCRIBE',
     });
   };
 
@@ -57,11 +70,13 @@ function Tournament() {
         .find((user) => user.id === userId));
 
     if (teamFinded) {
-      dispatch({ type: 'IM_ON_THIS_TOURNAMENT' });
-      return teamFinded.id;
+      //  return teamFinded.id;
     }
     return false;
   };
+
+  const alreadyRegistered = AmIAlreadyRegisteredForThisTournament(tournament.registered, userId);
+  const canISubscribe = canISubscribeToThisTournament(tournament, user);
 
   // const findTeamMembers = (teamId) => {
   //   const { firstname } = members.find((member) => member.id === playerId);
@@ -124,7 +139,7 @@ function Tournament() {
         </div>
 
         <div>
-          { !alreadyRegistred && (
+          { canISubscribe && !alreadyRegistered && (
             <button
               onClick={() => handleSubscribe()}
               type="button"
@@ -133,7 +148,7 @@ function Tournament() {
               Je m'inscris
             </button>
           )}
-          { alreadyRegistred && (
+          { canISubscribe && alreadyRegistered && (
             <button
               onClick={() => handleUnSubscribe()}
               type="button"
@@ -142,17 +157,6 @@ function Tournament() {
               Je me désinscris
             </button>
           )}
-
-          {/* { tournament.state_id === 1 ? (
-            <button
-              onClick={() => handleSubscribe()}
-              type="button"
-              className="action-btn"
-            >
-              Je m'inscris
-            </button>
-          )
-            : null} */}
 
         </div>
 

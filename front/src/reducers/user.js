@@ -10,6 +10,9 @@ export const initialState = {
   isAdmin: false,
   token: null,
 
+  // utilisateur connecté
+  loggedUser: {},
+
   email: '',
   password: '',
   avatar: '',
@@ -95,6 +98,7 @@ const reducer = (state = initialState, action = {}) => {
         genderId: action.value.gender_id,
         phone: action.value.phone,
         roleId: action.value.role_id,
+        loggedUser: action.value,
       };
     case 'GET_MEMBERS_SUCCESS':
       return {
