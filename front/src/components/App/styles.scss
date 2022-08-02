@@ -1278,3 +1278,20 @@ a {
     background-color: green;
   }
 }
+.ranking {
+  table {
+    background-color: var(--main-color);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    width: 100%;
+  }
+  tr {
+    padding: 2rem;
+  }
+  th {
+    padding: 2rem;
+  }
+  td {
+    padding: 1rem;
+  }
+}
