@@ -1,5 +1,5 @@
 const debug = require("debug")("ct-wrapper");
-const { ApiInternalError } = require("../services/errorHandler");
+const { ApiInternalError } = require("./errorHandler");
 /**
  * Controller wrapper with try catch for manage errors
  * @param {function} controllerFunc controller function to try catch
