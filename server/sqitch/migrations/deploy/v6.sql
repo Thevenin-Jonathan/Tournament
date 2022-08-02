@@ -117,6 +117,7 @@ SELECT
 "M"."note",
 "M"."tournament_id",
 "M"."state_id",
+"M"."phase",
 (SELECT JSON_AGG(
   JSON_BUILD_OBJECT(
     'team_id', "MT"."team_id",
