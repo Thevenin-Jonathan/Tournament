@@ -118,6 +118,50 @@ const longDateFr = (date) => {
   return maDate.toLocaleDateString('fr-FR', options);
 };
 
+// convertit une date standard dans le format attendue par la DB
+function convertDate(inputFormat) {
+  function pad(s) {
+    return (s < 10) ? `0${s}` : s;
+  }
+  const d = new Date(inputFormat);
+  return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/');
+}
+
+/**
+ * Suis-je déja inscrit à ce tournoi ?
+ * @param {Array} tournamentRegistered : Tableau d'id d'utilisateurs
+ * @param {number} userId : id d'utilisateur a chercher
+ * @returns true si l'id est trouvé dans la liste, sinon false.
+ */
+function AmIAlreadyRegisteredForThisTournament(tournamentRegistered, userId) {
+  const result = tournamentRegistered.find((user) => user.id === userId);
+  if (result) return true;
+  return false;
+}
+
+/**
+ * Ai-je le droit de m'inscrire à ce tournoi ?
+ * @param {Object} tournament : objet tournoi avec tout ses attributs
+ * @param {Object} user : objet user avec tout ses attributs
+ * @returns true si j'ai le droit de m'inscrire, sinon false
+ */
+function canISubscribeToThisTournament(tournament, user) {
+  // vérifier si le statut du tournoi autorise les inscriptions (tournoi ouvert)
+  if (tournament.state_id > 1) {
+    return false;
+  }
+  // vérifier si il y'a une limite, et si oui si elle est atteinte
+  const registeredUsers = tournament.registered.length;
+  if (tournament.player_limit !== null && registeredUsers >= tournament.player_limit) {
+    return false;
+  }
+  // vérifier si le genre du user est autorisé dans ce tournoi
+  const genderIdAuthorized = [1, 3, 5].includes(tournament.discipline_id) ? 1 : 2;
+  if (user.gender_id !== genderIdAuthorized) return false;
+
+  return true;
+}
+
 /**
  * supprimmer les clés d'un objet qui ont pour valeur null ou false
  * @param {object} obj - l'objet a nettoyer
@@ -139,5 +183,8 @@ export {
   dateFr,
   longDateFr,
   deleteNullOrFalsyKeyInObject,
+  convertDate,
+  AmIAlreadyRegisteredForThisTournament,
+  canISubscribeToThisTournament,
   formatPhoneNumber,
 };

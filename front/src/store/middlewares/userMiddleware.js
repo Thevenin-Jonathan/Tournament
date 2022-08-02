@@ -98,7 +98,7 @@ const userMiddleware = (store) => (next) => (action) => {
             type: 'NEW_TOAST',
             newToast: {
               id: state.interface.toastCounter,
-              message: `Nouveau membre ${response.data.firstname} ${response.data.lastname} enregistré`,
+              message: `Nouveau membre ${response.data.user.firstname} ${response.data.user.lastname} enregistré`,
               type: 'success',
             },
           });

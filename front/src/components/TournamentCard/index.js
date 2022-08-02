@@ -7,7 +7,8 @@ import {
 function TournamentCard({ tournament }) {
   return (
     <Link
-      to={`/tournois/${tournament.slug}`}
+      to={`/tournois/${tournament.id}`}
+      // to={`/tournois/${tournament.id}`}
       className={`tournament-card state-${tournament.state_id} ${disciplineShortText(tournament.discipline_id)}`}
     >
       <div className="tournament-special" />
@@ -21,7 +22,7 @@ function TournamentCard({ tournament }) {
           <p className="tournament-discipline">{ disciplineText(tournament.discipline_id) }</p>
           <p className="tournament-date">{ longDateFr(tournament.date) }</p>
           <p className="tournament-players-count">{ tournament.nb_playground } Terrains</p>
-          <p className="tournament-match">{tournament.player_limit && `Nombres de place : ${tournament.player_limit}`}</p>
+          <p className="tournament-match">{tournament.player_limit && `Nombres de places : ${tournament.player_limit}`}</p>
         </div>
       </div>
       <div className="tournament-hover">

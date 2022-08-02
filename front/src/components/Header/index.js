@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
 import logo from 'src/assets/logo-petit-tournament.svg';
 import config from 'src/config';
@@ -7,12 +8,19 @@ import config from 'src/config';
 function Header() {
   const dispatch = useDispatch();
   const user = useSelector((state) => (state.user));
+  useEffect(() => {
+    dispatch({
+      type: 'GET_PROFILE',
+      value: user.id,
+    });
+  }, []);
 
   const handleLogout = () => {
     dispatch({
       type: 'LOGOUT',
     });
   };
+
   const userAvatar = `${config.path.uploads.avatar}/${user.avatar}`;
 
   return (
