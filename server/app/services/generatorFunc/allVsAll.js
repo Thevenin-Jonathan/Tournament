@@ -6,8 +6,10 @@ function buildAllVsAllTournament(teamArray){
   // si le nombre de team est impaire
   // j'ajoute 1 équipe fantome pour simplifier les calculs
   // l'equipe qui joue contre l'équipe fantome dans une phase, en fait elle se repose :)
+  let even = true;
   if(teamCount%2) {
       teamCount++;
+      even = false;
   }
 
   // création d'un tableau de valeurs numériques égale au nombre de team
@@ -80,7 +82,17 @@ function buildAllVsAllTournament(teamArray){
       currentPhase++;
   }
 
-  return tournament;
+  // si nombre impair de joueurs
+  // je retire le premier match de chaque phase -> premiere case de chaque sous tableau
+  if (!even) {
+    tournament.forEach(phase => {
+        phase.shift();
+    });
+  }
+  // je remets les bonnes équipes dans le tableau
+  var realTournament = tournament.map(phase => phase.map(match => match.map(team => teamArray[team-1])));
+
+  return realTournament;
 }
 
 
