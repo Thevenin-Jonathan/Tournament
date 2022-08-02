@@ -99,7 +99,6 @@ const dateFr = (date) => {
   return maDate.toLocaleDateString('fr-FR', options);
 };
 
-
 // format phone numbers function
 // eslint-disable-next-line arrow-body-style
 const formatPhoneNumber = (phoneNumber) => {
