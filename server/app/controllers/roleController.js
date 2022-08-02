@@ -24,8 +24,14 @@ const { ApiError, Api404Error } = require("../services/errorHandler");
  */
   async function getOne(req, res) {
     const id = req.params.id;
-    const role = await roleDatamapper.findById(id);
-    return res.json(role);
+    if (id && !isNaN(Number(id))) {
+      const role = await roleDatamapper.findById(id);
+  
+      if (!role) throw new Api404Error("Role does not exist in DB");
+      return res.json(role);
+    } else {
+      throw new Api404Error("Invalid id, role not found");
+    }
   };
 
   /**
@@ -83,14 +89,19 @@ const { ApiError, Api404Error } = require("../services/errorHandler");
  */
   async function destroy(req, res) {
     const id = parseInt(req.params.id);
-    const role = await roleDatamapper.findById(id);
+    
+    if (id && !isNaN(Number(id))) {
+      const role = await roleDatamapper.findById(id);
   
-    if (!role) {
-      throw new Api404Error("Role does not exist in DB");
+      if (!role) {
+        throw new Api404Error("Role does not exist in DB");
+      }
+    
+      await roleDatamapper.deleteOne(id);
+      return res.status(204).json();
+    } else {
+      throw new Api404Error("Invalid id, role not found");
     }
-  
-    await roleDatamapper.deleteOne(id);
-    return res.status(204).json();
   };
 
   module.exports = {

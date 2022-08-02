@@ -1,0 +1,43 @@
+@hostname = http://localhost:3001/api/v1
+
+###
+# Get all users
+GET {{hostname}}/users/ HTTP/1.1
+content-type: application/json
+
+###
+# Get one user
+GET {{hostname}}/users/11 HTTP/1.1
+content-type: application/json
+
+###
+# Create one user
+POST {{hostname}}/users/ HTTP/1.1
+content-type: application/json
+
+{
+  "firstname": "jojo",
+  "lastname": "theven",
+  "birthdate": "08/11/1988",
+  "is_active": true,
+  "email": "dsdf@zefzrg.fr",
+  "password": "tomtom",
+  "player_license": "1245659819",
+  "club_id": 1,
+  "role_id": 1,
+  "gender_id": 1
+}
+
+###
+# Update one user
+PATCH {{hostname}}/users/56 HTTP/1.1
+content-type: application/json
+
+{
+  "firstname": "jowjow"
+}
+
+###
+# Delete one user
+DELETE {{hostname}}/users/56 HTTP/1.1
+content-type: application/json

@@ -24,8 +24,14 @@ async function getAll(_, res) {
  */
 async function getOne(req, res) {
   const id = req.params.id;
-  const result = await resultDatamapper.findById(id);
-  return res.json(result);
+  if (id && !isNaN(Number(id))) {
+    const result = await resultDatamapper.findById(id);
+
+    if (!result) throw new Api404Error("Result does not exist in DB");
+    return res.json(result);
+  } else {
+    throw new Api404Error("Invalid id, result not found");
+  }
 };
 
 /**
@@ -83,14 +89,19 @@ async function update(req, res) {
  */
 async function destroy(req, res) {
   const id = req.params.id;
-  const result = await resultDatamapper.findById(id);
 
-  if (!result) {
-    throw new Api404Error("Result does not exist in DB");
+  if (id && !isNaN(Number(id))) {
+    const result = await resultDatamapper.findById(id);
+
+    if (!result) {
+      throw new Api404Error("Result does not exist in DB");
+    }
+  
+    await resultDatamapper.deleteOne(id);
+    return res.status(204).json();
+  } else {
+    throw new Api404Error("Invalid id, result not found");
   }
-
-  await resultDatamapper.deleteOne(id);
-  return res.status(204).json();
 };
 
 module.exports = {

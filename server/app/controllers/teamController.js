@@ -31,11 +31,9 @@ async function getOne(req, res) {
     const team = await teamDatamapper.findById(id);
 
     if (!team) throw new Api404Error("Team does not exist in DB");
-  
-    await teamDatamapper.deleteOne(id);
     return res.json(team);
   } else {
-    throw new Api404Error("Invalid id, Team not found");
+    throw new Api404Error("Invalid id, team not found");
   }
 };
 
@@ -59,6 +57,9 @@ async function create(req, res) {
   /** Get each info users */
   const users = [];
   for (const userId of data.user_ids) {
+    if (tournament.registered.find(user => user.id === Number(userId))) {
+      throw new ApiError("Unable to add user, already on a team");
+    }
     users.push(await userDatamapper.findById(userId));
   }
 
@@ -66,10 +67,12 @@ async function create(req, res) {
     throw new ApiError("Too many user, only one user for this discipline");
   }
 
-  if (((tournament.discipline_id <= 2) && (tournament.nb_registered >= tournament.player_limit)) ||
+  if (tournament.player_limit !== null){    
+    if (((tournament.discipline_id <= 2) && (tournament.nb_registered >= tournament.player_limit)) ||
     ((tournament.discipline_id >= 3) && users.length === 1 && (tournament.nb_registered >= tournament.player_limit)) ||
     ((tournament.discipline_id >= 3) && users.length === 2 && (tournament.nb_registered >= tournament.player_limit - 1))) {
-    throw new ApiError("Registration not possible, the tournament is full");
+      throw new ApiError("Registration not possible, the tournament is full");
+    }
   }
 
   for (const user of users) {
@@ -93,9 +96,9 @@ async function create(req, res) {
     await teamDatamapper.insertUser(teamId, userId);
   }
 
-  /** Get and return all team informations */
-  const team = await teamDatamapper.findById(teamId);
-  return res.status(201).json(team);
+  /** Get and return all tournament informations */
+  const updatedTournament = await tournamentDatamapper.findById(tournament.id);
+  return res.status(201).json(updatedTournament);
 };
 
 /**
@@ -126,7 +129,7 @@ async function create(req, res) {
     throw new ApiError("Unable to add user, team is full");
   }
 
-  if (tournament.registered.find(user => user.id === user_id)) {
+  if (tournament.registered.find(user => user.id === Number(user_id))) {
     throw new ApiError("Unable to add user, already on a team");
   }
 
@@ -165,7 +168,7 @@ async function create(req, res) {
     throw new Api404Error("Team does not exist in DB");
   }
 
-  if (!team.users.find(user => user.user_id === user_id)) {
+  if (!team.users.find(user => user.user_id === Number(user_id))) {
     throw new Api404Error("User does not exist in team");
   }
   
@@ -194,11 +197,15 @@ async function destroy(req, res) {
     if (!team) {
       throw new Api404Error("Team does not exist in DB");
     }
-  
+
+    /** Delete team from db */
     await teamDatamapper.deleteOne(id);
-    return res.status(204).json();
+    
+    /** Get and return all tournament informations */
+    const updatedTournament = await tournamentDatamapper.findById(team.tournament_id);
+    return res.status(201).json(updatedTournament);
   } else {
-    throw new Api404Error("Invalid id, Team not found");
+    throw new Api404Error("Invalid id, team not found");
   }
 };
 

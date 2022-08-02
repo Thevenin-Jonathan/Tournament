@@ -24,8 +24,14 @@ async function getAll(_, res) {
  */
 async function getOne(req, res) {
   const id = req.params.id;
-  const gender = await genderDatamapper.findById(id);
-  return res.json(gender);
+  if (id && !isNaN(Number(id))) {
+    const gender = await genderDatamapper.findById(id);
+
+    if (!gender) throw new Api404Error("Gender does not exist in DB");
+    return res.json(gender);
+  } else {
+    throw new Api404Error("Invalid id, gender not found");
+  }
 };
 
 /**
@@ -83,14 +89,19 @@ async function update(req, res) {
  */
 async function destroy(req, res) {
   const id = req.params.id;
-  const gender = await genderDatamapper.findById(id);
 
-  if (!gender) {
-    throw new Api404Error("Gender does not exist in DB");
+  if (id && !isNaN(Number(id))) {
+    const gender = await genderDatamapper.findById(id);
+
+    if (!gender) {
+      throw new Api404Error("Gender does not exist in DB");
+    }
+  
+    await genderDatamapper.deleteOne(id);
+    return res.status(204).json();
+  } else {
+    throw new Api404Error("Invalid id, gender not found");
   }
-
-  await genderDatamapper.deleteOne(id);
-  return res.status(204).json();
 };
 
 module.exports = {

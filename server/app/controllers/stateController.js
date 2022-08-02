@@ -24,8 +24,14 @@ const { ApiError, Api404Error } = require("../services/errorHandler");
  */
   async function getOne(req, res) {
     const id = req.params.id;
-    const state = await stateDatamapper.findById(id);
-    return res.json(state);
+    if (id && !isNaN(Number(id))) {
+      const state = await stateDatamapper.findById(id);
+  
+      if (!state) throw new Api404Error("State does not exist in DB");
+      return res.json(state);
+    } else {
+      throw new Api404Error("Invalid id, state not found");
+    }
   };
 
   /**
@@ -83,13 +89,19 @@ const { ApiError, Api404Error } = require("../services/errorHandler");
  */
   async function destroy(req, res) {
     const id = req.params.id;
-    const state = await stateDatamapper.findById(id);
+
+    if (id && !isNaN(Number(id))) {
+      const state = await stateDatamapper.findById(id);
   
-    if (!state) {
-      throw new Api404Error("State does not exist in DB");
+      if (!state) {
+        throw new Api404Error("State does not exist in DB");
+      }
+    
+      await stateDatamapper.deleteOne(id);
+      return res.status(204).json();
+    } else {
+      throw new Api404Error("Invalid id, state not found");
     }
-    await stateDatamapper.deleteOne(id);
-    return res.status(204).json();
   };
 
   module.exports = {

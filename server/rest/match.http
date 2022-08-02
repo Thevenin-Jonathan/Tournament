@@ -17,7 +17,8 @@ content-type: application/json
 
 {
   "tournament_id": 5,
-  "team_ids": [6,7]
+  "team_ids": [6,7],
+  "phase": 1
 }
 
 ###
