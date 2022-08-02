@@ -1,6 +1,5 @@
 const pool = require("../config/database");
 const debug = require("debug")("dm-match");
-const matchHasTeamDatamapper = require("./matchHasTeam");
 
 /**
  * Return all matches from database
@@ -36,11 +35,11 @@ async function insertOne(match) {
   let result = (await pool.query (
     `
     INSERT INTO "match"
-    ("tournament_id")
+    ("tournament_id", "phase")
     VALUES
-    ($1)
+    ($1, $2)
     RETURNING *
-    `, [match.tournament_id]
+    `, [match.tournament_id, match.phase]
     )).rows[0];
       
   return result;
