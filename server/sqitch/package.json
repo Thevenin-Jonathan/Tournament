@@ -10,14 +10,10 @@
     "doc": "docs"
   },
   "scripts": {
-    "postinstall": "npm run postinstall-client && npm run postinstall-server",
-    "postinstall-client": "cd front && npm install && npm run build",
-    "postinstall-server": "cd server && npm install",
-    "db-init": "cd ./sqitch && bash sqitch_init.sh",
-    "db-add": "cd ./server/sqitch && npm run db-add",
-    "db-seed": "psql -U tournament_admin -d tournament -f ./server/sqitch/seed_db.sql",
-    "dev": "cd ./server && npm run dev",
-    "start": "node server/app/index.js"
+    "dev": "cd ./.. & npm run dev",
+    "db-init": "bash sqitch_init.sh",
+    "db-add": "bash sqitch_add.sh",
+    "db-seed": "psql -U tournament_admin -d tournament -f ./seed_db.sql"
   },
   "repository": {
     "type": "git",
