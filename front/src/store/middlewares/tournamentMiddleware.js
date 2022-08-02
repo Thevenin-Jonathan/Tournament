@@ -23,7 +23,7 @@ const tournamentMiddleware = (store) => (next) => (action) => {
       break;
     }
 
-    // récupérer UN tournoi par son id
+    // récupérer UN tournoi par son slug
     case 'GET_TOURNAMENT': {
       next(action);
       axios.get(`${config.api.baseUrl}/tournaments/${action.value.id}`)
@@ -35,6 +35,7 @@ const tournamentMiddleware = (store) => (next) => (action) => {
         });
       break;
     }
+
     // récupérer les teams d'un tournoi
     case 'GET_TEAMS': {
       next(action);
@@ -47,6 +48,7 @@ const tournamentMiddleware = (store) => (next) => (action) => {
         });
       break;
     }
+
     // inscription à un tournoi de simple (pas de gestion d'équipe)
     case 'SINGLE_TOURNAMENT_SUBSCRIBE': {
       const state = store.getState();

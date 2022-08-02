@@ -17,11 +17,13 @@ function Tournament() {
 
   // Je récupère le state dans le reducer 'tournament'
   const tournament = useSelector((state) => (state.tournament.tournament));
-  const teams = useSelector((state) => (state.tournament.teams));
+  // const teams = useSelector((state) => (state.tournament.teams));
   const user = useSelector((state) => (state.user.loggedUser));
   const userId = useSelector((state) => (state.user.id));
   const members = useSelector((state) => (state.user.members));
   const isLoading = useSelector((state) => (state.interface.isLoading));
+  const alreadyRegistered = AmIAlreadyRegisteredForThisTournament(tournament.registered, userId);
+  const canISubscribe = canISubscribeToThisTournament(tournament, user);
 
   const dispatch = useDispatch();
   // au chargement
@@ -80,15 +82,6 @@ function Tournament() {
     return false;
   };
 
-  const alreadyRegistered = AmIAlreadyRegisteredForThisTournament(tournament.registered, userId);
-  const canISubscribe = canISubscribeToThisTournament(tournament, user);
-
-  // const findTeamMembers = (teamId) => {
-  //   const { firstname } = members.find((member) => member.id === playerId);
-  //   const { lastname } = members.find((member) => member.id === playerId);
-  //   return `${firstname} ${lastname}`;
-  // };
-
   if (isLoading) {
     return <Loader />;
   }
@@ -103,12 +96,12 @@ function Tournament() {
         <div className="flex-wrapper">
           <div className="infos">
             <h2>Informations</h2>
+            <p className="tournament-date">{ longDateFr(tournament.date) }</p>
             <p className="tournament-status">Tournoi { tournamentStateText(tournament.state_id) }</p>
             <p className="tournament-discipline">{ disciplineText(tournament.discipline_id) }</p>
-            <p className="tournament-date">{ longDateFr(tournament.date) }</p>
-            <p className="tournament-players-count">{ tournament.nb_playground } Terrains disponibles</p>
             <p className="tournament-match">{tournament.player_limit && `Nombres de places : ${tournament.player_limit}`}</p>
-            <p className="tournament-registers">{`Joueurs inscrits : ${tournament.nb_registered}`}</p>
+            <p className="tournament-players-count">{ tournament.nb_playground } Terrains</p>
+            <p className="tournament-registers">{`${tournament.nb_registered} inscrits `}</p>
           </div>
 
           <div className="infos registred-users">

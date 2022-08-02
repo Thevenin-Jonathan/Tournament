@@ -7,8 +7,8 @@ import {
 function TournamentCard({ tournament }) {
   return (
     <Link
-      // to={`/tournois/${tournament.slug}`}
       to={`/tournois/${tournament.id}`}
+      // to={`/tournois/${tournament.id}`}
       className={`tournament-card state-${tournament.state_id} ${disciplineShortText(tournament.discipline_id)}`}
     >
       <div className="tournament-special" />
