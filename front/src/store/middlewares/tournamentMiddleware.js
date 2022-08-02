@@ -1,7 +1,7 @@
 import axios from 'axios';
 import qs from 'qs';
 import config from 'src/config';
-import { deleteNullOrFalsyKeyInObject } from 'src/utils';
+import { deleteNullOrFalsyKeyInObject, convertDate } from 'src/utils';
 
 const tournamentMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
@@ -105,7 +105,7 @@ const tournamentMiddleware = (store) => (next) => (action) => {
       };
       next(action);
       axios(axiosConfig)
-        .then((response) => {
+        .then(() => {
           store.dispatch({
             type: 'NEW_TOAST',
             newToast: {
@@ -135,7 +135,7 @@ const tournamentMiddleware = (store) => (next) => (action) => {
 
       const data = {
         title: state.tournament.tournamanentName,
-        date: state.tournament.tournamanentDate,
+        date: convertDate(state.tournament.tournamanentDate),
         description: state.tournament.tournamentDescription,
         picture_url: state.tournament.tournamentPictureUrl,
         nb_playground: state.tournament.tournamentNbPlayground,
