@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import {
-  tournamentStateText, disciplineText, disciplineShortText, dateFr,
+  tournamentStateText, disciplineText, disciplineShortText, longDateFr,
 } from 'src/utils';
 
 function TournamentCard({ tournament }) {
   return (
     <Link
-      to={`/tournois/${tournament.id}`}
+      to={`/tournois/${tournament.slug}`}
       className={`tournament-card state-${tournament.state_id} ${disciplineShortText(tournament.discipline_id)}`}
     >
       <div className="tournament-special" />
@@ -19,7 +19,7 @@ function TournamentCard({ tournament }) {
           <p className="tournament-status">{ tournamentStateText(tournament.state_id) }</p>
           <p className="tournament-name">{ tournament.title }</p>
           <p className="tournament-discipline">{ disciplineText(tournament.discipline_id) }</p>
-          <p className="tournament-date">{ dateFr(tournament.date) }</p>
+          <p className="tournament-date">{ longDateFr(tournament.date) }</p>
           <p className="tournament-players-count">{ tournament.nb_playground } Terrains</p>
           <p className="tournament-match">{tournament.player_limit && `Nombres de place : ${tournament.player_limit}`}</p>
         </div>

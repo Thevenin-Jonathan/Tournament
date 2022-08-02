@@ -1,5 +1,6 @@
 const debug = require("debug")("ct-stat");
 const statDatamapper = require("../datamappers/stat");
+const { Api404Error } = require("../services/errorHandler");
 
 /**
  * Get all player stats from DB
@@ -24,8 +25,14 @@ async function getAll(_, res) {
  */
 async function getOne(req, res) {
   const id = req.params.id;
-  const stats = await statDatamapper.findById(id);
-  return res.json(stats);
+  if (id && !isNaN(Number(id))) {
+    const stats = await statDatamapper.findById(id);
+
+    if (!stats) throw new Api404Error("User does not exist in DB");
+    return res.json(stats);
+  } else {
+    throw new Api404Error("Invalid id, user not found");
+  }
 };
 
 module.exports = {

@@ -1,0 +1,49 @@
+@hostname = http://localhost:3001/api/v1
+
+###
+# Get all tournaments
+GET {{hostname}}/tournaments/ HTTP/1.1
+content-type: application/json
+
+###
+# Get one tournament by id
+GET {{hostname}}/tournaments/7 HTTP/1.1
+content-type: application/json
+
+###
+# Get one tournament by slug
+GET {{hostname}}/tournaments/slug/champions-trophy HTTP/1.1
+content-type: application/json
+
+###
+# Generate matches of one tournament
+GET {{hostname}}/tournaments/7/generate HTTP/1.1
+content-type: application/json
+
+###
+# Create one tournament
+POST {{hostname}}/tournaments/ HTTP/1.1
+content-type: application/json
+
+{
+  "title": "Test de titre qui passe en slug héhé!",
+  "date": "28/07/2022",
+  "nb_playground": 5,
+  "discipline_id": 2,
+  "type_id": 1
+}
+
+###
+# Update one tournament
+PATCH {{hostname}}/tournaments/17 HTTP/1.1
+content-type: application/json
+
+{
+  "note": "Une noteuh",
+  "state_id": 4
+}
+
+###
+# Delete one tournament
+DELETE {{hostname}}/tournaments/8 HTTP/1.1
+content-type: application/json

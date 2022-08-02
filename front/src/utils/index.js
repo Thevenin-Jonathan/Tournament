@@ -99,6 +99,7 @@ const dateFr = (date) => {
   return maDate.toLocaleDateString('fr-FR', options);
 };
 
+
 // format phone numbers function
 // eslint-disable-next-line arrow-body-style
 const formatPhoneNumber = (phoneNumber) => {
@@ -106,6 +107,15 @@ const formatPhoneNumber = (phoneNumber) => {
     return phoneNumber.replace(/(.{2})(?=.)/g, '$1 ');
   }
   return null;
+};
+
+// Display text formated date --> mardi 19 juillet 2022
+const longDateFr = (date) => {
+  const options = {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+  };
+  const maDate = new Date(date);
+  return maDate.toLocaleDateString('fr-FR', options);
 };
 
 /**
@@ -127,6 +137,7 @@ export {
   disciplineText,
   disciplineShortText,
   dateFr,
+  longDateFr,
   deleteNullOrFalsyKeyInObject,
   formatPhoneNumber,
 };

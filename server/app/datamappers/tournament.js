@@ -11,12 +11,34 @@ async function findAll() {
 };
 
 /**
- * Return one tournament from database
+ * Get by id or slug and return one tournament
  * @param {number} id tournament identifiant
+ * @param {number} slug tournament slug
  * @returns {object} tournament
  */
 async function findById(id) {
-  const result = await pool.query(`SELECT * FROM "tournament" WHERE "id" = $1`, [id]);
+  const result = await pool.query(
+    `
+    SELECT * 
+    FROM "get_tournament" AS "GT"
+    WHERE "GT"."id" = $1;
+    `, [id]);
+  return result.rows[0];
+};
+
+/**
+ * Get by id or slug and return one tournament
+ * @param {number} id tournament identifiant
+ * @param {number} slug tournament slug
+ * @returns {object} tournament
+ */
+ async function findBySlug(slug) {
+  const result = await pool.query(
+    `
+    SELECT * 
+    FROM "get_tournament" AS "GT"
+    WHERE "GT"."slug" = $1;
+    `, [slug]);
   return result.rows[0];
 };
 
@@ -83,35 +105,11 @@ async function deleteOne(id) {
   return !!result.rowCount;
 };
 
-/**
- * Return all matches by tournament_id from database
- * @param {number} id match identifiant
- * @returns {object} match
- */
- async function findAllMatches(id) {
-  const result = await pool.query(`SELECT * FROM "match" WHERE "tournament_id" = $1`, [id]);
-  return result.rows;
-};
-
-//recuperer toutes les teams d'un tournoi
-/**
- * Return all teams of a tournament
- * @param {number} id tournament identifiant
- * @returns {object} teams
- */
- async function findAllTeams(id) {
-  const result = await pool.query(`SELECT * FROM "team" WHERE tournament_id = $1
-  `, [id]);
-  return result.rows;
-};
-
-
 module.exports = {
   findAll,
   findById,
+  findBySlug,
   insertOne,
   updateOne,
-  deleteOne,
-  findAllMatches,
-  findAllTeams
+  deleteOne
   };

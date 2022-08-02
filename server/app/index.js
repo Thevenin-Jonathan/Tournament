@@ -8,7 +8,7 @@ const { errorHandler } = require("./services/errorHandler");
 const helmet = require("helmet");
 
 /** Helmet for security */
-app.use(helmet());
+// app.use(helmet());
 
 /** Parser **/
 app.use(express.json());

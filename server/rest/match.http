@@ -2,12 +2,12 @@
 
 ###
 # Get all matches
-GET {{hostname}}/api/v1/matches/ HTTP/1.1
+GET {{hostname}}/matches/ HTTP/1.1
 content-type: application/json
 
 ###
 # Get one match
-GET {{hostname}}/matches/10 HTTP/1.1
+GET {{hostname}}/matches/11 HTTP/1.1
 content-type: application/json
 
 ###
@@ -17,7 +17,8 @@ content-type: application/json
 
 {
   "tournament_id": 5,
-  "team_ids": [6,7]
+  "team_ids": [6,7],
+  "phase": 1
 }
 
 ###
@@ -32,7 +33,7 @@ content-type: application/json
 
 ###
 # Add one team into match
-PATCH {{hostname}}/matches/17/addTeam HTTP/1.1
+PATCH {{hostname}}/matches/17/add-team HTTP/1.1
 content-type: application/json
 
 {
@@ -41,7 +42,7 @@ content-type: application/json
 
 ###
 # Remove one team from match
-PATCH {{hostname}}/matches/17/removeTeam HTTP/1.1
+PATCH {{hostname}}/matches/17/remove-team HTTP/1.1
 content-type: application/json
 
 {

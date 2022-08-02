@@ -7,6 +7,8 @@
     "node": "18.x"
   },
   "scripts": {
+    "db-init": "cd sqitch && bash sqitch_init.sh",
+    "db-add": "cd sqitch && npm run db-add",
     "db-seed": "psql -U tournament_admin -d tournament -f ./sqitch/seed_db.sql",
     "dev": "cross-env NODE_ENV=development DEBUG=*,-express:*,-nodemon*,-body-parser:*,-finalhandler nodemon app/index",
     "start": "cross-env NODE_ENV=production node app/index.js"
@@ -25,6 +27,7 @@
     "nodemon": "^2.0.19"
   },
   "dependencies": {
+    "@joi/date": "^2.1.0",
     "bcrypt": "^5.0.1",
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.1",

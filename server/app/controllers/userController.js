@@ -14,7 +14,6 @@ const { ApiError, Api404Error } = require("../services/errorHandler");
  */
 async function getAll(_, res) {
   const users = await userDatamapper.findAll();
-  delete users.password;
   return res.json(users);
 };
 
@@ -28,9 +27,14 @@ async function getAll(_, res) {
  */
 async function getOne(req, res) {
   const id = req.params.id;
-  const user = await userDatamapper.findById(id);
-  delete user.password;
-  return res.json(user);
+  if (id && !isNaN(Number(id))) {
+    const user = await userDatamapper.findById(id);
+
+    if (!user) throw new Api404Error("User does not exist in DB");
+    return res.json(user);
+  } else {
+    throw new Api404Error("Invalid id, user not found");
+  }
 };
 
 /**
@@ -129,14 +133,19 @@ async function update(req, res) {
  */
 async function destroy(req, res) {
   const id = req.params.id;
-  const user = await userDatamapper.findById(id);
 
-  if (!user) {
-    throw new ApiError("User does not exist in DB");
+  if (id && !isNaN(Number(id))) {
+    const user = await userDatamapper.findById(id);
+
+    if (!user) {
+      throw new ApiError("User does not exist in DB");
+    }
+  
+    await userDatamapper.deleteOne(id);
+    return res.status(204).json();
+  } else {
+    throw new Api404Error("Invalid id, user not found");
   }
-
-  await userDatamapper.deleteOne(id);
-  return res.status(204).json();
 };
 
 module.exports = {

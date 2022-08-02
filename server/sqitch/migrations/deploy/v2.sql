@@ -3,8 +3,8 @@
 BEGIN;
 
 -- applique le format jour-mois-année par defaut pour le type DATE
--- ALTER DATABASE "tournament" SET DATESTYLE TO "ISO, DMY"; -- Uncomment for development DB / Comment for production
-ALTER DATABASE "d4e528emrou64t" SET DATESTYLE TO "ISO, DMY"; -- Uncomment for production DB / Comment for development
+ALTER DATABASE "tournament" SET DATESTYLE TO "ISO, DMY"; -- Uncomment for development DB / Comment for production
+-- ALTER DATABASE "d4e528emrou64t" SET DATESTYLE TO "ISO, DMY"; -- Uncomment for production DB / Comment for development
 
 -- verifie qu'un email soit valide
 ALTER TABLE "user" ADD CONSTRAINT "user_email_check"

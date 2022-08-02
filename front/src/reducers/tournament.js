@@ -18,6 +18,19 @@ export const initialState = {
   tournamentType: 1,
   tournamentDiscipline: 1,
   tournamentNotification: false,
+
+  // champs controlés filtres Tournaments
+  filterState0: true,
+  filterState1: false,
+  filterState2: false,
+  filterState3: false,
+  filterState4: false,
+  filterDiscipline0: true,
+  filterDiscipline1: false,
+  filterDiscipline2: false,
+  filterDiscipline3: false,
+  filterDiscipline4: false,
+  filterDiscipline5: false,
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -46,7 +59,14 @@ const reducer = (state = initialState, action = {}) => {
         tournamentDiscipline: 1,
         tournamentNotification: false,
       };
-
+    case 'FILTER_STATE_ID':
+      return {
+        ...state,
+        filter: {
+          ...state.filter,
+          state_id: action.newFilter,
+        },
+      };
     default:
       return state;
   }
