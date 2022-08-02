@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { genderText, dateFr } from 'src/utils';
+import { genderText, dateFr, formatPhoneNumber } from 'src/utils';
 import config from 'src/config';
 
 function Profil() {
@@ -31,7 +31,7 @@ function Profil() {
               ? <li>Né le : <span>{dateFr(user.birthdate)}</span></li>
               : <li>Née le : <span>{dateFr(user.birthdate)}</span></li>}
             <li>Adresse : <span>{user.address}</span></li>
-            <li>Contact : <span>{user.email}</span><span>{user.phone}</span></li>
+            <li>Contact : <span>{user.email}</span><span>{formatPhoneNumber(user.phone)}</span></li>
           </ul>
         </div>
         <div className="stats">
@@ -45,7 +45,7 @@ function Profil() {
           </ul>
         </div>
       </div>
-      <Link className="action-btn" to="/modifier-profil">
+      <Link className="action-btn" to="/profil/modifier-profil">
         <button type="button">
           <i className="fa fa-pencil" aria-hidden="true" />
           &nbsp;

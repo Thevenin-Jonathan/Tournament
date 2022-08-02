@@ -93,7 +93,7 @@ function App() {
         <Route path="/membres" element={<Members />} />
         <Route path="/membres/:id" element={<Member />} />
         <Route path="/profil" element={<Profil />} />
-        <Route path="/modifier-profil" element={<UpdateProfil />} />
+        <Route path="/profil/modifier-profil" element={<UpdateProfil />} />
         <Route path="/aide" element={<Help />} />
         {isAdmin && (
           <>
