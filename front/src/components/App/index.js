@@ -12,6 +12,7 @@ import Club from '../Club';
 import Header from '../Header';
 import Menu from '../Menu';
 import Tournaments from '../Tournaments';
+import Tournament from '../Tournament';
 import Error from '../Error';
 import LoginForm from '../LoginForm';
 import Profil from '../Profil';
@@ -22,7 +23,6 @@ import Member from '../Member';
 import AddMembersForm from '../AddMembersForm';
 import AddTournamentForm from '../AddTournamentForm';
 import Help from '../Help';
-import Loader from '../Loader';
 import Toast from '../Toast';
 import Ranking from '../Ranking';
 
@@ -30,15 +30,8 @@ import Ranking from '../Ranking';
 function App() {
   const dispatch = useDispatch();
 
-  const isLoading = useSelector((state) => (state.interface.isLoading));
   const isLogged = useSelector((state) => (state.user.logged));
   const isAdmin = useSelector((state) => (state.user.isAdmin));
-
-  // chargement de data globales (liste des roles, des genres...)
-  // useEffect(() => {
-  //   dispatch({ type: 'GET_ROLES' });
-  //   dispatch({ type: 'GET_GENDERS' });
-  // });
 
   // Connexion auto avec token
   useEffect(() => {
@@ -85,7 +78,6 @@ function App() {
       <Header />
       <Menu />
       <Toast />
-      {isLoading && <Loader />}
       <Routes>
         <Route path="/connexion" element={<Navigate to="/tableau-de-bord" />} />
         <Route path="/tableau-de-bord" element={<Dashboard />} />
@@ -93,6 +85,7 @@ function App() {
         <Route path="/club" element={<Club />} />
         <Route path="/membres" element={<Members />} />
         <Route path="/membres/:id" element={<Member />} />
+        <Route path="/tournois/:slug" element={<Tournament />} />
         <Route path="/profil" element={<Profil />} />
         <Route path="/profil/modifier-profil" element={<UpdateProfil />} />
         <Route path="/classements" element={<Ranking />} />

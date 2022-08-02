@@ -17,7 +17,6 @@ const userMiddleware = (store) => (next) => (action) => {
           store.dispatch({ type: 'GET_PROFILE_SUCCESS', value: response.data });
         })
         .catch((error) => {
-          store.dispatch({ type: 'GET_PROFILE_FAILED', value: 'Data error' });
           throw new Error(error);
         });
       break;
@@ -34,9 +33,7 @@ const userMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           store.dispatch({ type: 'GET_MEMBERS_SUCCESS', value: response.data });
         })
-
         .catch((error) => {
-          store.dispatch({ type: 'GET_MEMBERS_FAILED', value: 'Data error' });
           throw new Error(error);
         });
       break;
@@ -55,7 +52,6 @@ const userMiddleware = (store) => (next) => (action) => {
           store.dispatch({ type: 'GET_MEMBER_SUCCESS', value: response.data });
         })
         .catch((error) => {
-          store.dispatch({ type: 'GET_MEMBER_FAILED', value: 'Data error' });
           throw new Error(error);
         });
       break;
@@ -98,7 +94,7 @@ const userMiddleware = (store) => (next) => (action) => {
             type: 'NEW_TOAST',
             newToast: {
               id: state.interface.toastCounter,
-              message: `Nouveau membre ${response.data.firstname} ${response.data.lastname} enregistré`,
+              message: `Nouveau membre ${response.data.user.firstname} ${response.data.user.lastname} enregistré`,
               type: 'success',
             },
           });
@@ -155,10 +151,6 @@ const userMiddleware = (store) => (next) => (action) => {
           store.dispatch({ type: 'REDIRECT', value: '/profil' });
         })
         .catch((error) => {
-          store.dispatch({
-            type: 'UPDATE_PROFILE_FAILED',
-            value: 'Data error',
-          });
           throw new Error(error);
         });
       break;
