@@ -127,12 +127,25 @@ function convertDate(inputFormat) {
 }
 
 /**
+ * Trouver un user dans une liste d'objet user par un id d'user
+ * @param {Array} usersList est un tableau d'users
+ * @param {Object} userId est l'id d'un user
+ * @returns l'objet user complet s'il est dans la liste
+ */
+function findMemberInAList(usersList, userId) {
+  if (!usersList || !userId) return false;
+  const findedUser = usersList.find((user) => user.id === userId);
+  return findedUser;
+}
+
+/**
  * Suis-je déja inscrit à ce tournoi ?
  * @param {Array} tournamentRegistered : Tableau d'id d'utilisateurs
  * @param {number} userId : id d'utilisateur a chercher
  * @returns true si l'id est trouvé dans la liste, sinon false.
  */
 function AmIAlreadyRegisteredForThisTournament(tournamentRegistered, userId) {
+  if (!tournamentRegistered) return false;
   const result = tournamentRegistered.find((user) => user.id === userId);
   if (result) return true;
   return false;
@@ -145,6 +158,8 @@ function AmIAlreadyRegisteredForThisTournament(tournamentRegistered, userId) {
  * @returns true si j'ai le droit de m'inscrire, sinon false
  */
 function canISubscribeToThisTournament(tournament, user) {
+  if (!tournament || !user) return false;
+
   // vérifier si le statut du tournoi autorise les inscriptions (tournoi ouvert)
   if (tournament.state_id > 1) {
     return false;
@@ -162,16 +177,33 @@ function canISubscribeToThisTournament(tournament, user) {
 }
 
 /**
+ * Trouver un user dans une liste de teams par son id
+ * @param {Array} teamList est un tableau de teams
+ * @param {Object} userId est l'id d'un user
+ * @returns la team de l'user s'il y'en a une
+ */
+function findUserTeam(teamList, userId) {
+  const teamFinded = teamList
+    .find((team) => team.users
+      .find((user) => user.id === userId));
+
+  if (teamFinded) {
+    return teamFinded;
+  }
+  return false;
+}
+
+/**
  * supprimmer les clés d'un objet qui ont pour valeur null ou false
  * @param {object} obj - l'objet a nettoyer
  */
-const deleteNullOrFalsyKeyInObject = (obj) => {
+function deleteNullOrFalsyKeyInObject(obj) {
   Object.keys(obj).forEach((key) => {
     if (obj[key] === null || obj[key] === false || obj[key] === '') {
       delete obj[key];
     }
   });
-};
+}
 
 export {
   roleText,
@@ -185,5 +217,7 @@ export {
   convertDate,
   AmIAlreadyRegisteredForThisTournament,
   canISubscribeToThisTournament,
+  findMemberInAList,
+  findUserTeam,
   formatPhoneNumber,
 };

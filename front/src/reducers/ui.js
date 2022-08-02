@@ -51,16 +51,6 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         isLoading: false,
       };
-    case 'GET_TEAMS':
-      return {
-        ...state,
-        isLoading: true,
-      };
-    case 'GET_TEAMS_SUCCESS':
-      return {
-        ...state,
-        isLoading: false,
-      };
     case 'NEW_TOAST':
       return {
         ...state,

@@ -84,7 +84,7 @@ function App() {
         <Route path="/club" element={<Club />} />
         <Route path="/membres" element={<Members />} />
         <Route path="/membres/:id" element={<Member />} />
-        <Route path="/tournois/:id" element={<Tournament />} />
+        <Route path="/tournois/:slug" element={<Tournament />} />
         <Route path="/profil" element={<Profil />} />
         <Route path="/profil/modifier-profil" element={<UpdateProfil />} />
         <Route path="/aide" element={<Help />} />

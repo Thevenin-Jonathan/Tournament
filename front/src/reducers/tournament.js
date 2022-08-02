@@ -12,9 +12,9 @@ export const initialState = {
   tournament: {
     managers: [],
     registered: [],
+    matches: [],
+    teams: [],
   },
-  // teams du tournoi courant
-  teams: [],
 
   // champs controlés AddTournamentForm
   tournamanentName: '',
@@ -59,11 +59,6 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         tournament: action.value,
       };
-    case 'GET_TEAMS_SUCCESS':
-      return {
-        ...state,
-        teams: action.value,
-      };
     case 'CREATE_TOURNAMENT_SUCCESS':
       return {
         ...state,
@@ -85,6 +80,16 @@ const reducer = (state = initialState, action = {}) => {
           ...state.filter,
           state_id: action.newFilter,
         },
+      };
+    case 'SINGLE_TOURNAMENT_SUBSCRIBE':
+      return {
+        ...state,
+        tournament: action.value,
+      };
+    case 'SINGLE_TOURNAMENT_UNSUBSCRIBE':
+      return {
+        ...state,
+        tournament: action.value,
       };
 
     default:

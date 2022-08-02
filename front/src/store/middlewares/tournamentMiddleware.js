@@ -26,22 +26,9 @@ const tournamentMiddleware = (store) => (next) => (action) => {
     // récupérer UN tournoi par son slug
     case 'GET_TOURNAMENT': {
       next(action);
-      axios.get(`${config.api.baseUrl}/tournaments/${action.value.id}`)
+      axios.get(`${config.api.baseUrl}/tournaments/slug/${action.value.slug}`)
         .then((response) => {
           store.dispatch({ type: 'GET_TOURNAMENT_SUCCESS', value: response.data });
-        })
-        .catch((error) => {
-          throw new Error(error);
-        });
-      break;
-    }
-
-    // récupérer les teams d'un tournoi
-    case 'GET_TEAMS': {
-      next(action);
-      axios.get(`${config.api.baseUrl}/tournaments/${action.value.id}/teams`)
-        .then((response) => {
-          store.dispatch({ type: 'GET_TEAMS_SUCCESS', value: response.data });
         })
         .catch((error) => {
           throw new Error(error);

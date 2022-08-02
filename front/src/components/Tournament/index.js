@@ -7,17 +7,19 @@ import {
   longDateFr,
   AmIAlreadyRegisteredForThisTournament,
   canISubscribeToThisTournament,
+  findMemberInAList,
+  findUserTeam,
 } from 'src/utils';
 
 import Loader from '../Loader';
 
 function Tournament() {
   // je récupère le slug dans l'url
-  const id = useParams();
+  const slug = useParams();
 
   // Je récupère le state dans le reducer 'tournament'
   const tournament = useSelector((state) => (state.tournament.tournament));
-  // const teams = useSelector((state) => (state.tournament.teams));
+  const teams = useSelector((state) => (state.tournament.tournament.teams));
   const user = useSelector((state) => (state.user.loggedUser));
   const userId = useSelector((state) => (state.user.id));
   const members = useSelector((state) => (state.user.members));
@@ -26,30 +28,15 @@ function Tournament() {
   const canISubscribe = canISubscribeToThisTournament(tournament, user);
 
   const dispatch = useDispatch();
-  // au chargement
+  // au chargement on fetch le tournoi par son slug
+  // et on fetch les membres pour mapper sur les id d'user
   useEffect(() => {
-    dispatch({
-      type: 'GET_MEMBERS',
-      value: id,
-    });
-    // récupère le tournoi correspondant au slug/id
     dispatch({
       type: 'GET_TOURNAMENT',
-      value: id,
+      value: slug,
     });
-    dispatch({
-      type: 'GET_TEAMS',
-      value: id,
-    });
+    dispatch({ type: 'GET_MEMBERS' });
   }, []);
-
-  useEffect(() => {
-    dispatch({
-      type: 'GET_TEAMS',
-      value: id,
-    });
-  }, [tournament]);
-
   // action de souscription
   const handleSubscribe = () => {
     dispatch({
@@ -63,23 +50,6 @@ function Tournament() {
       type: 'SINGLE_TOURNAMENT_UNSUBSCRIBE',
       value: teamId,
     });
-  };
-
-  const findInMembers = (playerId) => {
-    const { firstname } = members.find((member) => member.id === playerId);
-    const { lastname } = members.find((member) => member.id === playerId);
-    return `${firstname} ${lastname}`;
-  };
-
-  const findMyTeam = (playerId) => {
-    const teamFinded = tournament.teams
-      .find((team) => team.users
-        .find((player) => player.id === playerId));
-
-    if (teamFinded) {
-      return teamFinded.id;
-    }
-    return false;
   };
 
   if (isLoading) {
@@ -112,10 +82,11 @@ function Tournament() {
                   <Link
                     to={`/membres/${player.id}`}
                   >
-                    { findInMembers(player.id) }&nbsp;
+                    { findMemberInAList(members, player.id).firstname }&nbsp;
+                    { findMemberInAList(members, player.id).lastname }&nbsp;
                     <span className="debug">
                       (id : { player.id } |
-                      Team : { findMyTeam(player.id) })
+                      Team : { findUserTeam(teams, player.id).id })
                     </span>
                   </Link>
                 </li>
@@ -151,8 +122,8 @@ function Tournament() {
           )}
           { canISubscribe && alreadyRegistered && (
             <button
-              title={`supprimer l'équipe : ${findMyTeam(user.id)}`}
-              onClick={() => handleUnSubscribe(findMyTeam(user.id))}
+              title={`supprimer l'équipe : ${findUserTeam(teams, user.id).id}`}
+              onClick={() => handleUnSubscribe(findUserTeam(teams, user.id).id)}
               type="button"
               className="action-btn"
             >
