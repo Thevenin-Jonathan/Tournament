@@ -638,8 +638,8 @@ _Ce que tu as fait hier:_
 - Penser a verifier le type des données qui arrive par le front !
 
 _Les problèmes rencontrés:_
+
 - condtionner les possibilité d'inscription
-- 
 
 _Ce que tu comptes faire aujourd'hui:_
 
@@ -704,7 +704,7 @@ _Ce que tu comptes faire aujourd'hui:_
 
 _Ce que tu as fait hier:_
 
-- entrainement sur des requetes SQL, replay de BEN 
+- entrainement sur des requetes SQL, replay de BEN
 
 _Les problèmes rencontrés:_
 
@@ -712,6 +712,4 @@ _Les problèmes rencontrés:_
 
 _Ce que tu comptes faire aujourd'hui:_
 
--
-opsider em
-opsider em
+- opsider em
