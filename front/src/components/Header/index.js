@@ -25,7 +25,7 @@ function Header() {
 
   return (
     <header className="header">
-      <Link to="/tableau-de-bord" title="Retour au tableau de bord" className="header-logo">
+      <Link to="/" title="Retour au tableau de bord" className="header-logo">
         <img src={logo} alt="Logo Tournament" />
       </Link>
       <h1 className="header-club-name">Bayard Bad</h1>
