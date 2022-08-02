@@ -13,6 +13,8 @@
     "postinstall": "npm run postinstall-client && npm run postinstall-server",
     "postinstall-client": "cd front && npm install && npm run build",
     "postinstall-server": "cd server && npm install",
+    "db-seed": "psql -U tournament_admin -d tournament -f ./server/sqitch/seed_db.sql",
+    "dev": "cd server && npm run dev",
     "start": "node server/app/index.js"
   },
   "repository": {
