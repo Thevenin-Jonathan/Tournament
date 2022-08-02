@@ -21,6 +21,7 @@ router.route("/:id")
 router.route("/slug/:slug")
   .get(controllerWrapper(controller.getOne));
 
-router.route("/:id/teams/").get(controllerWrapper(controller.getAllTeams)); 
+router.route("/:id/generate")
+  .get(controllerWrapper(controller.generate)); 
 
 module.exports = router;
