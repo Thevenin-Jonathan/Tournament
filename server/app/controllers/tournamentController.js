@@ -1,7 +1,9 @@
 const debug = require("debug")("ct-tournament")
 const tournamentDatamapper = require("../datamappers/tournament");
+const matchDatamapper = require("../datamappers/match");
 const slugify = require("../services/slugify");
 const { ApiError, Api404Error } = require("../services/errorHandler");
+const generator = require("../services/generatorHandler");
 
 /**
  * Get and return all tournaments from DB
@@ -64,6 +66,59 @@ async function create(req, res) {
 };
 
 /**
+ * Generate matches grid of one tournament and save each match into DB
+ * 
+ * ExpressMiddleware signature
+ * @param {object} req express request object
+ * @param {object} res express response object
+ * @returns {json} JSON response with the generated tournament
+ */
+ async function generate(req, res) {
+  const id = Number(req.params.id);
+
+  if (id && !isNaN(id)) {
+    const tournament = await tournamentDatamapper.findById(id);
+
+    /** Verify */
+    if (!tournament) throw new Api404Error("Tournament does not exist in DB");
+    if (tournament.state_id > 1) {
+      throw new Api404Error("Unable to generate matches grid on a tournament already generated");
+    }
+
+    /** Get teams */
+    const teams = tournament.teams.map(team => team.id);
+
+    /** Generate and get matches grid */
+    const matchesGrid = await generator.generate(tournament.type_id, teams);
+
+    // /** Add match into DB */
+    for (const [index, phase] of matchesGrid.entries()) {
+      for (const match of phase) {
+        /** Add match */
+        const newMatch = (await matchDatamapper.insertOne({
+          tournament_id: id,
+          phase: index + 1
+        }));
+
+        /** Add team into match */
+        for (const teamId of match) {
+          await matchDatamapper.insertTeam(newMatch.id, teamId)
+        }
+      }
+    };
+    
+    /** Change tournament state to "generated"*/
+    await tournamentDatamapper.updateOne(id, {state_id: 2});
+
+    /** Return the generated tournament with all infos */
+    const tournamentGenerated = await tournamentDatamapper.findById(id);
+    return res.status(201).json(tournamentGenerated);
+  } else {
+    throw new Api404Error("Invalid id, tournament not found");
+  }
+};
+
+/**
  * Update one tournament into DB
  * 
  * ExpressMiddleware signature
@@ -113,6 +168,7 @@ module.exports = {
   getAll,
   getOne,
   create,
+  generate,
   update,
   destroy
 }
