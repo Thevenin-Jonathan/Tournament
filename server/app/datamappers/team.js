@@ -21,7 +21,9 @@ async function findAll() {
 async function findById(id) {
 	const result = await pool.query(
 		`
-		SELECT * FROM "get_team_by_id"($1);
+    SELECT * 
+    FROM "get_team" AS "GT"
+    WHERE "GT"."id" = $1;
 		`,[id]
 	);
 	return result.rows[0];

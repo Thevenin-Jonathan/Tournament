@@ -19,7 +19,9 @@ async function findAll() {
 async function findById(id) {
   const result = await pool.query(
     `
-    SELECT * FROM "get_tournament_by_id"($1);
+    SELECT * 
+    FROM "get_tournament" AS "GT"
+    WHERE "GT"."id" = $1;
     `, [id]);
   return result.rows[0];
 };
@@ -33,7 +35,9 @@ async function findById(id) {
  async function findBySlug(slug) {
   const result = await pool.query(
     `
-    SELECT * FROM "get_tournament_by_slug"($1);
+    SELECT * 
+    FROM "get_tournament" AS "GT"
+    WHERE "GT"."slug" = $1;
     `, [slug]);
   return result.rows[0];
 };

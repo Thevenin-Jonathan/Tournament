@@ -19,7 +19,9 @@ async function findAll() {
 async function findById(id) {
   const result = (await pool.query(
     `
-    SELECT * FROM "get_match_by_id"($1);
+    SELECT * 
+    FROM "get_match" AS "GM"
+    WHERE "GM"."id" = $1;
     `,
     [id])).rows[0];
   return result;
