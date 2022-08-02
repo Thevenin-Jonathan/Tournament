@@ -99,6 +99,15 @@ const dateFr = (date) => {
   return maDate.toLocaleDateString('fr-FR', options);
 };
 
+// format phone numbers function
+// eslint-disable-next-line arrow-body-style
+const formatPhoneNumber = (phoneNumber) => {
+  if (phoneNumber !== null) {
+    return phoneNumber.replace(/(.{2})(?=.)/g, '$1 ');
+  }
+  return null;
+};
+
 /**
  * supprimmer les clés d'un objet qui ont pour valeur null ou false
  * @param {object} obj - l'objet a nettoyer
@@ -119,4 +128,5 @@ export {
   disciplineShortText,
   dateFr,
   deleteNullOrFalsyKeyInObject,
+  formatPhoneNumber,
 };
