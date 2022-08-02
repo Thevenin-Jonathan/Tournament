@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import config from 'src/config';
 
 function Club() {
   // je récupère le state du reducer 'club'
@@ -26,7 +27,7 @@ function Club() {
 
       <div className="club-card">
         <h2 className="club-name">{club.name}</h2>
-        <img className="club-avatar" src={club.logo_url} alt={`Logo du club ${club.name}`} />
+        <img className="club-avatar" src={`${config.path.uploads.logoClub}/${club.logo}`} alt={`Logo du club ${club.name}`} />
         <ul>
           <li>Nombre de membres :<span>{user.members.length}</span></li>
           <li>Adresse :<span>{club.address}</span></li>

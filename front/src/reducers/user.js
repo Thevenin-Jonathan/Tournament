@@ -35,8 +35,16 @@ export const initialState = {
   searchMember: '',
   // state qui stocke la liste des membres
   members: [],
-  // state qui stocke un membre
+  // state qui stocke les datas d'un membre
   member: {},
+
+  // champs contrôlés update profile
+  updateFirstname: '',
+  updateLastname: '',
+  updateBirthdate: '',
+  // updateEmail: '',
+  // updatePhone: '',
+  updateAddress: '',
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -138,6 +146,22 @@ const reducer = (state = initialState, action = {}) => {
         addMembergenderId: '1',
         addMemberphone: '',
       };
+    case 'PREFILL_PROFIL_FORM':
+      return {
+        ...state,
+        updateFirstname: action.value.firstname,
+        updateLastname: action.value.lastname,
+        updateBirthdate: action.value.birthdate,
+        updateEmail: action.value.email,
+        updatePhone: action.value.phone,
+        updateAddress: action.value.address,
+      };
+    // case 'UPDATE_PROFILE_SUCCESS':
+    //   return {
+    //     ...state,
+    //     firstname: action.value.firstname,
+    //     lastname: action.value.lastname,
+    //   };
     default:
       return state;
   }
