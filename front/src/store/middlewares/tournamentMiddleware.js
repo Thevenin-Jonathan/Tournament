@@ -62,9 +62,9 @@ const tournamentMiddleware = (store) => (next) => (action) => {
         },
         data: qs.stringify(data),
       };
-      next(action);
       axios(axiosConfig)
         .then((response) => {
+          store.dispatch({ type: 'GET_TOURNAMENT_SUCCESS', value: response.data });
           store.dispatch({
             type: 'NEW_TOAST',
             newToast: {
@@ -91,26 +91,14 @@ const tournamentMiddleware = (store) => (next) => (action) => {
     // inscription à un tournoi de simple (pas de gestion d'équipe)
     case 'SINGLE_TOURNAMENT_UNSUBSCRIBE': {
       const state = store.getState();
-      const data = {
-        tournament_id: state.tournament.tournament.id,
-        user_ids: [state.user.id],
-      };
-      const axiosConfig = {
-        method: 'post',
-        url: `${config.api.baseUrl}/teams`,
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        data: qs.stringify(data),
-      };
-      next(action);
-      axios(axiosConfig)
-        .then(() => {
+      axios.delete(`${config.api.baseUrl}/teams/${action.value}`)
+        .then((response) => {
+          store.dispatch({ type: 'GET_TOURNAMENT_SUCCESS', value: response.data });
           store.dispatch({
             type: 'NEW_TOAST',
             newToast: {
               id: state.interface.toastCounter,
-              message: 'inscription réussie',
+              message: 'désinscription réussie',
               type: 'success',
             },
           });

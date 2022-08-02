@@ -86,16 +86,7 @@ const reducer = (state = initialState, action = {}) => {
           state_id: action.newFilter,
         },
       };
-    case 'IM_ON_THIS_TOURNAMENT':
-      return {
-        ...state,
-        alreadyRegistred: true,
-      };
-    case 'IM_NOT_ON_THIS_TOURNAMENT':
-      return {
-        ...state,
-        alreadyRegistred: false,
-      };
+
     default:
       return state;
   }

@@ -2,10 +2,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import {
-  tournamentStateText, 
-  disciplineText, 
-  longDateFr, 
-  AmIAlreadyRegisteredForThisTournament, 
+  tournamentStateText,
+  disciplineText,
+  longDateFr,
+  AmIAlreadyRegisteredForThisTournament,
   canISubscribeToThisTournament,
 } from 'src/utils';
 
@@ -26,11 +26,11 @@ function Tournament() {
   const dispatch = useDispatch();
   // au chargement
   useEffect(() => {
-    // récupère le tournoi correspondant au slug/id
     dispatch({
       type: 'GET_MEMBERS',
       value: id,
     });
+    // récupère le tournoi correspondant au slug/id
     dispatch({
       type: 'GET_TOURNAMENT',
       value: id,
@@ -42,19 +42,24 @@ function Tournament() {
   }, []);
 
   useEffect(() => {
-    // récupère le tournoi si changement du state
+    dispatch({
+      type: 'GET_TEAMS',
+      value: id,
+    });
   }, [tournament]);
 
   // action de souscription
   const handleSubscribe = () => {
     dispatch({
       type: 'SINGLE_TOURNAMENT_SUBSCRIBE',
+      value: userId,
     });
   };
   // action de désinscription
-  const handleUnSubscribe = () => {
+  const handleUnSubscribe = (teamId) => {
     dispatch({
       type: 'SINGLE_TOURNAMENT_UNSUBSCRIBE',
+      value: teamId,
     });
   };
 
@@ -64,13 +69,13 @@ function Tournament() {
     return `${firstname} ${lastname}`;
   };
 
-  const findMyTeam = () => {
+  const findMyTeam = (playerId) => {
     const teamFinded = tournament.teams
       .find((team) => team.users
-        .find((user) => user.id === userId));
+        .find((player) => player.id === playerId));
 
     if (teamFinded) {
-      //  return teamFinded.id;
+      return teamFinded.id;
     }
     return false;
   };
@@ -114,8 +119,11 @@ function Tournament() {
                   <Link
                     to={`/membres/${player.id}`}
                   >
-                    { findInMembers(player.id) }
-                    { findMyTeam() }
+                    { findInMembers(player.id) }&nbsp;
+                    <span className="debug">
+                      (id : { player.id } |
+                      Team : { findMyTeam(player.id) })
+                    </span>
                   </Link>
                 </li>
               ))}
@@ -150,7 +158,8 @@ function Tournament() {
           )}
           { canISubscribe && alreadyRegistered && (
             <button
-              onClick={() => handleUnSubscribe()}
+              title={`supprimer l'équipe : ${findMyTeam(user.id)}`}
+              onClick={() => handleUnSubscribe(findMyTeam(user.id))}
               type="button"
               className="action-btn"
             >
