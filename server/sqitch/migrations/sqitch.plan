@@ -7,3 +7,4 @@ v3 2022-07-21T16:13:27Z jonathan thevenin <warzo@Warzone-W11-Lap> # Upd default 
 v4 2022-07-27T09:21:08Z System Administrator <root@tino-mbp-1.home> # Upd BDD to match requirements of the app
 v5 2022-08-02T07:29:28Z jonathan thevenin <warzo@Warzone-W11-Lap> # add SQL functions for get tables
 v6 2022-08-02T09:34:54Z jonathan thevenin <warzo@Warzone-W11-Lap> # remove functions for views to get tables
+v7 2022-08-03T19:31:17Z jonathan thevenin <warzo@Warzone-W11-Lap> # create views and functions for get all stats players[D[D[D[D[D[D[D[[C[C[C[C
