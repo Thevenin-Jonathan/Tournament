@@ -41,6 +41,23 @@ function Tournament() {
     dispatch({ type: 'GET_MEMBERS' });
   }, []);
 
+
+  function compatiblesMembers(members, tournament) {
+    let filteredMembers = members;
+    // seulement hommes
+   
+    if([1, 3].includes(tournament.discipline_id)) {
+      filteredMembers = members.filter((member) => member.gender_id === 1);
+
+    }
+    // seulement femmes
+    if([2, 4].includes(tournament.discipline_id)) {
+      filteredMembers = members.filter((member) => member.gender_id === 2);
+    }
+    console.log(filteredMembers);
+    return filteredMembers;
+  }; 
+
   function enroledMembers(members, enroledMembers) {
     const enroledMembersIds = Array.from((enroledMembers), obj => obj.id);
     const filteredMembers = members.filter((member) => (
@@ -57,6 +74,13 @@ function Tournament() {
     return filteredMembers;
   };
 
+  
+  const filteredPlayers = (players, string) => {
+    return players.filter((member) => (
+      member.firstname.toLowerCase().includes(string.toLowerCase())
+      || member.lastname.toLowerCase().includes(string.toLowerCase())
+    ));
+  };
 
   // modal
   const [showPlayerModal, setShowPlayerModal] = useState(false);
@@ -64,9 +88,12 @@ function Tournament() {
   // sortable system
   const [availablePlayers, setAvailablePlayers] = useState([]);
   const [enroledPlayers, setEnroledPlayers] = useState([]);
+  const [searchString, setSearchString] = useState('');
+
   useEffect(() => {
     setAvailablePlayers(members);
   }, [members]);
+
   useEffect(() => {
     setEnroledPlayers(tournament.registered);
   }, [tournament]);
@@ -117,6 +144,8 @@ function Tournament() {
     });
   };
 
+
+
   if (isLoading) {
     return <Loader />;
   }
@@ -147,7 +176,7 @@ function Tournament() {
             {tournament.player_limit && (
               <p className="tournament-player-count">
                 <i className="fa fa-users fa-fw" aria-hidden="true" />
-                {tournament.player_limit}
+                {tournament.player_limit} Participants max
               </p>
             )}
             <p className="tournament-playground-count">
@@ -274,7 +303,11 @@ function Tournament() {
 
               <div className="col available-players">
                 <h2>Joueurs disponibles</h2>
-                <input type="search" placeholder="Rechercher un joueur" />
+                <input
+                value={searchString}
+                onChange={(evt) => setSearchString(evt.target.value)}
+                type="search"
+                placeholder="Rechercher un joueur" />
                 <ReactSortable
                   list={availablePlayers}
                   setList={setAvailablePlayers}
@@ -282,7 +315,7 @@ function Tournament() {
                   id="available-players"
                   className="available-players-list dragable-zone"
                 >
-                  {availableMembers(members, tournament.registered).map((player) => (
+                  {availableMembers(filteredPlayers(members, searchString), tournament.registered).map((player) => (
                     <div
                       key={player.id}
                       className="player-list-item"
