@@ -1,0 +1,34 @@
+@hostname = http://localhost:3001/api/v1
+
+###
+# Get all disciplines
+GET {{hostname}}/disciplines/ HTTP/1.1
+content-type: application/json
+
+###
+# Get one discipline
+GET {{hostname}}/disciplines/2 HTTP/1.1
+content-type: application/json
+
+###
+# Create one discipline
+POST {{hostname}}/disciplines/ HTTP/1.1
+content-type: application/json
+
+{
+  "name": "test"
+}
+
+###
+# Update one discipline
+PUT {{hostname}}/disciplines/6 HTTP/1.1
+content-type: application/json
+
+{
+  "name": "test2"
+}
+
+###
+# Delete one discipline
+DELETE {{hostname}}/disciplines/6 HTTP/1.1
+content-type: application/json

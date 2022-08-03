@@ -1,0 +1,34 @@
+@hostname = http://localhost:3001/api/v1
+
+###
+# Get all results
+GET {{hostname}}/results/ HTTP/1.1
+content-type: application/json
+
+###
+# Get one result
+GET {{hostname}}/results/2 HTTP/1.1
+content-type: application/json
+
+###
+# Create one result
+POST {{hostname}}/results/ HTTP/1.1
+content-type: application/json
+
+{
+  "label": "test"
+}
+
+###
+# Update one result
+PUT {{hostname}}/results/5 HTTP/1.1
+content-type: application/json
+
+{
+  "label": "test2"
+}
+
+###
+# Delete one result
+DELETE {{hostname}}/results/5 HTTP/1.1
+content-type: application/json
