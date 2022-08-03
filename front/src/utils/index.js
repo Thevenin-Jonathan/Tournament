@@ -133,7 +133,7 @@ function convertDate(inputFormat) {
  * @returns l'objet user complet s'il est dans la liste
  */
 function findMemberInAList(usersList, userId) {
-  if (!usersList || !userId) return false;
+  if (!usersList || !userId || usersList === undefined) return false;
   const findedUser = usersList.find((user) => user.id === userId);
   return findedUser;
 }

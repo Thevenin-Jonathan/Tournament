@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
 
 import logo from 'src/assets/logo-petit-tournament.svg';
 import config from 'src/config';
@@ -8,12 +7,6 @@ import config from 'src/config';
 function Header() {
   const dispatch = useDispatch();
   const user = useSelector((state) => (state.user));
-  useEffect(() => {
-    dispatch({
-      type: 'GET_PROFILE',
-      value: user.id,
-    });
-  }, []);
 
   const handleLogout = () => {
     dispatch({
@@ -25,13 +18,13 @@ function Header() {
 
   return (
     <header className="header">
-      <Link to="/" title="Retour au tableau de bord" className="header-logo">
+      <Link to="/tableau-de-bord" title="Retour au tableau de bord" className="header-logo">
         <img src={logo} alt="Logo Tournament" />
       </Link>
       <h1 className="header-club-name">Bayard Bad</h1>
       <div className="header-user-menu">
         <p className="header-user-welcome">
-          Bonjour <span className="header-member-firstname"> {user.displayName}</span>
+          Bonjour <span className="header-member-firstname"> {user.firstname}</span>
           &nbsp;<i className="fa fa-user fa-1x" aria-hidden="true" />
         </p>
         <div className="header-user-menu-pannel">
