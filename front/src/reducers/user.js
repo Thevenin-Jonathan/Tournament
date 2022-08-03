@@ -160,12 +160,11 @@ const reducer = (state = initialState, action = {}) => {
         updatePhone: action.value.phone,
         updateAddress: action.value.address,
       };
-    // case 'UPDATE_PROFILE_SUCCESS':
-    //   return {
-    //     ...state,
-    //     firstname: action.value.firstname,
-    //     lastname: action.value.lastname,
-    //   };
+    case 'UPDATE_PROFILE_SUCCESS':
+      return {
+        ...state,
+        loggedUser: action.value,
+      };
     default:
       return state;
   }

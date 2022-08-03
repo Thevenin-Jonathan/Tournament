@@ -43,6 +43,7 @@ const authMiddleware = (store) => (next) => (action) => {
       if (currentUser.role_id === 1) {
         store.dispatch({ type: 'IS_ADMIN' });
       }
+      store.dispatch({ type: 'GET_PROFILE', value: currentUser.id });
       next(action);
       break;
     }

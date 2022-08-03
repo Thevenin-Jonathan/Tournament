@@ -79,6 +79,7 @@ function App() {
       <Menu />
       <Toast />
       <Routes>
+        <Route path="/" element={<Navigate to="/tableau-de-bord" />} />
         <Route path="/connexion" element={<Navigate to="/tableau-de-bord" />} />
         <Route path="/tableau-de-bord" element={<Dashboard />} />
         <Route path="/tournois" element={<Tournaments />} />
@@ -97,6 +98,7 @@ function App() {
           </>
         )}
         <Route path="/membres/ajouter-membres" element={<Error />} />
+        <Route path="/erreur" element={<Error />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </div>

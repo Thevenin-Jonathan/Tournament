@@ -55,6 +55,7 @@ function Tournament() {
   if (isLoading) {
     return <Loader />;
   }
+
   return (
     <main className="content tournament">
       <div className="bg-layer" style={{ backgroundImage: `url(${tournament.picture_url})` }} />
