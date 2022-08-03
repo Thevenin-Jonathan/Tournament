@@ -761,7 +761,6 @@ id joueur dans le smatchs géénérés. Il m'a modifié tout ca dans son algo et
 
 _Ce que tu comptes faire aujourd'hui:_
 
-- Implémenter les routes pour ajouter et retirer un organisateur d'un tournoi (rt => add-manager & remove-manager)
 - Implémenter les routes pour modifier le score d'une équipe (rt => team update)
 - Voir les tokens temporaires pour les mails
 - Si il me reste du temps, voir pour un logger et la doc swagger
