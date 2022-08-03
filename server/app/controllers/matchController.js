@@ -1,6 +1,5 @@
 const debug = require("debug")("ct-match");
 const matchDatamapper = require("../datamappers/match");
-const matchHasTeamDatamapper = require("../datamappers/matchHasTeam");
 const tournamentDatamapper = require("../datamappers/tournament");
 const { ApiError, Api404Error } = require("../services/errorHandler");
 
@@ -84,6 +83,50 @@ async function update(req, res) {
   }
   
   const updMatch = await matchDatamapper.updateOne(id, req.body)
+  return res.json(updMatch)
+}
+
+/**
+ * Update match score and state
+ * 
+ * ExpressMiddleware signature
+ * @param {object} req express request object
+ * @param {object} res express response object
+ * @returns {json} JSON response with the updated match
+ */
+ async function updateScore(req, res) {
+  const id = req.params.id;
+  const data = req.body;
+  const match = await matchDatamapper.findById(id);
+
+  /** Verify */
+  if (!match) {
+    throw new Api404Error("Match does not exist in DB");
+  }
+
+  if (!match.team.every(team => data.some(matchTeam => matchTeam.team_id === team.team_id))) {
+    throw new Api404Error("One team is not participating in this match");
+  };
+
+  if ((await tournamentDatamapper.findById(match.tournament_id)).state_id >= 4) {
+    throw new Api404Error("Unable to change scores, tournament is closed");
+  };
+
+  const resultT1 = data[0].result_id
+  const resultT2 = data[1].result_id
+
+  /** set score for team 1 */
+  const isWinnerT1 = resultT1 === 3 ? true : resultT1 !== 4 && resultT2 === 4 ? true : false;
+  await matchDatamapper.setScore(id, data[0].team_id, data[0].result_id, isWinnerT1);
+  
+  /** set score for team 2 */
+  const isWinnerT2 = resultT2 !== 4 && isWinnerT1 === false ? true : false;
+  await matchDatamapper.setScore(id, data[1].team_id, data[1].result_id, isWinnerT2);
+
+  /** change match state to "closed" */
+  await matchDatamapper.updateOne(id, { state_id: 4 });
+
+  const updMatch = await matchDatamapper.findById(id);
   return res.json(updMatch)
 }
 
@@ -190,6 +233,7 @@ module.exports = {
   getOne,
   create,
   update,
+  updateScore,
   addTeam,
   removeTeam,
   destroy
