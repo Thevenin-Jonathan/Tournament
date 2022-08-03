@@ -248,7 +248,10 @@ function Tournament() {
                   key={match.id}
                   className="match-item"
                 >
-                  Match {match.id}
+                <p>
+                  Match {match.id} <br />
+                  Phase : {match.phase} <br />
+                </p>
                 </li>
               ))}
             </ul>
