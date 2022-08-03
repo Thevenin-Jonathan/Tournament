@@ -632,6 +632,46 @@ a {
         width: 100%;
       }
     }
+    .modal {
+      z-index: 99999;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,.9);
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .close-button {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        font-size: 2rem;
+      }
+    }
+    .modal.add-players {
+      .tournament-title {
+        margin-bottom: 2rem;
+        font-weight: var(--black);
+      }
+      .modal-content {
+        width: 80%;
+        height: 80%;
+      }
+    }
+    .available-players {
+      flex-basis: 40%;
+    }
+    .enroled-team-players {
+      flex-basis: 60%;
+    }
+    .enroled.drop-zone {
+      border: solid 2px white;
+      border-radius: var(--border-radius);
+      min-height: 20rem;
+    }
 }
 
 

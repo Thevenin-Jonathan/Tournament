@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
@@ -181,6 +182,41 @@ function Tournament() {
         </div>
         )}
       </div>
+
+      {isAdmin && tournament.state_id === 1 && (
+        <div className="modal add-players">
+          <button type="button" className="close-button"><i className="fa fa-close" aria-hidden="true" /></button>
+          <div className="modal-content">
+
+            <h1 className="title">Ajouter des participants</h1>
+            <p className="tournament-title"><i className="fa fa-trophy" aria-hidden="true" /> {tournament.title}</p>
+            <div className="row">
+
+              <div className="col available-players">
+                <h2>Joueurs disponibles</h2>
+                <input type="search" placeholder="Rechercher un joueur" />
+                <ul>
+                  <li>Allibe Philippe</li>
+                  <li>Tom Roche</li>
+                  <li>Cédric Bernard</li>
+                  <li>Marie Rodriguez</li>
+                </ul>
+              </div>
+
+              <div className="col enroled-team-players">
+                <h2>Equipes/Joueurs enrolés</h2>
+                <div className="enroled drop-zone">
+                  
+                </div>
+                <button type="button" to="" className="action-btn ">
+                  Confirmer <i className="fa fa-arrow-right" />
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      )}
 
     </main>
   );
