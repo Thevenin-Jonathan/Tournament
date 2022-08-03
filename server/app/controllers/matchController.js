@@ -109,12 +109,12 @@ async function update(req, res) {
     throw new ApiError("Unable to change teams, tournament already started");
   }
 
-  if ((await matchHasTeamDatamapper.findByMatchId(id)).length >= 2) {
-    throw new ApiError("The match already has two teams");
+  if (match.team.some(team => team.team_id === team_id)) {
+    throw new ApiError("This team is already in the match");
   }
 
-  if (await matchHasTeamDatamapper.findByMatchIdAndTeamId(id, team_id)) {
-    throw new ApiError("This team is already in the match");
+  if (match.team.length >= 2) {
+    throw new ApiError("The match already has two teams");
   }
   
   /** Add team into match */
@@ -142,8 +142,8 @@ async function update(req, res) {
   if (!match) {
     throw new Api404Error("Match does not exist in DB");
   }
-
-  if (!await matchHasTeamDatamapper.findByMatchIdAndTeamId(id, team_id)) {
+  
+  if (!match.team.some(team => team.team_id === team_id)) {
     throw new ApiError("Team does not exist in this match");
   }
 
