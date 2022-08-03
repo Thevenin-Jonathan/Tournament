@@ -4,10 +4,11 @@ const debug = require('debug')('app');
 const path = require("path");
 const app = express();
 const router = require("./routers");
-const { errorHandler } = require("./services/errorHandler");
 const helmet = require("helmet");
+const { errorHandler } = require("./services/errorHandler");
 const morgan = require("morgan");
 const rfs = require('rotating-file-stream');
+const morganLogger = require("./services/morganLogger");
 
 /** Helmet for security */
 // app.use(helmet());
@@ -32,42 +33,13 @@ app.use((req, res, next) => {
   }
 });
 
+/** Static files **/
 if (process.env.NODE_ENV === "production") {
-  /** Static files **/
   app.use(express.static(path.join(__dirname, 'public')));
 }
 
-/** Morgan **/  
-// doc officiel => https://expressjs.com/en/resources/middleware/morgan.htmlb_playground": 6,
-// https://medium.com/@zahidbashirkhan/access-and-error-logging-in-node-express-with-morgan-26e0e376a3e
-
-const accessLogStream = rfs.createStream('access.log', {
-	interval: '1d', // rotate daily
-	path: path.join(__dirname, 'logs/access'),
-});
-
-const errorLogStream = rfs.createStream('error.log', {
-	interval: '1d', // rotate daily
-	path: path.join(__dirname, 'logs/error'),
-});
-const morganFormat = () => JSON.stringify({
-	method: ':method',
-	url: ':url',
-	http_version: ':http-version',
-	response_time: ':response-time',
-	status: ':status',
-	content_length: ':res[content-length]',
-	timestamp: ':date[iso]',
-	headers_count: 'req-headers-length',
-});
-app.use(morgan(morganFormat(), {
-	skip: (req, res) => (res.statusCode < 400),
-	stream: errorLogStream,
-}));
-
-app.use(morgan('combined', {
-	stream: accessLogStream,
-}));
+// /** Morgan logger */
+app.use(morganLogger);
 
 /** Router **/
 app.use("/", router);
