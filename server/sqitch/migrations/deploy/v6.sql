@@ -94,7 +94,7 @@ WHERE "TEU"."user_id" = "U"."id"
 COALESCE ((SELECT JSON_AGG(
   JSON_BUILD_OBJECT(
     'id', "M"."id",
-    'phase', "M"."id",
+    'phase', "M"."phase",
     'teams', COALESCE ((SELECT JSON_AGG(
                 JSON_BUILD_OBJECT(
                 'id', "MHT"."team_id"))
