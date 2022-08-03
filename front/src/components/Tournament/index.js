@@ -17,7 +17,7 @@ function Tournament() {
   // je récupère le slug dans l'url
   const slug = useParams();
 
-  // Je récupère le state dans le reducer 'tournament'
+  const isAdmin = useSelector((state) => (state.user.isAdmin));
   const tournament = useSelector((state) => (state.tournament.tournament));
   const teams = useSelector((state) => (state.tournament.tournament.teams));
   const user = useSelector((state) => (state.user.loggedUser));
@@ -67,16 +67,57 @@ function Tournament() {
         <div className="flex-wrapper">
           <div className="infos">
             <h2>Informations</h2>
-            <p className="tournament-date">{ longDateFr(tournament.date) }</p>
-            <p className="tournament-status">Tournoi { tournamentStateText(tournament.state_id) }</p>
-            <p className="tournament-discipline">{ disciplineText(tournament.discipline_id) }</p>
-            <p className="tournament-match">{tournament.player_limit && `Nombres de places : ${tournament.player_limit}`}</p>
-            <p className="tournament-players-count">{ tournament.nb_playground } Terrains</p>
-            <p className="tournament-registers">{`${tournament.nb_registered} inscrits `}</p>
+            <p className="tournament-date">
+              <i className="fa fa-calendar-o fa-fw" aria-hidden="true" />
+              { longDateFr(tournament.date) }
+            </p>
+            <p className="tournament-status">
+              <i className="fa fa-list fa-fw" aria-hidden="true" />
+              Tournoi { tournamentStateText(tournament.state_id) }
+            </p>
+            <p className="tournament-discipline">
+              <i className="fa fa-tags fa-fw" aria-hidden="true" />
+              { disciplineText(tournament.discipline_id) }
+            </p>
+            {tournament.player_limit && (
+              <p className="tournament-player-count">
+                <i className="fa fa-users fa-fw" aria-hidden="true" />
+                {tournament.player_limit}
+              </p>
+            )}
+            <p className="tournament-playground-count">
+              <i className="fa fa-map-o fa-fw" aria-hidden="true" />
+              { tournament.nb_playground } Terrains
+            </p>
+            <p className="tournament-registers">
+              <i className="fa fa-users fa-fw" aria-hidden="true" />
+              {`${tournament.nb_registered} inscrits `}
+            </p>
           </div>
 
           <div className="infos registred-users">
             <h2>Participants</h2>
+
+            { canISubscribe && !alreadyRegistered && (
+            <button
+              onClick={() => handleSubscribe()}
+              type="button"
+              className="action-btn"
+            >
+              Je m'inscris
+            </button>
+            )}
+            { canISubscribe && alreadyRegistered && (
+            <button
+              title={`supprimer l'équipe : ${findUserTeam(teams, user.id).id}`}
+              onClick={() => handleUnSubscribe(findUserTeam(teams, user.id).id)}
+              type="button"
+              className="action-btn"
+            >
+              Je me désinscris
+            </button>
+            )}
+
             <ul>
               { tournament.registered.map((player) => (
                 <li key={`player-${player.id}`}>
@@ -111,29 +152,34 @@ function Tournament() {
           </div> */}
         </div>
 
-        <div>
-          { canISubscribe && !alreadyRegistered && (
-            <button
-              onClick={() => handleSubscribe()}
-              type="button"
-              className="action-btn"
-            >
-              Je m'inscris
+        {/* Partie admin */}
+        {isAdmin && (
+        <div className="admin-zone">
+          <h2>Gestion du tournoi</h2>
+
+          {tournament.state_id === 1 && (
+            <button type="button" to="" className="action-btn ">
+              <i className="fa fa-users" /> Ajouter des participants
             </button>
           )}
-          { canISubscribe && alreadyRegistered && (
-            <button
-              title={`supprimer l'équipe : ${findUserTeam(teams, user.id).id}`}
-              onClick={() => handleUnSubscribe(findUserTeam(teams, user.id).id)}
-              type="button"
-              className="action-btn"
-            >
-              Je me désinscris
-            </button>
+          {tournament.state_id === 1 && (
+          <button type="button" to="" className="action-btn ">
+            Aller à l'étape 2 : générer les phases <i className="fa fa-arrow-right" />
+          </button>
+          )}
+          {tournament.state_id === 2 && (
+          <button type="button" to="" className="action-btn ">
+            Aller à l'étape 3 : jouer ! <i className="fa fa-arrow-right" />
+          </button>
+          )}
+          {tournament.state_id === 3 && (
+          <button type="button" to="" className="action-btn ">
+            Aller à l'étape 4 : Cloturer ce tournoi <i className="fa fa-hand-peace-o" />
+          </button>
           )}
 
         </div>
-
+        )}
       </div>
 
     </main>

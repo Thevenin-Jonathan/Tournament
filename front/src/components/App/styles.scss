@@ -568,11 +568,11 @@ a {
       top: 0;
       left: 0;
       width: 100%;
-      min-height:100vh;
+      min-height:calc(100vh - var(--header-height));
       // filter: blur(5px);
       @media only screen and (max-width: 810px) {
         background-size: 150%;
-        min-height:70vh;
+        min-height:calc(70vh - var(--header-height));
       }
     }
     .gradient-layer {
@@ -598,6 +598,11 @@ a {
       p{
         padding: .5rem;
         border-top: solid 1px rgba(255,255,255,.5);
+        text-transform: capitalize;
+        font-weight: var(--fine);
+        .fa {
+          margin-right: .5rem;
+        }
       }
     }
     .tournament-description {
@@ -617,6 +622,14 @@ a {
             color: var(--emphase-color);
           }
         }
+      }
+    }
+    .admin-zone {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      h2 {
+        width: 100%;
       }
     }
 }
