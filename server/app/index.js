@@ -4,11 +4,21 @@ const debug = require('debug')('app');
 const path = require("path");
 const app = express();
 const router = require("./routers");
-const { errorHandler } = require("./services/errorHandler");
 const helmet = require("helmet");
+const { errorHandler } = require("./services/errorHandler");
+const morgan = require("morgan");
+const rfs = require('rotating-file-stream');
+const morganLogger = require("./services/morganLogger");
 
 /** Helmet for security */
-// app.use(helmet());
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+      "img-src": ["'self'", "kinoah.com"],
+    },
+  },
+}));
 
 /** Parser **/
 app.use(express.json());
@@ -30,10 +40,13 @@ app.use((req, res, next) => {
   }
 });
 
+/** Static files **/
 if (process.env.NODE_ENV === "production") {
-  /** Static files **/
   app.use(express.static(path.join(__dirname, 'public')));
 }
+
+// /** Morgan logger */
+app.use(morganLogger);
 
 /** Router **/
 app.use("/", router);

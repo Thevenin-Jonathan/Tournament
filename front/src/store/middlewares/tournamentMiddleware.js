@@ -1,7 +1,7 @@
 import axios from 'axios';
 import qs from 'qs';
 import config from 'src/config';
-import { deleteNullOrFalsyKeyInObject, convertDate } from 'src/utils';
+import { deleteNullOrFalsyKeyInObject, convertDate, findUserTeam } from 'src/utils';
 
 const tournamentMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
@@ -41,7 +41,7 @@ const tournamentMiddleware = (store) => (next) => (action) => {
       const state = store.getState();
       const data = {
         tournament_id: state.tournament.tournament.id,
-        user_ids: [state.user.id],
+        user_ids: [action.value],
       };
       const axiosConfig = {
         method: 'post',
@@ -77,10 +77,13 @@ const tournamentMiddleware = (store) => (next) => (action) => {
       break;
     }
 
-    // inscription à un tournoi de simple (pas de gestion d'équipe)
+    // desinscription d'un tournoi de simple (on suppr l'equipe)
     case 'SINGLE_TOURNAMENT_UNSUBSCRIBE': {
       const state = store.getState();
-      axios.delete(`${config.api.baseUrl}/teams/${action.value}`)
+      // trouver la team
+      const teamId = findUserTeam(state.tournament.tournament.teams, action.value).id;
+
+      axios.delete(`${config.api.baseUrl}/teams/${teamId}`)
         .then((response) => {
           store.dispatch({ type: 'GET_TOURNAMENT_SUCCESS', value: response.data });
           store.dispatch({

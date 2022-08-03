@@ -7,7 +7,7 @@ content-type: application/json
 
 ###
 # Get one match
-GET {{hostname}}/matches/11 HTTP/1.1
+GET {{hostname}}/matches/65 HTTP/1.1
 content-type: application/json
 
 ###
@@ -31,22 +31,40 @@ content-type: application/json
   "state_id": 4
 }
 
+
+
+###
+# Update match score
+PATCH {{hostname}}/matches/65/score HTTP/1.1
+content-type: application/json
+
+[
+  {
+    "team_id": 21,
+    "result_id": 4
+  },
+  {
+    "team_id": 23,
+    "result_id": 1
+  }
+]
+
 ###
 # Add one team into match
-PATCH {{hostname}}/matches/17/add-team HTTP/1.1
+PATCH {{hostname}}/matches/65/add-team HTTP/1.1
 content-type: application/json
 
 {
-  "team_id": 4
+  "team_id": 23
 }
 
 ###
 # Remove one team from match
-PATCH {{hostname}}/matches/17/remove-team HTTP/1.1
+PATCH {{hostname}}/matches/65/remove-team HTTP/1.1
 content-type: application/json
 
 {
-  "team_id": 4
+  "team_id": 20
 }
 
 ###

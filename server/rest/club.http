@@ -1,0 +1,39 @@
+@hostname = http://localhost:3001/api/v1
+
+###
+# Get all clubs
+GET {{hostname}}/clubs/ HTTP/1.1
+content-type: application/json
+
+###
+# Get one club
+GET {{hostname}}/clubs/1 HTTP/1.1
+content-type: application/json
+
+###
+# Create one club
+POST {{hostname}}/clubs/ HTTP/1.1
+content-type: application/json
+
+{
+  "name": "test",
+  "address": "adress test",
+  "phone": "0606061548",
+  "email": "test@test.fr",
+  "nb_playground": 6,
+  "club_ref": "15485926734859"
+}
+
+###
+# Update one club
+PATCH {{hostname}}/clubs/3 HTTP/1.1
+content-type: application/json
+
+{
+  "name": "test2"
+}
+
+###
+# Delete one club
+DELETE {{hostname}}/clubs/3 HTTP/1.1
+content-type: application/json

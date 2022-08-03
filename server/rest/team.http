@@ -7,7 +7,7 @@ content-type: application/json
 
 ###
 # Get one team
-GET {{hostname}}/teams/10 HTTP/1.1
+GET {{hostname}}/teams/65 HTTP/1.1
 content-type: application/json
 
 ###
@@ -22,7 +22,7 @@ content-type: application/json
 
 ###
 # Add one user into team
-PATCH {{hostname}}/teams/11/add-user HTTP/1.1
+PATCH {{hostname}}/teams/21/add-user HTTP/1.1
 content-type: application/json
 
 {

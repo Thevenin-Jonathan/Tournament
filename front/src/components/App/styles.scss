@@ -568,11 +568,11 @@ a {
       top: 0;
       left: 0;
       width: 100%;
-      min-height:100vh;
+      min-height:calc(100vh - var(--header-height));
       // filter: blur(5px);
       @media only screen and (max-width: 810px) {
         background-size: 150%;
-        min-height:70vh;
+        min-height:calc(70vh - var(--header-height));
       }
     }
     .gradient-layer {
@@ -598,6 +598,11 @@ a {
       p{
         padding: .5rem;
         border-top: solid 1px rgba(255,255,255,.5);
+        text-transform: capitalize;
+        font-weight: var(--fine);
+        .fa {
+          margin-right: .5rem;
+        }
       }
     }
     .tournament-description {
@@ -617,6 +622,117 @@ a {
             color: var(--emphase-color);
           }
         }
+      }
+      .action-btn{
+        display: block;
+        padding: .5rem 1rem;
+        width: 100%!important;
+        margin-bottom: 1rem;
+      }
+    }
+    .admin-zone {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      h2 {
+        width: 100%;
+      }
+    }
+    .modal {
+      z-index: 99999;
+      opacity: 0;
+      backdrop-filter: blur(10px);
+      position: fixed;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,.95);
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity .3s;
+      .close-button {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        font-size: 2rem;
+      }
+      &.open {
+        top: 0;
+        opacity: 1;
+      }
+    }
+    .modal.add-players {
+      .tournament-title {
+        margin-bottom: 2rem;
+        font-weight: var(--black);
+      }
+      .modal-content {
+        width: 80%;
+        height: 80%;
+      }
+    }
+    .available-players {
+      flex-basis: 40%;
+      input {
+        margin-bottom: 1rem;
+        width: calc(100% - 2rem);
+        border-radius: var(--border-radius);
+        border: solid 2px white;
+        background-image: url(../../assets/img/search-icon.png);
+        background-position: center right 1rem;
+        background-size: auto 50%;
+        opacity: 0.5;
+        &:focus {
+          opacity: 1;
+        }
+      }
+    }
+    .dragable-zone {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      padding: 1rem 2rem 0 0;
+      overflow-y: auto;
+      max-height: 25rem;
+      .player-list-item {
+        padding:1rem;
+        background-color: var(--main-color);
+        border-radius: var(--border-radius);
+        display: flex;
+        align-items: center;
+        cursor: grab;
+        &:hover {
+          background-color: var(--bg-color);
+        }
+        .player-firstname {
+          margin-right: .5em;
+        }
+        .player-lastname {
+          text-transform: uppercase;
+          margin-right: .5em;
+        }
+        .player-gender {
+          margin-left: auto;
+          font-size: .8rem;
+        }
+      }
+    }
+    .available-players-list {
+    }
+    .enroled-team-players {
+      flex-basis: 60%;
+    }
+    .enroled.drop-zone {
+      border: solid 2px white;
+      border-radius: var(--border-radius);
+      min-height: 23rem;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      .player-list-item {
+        width:max-content;
       }
     }
 }
@@ -1345,7 +1461,7 @@ a {
 // Toast messages component
 .toast-messages {
   font-size: .9rem;
-  z-index: 9999;
+  z-index: 9999999;
   position: fixed;
   top: var(--header-height);
   right: 1rem;

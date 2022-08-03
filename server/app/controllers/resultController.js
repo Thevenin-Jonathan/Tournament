@@ -64,18 +64,17 @@ async function create(req, res) {
  */
 async function update(req, res) {
   const id = req.params.id;
-  const newData = req.body.label;
+  const { label } = req.body;
   const result = await resultDatamapper.findById(id);
-
+  
   if (!result) {
     throw new Api404Error("Result does not exist in DB");
   }
-
+  
   if (await resultDatamapper.findByLabel(label)) {
     throw new ApiError("This label is already in use");
   }
-
-  const updatedResult = await resultDatamapper.updateOne(id, newData)
+  const updatedResult = await resultDatamapper.updateOne(id, label)
   return res.json(updatedResult)
 }
 

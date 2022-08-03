@@ -1,0 +1,11 @@
+@hostname = http://localhost:3001/api/v1
+
+###
+# Get all stats
+GET {{hostname}}/stats/ HTTP/1.1
+content-type: application/json
+
+###
+# Get one stat
+GET {{hostname}}/stats/2 HTTP/1.1
+content-type: application/json

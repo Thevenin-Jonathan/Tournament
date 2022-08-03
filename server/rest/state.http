@@ -1,0 +1,34 @@
+@hostname = http://localhost:3001/api/v1
+
+###
+# Get all states
+GET {{hostname}}/states/ HTTP/1.1
+content-type: application/json
+
+###
+# Get one state
+GET {{hostname}}/states/2 HTTP/1.1
+content-type: application/json
+
+###
+# Create one state
+POST {{hostname}}/states/ HTTP/1.1
+content-type: application/json
+
+{
+  "name": "test"
+}
+
+###
+# Update one state
+PUT {{hostname}}/states/5 HTTP/1.1
+content-type: application/json
+
+{
+  "name": "test2"
+}
+
+###
+# Delete one state
+DELETE {{hostname}}/states/5 HTTP/1.1
+content-type: application/json
