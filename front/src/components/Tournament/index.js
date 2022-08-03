@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { ReactSortable } from 'react-sortablejs';
 import {
   tournamentStateText,
   disciplineText,
@@ -10,6 +11,7 @@ import {
   canISubscribeToThisTournament,
   findMemberInAList,
   findUserTeam,
+  genderText,
 } from 'src/utils';
 
 import Loader from '../Loader';
@@ -38,6 +40,68 @@ function Tournament() {
     });
     dispatch({ type: 'GET_MEMBERS' });
   }, []);
+
+  function enroledMembers(members, enroledMembers) {
+    const enroledMembersIds = Array.from((enroledMembers), obj => obj.id);
+    const filteredMembers = members.filter((member) => (
+      enroledMembersIds.includes(member.id)
+    ));
+    return filteredMembers;
+  };
+
+  function availableMembers(members, enroledMembers) {
+    const enroledMembersIds = Array.from((enroledMembers), obj => obj.id);
+    const filteredMembers = members.filter((member) => (
+      !enroledMembersIds.includes(member.id)
+    ));
+    return filteredMembers;
+  };
+
+
+  // modal
+  const [showPlayerModal, setShowPlayerModal] = useState(false);
+
+  // sortable system
+  const [availablePlayers, setAvailablePlayers] = useState([]);
+  const [enroledPlayers, setEnroledPlayers] = useState([]);
+  useEffect(() => {
+    setAvailablePlayers(members);
+  }, [members]);
+  useEffect(() => {
+    setEnroledPlayers(tournament.registered);
+  }, [tournament]);
+
+  const sortableOptions = {
+    animation: 150,
+    fallbackOnBody: true,
+    swapThreshold: 0.65,
+    ghostClass: 'ghost',
+    group: 'shared',
+    //onStart: (evt) => {console.log(evt.oldIndex)},
+    onEnd: (evt) => {
+      const playerId = evt.item.dataset.id;
+      const fromId = evt.from.id;
+      const dropId = evt.to.id;
+      
+      // si on drop dans la enroled zone --> on inscrit
+      if(dropId === "enroled-players" && fromId === "available-players") {
+        dispatch({
+            type: 'SINGLE_TOURNAMENT_SUBSCRIBE',
+            value: playerId,
+        });        
+      }
+      // si on drop dans la aivalible zone --> on désinscrit
+      // mais faut d'abord trouver sa team
+      if(dropId === "available-players" && fromId === "enroled-players") {
+        dispatch({
+            type: 'SINGLE_TOURNAMENT_UNSUBSCRIBE',
+            value: playerId,
+        });        
+      }
+    },
+  };
+
+
   // action de souscription
   const handleSubscribe = () => {
     dispatch({
@@ -46,10 +110,10 @@ function Tournament() {
     });
   };
   // action de désinscription
-  const handleUnSubscribe = (teamId) => {
+  const handleUnSubscribe = () => {
     dispatch({
       type: 'SINGLE_TOURNAMENT_UNSUBSCRIBE',
-      value: teamId,
+      value: userId,
     });
   };
 
@@ -110,8 +174,8 @@ function Tournament() {
             )}
             { canISubscribe && alreadyRegistered && (
             <button
-              title={`supprimer l'équipe : ${findUserTeam(teams, user.id).id}`}
-              onClick={() => handleUnSubscribe(findUserTeam(teams, user.id).id)}
+              // title={`supprimer l'équipe : ${findUserTeam(teams, user.id).id}`}
+              onClick={() => handleUnSubscribe()}
               type="button"
               className="action-btn"
             >
@@ -120,7 +184,7 @@ function Tournament() {
             )}
 
             <ul>
-              { tournament.registered.map((player) => (
+              {/* { tournament.registered.map((player) => (
                 <li key={`player-${player.id}`}>
                   <Link
                     to={`/membres/${player.id}`}
@@ -131,6 +195,20 @@ function Tournament() {
                       (id : { player.id } |
                       Team : { findUserTeam(teams, player.id).id })
                     </span>
+                  </Link>
+                </li>
+              ))} */}
+              { enroledMembers(members, tournament.registered).map((player) => (
+                <li key={`player-${player.id}`}>
+                  <Link
+                    to={`/membres/${player.id}`}
+                  >
+                    {player.firstname} &nbsp;
+                    {player.lastname}
+                    {/* <span className="debug">
+                      (id : { player.id } |
+                      Team : { findUserTeam(teams, player.id).id })
+                    </span> */}
                   </Link>
                 </li>
               ))}
@@ -159,7 +237,7 @@ function Tournament() {
           <h2>Gestion du tournoi</h2>
 
           {tournament.state_id === 1 && (
-            <button type="button" to="" className="action-btn ">
+            <button type="button" className="action-btn" onClick={() => setShowPlayerModal(true)}>
               <i className="fa fa-users" /> Ajouter des participants
             </button>
           )}
@@ -184,8 +262,10 @@ function Tournament() {
       </div>
 
       {isAdmin && tournament.state_id === 1 && (
-        <div className="modal add-players">
-          <button type="button" className="close-button"><i className="fa fa-close" aria-hidden="true" /></button>
+        <div className={showPlayerModal ? "modal add-players open" : "modal add-players"}>
+          <button type="button" className="close-button" onClick={() => setShowPlayerModal(false)}>
+            <i className="fa fa-close" aria-hidden="true" />
+          </button>
           <div className="modal-content">
 
             <h1 className="title">Ajouter des participants</h1>
@@ -195,20 +275,59 @@ function Tournament() {
               <div className="col available-players">
                 <h2>Joueurs disponibles</h2>
                 <input type="search" placeholder="Rechercher un joueur" />
-                <ul>
-                  <li>Allibe Philippe</li>
-                  <li>Tom Roche</li>
-                  <li>Cédric Bernard</li>
-                  <li>Marie Rodriguez</li>
-                </ul>
+                <ReactSortable
+                  list={availablePlayers}
+                  setList={setAvailablePlayers}
+                  {...sortableOptions}
+                  id="available-players"
+                  className="available-players-list dragable-zone"
+                >
+                  {availableMembers(members, tournament.registered).map((player) => (
+                    <div
+                      key={player.id}
+                      className="player-list-item"
+                    >
+                      <span className="player-firstname">
+                        {player.firstname}
+                      </span>
+                      <span className="player-lastname">
+                        {player.lastname}
+                      </span>
+                      <span className="player-gender">
+                        {genderText(player.gender_id)}
+                      </span>
+                    </div>
+                  ))}
+                </ReactSortable>
               </div>
 
               <div className="col enroled-team-players">
                 <h2>Equipes/Joueurs enrolés</h2>
-                <div className="enroled drop-zone">
-                  
-                </div>
-                <button type="button" to="" className="action-btn ">
+                <ReactSortable
+                  list={enroledPlayers}
+                  setList={setEnroledPlayers}
+                  {...sortableOptions}
+                  id="enroled-players"
+                  className="enroled drop-zone dragable-zone"
+                >
+                  {enroledMembers(members, tournament.registered).map((player) => (
+                    <div
+                      key={player.id}
+                      className="player-list-item"
+                    >
+                      <span className="player-firstname">
+                        {player.firstname}
+                      </span>
+                      <span className="player-lastname">
+                        {player.lastname}
+                      </span>
+                      <span className="player-gender">
+                        {genderText(player.gender_id)}
+                      </span>
+                    </div>
+                  ))}
+                </ReactSortable>
+                <button type="button" className="action-btn pull-right" onClick={() => setShowPlayerModal(false)}>
                   Confirmer <i className="fa fa-arrow-right" />
                 </button>
               </div>

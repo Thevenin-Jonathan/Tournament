@@ -634,21 +634,28 @@ a {
     }
     .modal {
       z-index: 99999;
+      opacity: 0;
+      backdrop-filter: blur(10px);
       position: fixed;
-      top: 0;
+      top: -100%;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0,0,0,.9);
+      background-color: rgba(0,0,0,.95);
       padding: 2rem;
       display: flex;
       justify-content: center;
       align-items: center;
+      transition: opacity .3s;
       .close-button {
         position: absolute;
         top: 2rem;
         right: 2rem;
         font-size: 2rem;
+      }
+      &.open {
+        top: 0;
+        opacity: 1;
       }
     }
     .modal.add-players {
@@ -663,6 +670,42 @@ a {
     }
     .available-players {
       flex-basis: 40%;
+      input {
+        margin-bottom: 1rem;
+        width: calc(100% - 2rem);
+      }
+    }
+    .dragable-zone {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      padding: 1rem 2rem 0 0;
+      overflow-y: auto;
+      max-height: 25rem;
+      .player-list-item {
+        padding:1rem;
+        background-color: var(--main-color);
+        border-radius: var(--border-radius);
+        display: flex;
+        align-items: center;
+        cursor: grab;
+        &:hover {
+          background-color: var(--bg-color);
+        }
+        .player-firstname {
+          margin-right: .5em;
+        }
+        .player-lastname {
+          text-transform: uppercase;
+          margin-right: .5em;
+        }
+        .player-gender {
+          margin-left: auto;
+          font-size: .8rem;
+        }
+      }
+    }
+    .available-players-list {
     }
     .enroled-team-players {
       flex-basis: 60%;
@@ -670,7 +713,12 @@ a {
     .enroled.drop-zone {
       border: solid 2px white;
       border-radius: var(--border-radius);
-      min-height: 20rem;
+      min-height: 23rem;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      .player-list-item {
+        width:max-content;
+      }
     }
 }
 
@@ -1398,7 +1446,7 @@ a {
 // Toast messages component
 .toast-messages {
   font-size: .9rem;
-  z-index: 9999;
+  z-index: 9999999;
   position: fixed;
   top: var(--header-height);
   right: 1rem;
