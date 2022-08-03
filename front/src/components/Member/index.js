@@ -21,7 +21,10 @@ function Member() {
     });
   }, []);
 
-  const userAvatar = `${config.path.uploads.avatar}/${user.member.url_avatar}`;
+  let userAvatar = `${config.path.uploads.avatar}/${user.member.url_avatar}`;
+  if (user.member.url_avatar === null) {
+    userAvatar = `${config.path.uploads.avatar}/generic-user-${user.member.gender_id}.jpg`;
+  }
 
   return (
     <main className="content member">

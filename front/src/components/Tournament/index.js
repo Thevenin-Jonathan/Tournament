@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ReactSortable } from 'react-sortablejs';
+import config from 'src/config';
 import {
   tournamentStateText,
   disciplineText,
@@ -220,26 +221,13 @@ function Tournament() {
             )}
 
             <ul>
-              {/* { tournament.registered.map((player) => (
-                <li key={`player-${player.id}`}>
-                  <Link
-                    to={`/membres/${player.id}`}
-                  >
-                    { findMemberInAList(members, player.id).firstname }&nbsp;
-                    { findMemberInAList(members, player.id).lastname }&nbsp;
-                    <span className="debug">
-                      (id : { player.id } |
-                      Team : { findUserTeam(teams, player.id).id })
-                    </span>
-                  </Link>
-                </li>
-              ))} */}
               { enroledMembers(members, tournament.registered).map((player) => (
-                <li key={`player-${player.id}`}>
+                <li key={`player-${player.id}`} className="player-item">
                   <Link
                     to={`/membres/${player.id}`}
                   >
-                    {player.firstname} &nbsp;
+                    <img src={player.url_avatar ? `${config.path.uploads.avatar}/${player.url_avatar}` : `${config.path.uploads.avatar}/generic-user-${player.gender_id}.jpg`} alt={player.firstname} />
+                    {player.firstname}&nbsp;
                     {player.lastname}
                     {/* <span className="debug">
                       (id : { player.id } |
