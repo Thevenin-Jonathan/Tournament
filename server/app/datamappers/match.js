@@ -69,6 +69,30 @@ async function updateOne(id, match) {
 }
 
 /**
+ * Set team score
+ * @param {number} matchId match identifiant
+ * @param {number} teamId team identifiant
+ * @param {number} resultId result identifiant
+ * @param {boolean} isWinner is team winner
+ * @returns {object} infos match
+ */
+ async function setScore(matchId, teamId, resultId, isWinner) {
+  const result = await pool.query(
+    `    
+    UPDATE "match_has_team" SET
+      "result_id" = $3,
+      "is_winner" = $4
+    WHERE "match_id" = $1
+      AND "team_id" = $2
+    RETURNING *;
+    `,
+    [matchId, teamId, resultId, isWinner]
+  );
+
+  return result.rows[0];
+} 
+
+/**
  * Add one team into match
  * @param {number} id match identifiant
  * @param {object} team_id match informations
@@ -129,6 +153,7 @@ module.exports = {
   findById,
   insertOne,
   updateOne,
+  setScore,
   insertTeam,
   deleteTeam,
   deleteOne 
