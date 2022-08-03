@@ -20,6 +20,7 @@ const authMiddleware = (store) => (next) => (action) => {
       axios(axiosConfig)
         .then((response) => {
           store.dispatch({ type: 'SUBMIT_LOGIN_SUCCESS', value: response.data });
+          store.dispatch({ type: 'GET_PROFILE', value: response.data.id });
           if (response.data.role_id === 1) {
             store.dispatch({ type: 'IS_ADMIN' });
           }

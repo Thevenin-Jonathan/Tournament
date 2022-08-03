@@ -33,10 +33,14 @@ function Header() {
           </div>
           <ul>
             <li>
-              <Link className="pannel-link" to="/profil">Mon profil</Link>
+              <Link className="pannel-link" to="/profil">
+                <i className="fa fa-user" aria-hidden="true" /> Mon profil
+              </Link>
             </li>
             <li>
-              <Link className="pannel-link" to="/connexion" onClick={() => handleLogout()}>Déconnexion</Link>
+              <Link className="pannel-link" to="/connexion" onClick={() => handleLogout()}>
+                <i className="fa fa-sign-out" aria-hidden="true" /> Déconnexion
+              </Link>
             </li>
           </ul>
         </div>

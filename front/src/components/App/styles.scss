@@ -3,6 +3,7 @@
   --bg-color: #1A2F4C;
   --main-color: #061B38;
   --emphase-color: #BF9C5A;
+  --dark-emphase-color: #6e5b36;
   --header-color: #16273E;
   --ligth-color-text: #FFFFFF;
 
@@ -231,15 +232,21 @@ a {
     position: absolute;
     z-index: 99;
     right: 0;
-
+    transition:  0.5s;
     &-pannel {
-      display: none;
+      display: flex;
+      align-items: center;
       position: absolute;
-      background-color: var(--ligth-color-text);
-      right: 0;
+      top: 0;
+      right: -300px;
       padding: .5rem;
       box-shadow: 0 10px 8px rgba(0,0,0,.2);
-      border-radius: 0 0 0 var(--border-radius);
+      border-radius: var(--border-radius) 0 0 var(--border-radius);
+      transition: right .3s ease;
+      background: linear-gradient(180deg, var(--emphase-color) 0%, var(--dark-emphase-color) 100%); 
+      // background-color: var(--emphase-color);
+      color: white;
+      font-weight: var(--bold);
 
       .user-image {
         background-color: var(--bg-color);
@@ -256,24 +263,23 @@ a {
 
       .pannel-link {
         width: 10rem;
-        padding: 0.5rem 0;
+        padding: 0.5rem;
+        border-radius: calc(var(--border-radius) * 0.5);
         display: block;
-        color: var(--header-color);
+        color: inherit;
       }
 
       .pannel-link:hover {
-        text-decoration: underline;
+        background-color: rgba(0,0,0,.5);
       }
     }
   }
 
   &-user-menu:hover {
-    color: var(--header-color);
-    background-color: #FFFFFF;
+    transform: scale(1);
 
     .header-user-menu-pannel {
-      display: flex;
-      align-items: center;
+      right: 0;
     }
   }
 
@@ -818,12 +824,12 @@ a {
       background-color: var(--main-color);
   }
   &.state-1 .tournament-special {
-    width: calc(100% + 1rem);
-    height: calc(100% + 1rem);
+    width: calc(100% + 12px);
+    height: calc(100% + 12px);
     position: absolute;
-    top: -.5rem;
-    left: -.5rem;
-    border-radius: calc(var(--border-radius) * 2);
+    top: -6px;
+    left: -6px;
+    border-radius: calc(var(--border-radius) * 1.5);
     outline: solid 10px transparent;
     overflow: hidden;
     @media only screen and (max-width: 450px) {
