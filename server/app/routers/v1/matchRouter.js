@@ -5,6 +5,7 @@ const validationWrapper = require("../../services/validationWrapper");
 const createSchema = require("../../schemas/matchCreate");
 const updateSchema = require("../../schemas/matchUpdate");
 const matchUpdTeamSchema = require("../../schemas/matchUpdTeam");
+const matchUpdScores = require("../../schemas/matchUpdScores");
 
 router.route("/")
   .get(controllerWrapper(controller.getAll))
@@ -28,5 +29,10 @@ router.route("/:id/remove-team")
   .patch(
     validationWrapper(matchUpdTeamSchema),
     controllerWrapper(controller.removeTeam));
+
+router.route("/:id/score")
+  .patch(
+    validationWrapper(matchUpdScores),
+    controllerWrapper(controller.updateScore));
 
 module.exports = router;
