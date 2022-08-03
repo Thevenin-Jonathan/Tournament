@@ -1,0 +1,34 @@
+@hostname = http://localhost:3001/api/v1
+
+###
+# Get all roles
+GET {{hostname}}/roles/ HTTP/1.1
+content-type: application/json
+
+###
+# Get one role
+GET {{hostname}}/roles/2 HTTP/1.1
+content-type: application/json
+
+###
+# Create one role
+POST {{hostname}}/roles/ HTTP/1.1
+content-type: application/json
+
+{
+  "name": "test"
+}
+
+###
+# Update one role
+PUT {{hostname}}/roles/3 HTTP/1.1
+content-type: application/json
+
+{
+  "name": "test2"
+}
+
+###
+# Delete one role
+DELETE {{hostname}}/roles/3 HTTP/1.1
+content-type: application/json

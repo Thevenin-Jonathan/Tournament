@@ -99,6 +99,15 @@ const dateFr = (date) => {
   return maDate.toLocaleDateString('fr-FR', options);
 };
 
+// format phone numbers function
+// eslint-disable-next-line arrow-body-style
+const formatPhoneNumber = (phoneNumber) => {
+  if (phoneNumber !== null) {
+    return phoneNumber.replace(/(.{2})(?=.)/g, '$1 ');
+  }
+  return null;
+};
+
 // Display text formated date --> mardi 19 juillet 2022
 const longDateFr = (date) => {
   const options = {
@@ -108,17 +117,93 @@ const longDateFr = (date) => {
   return maDate.toLocaleDateString('fr-FR', options);
 };
 
+// convertit une date standard dans le format attendue par la DB
+function convertDate(inputFormat) {
+  function pad(s) {
+    return (s < 10) ? `0${s}` : s;
+  }
+  const d = new Date(inputFormat);
+  return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/');
+}
+
+/**
+ * Trouver un user dans une liste d'objet user par un id d'user
+ * @param {Array} usersList est un tableau d'users
+ * @param {Object} userId est l'id d'un user
+ * @returns l'objet user complet s'il est dans la liste
+ */
+function findMemberInAList(usersList, userId) {
+  if (!usersList || !userId || usersList === undefined) return false;
+  const findedUser = usersList.find((user) => user.id === userId);
+  return findedUser;
+}
+
+/**
+ * Suis-je déja inscrit à ce tournoi ?
+ * @param {Array} tournamentRegistered : Tableau d'id d'utilisateurs
+ * @param {number} userId : id d'utilisateur a chercher
+ * @returns true si l'id est trouvé dans la liste, sinon false.
+ */
+function AmIAlreadyRegisteredForThisTournament(tournamentRegistered, userId) {
+  if (!tournamentRegistered) return false;
+  const result = tournamentRegistered.find((user) => user.id === userId);
+  if (result) return true;
+  return false;
+}
+
+/**
+ * Ai-je le droit de m'inscrire à ce tournoi ?
+ * @param {Object} tournament : objet tournoi avec tout ses attributs
+ * @param {Object} user : objet user avec tout ses attributs
+ * @returns true si j'ai le droit de m'inscrire, sinon false
+ */
+function canISubscribeToThisTournament(tournament, user) {
+  if (!tournament || !user) return false;
+
+  // vérifier si le statut du tournoi autorise les inscriptions (tournoi ouvert)
+  if (tournament.state_id > 1) {
+    return false;
+  }
+  // vérifier si il y'a une limite, et si oui si elle est atteinte
+  const registeredUsers = tournament.registered.length;
+  if (tournament.player_limit !== null && registeredUsers >= tournament.player_limit) {
+    return false;
+  }
+  // vérifier si le genre du user est autorisé dans ce tournoi
+  const genderIdAuthorized = [1, 3, 5].includes(tournament.discipline_id) ? 1 : 2;
+  if (user.gender_id !== genderIdAuthorized) return false;
+
+  return true;
+}
+
+/**
+ * Trouver un user dans une liste de teams par son id
+ * @param {Array} teamList est un tableau de teams
+ * @param {Object} userId est l'id d'un user
+ * @returns la team de l'user s'il y'en a une
+ */
+function findUserTeam(teamList, userId) {
+  const teamFinded = teamList
+    .find((team) => team.users
+      .find((user) => user.id === userId));
+
+  if (teamFinded) {
+    return teamFinded;
+  }
+  return false;
+}
+
 /**
  * supprimmer les clés d'un objet qui ont pour valeur null ou false
  * @param {object} obj - l'objet a nettoyer
  */
-const deleteNullOrFalsyKeyInObject = (obj) => {
+function deleteNullOrFalsyKeyInObject(obj) {
   Object.keys(obj).forEach((key) => {
     if (obj[key] === null || obj[key] === false || obj[key] === '') {
       delete obj[key];
     }
   });
-};
+}
 
 export {
   roleText,
@@ -129,4 +214,10 @@ export {
   dateFr,
   longDateFr,
   deleteNullOrFalsyKeyInObject,
+  convertDate,
+  AmIAlreadyRegisteredForThisTournament,
+  canISubscribeToThisTournament,
+  findMemberInAList,
+  findUserTeam,
+  formatPhoneNumber,
 };

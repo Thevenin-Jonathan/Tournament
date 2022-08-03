@@ -12,7 +12,7 @@ router.route("/")
 
 router.route("/:id")
   .get(controllerWrapper(controller.getOne))
-  .patch(
+  .put(
     validationWrapper(schema),
     controllerWrapper(controller.update))
   .delete(controllerWrapper(controller.destroy));

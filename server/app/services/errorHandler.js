@@ -6,6 +6,7 @@ const ApiInternalError = require("../errors/apiInternalError");
 const BadCredentialsError = require("../errors/BadCredentialsError");
 const ExpiredTokenError = require("../errors/ExpiredTokenError");
 const InvalidTokenError = require("../errors/InvalidTokenError");
+const ValidationError = require("../errors/validationError");
 
 /**
  * Error handler middleware.
@@ -13,9 +14,10 @@ const InvalidTokenError = require("../errors/InvalidTokenError");
  * @param {Error} err - Error object.
  * @param {Object} req - Express request object.
  * @param {Object} res - Express response object.
- * @param {Function} __ - Express next middleware function. (not used)
+ * @param {Function} _ - Express next middleware function. (not used)
  */
-async function errorHandler(err, req, res, __) {
+
+async function errorHandler(err, _, res, _) {
 
   if (process.env.NODE_ENV === "development") {
     debug(err.statusCode)
@@ -49,5 +51,6 @@ module.exports = {
   ApiInternalError,
   BadCredentialsError,
   ExpiredTokenError,
-  InvalidTokenError
+  InvalidTokenError,
+  ValidationError
 }

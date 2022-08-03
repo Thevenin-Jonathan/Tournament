@@ -1,0 +1,34 @@
+@hostname = http://localhost:3001/api/v1
+
+###
+# Get all types
+GET {{hostname}}/types/ HTTP/1.1
+content-type: application/json
+
+###
+# Get one type
+GET {{hostname}}/types/1 HTTP/1.1
+content-type: application/json
+
+###
+# Create one type
+POST {{hostname}}/types/ HTTP/1.1
+content-type: application/json
+
+{
+  "name": "test"
+}
+
+###
+# Update one type
+PUT {{hostname}}/types/2 HTTP/1.1
+content-type: application/json
+
+{
+  "name": "test2"
+}
+
+###
+# Delete one type
+DELETE {{hostname}}/types/2 HTTP/1.1
+content-type: application/json

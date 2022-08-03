@@ -92,7 +92,8 @@ _Ce que tu as fait hier:_
 _Les problèmes rencontrés:_
 
 - Un peu de veille nécessaire pour comprendre JWT et son fonctionnement
-- Problème avec le nommage des noms de colonne, longue réflexion pour décider si on passait en camel case mais      finalement non, pas assez de recul pour savoir si ca poserait encore plus de problèmes
+- Problème avec le nommage des noms de colonne, longue réflexion pour décider si on passait en camel case mais finalement
+non, pas assez de recul pour savoir si ca poserait encore plus de problèmes
 
 _Ce que tu comptes faire aujourd'hui:_
 
@@ -176,7 +177,8 @@ _Les problèmes rencontrés:_
 
 - Un peu de réflexion sur les fonctions update et create du controller "user" pour rendre dynamique les parametres d'entrée
 - On a eu quelques bugs sur la connexion front et back à cause de fonctions mal nommées
-- Un peu de mal avec le controller wrapper et le currying, j'ai fais un peu de veille pour mieux comprendre car la syntaxe en fléché était pas simple à lire avec 3 fonctions imbriquées
+- Un peu de mal avec le controller wrapper et le currying, j'ai fais un peu de veille pour mieux comprendre car la syntaxe en
+fléché était pas simple à lire avec 3 fonctions imbriquées
 
 _Ce que tu comptes faire aujourd'hui:_
 
@@ -356,7 +358,9 @@ _Ce que tu as fait hier:_
 
 _Les problèmes rencontrés:_
 
-- J'ai toujours du mal à déployer, il me faut transformer le repo actuel en déplacant les fichiers serveurs à la racine et ca met le bazar sur git. J'ai eu aussi plusieurs probleme en créant le mail handler, des problemes d'email bloqué pour spam et aussi des bug de configuration en essayant de passer par de addons qui finalement était inutile.
+- J'ai toujours du mal à déployer, il me faut transformer le repo actuel en déplacant les fichiers serveurs à la racine et ca met le bazar
+sur git. J'ai eu aussi plusieurs probleme en créant le mail handler, des problemes d'email bloqué pour spam et aussi des bug de configuration
+en essayant de passer par de addons qui finalement était inutile.
 
 _Ce que tu comptes faire aujourd'hui:_
 
@@ -518,7 +522,8 @@ _Les problèmes rencontrés:_
 
 - dans swagger-doc, j'ai mis "tag" au lieu de "tags" dans la doc, et problème de rangement dans le visuel
 - pas fonctionnelle à 100% quelques erreur lors des test PATCHS et CREATE notamment sur swagger
-- ajout de la colonne "winner_ido - ORDER BY ajouter en sur les f"indAll dans tous lesORDER BY ajouter en sur les findAll dans tous les swagger-doc sur tous les routers, pas fonctionnelle à 100% quelques erreur lors des test PATCHS et CREATE notamment
+- ajout de la colonne "winner_ido - ORDER BY ajouter en sur les f"indAll dans tous lesORDER BY ajouter en sur les findAll dans
+tous les swagger-doc sur tous les routers, pas fonctionnelle à 100% quelques erreur lors des test PATCHS et CREATE notamment
 
 _Ce que tu comptes faire aujourd'hui:_
 
@@ -541,8 +546,8 @@ _Ce que tu as fait vendredi:_
 
 _Les problèmes rencontrés:_
 
-- comment changer d'url au submit (apres un succes sur un async)
---> dispatcher une action au submit (REDIRECT), dans le reducer alimenter le state correspondant, de retour dans le composant verifier ce state et rediriger avec navigate si nécéssaire.
+- dispatcher une action au submit (REDIRECT), dans le reducer alimenter le state correspondant, de retour dans le composant verifier
+ce state et rediriger avec navigate si nécéssaire.
 - gestion des CSP (CONTENT POLICY MANAGEMENT un peu comme les CORS)
 - Helmet a configurer (bloque les images distantes)
 - Probleme ssl chez l'hebergeur
@@ -638,8 +643,8 @@ _Ce que tu as fait hier:_
 - Penser a verifier le type des données qui arrive par le front !
 
 _Les problèmes rencontrés:_
+
 - condtionner les possibilité d'inscription
-- 
 
 _Ce que tu comptes faire aujourd'hui:_
 
@@ -704,7 +709,7 @@ _Ce que tu comptes faire aujourd'hui:_
 
 _Ce que tu as fait hier:_
 
-- entrainement sur des requetes SQL, replay de BEN 
+- entrainement sur des requetes SQL, replay de BEN
 
 _Les problèmes rencontrés:_
 
@@ -712,6 +717,94 @@ _Les problèmes rencontrés:_
 
 _Ce que tu comptes faire aujourd'hui:_
 
--
-opsider em
-opsider em
+- opsider em
+
+### 03/08/2022 - Sprint 3 - Jour 17
+
+**Tom:**
+
+_Ce que tu as fait hier:_
+
+- Amélioration de l'algo et transposition dans le back
+- Amélioration de certaines route pour les besoin du front
+- fonctionnalité inscription / désinscription opérationnelle
+- création de fonction de test pour l'acces aux tournois
+- code fun pour la détente (animations, petits algos map)
+- pas mal de fix et de refacto
+
+_Les problèmes rencontrés:_
+
+- Algo qui retournait pas la data attendue (le match fantome!)
+- maj des infos du header en fonction de la modification de profil.
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- Ajout de joueurs à un tournoi par l'admin
+- étape 2 du tournoie que tu as fait hier:_
+
+**Jonathan:**
+
+_Ce que tu as fait hier:_
+
+- Ajout de scripts NPM un peu partout pour faciliter les lancement dans different endroit
+- Suppression des fonctions SQL et passage vers des views plutot qui sont plus justifié
+- Ajout de la colonne phase dans la table match
+- Implémentation de la route "/tournament/:id/generate" et de tous ces composants et fonctions nécéssaires
+- Ajout d'une classe ValidationError
+- Amélioration du gestionnaire d'erreur
+
+_Les problèmes rencontrés:_
+
+- Les boucle forEach en async, plus jamais.
+- J'ai eu plusieurs probleme avec l'ago de Tom, il me retournait des maths avec un joueur "fantome" et ne me retournait pas directement les
+id joueur dans le smatchs géénérés. Il m'a modifié tout ca dans son algo et tout a roulé impeccable !
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- Implémenter les routes pour modifier le score d'une équipe (rt => team update)
+- Voir les tokens temporaires pour les mails
+- Si il me reste du temps, voir pour un logger et la doc swagger
+
+**Cédric:**
+
+_Ce que tu as fait hier:_
+
+- logique du composant UpdateProfil (en cours)
+- début d'intégration du composant Ranking
+
+_Les problèmes rencontrés:_
+
+- Lors de l'enregistrement des modifications dans UpdateProfil, erreurs si email ou phone ne sont pas modifiés, c'est probablement dû à la contrainte
+   UNIQUE
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- avancer sur le composant Ranking (intégration et logique)
+
+**Agustin:**
+
+_Ce que tu as fait hier:_
+
+- Mise en place de jest et de supertest sur des petites functions
+
+_Les problèmes rencontrés:_
+
+- L'incapacité a mettre en place l
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- Faire des tests  plus simples sur notre app, et tenter les plus complexes si je reussi avec les autres
+
+**Houceine:**
+
+_Ce que tu as fait hier:_
+
+- suivi des presentations, presentation, puis mise en place de morgan express
+
+_Les problèmes rencontrés:_
+
+- recuperer les erreurs précise
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- continuer la dessus, et voir ce qui peut être fait

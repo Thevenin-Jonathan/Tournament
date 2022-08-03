@@ -1,6 +1,5 @@
 const pool = require("../config/database");
 const debug = require("debug")("dm-match");
-const matchHasTeamDatamapper = require("./matchHasTeam");
 
 /**
  * Return all matches from database
@@ -19,7 +18,9 @@ async function findAll() {
 async function findById(id) {
   const result = (await pool.query(
     `
-    SELECT * FROM "get_match_by_id"($1);
+    SELECT * 
+    FROM "get_match" AS "GM"
+    WHERE "GM"."id" = $1;
     `,
     [id])).rows[0];
   return result;
@@ -34,11 +35,11 @@ async function insertOne(match) {
   let result = (await pool.query (
     `
     INSERT INTO "match"
-    ("tournament_id")
+    ("tournament_id", "phase")
     VALUES
-    ($1)
+    ($1, $2)
     RETURNING *
-    `, [match.tournament_id]
+    `, [match.tournament_id, match.phase]
     )).rows[0];
       
   return result;
@@ -66,6 +67,30 @@ async function updateOne(id, match) {
 
   return result.rows[0];
 }
+
+/**
+ * Set team score
+ * @param {number} matchId match identifiant
+ * @param {number} teamId team identifiant
+ * @param {number} resultId result identifiant
+ * @param {boolean} isWinner is team winner
+ * @returns {object} infos match
+ */
+ async function setScore(matchId, teamId, resultId, isWinner) {
+  const result = await pool.query(
+    `    
+    UPDATE "match_has_team" SET
+      "result_id" = $3,
+      "is_winner" = $4
+    WHERE "match_id" = $1
+      AND "team_id" = $2
+    RETURNING *;
+    `,
+    [matchId, teamId, resultId, isWinner]
+  );
+
+  return result.rows[0];
+} 
 
 /**
  * Add one team into match
@@ -128,6 +153,7 @@ module.exports = {
   findById,
   insertOne,
   updateOne,
+  setScore,
   insertTeam,
   deleteTeam,
   deleteOne 

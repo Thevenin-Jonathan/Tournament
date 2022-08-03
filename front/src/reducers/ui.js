@@ -31,6 +31,26 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         isLoading: false,
       };
+    case 'GET_TOURNAMENTS':
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case 'GET_TOURNAMENTS_SUCCESS':
+      return {
+        ...state,
+        isLoading: false,
+      };
+    case 'GET_TOURNAMENT':
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case 'GET_TOURNAMENT_SUCCESS':
+      return {
+        ...state,
+        isLoading: false,
+      };
     case 'NEW_TOAST':
       return {
         ...state,

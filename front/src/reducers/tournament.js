@@ -5,7 +5,16 @@ const today = () => {
 };
 
 export const initialState = {
+  // liste des tournois
   tournaments: [],
+
+  // tournoi courant
+  tournament: {
+    managers: [],
+    registered: [],
+    matches: [],
+    teams: [],
+  },
 
   // champs controlés AddTournamentForm
   tournamanentName: '',
@@ -45,6 +54,11 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         tournaments: action.value,
       };
+    case 'GET_TOURNAMENT_SUCCESS':
+      return {
+        ...state,
+        tournament: action.value,
+      };
     case 'CREATE_TOURNAMENT_SUCCESS':
       return {
         ...state,
@@ -67,6 +81,17 @@ const reducer = (state = initialState, action = {}) => {
           state_id: action.newFilter,
         },
       };
+    case 'SINGLE_TOURNAMENT_SUBSCRIBE':
+      return {
+        ...state,
+        tournament: action.value,
+      };
+    case 'SINGLE_TOURNAMENT_UNSUBSCRIBE':
+      return {
+        ...state,
+        tournament: action.value,
+      };
+
     default:
       return state;
   }

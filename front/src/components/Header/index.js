@@ -13,6 +13,7 @@ function Header() {
       type: 'LOGOUT',
     });
   };
+
   const userAvatar = `${config.path.uploads.avatar}/${user.avatar}`;
 
   return (
@@ -23,7 +24,7 @@ function Header() {
       <h1 className="header-club-name">Bayard Bad</h1>
       <div className="header-user-menu">
         <p className="header-user-welcome">
-          Bonjour <span className="header-member-firstname"> {user.displayName}</span>
+          Bonjour <span className="header-member-firstname"> {user.firstname}</span>
           &nbsp;<i className="fa fa-user fa-1x" aria-hidden="true" />
         </p>
         <div className="header-user-menu-pannel">

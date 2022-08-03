@@ -96,9 +96,9 @@ async function create(req, res) {
     await teamDatamapper.insertUser(teamId, userId);
   }
 
-  /** Get and return all team informations */
-  const team = await teamDatamapper.findById(teamId);
-  return res.status(201).json(team);
+  /** Get and return all tournament informations */
+  const updatedTournament = await tournamentDatamapper.findById(tournament.id);
+  return res.status(201).json(updatedTournament);
 };
 
 /**
@@ -197,11 +197,15 @@ async function destroy(req, res) {
     if (!team) {
       throw new Api404Error("Team does not exist in DB");
     }
-  
+
+    /** Delete team from db */
     await teamDatamapper.deleteOne(id);
-    return res.status(204).json();
+    
+    /** Get and return all tournament informations */
+    const updatedTournament = await tournamentDatamapper.findById(team.tournament_id);
+    return res.status(201).json(updatedTournament);
   } else {
-    throw new Api404Error("Invalid id, Team not found");
+    throw new Api404Error("Invalid id, team not found");
   }
 };
 

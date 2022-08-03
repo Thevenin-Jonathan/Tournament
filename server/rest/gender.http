@@ -1,0 +1,34 @@
+@hostname = http://localhost:3001/api/v1
+
+###
+# Get all genders
+GET {{hostname}}/genders/ HTTP/1.1
+content-type: application/json
+
+###
+# Get one gender
+GET {{hostname}}/genders/2 HTTP/1.1
+content-type: application/json
+
+###
+# Create one gender
+POST {{hostname}}/genders/ HTTP/1.1
+content-type: application/json
+
+{
+  "name": "test"
+}
+
+###
+# Update one gender
+PUT {{hostname}}/genders/3 HTTP/1.1
+content-type: application/json
+
+{
+  "name": "test2"
+}
+
+###
+# Delete one gender
+DELETE {{hostname}}/genders/3 HTTP/1.1
+content-type: application/json
