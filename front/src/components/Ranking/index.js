@@ -80,7 +80,7 @@ function Ranking() {
           </tr>
         </table>
       </section>
-      <section>
+      {/* <section>
         <h2 className="title-h2">Classement Simple Dames</h2>
       </section>
       <section>
@@ -91,7 +91,7 @@ function Ranking() {
       </section>
       <section>
         <h2 className="title-h2">Classement Double Mix</h2>
-      </section>
+      </section> */}
     </main>
   );
 }

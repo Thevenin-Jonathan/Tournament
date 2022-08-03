@@ -1373,18 +1373,22 @@ a {
 }
 .ranking {
   table {
-    background-color: var(--main-color);
+    border: 5px solid var(--main-color);
     border-radius: var(--border-radius);
-    padding: 2rem;
     width: 100%;
   }
-  tr {
-    padding: 2rem;
+  tr {    
   }
   th {
-    padding: 2rem;
+    background-color: var(--main-color);
+    padding: 1.5rem;
   }
   td {
-    padding: 1rem;
+    padding: 0.5rem;
+    text-align: center;
+    border: 2px solid var(--main-color);
+  }
+  section {
+    padding: 2rem 0;
   }
 }
