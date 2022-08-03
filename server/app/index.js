@@ -11,7 +11,14 @@ const rfs = require('rotating-file-stream');
 const morganLogger = require("./services/morganLogger");
 
 /** Helmet for security */
-// app.use(helmet());
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+      "img-src": ["'self'", "kinoah.com"],
+    },
+  },
+}));
 
 /** Parser **/
 app.use(express.json());
