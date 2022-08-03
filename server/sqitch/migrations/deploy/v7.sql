@@ -97,8 +97,4 @@ SELECT
 FROM "user" AS "U"
 GROUP BY 1,2,3,4,5,6;
 
-SELECT *
-FROM "get_all_stats" AS "G"
-WHERE "G"."id" = 1;
-
 COMMIT;
