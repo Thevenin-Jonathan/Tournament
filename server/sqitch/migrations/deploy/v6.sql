@@ -61,6 +61,7 @@ SELECT
 "T"."type_id",
 "T"."state_id",
 "T"."club_id",
+"T"."winner_id",
 
 (SELECT
   COUNT("U"."id")
@@ -92,8 +93,13 @@ WHERE "TEU"."user_id" = "U"."id"
 ), '[]') AS "registered",
 COALESCE ((SELECT JSON_AGG(
   JSON_BUILD_OBJECT(
-    'id', "M"."id"
-  ))
+    'id', "M"."id",
+    'phase', "M"."id",
+    'teams', COALESCE ((SELECT JSON_AGG(
+                JSON_BUILD_OBJECT(
+                'id', "MHT"."team_id"))
+                FROM "match_has_team" AS "MHT"
+                WHERE "MHT"."match_id" = "M"."id"), '[]'))) AS "teams"
 FROM "match" AS "M"
 WHERE "M"."tournament_id" = "T"."id"
 ), '[]') AS "matches",
@@ -102,8 +108,7 @@ COALESCE ((SELECT JSON_AGG(
     'id', "TE"."id",
     'users', COALESCE ((SELECT JSON_AGG(
                 JSON_BUILD_OBJECT(
-                'id', "TU"."user_id"
-                ))
+                'id', "TU"."user_id"))
                 FROM "team_has_user" AS "TU"
                 WHERE "TU"."team_id" = "TE"."id"), '[]'))) AS "users"
 FROM "team" AS "TE"
