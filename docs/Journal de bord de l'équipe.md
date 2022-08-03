@@ -726,11 +726,6 @@ _Ce que tu comptes faire aujourd'hui:_
 _Ce que tu as fait hier:_
 
 - Amélioration de l'algo et transposition dans le back
-**Tom:**
-
-_Ce que tu as fait hier:_
-
-- Amélioration de l'algo et transposition dans le back
 - Amélioration de certaines route pour les besoin du front
 - fonctionnalité inscription / désinscription opérationnelle
 - création de fonction de test pour l'acces aux tournois
@@ -742,11 +737,14 @@ _Les problèmes rencontrés:_
 - Algo qui retournait pas la data attendue (le match fantome!)
 - maj des infos du header en fonction de la modification de profil.
 
-
 _Ce que tu comptes faire aujourd'hui:_
 
 - Ajout de joueurs à un tournoi par l'admin
 - étape 2 du tournoie que tu as fait hier:_
+
+**Jonathan:**
+
+_Ce que tu as fait hier:_
 
 - Ajout de scripts NPM un peu partout pour faciliter les lancement dans different endroit
 - Suppression des fonctions SQL et passage vers des views plutot qui sont plus justifié
@@ -795,8 +793,6 @@ _Les problèmes rencontrés:_
 - L'incapacité a mettre en place l
 
 _Ce que tu comptes faire aujourd'hui:_
-
-- 
 
 - Faire des tests  plus simples sur notre app, et tenter les plus complexes si je reussi avec les autres
 
