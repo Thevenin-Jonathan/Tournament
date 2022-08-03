@@ -7,6 +7,7 @@ import authMiddleware from './middlewares/authMiddleware';
 import userMiddleware from './middlewares/userMiddleware';
 import clubMiddleware from './middlewares/clubMiddleware';
 import tournamentMiddleware from './middlewares/tournamentMiddleware';
+import statsMiddleware from './middlewares/statsMiddleware';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -17,6 +18,7 @@ const enhancers = composeEnhancers(
     authMiddleware,
     clubMiddleware,
     tournamentMiddleware,
+    statsMiddleware,
   ),
 );
 
