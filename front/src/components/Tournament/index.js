@@ -144,6 +144,13 @@ function Tournament() {
     });
   };
 
+  // action de génération des matchs du tournois -> etape 2
+  const handleGenerateTournament = () => {
+    dispatch({
+      type: 'TOURNAMENT_GENERATE',
+    });
+  };
+
 
 
   if (isLoading) {
@@ -244,6 +251,22 @@ function Tournament() {
             </ul>
 
           </div>
+          
+          {tournament.state_id === 2 && (
+          <div className="infos matchs">
+            <ul className="match-list">
+              { tournament.matches.map((match) => (
+                <li
+                  key={match.id}
+                  className="match-item"
+                >
+                  Match {match.id}
+                </li>
+              ))}
+            </ul>
+          </div>
+          )}
+          
 
           {/* <div className="infos registred-teams">
             <h2>Equipes</h2>
@@ -266,12 +289,20 @@ function Tournament() {
           <h2>Gestion du tournoi</h2>
 
           {tournament.state_id === 1 && (
-            <button type="button" className="action-btn" onClick={() => setShowPlayerModal(true)}>
+            <button
+              type="button"
+              className="action-btn"
+              onClick={() => setShowPlayerModal(true)}
+            >
               <i className="fa fa-users" /> Ajouter des participants
             </button>
           )}
           {tournament.state_id === 1 && (
-          <button type="button" to="" className="action-btn ">
+          <button
+            type="button"
+            className="action-btn"
+            onClick={() => handleGenerateTournament()}
+          >
             Aller à l'étape 2 : générer les phases <i className="fa fa-arrow-right" />
           </button>
           )}

@@ -735,6 +735,17 @@ a {
         width:max-content;
       }
     }
+    .matchs{
+      background-color: var(--header-color);
+      .match-list{
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+        .match-item{
+          
+        }
+      }
+    }
 }
 
 

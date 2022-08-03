@@ -36,6 +36,20 @@ const tournamentMiddleware = (store) => (next) => (action) => {
       break;
     }
 
+    // générer les matchs du tournoi !
+    case 'TOURNAMENT_GENERATE': {
+      const state = store.getState();
+      next(action);
+      axios.get(`${config.api.baseUrl}/tournaments/${state.tournament.tournament.id}/generate`)
+        .then((response) => {
+          store.dispatch({ type: 'TOURNAMENT_GENERATE_SUCCESS', value: response.data });
+        })
+        .catch((error) => {
+          throw new Error(error);
+        });
+      break;
+    }
+
     // inscription à un tournoi de simple (pas de gestion d'équipe)
     case 'SINGLE_TOURNAMENT_SUBSCRIBE': {
       const state = store.getState();
