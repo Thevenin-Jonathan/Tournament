@@ -185,8 +185,7 @@ function canISubscribeToThisTournament(tournament, user) {
 function findUserTeam(teamList, userId) {
   const teamFinded = teamList
     .find((team) => team.users
-      .find((user) => user.id === userId));
-
+      .find((user) => user.id === Number(userId)));
   if (teamFinded) {
     return teamFinded;
   }
