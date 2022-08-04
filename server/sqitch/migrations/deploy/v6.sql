@@ -99,12 +99,13 @@ COALESCE ((SELECT JSON_AGG(
                 JSON_BUILD_OBJECT(
                 'id', "MHT"."team_id",
                 'result_id', "MHT"."result_id",
-                'is_winner', "MHT"."is_winner"))
+                'is_winner', "MHT"."is_winner")                 
+                ORDER BY "MHT"."match_id")
                 FROM "match_has_team" AS "MHT"
-                WHERE "MHT"."match_id" = "M"."id"), '[]'))) AS "teams"
+                WHERE "MHT"."match_id" = "M"."id"), '[]')) 
+                ORDER BY "M"."id") AS "teams"
 FROM "match" AS "M"
-WHERE "M"."tournament_id" = "T"."id"
-), '[]') AS "matches",
+WHERE "M"."tournament_id" = "T"."id"), '[]') AS "matches",
 COALESCE ((SELECT JSON_AGG(
   JSON_BUILD_OBJECT(
     'id', "TE"."id",

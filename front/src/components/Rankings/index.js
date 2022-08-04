@@ -159,7 +159,9 @@ function Rankings() {
         </section>
 
         {/* Classement Double Messieurs */}
-        <section className={rankingCategory === 3 || rankingCategory === 0 ? 'double-men-ranking' : 'double-men-ranking hide'}>
+        <section className={rankingCategory === 3 || rankingCategory === 0
+          ? 'double-men-ranking' : 'double-men-ranking hide'}
+        >
           <h2 className="title-h2">Double Homme &nbsp;
             <i className="fa fa-male" aria-hidden="true" />
             <i className="fa fa-male" aria-hidden="true" />
@@ -189,7 +191,9 @@ function Rankings() {
         </section>
 
         {/* Classement Double Dames */}
-        <section className={rankingCategory === 4 || rankingCategory === 0 ? 'double-women-ranking' : 'double-women-ranking hide'}>
+        <section className={rankingCategory === 4 || rankingCategory === 0
+          ? 'double-women-ranking' : 'double-women-ranking hide'}
+        >
           <h2 className="title-h2">Double Dame &nbsp;
             <i className="fa fa-female" aria-hidden="true" />
             <i className="fa fa-female" aria-hidden="true" />
@@ -219,7 +223,9 @@ function Rankings() {
         </section>
 
         {/* Classement Double Mixte */}
-        <section className={rankingCategory === 5 || rankingCategory === 0 ? 'double-mixed-ranking' : 'double-mixed-ranking hide'}>
+        <section className={rankingCategory === 5 || rankingCategory === 0
+          ? 'double-mixed-ranking' : 'double-mixed-ranking hide'}
+        >
           <h2 className="title-h2">Double Mixte &nbsp;
             <i className="fa fa-female" aria-hidden="true" />
             <i className="fa fa-male" aria-hidden="true" />
@@ -259,7 +265,7 @@ function Rankings() {
             name="discipline"
             className="0"
             onChange={(e) => setRankingCategory(parseInt(e.target.className, 10))}
-            checked
+            // checked
           />Tous
           </li>
           <li><input

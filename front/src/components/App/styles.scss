@@ -1636,7 +1636,6 @@ a {
     background-color: var(--bg-color);
   }
   table {
-    border: 2px solid var(--main-color);
     width: 100%;
     counter-reset: rowNumber;
     tr {
@@ -1650,6 +1649,10 @@ a {
       &:not(:first-child) {
         counter-increment: rowNumber;
       }
+      &:hover {
+        background-color: rgba(0,0,0,.3);
+      }
+  
     }
     th {
       background-color: var(--main-color);
