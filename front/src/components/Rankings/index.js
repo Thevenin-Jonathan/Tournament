@@ -11,49 +11,84 @@ function Rankings() {
     });
   }, []);
 
-  // Ajout dans 'stats' pour chaque membre des % de victoires pour chaque discipline
-  const addSingleVictoriesRates = (
-    stats.map((memberStats) => (
-      Object.defineProperty(memberStats, 'singleVictoriesRate', {
-        value: memberStats.stat_won_single * 100 / memberStats.stat_single_played,
-      })
-    ))
-  );
-  const addDoubleVictoriesRates = (
-    addSingleVictoriesRates.map((memberStats) => (
-      Object.defineProperty(memberStats, 'doubleVictoriesRate', {
-        value: memberStats.stat_won_double * 100 / memberStats.stat_double_played,
-      })
-    ))
-  );
-  const statsWithVictoriesRates = (
-    addDoubleVictoriesRates.map((memberStats) => (
-      Object.defineProperty(memberStats, 'mixVictoriesRate', {
-        value: memberStats.stat_won_mix * 100 / memberStats.stat_mix_played,
-      })
-    ))
-  );
-  // console.log(statsWithVictoriesRates);
-
-  // Filtre les hommes, tri par % victoires en simple
-  const men = (
-    statsWithVictoriesRates.filter((member) => (
-      member.gender_id === 1
-    ))
-  ).sort((a, b) => {
-    if (a.singleVictoriesRate < b.singleVictoriesRate) {
-      return -1;
-    }
-    if (a.singleVictoriesRate > b.singleVictoriesRate) {
-      return 1;
-    }
-    return 0;
-  });
-
+  // Filtre les hommes
+  const men = stats.filter((member) => (
+    member.gender_id === 1
+  ));
   // Filtre les dames
-  const women = statsWithVictoriesRates.filter((member) => (
+  const women = stats.filter((member) => (
     member.gender_id === 2
   ));
+
+  // Fonction pour trier par % de victoire en SIMPLE HOMME
+  const sortByPercentWinSingleMen = (category) => (
+    category.sort((a, b) => {
+      if (a.single_men[0].percent_win < b.single_men[0].percent_win) {
+        return 1;
+      }
+      if (a.single_men[0].percent_win > b.single_men[0].percent_win) {
+        return -1;
+      }
+      return 0;
+    })
+  );
+
+  // Fonction pour trier par % de victoire en SIMPLE FEMME
+  const sortByPercentWinSingleWomen = (category) => (
+    category.sort((a, b) => {
+      if (a.single_women[0].percent_win < b.single_women[0].percent_win) {
+        return 1;
+      }
+      if (a.single_women[0].percent_win > b.single_women[0].percent_win) {
+        return -1;
+      }
+      return 0;
+    })
+  );
+
+  // Fonction pour trier par % de victoire en DOUBLE HOMME
+  const sortByPercentWinDoubleMen = (category) => (
+    category.sort((a, b) => {
+      if (a.double_men[0].percent_win < b.double_men[0].percent_win) {
+        return 1;
+      }
+      if (a.double_men[0].percent_win > b.double_men[0].percent_win) {
+        return -1;
+      }
+      return 0;
+    })
+  );
+
+  // Fonction pour trier par % de victoire en DOUBLE FEMME
+  const sortByPercentWinDoubleWomen = (category) => (
+    category.sort((a, b) => {
+      if (a.double_women[0].percent_win < b.double_women[0].percent_win) {
+        return 1;
+      }
+      if (a.double_women[0].percent_win > b.double_women[0].percent_win) {
+        return -1;
+      }
+      return 0;
+    })
+  );
+
+  // Fonction pour trier par % de victoire en DOUBLE MIXTE
+  const sortByPercentWinDoubleMixed = (category) => (
+    category.sort((a, b) => {
+      if (a.double_mixed[0].percent_win < b.double_mixed[0].percent_win) {
+        return 1;
+      }
+      if (a.double_mixed[0].percent_win > b.double_mixed[0].percent_win) {
+        return -1;
+      }
+      return 0;
+    })
+  );
+
+  const changeRanking = (toto) => {
+    console.log('toto :', toto);
+  };
+  // console.log(changeRanking());
 
   return (
     <main className="rankings content">
@@ -61,29 +96,6 @@ function Rankings() {
       <div className="rankings-list">
         <h1 className="title">Classements</h1>
 
-        <section> {/* Classement Simple Messieurs */}
-          <h2 className="title-h2">Classement Général</h2>
-          <table>
-            <tbody>
-              <tr>
-                <th>Rang</th>
-                <th>Nom</th>
-                <th>Matchs joués</th>
-                <th>Matchs gagnés</th>
-                <th>% victoires</th>
-              </tr>
-              {statsWithVictoriesRates.map((memberStats) => (
-                <tr key={memberStats.id}>
-                  <td>1</td>
-                  <td>{memberStats.lastname.toUpperCase()} {memberStats.firstname}</td>
-                  <td>{memberStats.stat_single_played}</td>
-                  <td>{memberStats.stat_won_single}</td>
-                  <td>{memberStats.singleVictoriesRate} %</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </section>
         <section> {/* Classement Simple Messieurs */}
           <h2 className="title-h2">Classement Simple Messieurs</h2>
           <table>
@@ -95,13 +107,13 @@ function Rankings() {
                 <th>Matchs gagnés</th>
                 <th>% victoires</th>
               </tr>
-              {men.map((memberStats) => (
+              {sortByPercentWinSingleMen(men).map((memberStats) => (
                 <tr key={memberStats.id}>
                   <td>1</td>
                   <td>{memberStats.lastname.toUpperCase()} {memberStats.firstname}</td>
-                  <td>{memberStats.stat_single_played}</td>
-                  <td>{memberStats.stat_won_single}</td>
-                  <td>{memberStats.singleVictoriesRate} %</td>
+                  <td>{memberStats.single_men[0].nb_played}</td>
+                  <td>{memberStats.single_men[0].nb_win}</td>
+                  <td>{memberStats.single_men[0].percent_win} %</td>
                 </tr>
               ))}
             </tbody>
@@ -118,13 +130,13 @@ function Rankings() {
                 <th>Matchs gagnés</th>
                 <th>% victoires</th>
               </tr>
-              {women.map((memberStats) => (
+              {sortByPercentWinSingleWomen(women).map((memberStats) => (
                 <tr key={memberStats.id}>
                   <td>1</td>
                   <td>{memberStats.lastname.toUpperCase()} {memberStats.firstname}</td>
-                  <td>{memberStats.stat_single_played}</td>
-                  <td>{memberStats.stat_won_single}</td>
-                  <td>{memberStats.singleVictoriesRate} %</td>
+                  <td>{memberStats.single_women[0].nb_played}</td>
+                  <td>{memberStats.single_women[0].nb_win}</td>
+                  <td>{memberStats.single_women[0].percent_win} %</td>
                 </tr>
               ))}
             </tbody>
@@ -141,13 +153,13 @@ function Rankings() {
                 <th>Matchs gagnés</th>
                 <th>% victoires</th>
               </tr>
-              {men.map((memberStats) => (
+              {sortByPercentWinDoubleMen(men).map((memberStats) => (
                 <tr key={memberStats.id}>
                   <td>1</td>
                   <td>{memberStats.lastname.toUpperCase()} {memberStats.firstname}</td>
-                  <td>{memberStats.stat_double_played}</td>
-                  <td>{memberStats.stat_won_double}</td>
-                  <td>{memberStats.doubleVictoriesRate} %</td>
+                  <td>{memberStats.double_men[0].nb_played}</td>
+                  <td>{memberStats.double_men[0].nb_win}</td>
+                  <td>{memberStats.double_men[0].percent_win} %</td>
                 </tr>
               ))}
             </tbody>
@@ -164,13 +176,13 @@ function Rankings() {
                 <th>Matchs gagnés</th>
                 <th>% victoires</th>
               </tr>
-              {women.map((memberStats) => (
+              {sortByPercentWinDoubleWomen(women).map((memberStats) => (
                 <tr key={memberStats.id}>
                   <td>1</td>
                   <td>{memberStats.lastname.toUpperCase()} {memberStats.firstname}</td>
-                  <td>{memberStats.stat_double_played}</td>
-                  <td>{memberStats.stat_won_double}</td>
-                  <td>{memberStats.doubleVictoriesRate} %</td>
+                  <td>{memberStats.double_women[0].nb_played}</td>
+                  <td>{memberStats.double_women[0].nb_win}</td>
+                  <td>{memberStats.double_women[0].percent_win} %</td>
                 </tr>
               ))}
             </tbody>
@@ -187,13 +199,13 @@ function Rankings() {
                 <th>Matchs gagnés</th>
                 <th>% victoires</th>
               </tr>
-              {statsWithVictoriesRates.map((memberStats) => (
+              {sortByPercentWinDoubleMixed(stats).map((memberStats) => (
                 <tr key={memberStats.id}>
                   <td>1</td>
                   <td>{memberStats.lastname.toUpperCase()} {memberStats.firstname}</td>
-                  <td>{memberStats.stat_mix_played}</td>
-                  <td>{memberStats.stat_won_mix}</td>
-                  <td>{memberStats.mixVictoriesRate} %</td>
+                  <td>{memberStats.double_mixed[0].nb_played}</td>
+                  <td>{memberStats.double_mixed[0].nb_win}</td>
+                  <td>{memberStats.double_mixed[0].percent_win} %</td>
                 </tr>
               ))}
             </tbody>
@@ -211,7 +223,7 @@ function Rankings() {
           <li><input
             type="radio"
             name="discipline"
-            // onChange={(e) => changeRanking(e.target.value)}
+            onChange={(e) => changeRanking(e.target.value)}
           />
             Simple Homme
           </li>
