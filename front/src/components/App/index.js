@@ -24,6 +24,7 @@ import AddMembersForm from '../AddMembersForm';
 import AddTournamentForm from '../AddTournamentForm';
 import Help from '../Help';
 import Toast from '../Toast';
+import Rankings from '../Rankings';
 
 // == Composant
 function App() {
@@ -88,6 +89,7 @@ function App() {
         <Route path="/tournois/:slug" element={<Tournament />} />
         <Route path="/profil" element={<Profil />} />
         <Route path="/profil/modifier-profil" element={<UpdateProfil />} />
+        <Route path="/classements" element={<Rankings />} />
         <Route path="/aide" element={<Help />} />
         {isAdmin && (
           <>
