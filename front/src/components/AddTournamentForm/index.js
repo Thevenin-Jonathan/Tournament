@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+import { useRef, useState } from 'react';
 
 const today = () => {
   const date = new Date();
@@ -46,6 +47,60 @@ function AddTournamentForm() {
     });
   };
 
+  // cloudinary
+  const [image, setImage] = useState(null);
+  const [progress, setProgress] = useState(0);
+
+  const fileSelect = useRef(null);
+
+  function uploadFile(file) {
+    const url = `https://api.cloudinary.com/v1_1/dy21tmaam/upload`;
+    const xhr = new XMLHttpRequest();
+    const fd = new FormData();
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+    // Update progress (can be used to show progress indicator)
+    xhr.upload.addEventListener('progress', (e) => {
+      setProgress(Math.round((e.loaded * 100.0) / e.total));
+      console.log(Math.round((e.loaded * 100.0) / e.total));
+    });
+
+    xhr.onreadystatechange = (e) => {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        const response = JSON.parse(xhr.responseText);
+
+        setImage(response.secure_url);
+        console.log(response.secure_url);
+        dispatch({
+          type: 'CHANGE_FIELD_TOURNAMENT',
+          input: 'tournamentPictureUrl',
+          value: response.secure_url,
+        });
+        dispatch({
+          type: 'CHANGE_FIELD_TOURNAMENT',
+          input: 'tournamentPicturePreview',
+          value: response.secure_url,
+        });
+      }
+    };
+
+    fd.append(
+      'upload_preset',
+      'tournament',
+    );
+    fd.append('tags', 'browser_upload');
+    fd.append('file', file);
+    xhr.send(fd);
+  }
+
+  function handleFiles(files) {
+    for (let i = 0; i < files.length; i++) {
+      console.log(files[i]);
+      uploadFile(files[i]);
+    }
+  }
+
   return (
     <main className="content add-tournament-form">
       <h1 className="title">Organiser un nouveau tournoi</h1>
@@ -86,10 +141,10 @@ function AddTournamentForm() {
             <div className="input-line">
               <label htmlFor="tournamentPictureUrl">Illustration du tournoi </label>
               <input
+                ref={fileSelect}
                 type="file"
-                name="tournamentPictureUrl"
-                id="tournamentPictureUrl"
-                onChange={(evt) => changePicture(evt, evt.target.value, evt.target.name)}
+                accept="image/*"
+                onChange={(e) => handleFiles(e.target.files)}
               />
             </div>
 
