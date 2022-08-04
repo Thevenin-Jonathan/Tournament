@@ -1615,6 +1615,10 @@ a {
       &:not(:first-child) {
         counter-increment: rowNumber;
       }
+      &:hover {
+        background-color: rgba(0,0,0,.3);
+      }
+  
     }
     th {
       background-color: var(--main-color);
