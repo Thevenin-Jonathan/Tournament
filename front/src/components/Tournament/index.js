@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -42,46 +43,41 @@ function Tournament() {
     dispatch({ type: 'GET_MEMBERS' });
   }, []);
 
-
   function compatiblesMembers(members, tournament) {
     let filteredMembers = members;
     // seulement hommes
-   
-    if([1, 3].includes(tournament.discipline_id)) {
-      filteredMembers = members.filter((member) => member.gender_id === 1);
 
+    if ([1, 3].includes(tournament.discipline_id)) {
+      filteredMembers = members.filter((member) => member.gender_id === 1);
     }
     // seulement femmes
-    if([2, 4].includes(tournament.discipline_id)) {
+    if ([2, 4].includes(tournament.discipline_id)) {
       filteredMembers = members.filter((member) => member.gender_id === 2);
     }
     console.log(filteredMembers);
     return filteredMembers;
-  }; 
+  }
 
   function enroledMembers(members, enroledMembers) {
-    const enroledMembersIds = Array.from((enroledMembers), obj => obj.id);
+    const enroledMembersIds = Array.from((enroledMembers), (obj) => obj.id);
     const filteredMembers = members.filter((member) => (
       enroledMembersIds.includes(member.id)
     ));
     return filteredMembers;
-  };
+  }
 
   function availableMembers(members, enroledMembers) {
-    const enroledMembersIds = Array.from((enroledMembers), obj => obj.id);
+    const enroledMembersIds = Array.from((enroledMembers), (obj) => obj.id);
     const filteredMembers = members.filter((member) => (
       !enroledMembersIds.includes(member.id)
     ));
     return filteredMembers;
-  };
+  }
 
-  
-  const filteredPlayers = (players, string) => {
-    return players.filter((member) => (
-      member.firstname.toLowerCase().includes(string.toLowerCase())
+  const filteredPlayers = (players, string) => players.filter((member) => (
+    member.firstname.toLowerCase().includes(string.toLowerCase())
       || member.lastname.toLowerCase().includes(string.toLowerCase())
-    ));
-  };
+  ));
 
   // modal
   const [showPlayerModal, setShowPlayerModal] = useState(false);
@@ -105,30 +101,29 @@ function Tournament() {
     swapThreshold: 0.65,
     ghostClass: 'ghost',
     group: 'shared',
-    //onStart: (evt) => {console.log(evt.oldIndex)},
+    // onStart: (evt) => {console.log(evt.oldIndex)},
     onEnd: (evt) => {
       const playerId = evt.item.dataset.id;
       const fromId = evt.from.id;
       const dropId = evt.to.id;
-      
+
       // si on drop dans la enroled zone --> on inscrit
-      if(dropId === "enroled-players" && fromId === "available-players") {
+      if (dropId === 'enroled-players' && fromId === 'available-players') {
         dispatch({
-            type: 'SINGLE_TOURNAMENT_SUBSCRIBE',
-            value: playerId,
-        });        
+          type: 'SINGLE_TOURNAMENT_SUBSCRIBE',
+          value: playerId,
+        });
       }
       // si on drop dans la aivalible zone --> on désinscrit
       // mais faut d'abord trouver sa team
-      if(dropId === "available-players" && fromId === "enroled-players") {
+      if (dropId === 'available-players' && fromId === 'enroled-players') {
         dispatch({
-            type: 'SINGLE_TOURNAMENT_UNSUBSCRIBE',
-            value: playerId,
-        });        
+          type: 'SINGLE_TOURNAMENT_UNSUBSCRIBE',
+          value: playerId,
+        });
       }
     },
   };
-
 
   // action de souscription
   const handleSubscribe = () => {
@@ -152,7 +147,23 @@ function Tournament() {
     });
   };
 
+  // construire le tableau des phases/matches
+  const matchsBuilder = (matches) => {
+    const phases = matches.map((match) => match.phase);
+    const nbPhases = Math.max(...phases);
+    const matchTable = [];
+    for (let i = 1; i <= nbPhases; i += 1) {
+      matchTable.push(matches.filter((match) => match.phase === i));
+    }
+    return matchTable;
+  };
 
+  const getPlayersFromTeam = (teamId, teamsList, membersList) => {
+    const playersIds = teamsList.find((team) => team.id === teamId);
+    // console.log(playersIds.users[0]);
+    const player = membersList.find((member) => member.id === playersIds.users[0].id);
+    return `${player.firstname} ${player.lastname.charAt(0)}.`;
+  };
 
   if (isLoading) {
     return <Loader />;
@@ -239,25 +250,31 @@ function Tournament() {
             </ul>
 
           </div>
-          
+
           {tournament.state_id === 2 && (
           <div className="infos matchs">
+            <h2>Grille de matchs</h2>
             <ul className="match-list">
-              { tournament.matches.map((match) => (
-                <li
-                  key={match.id}
-                  className="match-item"
+              { matchsBuilder(tournament.matches).map((phase, i) => (
+                <p
+                  key={i}
+                  className="phase"
                 >
-                <p>
-                  Match {match.id} <br />
-                  Phase : {match.phase} <br />
+                  Journée {i + 1} :
+                  { phase.map((match) => (
+                    <span key={match.id} className="match">
+
+                      {getPlayersFromTeam(match.teams[0].id, teams, members)}
+                      <span>&nbsp;vs&nbsp;</span>
+                      {getPlayersFromTeam(match.teams[1].id, teams, members)}
+
+                    </span>
+                  ))}
                 </p>
-                </li>
               ))}
             </ul>
           </div>
           )}
-          
 
           {/* <div className="infos registred-teams">
             <h2>Equipes</h2>
@@ -313,7 +330,7 @@ function Tournament() {
       </div>
 
       {isAdmin && tournament.state_id === 1 && (
-        <div className={showPlayerModal ? "modal add-players open" : "modal add-players"}>
+        <div className={showPlayerModal ? 'modal add-players open' : 'modal add-players'}>
           <button type="button" className="close-button" onClick={() => setShowPlayerModal(false)}>
             <i className="fa fa-close" aria-hidden="true" />
           </button>
@@ -326,10 +343,11 @@ function Tournament() {
               <div className="col available-players">
                 <h2>Joueurs disponibles</h2>
                 <input
-                value={searchString}
-                onChange={(evt) => setSearchString(evt.target.value)}
-                type="search"
-                placeholder="Rechercher un joueur" />
+                  value={searchString}
+                  onChange={(evt) => setSearchString(evt.target.value)}
+                  type="search"
+                  placeholder="Rechercher un joueur"
+                />
                 <ReactSortable
                   list={availablePlayers}
                   setList={setAvailablePlayers}
@@ -337,22 +355,23 @@ function Tournament() {
                   id="available-players"
                   className="available-players-list dragable-zone"
                 >
-                  {availableMembers(filteredPlayers(members, searchString), tournament.registered).map((player) => (
-                    <div
-                      key={player.id}
-                      className="player-list-item"
-                    >
-                      <span className="player-firstname">
-                        {player.firstname}
-                      </span>
-                      <span className="player-lastname">
-                        {player.lastname}
-                      </span>
-                      <span className="player-gender">
-                        {genderText(player.gender_id)}
-                      </span>
-                    </div>
-                  ))}
+                  {availableMembers(filteredPlayers(members, searchString), tournament.registered)
+                    .map((player) => (
+                      <div
+                        key={player.id}
+                        className="player-list-item"
+                      >
+                        <span className="player-firstname">
+                          {player.firstname}
+                        </span>
+                        <span className="player-lastname">
+                          {player.lastname}
+                        </span>
+                        <span className="player-gender">
+                          {genderText(player.gender_id)}
+                        </span>
+                      </div>
+                    ))}
                 </ReactSortable>
               </div>
 

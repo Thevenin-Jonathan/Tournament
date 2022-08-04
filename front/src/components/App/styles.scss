@@ -599,6 +599,7 @@ a {
     }
     .flex-wrapper {
       display: flex;
+      flex-wrap: wrap;
       align-items: flex-start;
       gap: 2rem;
       margin-bottom: 2rem;
@@ -640,7 +641,7 @@ a {
               gap: .5rem;
               padding: .5rem;
               background-color: var(--main-color);
-              border-radius: 10px;
+              border-radius: calc(var(--border-radius) * 0.5);
               img{
                 width: 2rem;
                 height: 2rem;
@@ -731,7 +732,7 @@ a {
       .player-list-item {
         padding:1rem;
         background-color: var(--main-color);
-        border-radius: var(--border-radius);
+        border-radius: calc(var(--border-radius) * 0.5);
         display: flex;
         align-items: center;
         cursor: grab;
@@ -773,8 +774,19 @@ a {
         display: flex;
         flex-direction: column;
         gap: .5rem;
-        .match-item{
-          
+        .phase {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          .match {
+            background-color: var(--main-color);
+            padding: .5rem 1rem;
+            border-radius: calc(var(--border-radius) * 0.5);
+            span {
+              color: var(--emphase-color);
+              font-weight: var(--black);
+            }
+          }
         }
       }
     }
