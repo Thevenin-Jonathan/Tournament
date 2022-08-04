@@ -149,6 +149,13 @@ function Tournament() {
     });
   };
 
+  // action de passer le matche à "jeu" -> l'étape 3 
+  const handlePlayTournament = () => {
+    dispatch({
+      type: 'TOURNAMENT_PLAY',
+    });
+  };
+
   // action d'envoi d'un resultat
   const handleChangeScore = (evt) => {
     const match = evt.target.closest('.score-inputs');
@@ -183,6 +190,7 @@ function Tournament() {
 
   // construire le tableau des phases/matches
   const matchsBuilder = (matches) => {
+    console.log(matches);
     const phases = matches.map((match) => match.phase);
     const nbPhases = Math.max(...phases);
     const matchTable = [];
@@ -286,7 +294,7 @@ function Tournament() {
 
           </div>
 
-          {tournament.state_id === 2 || tournament.state_id === 3 && (
+          { (tournament.state_id === 2 || tournament.state_id === 3) && (
           <div className="infos matchs">
             <h2>Grille de matchs</h2>
             {tournament.state_id === 2 && (
@@ -386,7 +394,11 @@ function Tournament() {
           </button>
           )}
           {tournament.state_id === 2 && (
-          <button type="button" to="" className="action-btn ">
+          <button
+            type="button"
+            className="action-btn"
+            onClick={() => handlePlayTournament()}
+          >
             Aller à l'étape 3 : jouer ! <i className="fa fa-arrow-right" />
           </button>
           )}

@@ -96,6 +96,11 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         tournament: action.value,
       };
+    case 'TOURNAMENT_PLAY_SUCCESS':
+      return {
+        ...state,
+        // tournament: action.value,
+      };
 
     default:
       return state;
