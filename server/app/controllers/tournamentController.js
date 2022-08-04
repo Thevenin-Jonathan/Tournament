@@ -90,11 +90,13 @@ async function create(req, res) {
 
     /** Generate and get matches grid */
     const matchesGrid = await generator.generate(tournament.type_id, teams);
+    
 
     // /** Add match into DB */
     for (const [index, phase] of matchesGrid.entries()) {
       for (const match of phase) {
         /** Add match */
+
         const newMatch = (await matchDatamapper.insertOne({
           tournament_id: id,
           phase: index + 1

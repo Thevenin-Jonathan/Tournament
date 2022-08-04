@@ -64,7 +64,7 @@ function Dashboard() {
       <Link to="/tournois" className="dashboard-widget tournament">
         <i className="fa fa-trophy fa-2x widget-icon" />
         <p className="tournament-count">{tournaments.length}</p>
-        <p className="tournament-text">Tournois Archivés</p>
+        <p className="tournament-text">Tournois</p>
       </Link>
 
       <Link to="/club" className="dashboard-widget club">
