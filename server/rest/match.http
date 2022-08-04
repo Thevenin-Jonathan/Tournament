@@ -35,13 +35,13 @@ content-type: application/json
 
 ###
 # Update match score
-PATCH {{hostname}}/matches/5/score HTTP/1.1
+PATCH {{hostname}}/matches/2/score HTTP/1.1
 content-type: application/json
 
 {
   "match": [
     {
-      "team_id": 15,
+      "team_id": 13,
       "result_id": 4
     },
     {
