@@ -808,3 +808,88 @@ _Les problèmes rencontrés:_
 _Ce que tu comptes faire aujourd'hui:_
 
 - continuer la dessus, et voir ce qui peut être fait
+
+### 04/08/2022 - Sprint 3 - Jour 18
+
+**Tom:**
+
+_Ce que tu as fait hier:_
+
+- Gestion drag & drop des users par l'admin
+- Gestion des étapes et génération du tournoi ! 
+- recuperation des matchs
+- cloudinary upload : https://andreaskeller.name/blog/react-upload-images-cloudinary
+
+_Les problèmes rencontrés:_
+
+- erreur sur un id de mauvais type... un petit TU m'aurais sauvé !
+- un map un peu costaud sur les matchs
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- implémenation de la saisie des scores et cloture du tournoi
+
+**Jonathan:**
+
+_Ce que tu as fait hier:_
+
+- Implémentation de tout les fichiers REST client pour tester les routes
+- Modifications du logger d'Houceine pour le passer en service externe et modifications du format du stream
+- Nouvelle view SQL pour récupérer les stats des joueurs, plusieurs fonctions et views en back ont été nécéssaires
+- Modifications de certaines requetes pour avoir plus de données à l'interieur
+
+_Les problèmes rencontrés:_
+
+- Petit bug autour de Morgan, j'ai mis du temps a comprendre qu'il fallait absolumnet le lancer avant les routes dans l'index server.
+- J'ai pas mal galéré avec les fonction SQL et les variables.. J'avais pas les bonnes syntaxes. Je suis passé par le language PLPGSQL
+- J'ai aussi galéré pour la division car il fallait cast les integer en decimal pour éviter de me prendre des 0..
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- Checkup de la fonction mail, voir les token temporaire
+- Swagger doc
+- TU
+
+**Cédric:**
+
+_Ce que tu as fait hier:_
+
+- continué sur la logique du composant Rankings
+
+_Les problèmes rencontrés:_
+
+- boutons radio permettant d'afficher le classement d'une discipline en particulier
+- clacul des % de victoires pour les classements par discipline
+- ajout de propriétés dans un objet => découverte de le méthode Object.defineProperty()
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- terminer Rankings en utilisant les nouvelles données fournies par le back
+
+**Agustin:**
+
+_Ce que tu as fait hier:_
+
+- Essayer de mettre en place les test unitaires CRUD sur un controller
+
+_Les problèmes rencontrés:_
+
+- Les tests, quand il s'agit de tester la creation d'un nouveau element, rajoutent le nouveau element dans la base de données. Une fois l'element effacé, le nouveau element suivant à un id different, par rapport au precedent, car la base de données ene "reset" pas les ids des elements effacés, et le test suivant ne functionne plus car dans les tests que j'ai creé les ids ne sont pas dynamiques.
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- Swagger. Veuille et regarder si je peux apporter quelque chose a ce que a déjà été fait
+
+**Houceine:**
+
+_Ce que tu as fait hier:_
+
+- LOGGER, et j'ai commencer les messages joi
+
+_Les problèmes rencontrés:_
+
+- j'ai l'erreur du logger (heursment que Jo est là )
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- finir les message joi Inch'Allah :D
