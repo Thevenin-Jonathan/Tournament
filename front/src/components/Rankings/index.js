@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+
 // import disciplineText from 'src/utils';
 
 function Rankings() {
@@ -10,6 +11,8 @@ function Rankings() {
       type: 'GET_STATS',
     });
   }, []);
+
+  console.log(stats);
 
   // Filtre les hommes
   const men = stats.filter((member) => (
@@ -85,10 +88,7 @@ function Rankings() {
     })
   );
 
-  const changeRanking = (toto) => {
-    console.log('toto :', toto);
-  };
-  // console.log(changeRanking());
+  const [rankingCategory, setRankingCategory] = useState(0);
 
   return (
     <main className="rankings content">
@@ -96,8 +96,13 @@ function Rankings() {
       <div className="rankings-list">
         <h1 className="title">Classements</h1>
 
-        <section> {/* Classement Simple Messieurs */}
-          <h2 className="title-h2">Classement Simple Messieurs</h2>
+        {/* Classement Simple Messieurs */}
+        <section className={rankingCategory === 1 || rankingCategory === 0
+          ? 'single-men-ranking' : 'single-men-ranking hide'}
+        >
+          <h2 className="title-h2">Simple Homme &nbsp;
+            <i className="fa fa-male" aria-hidden="true" />
+          </h2>
           <table>
             <tbody>
               <tr>
@@ -109,8 +114,10 @@ function Rankings() {
               </tr>
               {sortByPercentWinSingleMen(men).map((memberStats) => (
                 <tr key={memberStats.id}>
-                  <td>1</td>
-                  <td>{memberStats.lastname.toUpperCase()} {memberStats.firstname}</td>
+                  <td className="row-number"> </td>
+                  <td className="member-name">
+                    {memberStats.lastname.toUpperCase()} {memberStats.firstname}
+                  </td>
                   <td>{memberStats.single_men[0].nb_played}</td>
                   <td>{memberStats.single_men[0].nb_win}</td>
                   <td>{memberStats.single_men[0].percent_win} %</td>
@@ -119,8 +126,14 @@ function Rankings() {
             </tbody>
           </table>
         </section>
-        <section> {/* Classement Simple Dames */}
-          <h2 className="title-h2">Classement Simple Dames</h2>
+
+        {/* Classement Simple Dames */}
+        <section className={rankingCategory === 2 || rankingCategory === 0
+          ? 'single-women-ranking' : 'single-women-ranking hide'}
+        >
+          <h2 className="title-h2">Simple Dame &nbsp;
+            <i className="fa fa-female" aria-hidden="true" />
+          </h2>
           <table>
             <tbody>
               <tr>
@@ -132,8 +145,10 @@ function Rankings() {
               </tr>
               {sortByPercentWinSingleWomen(women).map((memberStats) => (
                 <tr key={memberStats.id}>
-                  <td>1</td>
-                  <td>{memberStats.lastname.toUpperCase()} {memberStats.firstname}</td>
+                  <td> </td>
+                  <td className="member-name">
+                    {memberStats.lastname.toUpperCase()} {memberStats.firstname}
+                  </td>
                   <td>{memberStats.single_women[0].nb_played}</td>
                   <td>{memberStats.single_women[0].nb_win}</td>
                   <td>{memberStats.single_women[0].percent_win} %</td>
@@ -142,8 +157,13 @@ function Rankings() {
             </tbody>
           </table>
         </section>
-        <section> {/* Classement Double Messieurs */}
-          <h2 className="title-h2">Classement Double Messieurs</h2>
+
+        {/* Classement Double Messieurs */}
+        <section className={rankingCategory === 3 || rankingCategory === 0 ? 'double-men-ranking' : 'double-men-ranking hide'}>
+          <h2 className="title-h2">Double Homme &nbsp;
+            <i className="fa fa-male" aria-hidden="true" />
+            <i className="fa fa-male" aria-hidden="true" />
+          </h2>
           <table>
             <tbody>
               <tr>
@@ -155,8 +175,10 @@ function Rankings() {
               </tr>
               {sortByPercentWinDoubleMen(men).map((memberStats) => (
                 <tr key={memberStats.id}>
-                  <td>1</td>
-                  <td>{memberStats.lastname.toUpperCase()} {memberStats.firstname}</td>
+                  <td> </td>
+                  <td className="member-name">
+                    {memberStats.lastname.toUpperCase()} {memberStats.firstname}
+                  </td>
                   <td>{memberStats.double_men[0].nb_played}</td>
                   <td>{memberStats.double_men[0].nb_win}</td>
                   <td>{memberStats.double_men[0].percent_win} %</td>
@@ -165,8 +187,13 @@ function Rankings() {
             </tbody>
           </table>
         </section>
-        <section> {/* Classement Double Dames */}
-          <h2 className="title-h2">Classement Double Dames</h2>
+
+        {/* Classement Double Dames */}
+        <section className={rankingCategory === 4 || rankingCategory === 0 ? 'double-women-ranking' : 'double-women-ranking hide'}>
+          <h2 className="title-h2">Double Dame &nbsp;
+            <i className="fa fa-female" aria-hidden="true" />
+            <i className="fa fa-female" aria-hidden="true" />
+          </h2>
           <table>
             <tbody>
               <tr>
@@ -178,8 +205,10 @@ function Rankings() {
               </tr>
               {sortByPercentWinDoubleWomen(women).map((memberStats) => (
                 <tr key={memberStats.id}>
-                  <td>1</td>
-                  <td>{memberStats.lastname.toUpperCase()} {memberStats.firstname}</td>
+                  <td> </td>
+                  <td className="member-name">
+                    {memberStats.lastname.toUpperCase()} {memberStats.firstname}
+                  </td>
                   <td>{memberStats.double_women[0].nb_played}</td>
                   <td>{memberStats.double_women[0].nb_win}</td>
                   <td>{memberStats.double_women[0].percent_win} %</td>
@@ -188,8 +217,13 @@ function Rankings() {
             </tbody>
           </table>
         </section>
-        <section> {/* Classement Double Mixte */}
-          <h2 className="title-h2">Classement Double Mixte</h2>
+
+        {/* Classement Double Mixte */}
+        <section className={rankingCategory === 5 || rankingCategory === 0 ? 'double-mixed-ranking' : 'double-mixed-ranking hide'}>
+          <h2 className="title-h2">Double Mixte &nbsp;
+            <i className="fa fa-female" aria-hidden="true" />
+            <i className="fa fa-male" aria-hidden="true" />
+          </h2>
           <table>
             <tbody>
               <tr>
@@ -201,8 +235,10 @@ function Rankings() {
               </tr>
               {sortByPercentWinDoubleMixed(stats).map((memberStats) => (
                 <tr key={memberStats.id}>
-                  <td>1</td>
-                  <td>{memberStats.lastname.toUpperCase()} {memberStats.firstname}</td>
+                  <td> </td>
+                  <td className="member-name">
+                    {memberStats.lastname.toUpperCase()} {memberStats.firstname}
+                  </td>
                   <td>{memberStats.double_mixed[0].nb_played}</td>
                   <td>{memberStats.double_mixed[0].nb_win}</td>
                   <td>{memberStats.double_mixed[0].percent_win} %</td>
@@ -210,27 +246,61 @@ function Rankings() {
               ))}
             </tbody>
           </table>
-
         </section>
+
       </div>
 
       <div className="rankings-filter">
         <h2><i className="fa fa-sliders" aria-hidden="true" /> Filtres</h2>
         <h3>Disciplines</h3>
         <ul>
-          <li><input type="radio" name="discipline" value="all" />Tous</li>
-          {/* <li><input type="radio" name="discipline" value="singleAll" />Simple Général</li> */}
           <li><input
             type="radio"
             name="discipline"
-            onChange={(e) => changeRanking(e.target.value)}
+            className="0"
+            onChange={(e) => setRankingCategory(parseInt(e.target.className, 10))}
+            checked
+          />Tous
+          </li>
+          <li><input
+            type="radio"
+            name="discipline"
+            className="1"
+            onChange={(e) => setRankingCategory(parseInt(e.target.className, 10))}
           />
             Simple Homme
           </li>
-          <li><input type="radio" name="discipline" value="singleWomen" />Simple Dame</li>
-          <li><input type="radio" name="discipline" value="doubleMen" />Double Homme</li>
-          <li><input type="radio" name="discipline" value="doubleWomen" />Double Dame</li>
-          <li><input type="radio" name="discipline" value="doubleMix" />Double Mixte</li>
+          <li><input
+            type="radio"
+            name="discipline"
+            className="2"
+            onChange={(e) => setRankingCategory(parseInt(e.target.className, 10))}
+          />Simple Dame
+          </li>
+          <li><input
+            type="radio"
+            name="discipline"
+            className="3"
+            onChange={(e) => setRankingCategory(parseInt(e.target.className, 10))}
+          />
+            Double Homme
+          </li>
+          <li><input
+            type="radio"
+            name="discipline"
+            className="4"
+            onChange={(e) => setRankingCategory(parseInt(e.target.className, 10))}
+          />
+            Double Dame
+          </li>
+          <li><input
+            type="radio"
+            name="discipline"
+            className="5"
+            onChange={(e) => setRankingCategory(parseInt(e.target.className, 10))}
+          />
+            Double Mixte
+          </li>
         </ul>
       </div>
     </main>
