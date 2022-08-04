@@ -45,20 +45,20 @@ function Tournament() {
   }, []);
 
   // todo
-  function compatiblesMembers(members, tournament) {
-    let filteredMembers = members;
-    // seulement hommes
+  // function compatiblesMembers(members, tournament) {
+  //   let filteredMembers = members;
+  //   // seulement hommes
 
-    if ([1, 3].includes(tournament.discipline_id)) {
-      filteredMembers = members.filter((member) => member.gender_id === 1);
-    }
-    // seulement femmes
-    if ([2, 4].includes(tournament.discipline_id)) {
-      filteredMembers = members.filter((member) => member.gender_id === 2);
-    }
-    console.log(filteredMembers);
-    return filteredMembers;
-  }
+  //   if ([1, 3].includes(tournament.discipline_id)) {
+  //     filteredMembers = members.filter((member) => member.gender_id === 1);
+  //   }
+  //   // seulement femmes
+  //   if ([2, 4].includes(tournament.discipline_id)) {
+  //     filteredMembers = members.filter((member) => member.gender_id === 2);
+  //   }
+  //   console.log(filteredMembers);
+  //   return filteredMembers;
+  // }
 
   function enroledMembers(members, enroledMembers) {
     const enroledMembersIds = Array.from((enroledMembers), (obj) => obj.id);
