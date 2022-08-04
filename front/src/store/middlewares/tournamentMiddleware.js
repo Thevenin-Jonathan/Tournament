@@ -194,12 +194,11 @@ const tournamentMiddleware = (store) => (next) => (action) => {
       };
       axios(axiosConfig)
         .then((response) => {
-          console.log(response.data);
           store.dispatch({ type: 'TOURNAMENT_PLAY_SUCCESS', value: response.data });
           // get tournamaent a jour
           axios.get(`${config.api.baseUrl}/tournaments/${state.tournament.tournament.id}`)
-            .then((response) => {
-              store.dispatch({ type: 'GET_TOURNAMENT_SUCCESS', value: response.data });
+            .then((response2) => {
+              store.dispatch({ type: 'GET_TOURNAMENT_SUCCESS', value: response2.data });
             })
             .catch((error) => {
               throw new Error(error);
@@ -243,7 +242,6 @@ const tournamentMiddleware = (store) => (next) => (action) => {
             },
           });
           store.dispatch({ type: 'SET_MATCH_SCORES_SUCCESS', value: response.data });
-          console.log(response.data);
         })
         .catch((error) => {
           store.dispatch({

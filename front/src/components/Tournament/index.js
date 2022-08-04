@@ -12,8 +12,8 @@ import {
   longDateFr,
   AmIAlreadyRegisteredForThisTournament,
   canISubscribeToThisTournament,
-  findMemberInAList,
-  findUserTeam,
+  // findMemberInAList,
+  // findUserTeam,
   genderText,
 } from 'src/utils';
 
