@@ -180,6 +180,46 @@ const tournamentMiddleware = (store) => (next) => (action) => {
         });
       break;
     }
+
+    // définir le score d'un match
+    case 'SET_MATCH_SCORES': {
+      const state = store.getState();
+      const data = action.value.matchResult;
+      console.log(data);
+      const axiosConfig = {
+        method: 'patch',
+        url: `${config.api.baseUrl}/matches/${action.value.matchId}/score`,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        data: qs.stringify(data),
+      };
+      next(action);
+      axios(axiosConfig)
+        .then((response) => {
+          store.dispatch({
+            type: 'NEW_TOAST',
+            newToast: {
+              id: state.interface.toastCounter,
+              message: 'Score mis à jour',
+              type: 'success',
+            },
+          });
+          store.dispatch({ type: 'SET_MATCH_SCORES_SUCCESS', value: response.data });
+        })
+        .catch((error) => {
+          store.dispatch({
+            type: 'NEW_TOAST',
+            newToast: {
+              id: state.interface.toastCounter,
+              message: `${error.response.data.message}`,
+              type: 'error',
+            },
+          });
+          throw new Error(error);
+        });
+      break;
+    }
     default:
       next(action);
   }

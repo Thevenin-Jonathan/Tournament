@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import { useDispatch, useSelector } from 'react-redux';
@@ -43,6 +44,7 @@ function Tournament() {
     dispatch({ type: 'GET_MEMBERS' });
   }, []);
 
+  // todo
   function compatiblesMembers(members, tournament) {
     let filteredMembers = members;
     // seulement hommes
@@ -79,7 +81,7 @@ function Tournament() {
       || member.lastname.toLowerCase().includes(string.toLowerCase())
   ));
 
-  // modal
+  // modal d'ajout de membre (admin)
   const [showPlayerModal, setShowPlayerModal] = useState(false);
 
   // sortable system
@@ -125,7 +127,7 @@ function Tournament() {
     },
   };
 
-  // action de souscription
+  // action d'inscription
   const handleSubscribe = () => {
     dispatch({
       type: 'SINGLE_TOURNAMENT_SUBSCRIBE',
@@ -147,6 +149,35 @@ function Tournament() {
     });
   };
 
+  // action d'envoi d'un resultat
+  const handleChangeScore = (evt) => {
+    const match = evt.target.closest('.score-inputs');
+    const matchId = match.querySelector('.t1').dataset.matchid;
+    const t1Id = match.querySelector('.t1').dataset.teamid;
+    const t1Score = match.querySelector('.t1').value;
+    const t2Id = match.querySelector('.t2').dataset.teamid;
+    const t2Score = match.querySelector('.t2').value;
+    const matchResult = {
+      match: [
+        {
+          team_id: Number(t1Id),
+          result_id: Number(t1Score),
+        },
+        {
+          team_id: Number(t2Id),
+          result_id: Number(t2Score),
+        },
+      ],
+    };
+    dispatch({
+      type: 'SET_MATCH_SCORES',
+      value: {
+        matchId,
+        matchResult,
+      },
+    });
+  };
+
   // construire le tableau des phases/matches
   const matchsBuilder = (matches) => {
     const phases = matches.map((match) => match.phase);
@@ -158,6 +189,7 @@ function Tournament() {
     return matchTable;
   };
 
+  // trouver les joueurs d'une équipe (par id d'équipe)
   const getPlayersFromTeam = (teamId, teamsList, membersList) => {
     const playersIds = teamsList.find((team) => team.id === teamId);
     // console.log(playersIds.users[0]);
@@ -251,12 +283,18 @@ function Tournament() {
 
           </div>
 
-          {tournament.state_id === 2 && (
+          {tournament.state_id === 2 || tournament.state_id === 3 && (
           <div className="infos matchs">
             <h2>Grille de matchs</h2>
+            {tournament.state_id === 2 && (
+              <p className="note">Les matchs ne sont pas modifables en All vs All</p>
+            )}
+            {tournament.state_id === 3 && (
+              <p className="note">Saisissez les scores de chaque matchs</p>
+            )}
             <ul className="match-list">
               { matchsBuilder(tournament.matches).map((phase, i) => (
-                <p
+                <li
                   key={i}
                   className="phase"
                 >
@@ -267,10 +305,39 @@ function Tournament() {
                       {getPlayersFromTeam(match.teams[0].id, teams, members)}
                       <span>&nbsp;vs&nbsp;</span>
                       {getPlayersFromTeam(match.teams[1].id, teams, members)}
+                      {tournament.state_id === 3 && (
+                        <span className="score-inputs">
+                          <select
+                            className="team t1"
+                            data-matchid={match.id}
+                            data-teamid={match.teams[0].id}
+                            onChange={(evt) => handleChangeScore(evt)}
+                          >
+                            <option value={null} />
+                            <option value={1}>0</option>
+                            <option value={2}>1</option>
+                            <option value={3}>2</option>
+                            <option value={4}>Forfait</option>
+                          </select>
+                          <select
+                            className="team t2"
+                            data-matchid={match.id}
+                            data-teamid={match.teams[1].id}
+                            onChange={(evt) => handleChangeScore(evt)}
+                          >
+                            <option value={null} />
+                            <option value={1}>0</option>
+                            <option value={2}>1</option>
+                            <option value={3}>2</option>
+                            <option value={4}>Forfait</option>
+                          </select>
+                        </span>
+
+                      )}
 
                     </span>
                   ))}
-                </p>
+                </li>
               ))}
             </ul>
           </div>

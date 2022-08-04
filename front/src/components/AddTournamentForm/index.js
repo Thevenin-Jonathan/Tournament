@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
@@ -54,7 +55,7 @@ function AddTournamentForm() {
   const fileSelect = useRef(null);
 
   function uploadFile(file) {
-    const url = `https://api.cloudinary.com/v1_1/dy21tmaam/upload`;
+    const url = 'https://api.cloudinary.com/v1_1/dy21tmaam/upload';
     const xhr = new XMLHttpRequest();
     const fd = new FormData();
     xhr.open('POST', url, true);
@@ -63,11 +64,11 @@ function AddTournamentForm() {
     // Update progress (can be used to show progress indicator)
     xhr.upload.addEventListener('progress', (e) => {
       setProgress(Math.round((e.loaded * 100.0) / e.total));
-      console.log(Math.round((e.loaded * 100.0) / e.total));
+      // console.log(Math.round((e.loaded * 100.0) / e.total));
     });
 
     xhr.onreadystatechange = (e) => {
-      if (xhr.readyState == 4 && xhr.status == 200) {
+      if (xhr.readyState === 4 && xhr.status === 200) {
         const response = JSON.parse(xhr.responseText);
 
         setImage(response.secure_url);
@@ -95,8 +96,8 @@ function AddTournamentForm() {
   }
 
   function handleFiles(files) {
-    for (let i = 0; i < files.length; i++) {
-      console.log(files[i]);
+    for (let i = 0; i < files.length; i += 1) {
+      // console.log(files[i]);
       uploadFile(files[i]);
     }
   }
