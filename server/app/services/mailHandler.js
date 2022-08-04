@@ -25,7 +25,7 @@ async function sendEmail(user, subject, templateName) {
   const template = templates[templateName];
   const club = await clubDatamapper.findById(user.club_id);
   const infos = await transporter.sendMail({
-    from: `"Tournament - ${club.name} 🎾" <${process.env.AUTH_USER_EMAIL}>`,
+    from: `"Tournament - ${club.name} 🎾" <${process.env.SENDER_EMAIL}>`,
     to: user.email,
     subject,
     html: template(user),
