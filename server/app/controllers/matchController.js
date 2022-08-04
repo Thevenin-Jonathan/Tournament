@@ -104,7 +104,7 @@ async function update(req, res) {
     throw new Api404Error("Match does not exist in DB");
   }
 
-  if (!match.team.every(team => data.some(matchTeam => matchTeam.team_id === team.team_id))) {
+  if (!match.team.every(team => data.some(matchTeam => Number(matchTeam.team_id) === team.team_id))) {
     throw new Api404Error("One team is not participating in this match");
   };
 
