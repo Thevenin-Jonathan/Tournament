@@ -5,6 +5,8 @@ const teamSchema = joi.object({
   result_id: joi.number().min(1).max(4).required()
 }).required();
 
-module.exports = joi.array().items(
-  teamSchema
-).length(2).required();
+module.exports = joi.object({
+  match: joi.array().items(
+    teamSchema
+  ).length(2).required()
+}).required();

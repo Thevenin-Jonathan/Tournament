@@ -6,26 +6,33 @@ const app = express();
 const router = require("./routers");
 const helmet = require("helmet");
 const { errorHandler } = require("./services/errorHandler");
-const morgan = require("morgan");
-const rfs = require('rotating-file-stream');
 const morganLogger = require("./services/morganLogger");
 
 /** Helmet for security */
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
-      ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-      "img-src": ["'self'", "kinoah.com"],
+      defaultSrc: [
+        `'self'`
+      ],
+      imgSrc: [
+        `'self'`,
+        `data:`,
+        `https://*`
+      ],
+      connectSrc: [
+        `'self'`,
+        `data:`,
+        `https://api.cloudinary.com`,
+      ]
     },
   },
+  crossOriginEmbedderPolicy: false,
+  crossOriginOpenerPolicy: false,
+  crossOriginResourcePolicy : false
 }));
 
-/** Parser **/
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-
-/** Cors **/
+/** CORS **/
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', "http://localhost:8080");
   res.header('Access-Control-Allow-Headers', 'Content-Type, Accept, Authorization');
@@ -39,6 +46,10 @@ app.use((req, res, next) => {
     next();
   }
 });
+
+/** Parser **/
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 /** Static files **/
 if (process.env.NODE_ENV === "production") {

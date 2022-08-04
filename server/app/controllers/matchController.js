@@ -96,7 +96,7 @@ async function update(req, res) {
  */
  async function updateScore(req, res) {
   const id = req.params.id;
-  const data = req.body;
+  const data = req.body.match;
   const match = await matchDatamapper.findById(id);
 
   /** Verify */
