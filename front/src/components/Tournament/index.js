@@ -149,7 +149,7 @@ function Tournament() {
     });
   };
 
-  // action de passer le matche à "jeu" -> l'étape 3 
+  // action de passer le matche à "jeu" -> l'étape 3
   const handlePlayTournament = () => {
     dispatch({
       type: 'TOURNAMENT_PLAY',
@@ -190,7 +190,6 @@ function Tournament() {
 
   // construire le tableau des phases/matches
   const matchsBuilder = (matches) => {
-    console.log(matches);
     const phases = matches.map((match) => match.phase);
     const nbPhases = Math.max(...phases);
     const matchTable = [];
@@ -313,9 +312,9 @@ function Tournament() {
                   { phase.map((match) => (
                     <span key={match.id} className="match">
                       <span className="players">
-                        <span className="player">{getPlayersFromTeam(match.teams[0].id, teams, members)}</span>
+                        <span className={match.teams[0].is_winner ? 'player winner' : 'player'}>{getPlayersFromTeam(match.teams[0].id, teams, members)}</span>
                         <span className="vs">&nbsp;vs&nbsp;</span>
-                        <span className="player">{getPlayersFromTeam(match.teams[1].id, teams, members)}</span>
+                        <span className={match.teams[1].is_winner ? 'player winner' : 'player'}>{getPlayersFromTeam(match.teams[1].id, teams, members)}</span>
                       </span>
                       {tournament.state_id === 3 && (
                         <span className="score-inputs">

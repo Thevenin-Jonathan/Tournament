@@ -800,8 +800,8 @@ a {
             .players {
               display: flex;
               justify-content: space-between;
-              .player {
-                
+              .player.winner {
+                background-color: var(--emphase-color);
               }
               .vs {
                 color: var(--emphase-color);

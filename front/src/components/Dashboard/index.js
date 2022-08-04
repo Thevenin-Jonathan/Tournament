@@ -11,6 +11,7 @@ function Dashboard() {
   const user = useSelector((state) => (state.user));
   const club = useSelector((state) => (state.club));
   const tournaments = useSelector((state) => (state.tournament.tournaments));
+  const stats = useSelector((state) => (state.stats.stats));
 
   useEffect(() => {
     dispatch({
@@ -31,6 +32,12 @@ function Dashboard() {
     });
   }, []);
 
+  useEffect(() => {
+    dispatch({
+      type: 'GET_STATS',
+    });
+  }, []);
+
   const filter = 10;
   const hallOfFameFilter = () => {
     if (filter === '') {
@@ -47,6 +54,23 @@ function Dashboard() {
 
   // const tournamentCover = `${config.path.uploads.coverTournament}/cover-tournament-01.jpg`;
   // import clublogo from 'src/assets/logo-bayard-bad-blanc.png';
+
+  const statFilter = (list) => {
+    console.log(list[0]);
+    
+    console.log(list[0]?.firstname);
+
+    const totalMatchVictory = (
+      list[0]?.single_men[0].nb_win
+      + list[0]?.single_women[0].nb_win
+      + list[0]?.double_men[0].nb_win
+      + list[0]?.double_women[0].nb_win
+      + list[0]?.double_mixed[0].nb_win
+    );
+
+    console.log('Total Victory : ',totalMatchVictory);
+    // return list;
+  };
 
   return (
     <main className="dashboard content">
@@ -99,6 +123,7 @@ function Dashboard() {
       <Link to="/classements" className="dashboard-widget hall-of-fame">
         <i className="fa fa-star fa-2x hof-icon widget-icon" />
         <p className="hof-title">Hall of Fame</p>
+        { statFilter(stats) }
         <ol>
           { hallOfFameFilter().map((member, index) => (
             <li key={member.id}>

@@ -233,6 +233,7 @@ const tournamentMiddleware = (store) => (next) => (action) => {
       next(action);
       axios(axiosConfig)
         .then((response) => {
+          console.log(response.data);
           store.dispatch({
             type: 'NEW_TOAST',
             newToast: {
