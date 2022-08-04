@@ -36,20 +36,6 @@ const tournamentMiddleware = (store) => (next) => (action) => {
       break;
     }
 
-    // générer les matchs du tournoi !
-    case 'TOURNAMENT_GENERATE': {
-      const state = store.getState();
-      next(action);
-      axios.get(`${config.api.baseUrl}/tournaments/${state.tournament.tournament.id}/generate`)
-        .then((response) => {
-          store.dispatch({ type: 'TOURNAMENT_GENERATE_SUCCESS', value: response.data });
-        })
-        .catch((error) => {
-          throw new Error(error);
-        });
-      break;
-    }
-
     // inscription à un tournoi de simple (pas de gestion d'équipe)
     case 'SINGLE_TOURNAMENT_SUBSCRIBE': {
       const state = store.getState();
@@ -125,6 +111,7 @@ const tournamentMiddleware = (store) => (next) => (action) => {
 
     // créer un tournoi
     case 'CREATE_TOURNAMENT': {
+      next(action);
       const state = store.getState();
 
       const data = {
@@ -152,7 +139,6 @@ const tournamentMiddleware = (store) => (next) => (action) => {
         },
         data: qs.stringify(data),
       };
-      next(action);
       axios(axiosConfig)
         .then((response) => {
           store.dispatch({
@@ -164,8 +150,99 @@ const tournamentMiddleware = (store) => (next) => (action) => {
             },
           });
           store.dispatch({ type: 'CREATE_TOURNAMENT_SUCCESS', value: response.data });
-
           store.dispatch({ type: 'REDIRECT', value: '/tableau-de-bord' });
+        })
+        .catch((error) => {
+          store.dispatch({
+            type: 'NEW_TOAST',
+            newToast: {
+              id: state.interface.toastCounter,
+              message: `${error.response.data.message}`,
+              type: 'error',
+            },
+          });
+          throw new Error(error);
+        });
+      break;
+    }
+
+    // générer les matchs du tournoi !
+    case 'TOURNAMENT_GENERATE': {
+      const state = store.getState();
+      next(action);
+      axios.get(`${config.api.baseUrl}/tournaments/${state.tournament.tournament.id}/generate`)
+        .then((response) => {
+          store.dispatch({ type: 'TOURNAMENT_GENERATE_SUCCESS', value: response.data });
+        })
+        .catch((error) => {
+          throw new Error(error);
+        });
+      break;
+    }
+
+    // générer les matchs du tournoi !
+    case 'TOURNAMENT_PLAY': {
+      const state = store.getState();
+      next(action);
+      const axiosConfig = {
+        method: 'patch',
+        url: `${config.api.baseUrl}/tournaments/${state.tournament.tournament.id}`,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        data: qs.stringify({ state_id: 3 }),
+      };
+      axios(axiosConfig)
+        .then((response) => {
+          store.dispatch({ type: 'TOURNAMENT_PLAY_SUCCESS', value: response.data });
+          // get tournamaent a jour
+          axios.get(`${config.api.baseUrl}/tournaments/${state.tournament.tournament.id}`)
+            .then((response2) => {
+              store.dispatch({ type: 'GET_TOURNAMENT_SUCCESS', value: response2.data });
+            })
+            .catch((error) => {
+              throw new Error(error);
+            });
+          store.dispatch({
+            type: 'NEW_TOAST',
+            newToast: {
+              id: state.interface.toastCounter,
+              message: 'C\'est partit !',
+              type: 'success',
+            },
+          });
+        })
+        .catch((error) => {
+          throw new Error(error);
+        });
+      break;
+    }
+
+    // définir le score d'un match
+    case 'SET_MATCH_SCORES': {
+      const state = store.getState();
+      const data = action.value.matchResult;
+      const axiosConfig = {
+        method: 'patch',
+        url: `${config.api.baseUrl}/matches/${action.value.matchId}/score`,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        data: qs.stringify(data),
+      };
+      next(action);
+      axios(axiosConfig)
+        .then((response) => {
+          console.log(response.data);
+          store.dispatch({
+            type: 'NEW_TOAST',
+            newToast: {
+              id: state.interface.toastCounter,
+              message: 'Score du match mis à jour',
+              type: 'success',
+            },
+          });
+          store.dispatch({ type: 'SET_MATCH_SCORES_SUCCESS', value: response.data });
         })
         .catch((error) => {
           store.dispatch({

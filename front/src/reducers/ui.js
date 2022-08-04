@@ -51,6 +51,36 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         isLoading: false,
       };
+    case 'CREATE_TOURNAMENT':
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case 'TOURNAMENT_GENERATE':
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case 'TOURNAMENT_PLAY':
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case 'CREATE_TOURNAMENT_SUCCESS':
+      return {
+        ...state,
+        isLoading: false,
+      };
+    case 'TOURNAMENT_GENERATE_SUCCESS':
+      return {
+        ...state,
+        isLoading: false,
+      };
+    case 'TOURNAMENT_PLAY_SUCCESS':
+      return {
+        ...state,
+        isLoading: false,
+      };
     case 'NEW_TOAST':
       return {
         ...state,

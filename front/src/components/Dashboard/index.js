@@ -1,3 +1,4 @@
+/* eslint-disable no-unsafe-optional-chaining */
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
@@ -11,6 +12,7 @@ function Dashboard() {
   const user = useSelector((state) => (state.user));
   const club = useSelector((state) => (state.club));
   const tournaments = useSelector((state) => (state.tournament.tournaments));
+  const stats = useSelector((state) => (state.stats.stats));
 
   useEffect(() => {
     dispatch({
@@ -31,15 +33,11 @@ function Dashboard() {
     });
   }, []);
 
-  const filter = 10;
-  const hallOfFameFilter = () => {
-    if (filter === '') {
-      return user.members;
-    }
-    return user.members.filter((member) => (
-      member.id <= filter
-    ));
-  };
+  useEffect(() => {
+    dispatch({
+      type: 'GET_STATS',
+    });
+  }, []);
 
   const tournamentsFilter = (tournamentState) => tournaments.filter((tournament) => (
     tournament.state_id === tournamentState
@@ -47,6 +45,45 @@ function Dashboard() {
 
   // const tournamentCover = `${config.path.uploads.coverTournament}/cover-tournament-01.jpg`;
   // import clublogo from 'src/assets/logo-bayard-bad-blanc.png';
+
+  const statFilter = (list) => {
+    console.log(list[0]);
+  };
+
+  function aggregateVictory(playerWithStats) {
+    const totalMatchVictory = (
+      playerWithStats?.single_men[0].nb_win
+      + playerWithStats?.single_women[0].nb_win
+      + playerWithStats?.double_men[0].nb_win
+      + playerWithStats?.double_women[0].nb_win
+      + playerWithStats?.double_mixed[0].nb_win
+    );
+    return totalMatchVictory;
+  }
+
+  const sortByTotalVictory = (playerListWithStats) => (
+    playerListWithStats.sort((a, b) => {
+      const aTv = a?.single_men[0].nb_win
+      + a?.single_women[0].nb_win
+      + a?.double_men[0].nb_win
+      + a?.double_women[0].nb_win
+      + a?.double_mixed[0].nb_win;
+
+      const bTv = b?.single_men[0].nb_win
+      + b?.single_women[0].nb_win
+      + b?.double_men[0].nb_win
+      + b?.double_women[0].nb_win
+      + b?.double_mixed[0].nb_win;
+
+      if (aTv < bTv) {
+        return 1;
+      }
+      if (aTv > bTv) {
+        return -1;
+      }
+      return 0;
+    })
+  );
 
   return (
     <main className="dashboard content">
@@ -99,47 +136,16 @@ function Dashboard() {
       <Link to="/classements" className="dashboard-widget hall-of-fame">
         <i className="fa fa-star fa-2x hof-icon widget-icon" />
         <p className="hof-title">Hall of Fame</p>
+        { statFilter(stats) }
         <ol>
-          { hallOfFameFilter().map((member, index) => (
+          { sortByTotalVictory(stats).slice(0, 10).map((member, index) => (
             <li key={member.id}>
               <span className="player-name">
                 {(index + 1)}. {member.firstname}
               </span>
-              <span className="player-victory"> X <i className="fa fa-trophy" /></span>
+              <span className="player-victory"> {aggregateVictory(member)} <i className="fa fa-trophy" /></span>
             </li>
           ))}
-          {/* <li className="champion">
-            <span className="player-name">1. Alexis Viney</span>
-            <span className="player-victory"> 7 <i className="fa fa-trophy" /></span>
-          </li>
-          <li>
-            <span className="player-name">2. Célia Guigue</span>
-            <span className="player-victory"> 4 <i className="fa fa-trophy" /></span>
-          </li>
-          <li>
-            <span className="player-name">3. Claudia Jacob</span>
-            <span className="player-victory"> 3 <i className="fa fa-trophy" /></span>
-          </li>
-          <li>
-            <span className="player-name">4. Jonathan Thevenin</span>
-            <span className="player-victory"> 2 <i className="fa fa-trophy" /></span>
-          </li>
-          <li>
-            <span className="player-name">5. Cédric Bernard</span>
-            <span className="player-victory"> 2 <i className="fa fa-trophy" /></span>
-          </li>
-          <li>
-            <span className="player-name">6 El Houceine El Handouz</span>
-            <span className="player-victory"> 2 <i className="fa fa-trophy" /></span>
-          </li>
-          <li>
-            <span className="player-name">7. Tino Pajaro</span>
-            <span className="player-victory"> 2 <i className="fa fa-trophy" /></span>
-          </li>
-          <li>
-            <span className="player-name">8. Tom Roche</span>
-            <span className="player-victory"> 2 <i className="fa fa-trophy" /></span>
-          </li> */}
         </ol>
       </Link>
 
