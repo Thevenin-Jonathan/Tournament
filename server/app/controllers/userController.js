@@ -1,4 +1,5 @@
 const debug = require("debug")("login");
+const crypto = require("crypto");
 const bcrypt = require("bcrypt");
 const userDatamapper = require("../datamappers/user");
 const { sendEmail } = require("../services/mailHandler");
@@ -63,12 +64,12 @@ async function create(req, res) {
     throw new ApiError("This player license is already in use");
   }
 
-  /** Save password for email mw */
-  const { password } = user; //jonjon
+  /** Generate random password */
+  const password = crypto.randomBytes(12).toString('hex')
 
   /** Password hash **/
   const saltRound = 10;
-  user.password = await bcrypt.hash(user.password, saltRound);
+  user.password = await bcrypt.hash(password, saltRound);
 
   /** Save new user in DB */
   const newUser = await userDatamapper.insertOne(user);
