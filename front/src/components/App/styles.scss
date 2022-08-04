@@ -793,9 +793,20 @@ a {
             background-color: var(--main-color);
             padding: .5rem 1rem;
             border-radius: calc(var(--border-radius) * .5);
-            span {
-              color: var(--emphase-color);
-              font-weight: var(--black);
+            flex: 1;
+            width: 18rem;
+            display: flex;
+            flex-direction: column;
+            .players {
+              display: flex;
+              justify-content: space-between;
+              .player {
+                
+              }
+              .vs {
+                color: var(--emphase-color);
+                font-weight: var(--black);
+              }
             }
             .score-inputs{
               display: flex;

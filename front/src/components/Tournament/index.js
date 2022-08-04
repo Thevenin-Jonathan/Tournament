@@ -160,22 +160,25 @@ function Tournament() {
     const matchResult = {
       match: [
         {
-          team_id: Number(t1Id),
-          result_id: Number(t1Score),
+          team_id: t1Id,
+          result_id: t1Score,
         },
         {
-          team_id: Number(t2Id),
-          result_id: Number(t2Score),
+          team_id: t2Id,
+          result_id: t2Score,
         },
       ],
     };
-    dispatch({
-      type: 'SET_MATCH_SCORES',
-      value: {
-        matchId,
-        matchResult,
-      },
-    });
+
+    if (t1Score && t2Score) {
+      dispatch({
+        type: 'SET_MATCH_SCORES',
+        value: {
+          matchId,
+          matchResult,
+        },
+      });
+    }
   };
 
   // construire le tableau des phases/matches
@@ -301,10 +304,11 @@ function Tournament() {
                   Journée {i + 1} :
                   { phase.map((match) => (
                     <span key={match.id} className="match">
-
-                      {getPlayersFromTeam(match.teams[0].id, teams, members)}
-                      <span>&nbsp;vs&nbsp;</span>
-                      {getPlayersFromTeam(match.teams[1].id, teams, members)}
+                      <span className="players">
+                        <span className="player">{getPlayersFromTeam(match.teams[0].id, teams, members)}</span>
+                        <span className="vs">&nbsp;vs&nbsp;</span>
+                        <span className="player">{getPlayersFromTeam(match.teams[1].id, teams, members)}</span>
+                      </span>
                       {tournament.state_id === 3 && (
                         <span className="score-inputs">
                           <select

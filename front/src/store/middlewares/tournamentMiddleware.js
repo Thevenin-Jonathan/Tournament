@@ -185,7 +185,6 @@ const tournamentMiddleware = (store) => (next) => (action) => {
     case 'SET_MATCH_SCORES': {
       const state = store.getState();
       const data = action.value.matchResult;
-      console.log(data);
       const axiosConfig = {
         method: 'patch',
         url: `${config.api.baseUrl}/matches/${action.value.matchId}/score`,
@@ -201,11 +200,12 @@ const tournamentMiddleware = (store) => (next) => (action) => {
             type: 'NEW_TOAST',
             newToast: {
               id: state.interface.toastCounter,
-              message: 'Score mis à jour',
+              message: 'Score du match mis à jour',
               type: 'success',
             },
           });
           store.dispatch({ type: 'SET_MATCH_SCORES_SUCCESS', value: response.data });
+          console.log(response.data);
         })
         .catch((error) => {
           store.dispatch({
