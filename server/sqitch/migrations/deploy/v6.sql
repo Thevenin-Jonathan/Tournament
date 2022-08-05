@@ -100,10 +100,10 @@ COALESCE ((SELECT JSON_AGG(
                 'id', "MHT"."team_id",
                 'result_id', "MHT"."result_id",
                 'is_winner', "MHT"."is_winner")                 
-                ORDER BY "MHT"."match_id")
+                ORDER BY "MHT"."team_id")
                 FROM "match_has_team" AS "MHT"
                 WHERE "MHT"."match_id" = "M"."id"), '[]')) 
-                ORDER BY "M"."id") AS "teams"
+ORDER BY "M"."id") AS "teams"
 FROM "match" AS "M"
 WHERE "M"."tournament_id" = "T"."id"), '[]') AS "matches",
 COALESCE ((SELECT JSON_AGG(
@@ -111,12 +111,13 @@ COALESCE ((SELECT JSON_AGG(
     'id', "TE"."id",
     'users', COALESCE ((SELECT JSON_AGG(
                 JSON_BUILD_OBJECT(
-                'id', "TU"."user_id"))
+                'id', "TU"."user_id")
+                ORDER BY "TU"."user_id")
                 FROM "team_has_user" AS "TU"
-                WHERE "TU"."team_id" = "TE"."id"), '[]'))) AS "users"
+                WHERE "TU"."team_id" = "TE"."id"), '[]'))
+ORDER BY "TE"."id") AS "users"
 FROM "team" AS "TE"
-WHERE "TE"."tournament_id" = "T"."id"
-), '[]') AS "teams"
+WHERE "TE"."tournament_id" = "T"."id"), '[]') AS "teams"
 FROM "tournament" AS "T";
 
 CREATE OR REPLACE VIEW "get_match" AS
