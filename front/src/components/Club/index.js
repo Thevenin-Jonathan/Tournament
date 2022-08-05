@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import config from 'src/config';
 import { formatPhoneNumber } from 'src/utils';
+import clubImage from '../../../public/photo-club-bayardbad.jpg';
 
 function Club() {
   // je récupère le state du reducer 'club'
@@ -30,23 +31,23 @@ function Club() {
 
         <section className="section-left">
           <h2 className="club-name">{club.name}</h2>
-          <ul>
-            <div className="club-infos">Nombre de membres :<span>{user.members.length}</span></div>
-            <div className="club-infos">Adresse :<span>{club.address}</span></div>
-            <div className="club-infos">
-              Contact :<span>{club.email}</span>
-              <span>Tél. {formatPhoneNumber(club.phone)}</span>
-            </div>
-            <div className="club-infos">Site internet : <span>{club.website}</span></div>
-          </ul>
-        </section>
-
-        <section className="section-right">
           <img
-            className="club-logo"
+            className="club-logo club-infos"
             src={`${config.path.uploads.logoClub}/${club.logo}`}
             alt={`Logo du club ${club.name}`}
           />
+          <div className="club-infos">Nombre de membres :<span>{user.members.length}</span></div>
+          <div className="club-infos">Adresse :<span>{club.address}</span></div>
+          <div className="club-infos">
+            Contact :<span>{club.email}</span>
+            <span>Tél. {formatPhoneNumber(club.phone)}</span>
+          </div>
+          <div className="club-infos">Site internet : <span>{club.website}</span></div>
+        </section>
+
+        <section className="section-right">
+          {/* eslint-disable-next-line jsx-a11y/img-redundant-alt */}
+          <img src={clubImage} alt={`Photo du club ${club.name}`} />
           <div className="club-infos">Description : <span>{club.description}</span></div>
         </section>
 
