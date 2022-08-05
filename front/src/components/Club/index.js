@@ -25,17 +25,19 @@ function Club() {
   return (
     <main className="content club">
       <h1 className="title">Profil du club</h1>
+
       <div className="wrapper-sections">
+
         <section className="section-left">
           <h2 className="club-name">{club.name}</h2>
           <ul>
-            <li>Nombre de membres :<span>{user.members.length}</span></li>
-            <li>Adresse :<span>{club.address}</span></li>
-            <li>
+            <div className="club-infos">Nombre de membres :<span>{user.members.length}</span></div>
+            <div className="club-infos">Adresse :<span>{club.address}</span></div>
+            <div className="club-infos">
               Contact :<span>{club.email}</span>
               <span>Tél. {formatPhoneNumber(club.phone)}</span>
-            </li>
-            <li>Site internet : <span>{club.website}</span></li>
+            </div>
+            <div className="club-infos">Site internet : <span>{club.website}</span></div>
           </ul>
         </section>
 
@@ -45,9 +47,11 @@ function Club() {
             src={`${config.path.uploads.logoClub}/${club.logo}`}
             alt={`Logo du club ${club.name}`}
           />
-          <div className="club-description">Description : <span>{club.description}</span></div>
+          <div className="club-infos">Description : <span>{club.description}</span></div>
         </section>
+
       </div>
+
     </main>
   );
 }
