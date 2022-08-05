@@ -13,7 +13,7 @@ function Profil() {
       value: user.id,
     });
   }, []);
-
+  console.log(user);
   const userAvatar = `${config.path.uploads.avatar}/${user.avatar}`;
 
   return (
