@@ -14,18 +14,6 @@ function Profil() {
     });
   }, []);
 
-  const stats = useSelector((state) => (state.stats.stats));
-  useEffect(() => {
-    dispatch({
-      type: 'GET_STATS',
-    });
-  }, []);
-
-  const userStats = [stats[user.id - 1]];
-  console.log('userStats :', userStats);
-  console.log('userStats[0] :', userStats[0]);
-  // console.log('userStats[0].bithdate :', userStats[0].bithdate);
-
   const userAvatar = `${config.path.uploads.avatar}/${user.avatar}`;
 
   return (
@@ -34,34 +22,29 @@ function Profil() {
 
       <div className="wrapper">
 
-        <h2 className="infos-title">Mes informations</h2>
+        <h2 className="infos-title">{user.firstname} {user.lastname.toUpperCase()}</h2>
 
         <div className="wrapper-infos">
           <div className="sub-wrapper-infos">
             <div className="infos-left">
-              <div>Prénom : <span>{user.firstname}</span></div>
-              <div>Nom : <span>{user.lastname}</span></div>
-              <div>license FFBAD : <span>{user.playerLicense}</span></div>
-              <div>Genre : <span>{genderText(user.genderId)}</span></div>
-              { (user.gender_id === 1)
-                ? <div>Née le : <span>{dateFr(user.birthdate)}</span></div>
-                : <div>Né le : <span>{dateFr(user.birthdate)}</span></div>}
-              <div>Adresse : <span>{user.address}</span></div>
+              {/* <div>Prénom : <span>{user.firstname}</span></div>
+              <div>Nom : <span>{user.lastname}</span></div> */}
+              <img
+                className="member-avatar"
+                src={userAvatar}
+                alt={`${user.firstname} Avatar`}
+              />
             </div>
 
             <div className="infos-right">
-
-              <div>Email :<span>{user.email}</span>
-              </div>
-              <div>Téléphone :<span>{formatPhoneNumber(user.phone)}</span>
-              </div>
-              <div>Photo de profil :
-                <img
-                  className="member-avatar"
-                  src={userAvatar}
-                  alt={`${user.firstname} Avatar`}
-                />
-              </div>
+              <div>license FFBAD : <span>{user.playerLicense}</span></div>
+              { (user.gender_id === 1)
+                ? <div>Née le : <span>{dateFr(user.birthdate)}</span></div>
+                : <div>Né le : <span>{dateFr(user.birthdate)}</span></div>}
+              <div>Genre : <span>{genderText(user.genderId)}</span></div>
+              <div>Adresse : <span>{user.address}</span></div>
+              <div>Email :<span>{user.email}</span></div>
+              <div>Téléphone :<span>{formatPhoneNumber(user.phone)}</span></div>
 
             </div>
           </div>
