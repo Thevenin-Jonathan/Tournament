@@ -83,7 +83,7 @@ async function update(req, res) {
   }
   
   const updMatch = await matchDatamapper.updateOne(id, req.body)
-  return res.json(updMatch)
+  return res.json(updMatch);
 }
 
 /**
@@ -112,8 +112,8 @@ async function update(req, res) {
     throw new Api404Error("Unable to change scores, tournament is closed");
   };
 
-  const resultT1 = data[0].result_id
-  const resultT2 = data[1].result_id
+  const resultT1 = Number(data[0].result_id);
+  const resultT2 = Number(data[1].result_id);
 
   /** set score for team 1 */
   const isWinnerT1 = resultT1 === 3 ? true : resultT1 !== 4 && resultT2 === 4 ? true : false;
@@ -127,7 +127,7 @@ async function update(req, res) {
   await matchDatamapper.updateOne(id, { state_id: 4 });
 
   const updMatch = await matchDatamapper.findById(id);
-  return res.json(updMatch)
+  return res.json(updMatch);
 }
 
 /**
