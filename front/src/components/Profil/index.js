@@ -13,57 +13,102 @@ function Profil() {
       value: user.id,
     });
   }, []);
-  console.log(user);
+
+  const stats = useSelector((state) => (state.stats.stats));
+  useEffect(() => {
+    dispatch({
+      type: 'GET_STATS',
+    });
+  }, []);
+
+  const userStats = [stats[user.id - 1]];
+  console.log('userStats :', userStats);
+  console.log('userStats[0] :', userStats[0]);
+  // console.log('userStats[0].bithdate :', userStats[0].bithdate);
+
   const userAvatar = `${config.path.uploads.avatar}/${user.avatar}`;
 
   return (
     <main className="content profil">
       <h1 className="title">Mon profil</h1>
 
-      <div className="wrapper-sections">
+      <div className="wrapper">
 
-        <section className="section-left">
-          <h2 className="member-name">{user.firstname} {user.lastname}</h2>
-          <div className="member-infos">
-            <img
-              className="member-avatar"
-              src={userAvatar}
-              alt={`${user.firstname} Avatar`}
-            />
+        <h2 className="infos-title">Mes informations</h2>
+
+        <div className="wrapper-infos">
+          <div className="sub-wrapper-infos">
+            <div className="infos-left">
+              <div>Prénom : <span>{user.firstname}</span></div>
+              <div>Nom : <span>{user.lastname}</span></div>
+              <div>license FFBAD : <span>{user.playerLicense}</span></div>
+              <div>Genre : <span>{genderText(user.genderId)}</span></div>
+              { (user.gender_id === 1)
+                ? <div>Née le : <span>{dateFr(user.birthdate)}</span></div>
+                : <div>Né le : <span>{dateFr(user.birthdate)}</span></div>}
+              <div>Adresse : <span>{user.address}</span></div>
+            </div>
+
+            <div className="infos-right">
+
+              <div>Email :<span>{user.email}</span>
+              </div>
+              <div>Téléphone :<span>{formatPhoneNumber(user.phone)}</span>
+              </div>
+              <div>Photo de profil :
+                <img
+                  className="member-avatar"
+                  src={userAvatar}
+                  alt={`${user.firstname} Avatar`}
+                />
+              </div>
+
+            </div>
           </div>
+        </div>
 
-          <div className="member-infos">license FFBAD : <span>{user.playerLicense}</span></div>
-          <div className="member-infos">Genre : <span>{genderText(user.genderId)}</span></div>
-          { (user.gender_id === 1)
-            ? <div className="member-infos">Née le : <span>{dateFr(user.birthdate)}</span></div>
-            : <div className="member-infos">Né le : <span>{dateFr(user.birthdate)}</span></div>}
-          <div className="member-infos">Adresse : <span>{user.address}</span></div>
-          <div className="member-infos">Contact :
-            <span>{user.email}</span>
-            <span>{formatPhoneNumber(user.phone)}</span>
-          </div>
+        <h2 className="stats-title">Mes statistiques</h2>
 
-        </section>
+        <div className="wrapper-stats">
 
-        <section className="section-right">
-          <h2 className="stats-title">Statistiques</h2>
+          <table>
+            <tbody>
+              <tr>
+                <th>Discipline</th>
+                <th>Matchs Joués</th>
+                <th>Matchs Gagnés</th>
+                <th>% de Victoires</th>
+              </tr>
+              <tr>
+                <td><span>Simple</span></td>
+                <td><span>1</span></td>
+                <td><span>1</span></td>
+                <td><span>1</span></td>
+              </tr>
+              <tr>
+                <td><span>Double</span></td>
+                <td><span>1</span></td>
+                <td><span>1</span></td>
+                <td><span>1</span></td>
+              </tr>
+              <tr>
+                <td><span>Double Mixte</span></td>
+                <td><span>1</span></td>
+                <td><span>1</span></td>
+                <td><span>1</span></td>
+              </tr>
+            </tbody>
+          </table>
 
-          <div className="member-infos">Participations totales : <span>3</span></div>
-          <div className="member-infos">Matchs joués : <span>24</span></div>
-          <div className="member-infos">Victoires en simple : <span>1</span></div>
-          <div className="member-infos">Victoires en double : <span>0</span></div>
-          <div className="member-infos">Victoires en mixte : <span>2</span></div>
-
-        </section>
+        </div>
+        <Link className="action-btn" to="/profil/modifier-profil">
+          <button type="button">
+            <i className="fa fa-pencil" aria-hidden="true" />
+            &nbsp;
+            Modifier mon profil
+          </button>
+        </Link>
       </div>
-
-      <Link className="action-btn" to="/profil/modifier-profil">
-        <button type="button">
-          <i className="fa fa-pencil" aria-hidden="true" />
-          &nbsp;
-          Modifier mon profil
-        </button>
-      </Link>
 
     </main>
   );
