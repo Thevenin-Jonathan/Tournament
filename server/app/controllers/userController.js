@@ -27,7 +27,7 @@ async function getAll(_, res) {
  * @returns {json} JSON response with one user
  */
 async function getOne(req, res) {
-  const id = req.params.id;
+  const id = Number(req.params.id);
   if (id && !isNaN(Number(id))) {
     const user = await userDatamapper.findById(id);
 
@@ -97,7 +97,7 @@ async function create(req, res) {
  * @returns {json} JSON response with the updated user
  */
 async function update(req, res) {
-  const id = req.params.id;
+  const id = Number(req.params.id);
   const newData = req.body;
   const user = await userDatamapper.findById(id);
 
@@ -133,7 +133,7 @@ async function update(req, res) {
  * @returns {json} JSON response with one user
  */
 async function destroy(req, res) {
-  const id = req.params.id;
+  const id = Number(req.params.id);
 
   if (id && !isNaN(Number(id))) {
     const user = await userDatamapper.findById(id);

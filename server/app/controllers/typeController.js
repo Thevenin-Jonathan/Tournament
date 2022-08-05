@@ -23,7 +23,7 @@ const { ApiError, Api404Error } = require("../services/errorHandler");
  * @returns {json} JSON response with one type
  */
    async function getOne(req, res) {
-    const id = req.params.id;
+    const id = Number(req.params.id);
     if (id && !isNaN(Number(id))) {
       const type = await typeDatamapper.findById(id);
   
@@ -63,7 +63,7 @@ async function create(req, res) {
  * @returns {json} JSON response with the updated type
  */
 async function update(req, res) {
-    const id = req.params.id;
+    const id = Number(req.params.id);
     const { name } = req.body
     const type = await typeDatamapper.findById(id);
   
@@ -88,7 +88,7 @@ async function update(req, res) {
  * @returns {json} JSON response with one type
  */
 async function destroy(req, res) {
-    const id = req.params.id;
+    const id = Number(req.params.id);
     
     if (id && !isNaN(Number(id))) {
       const type = await typeDatamapper.findById(id);

@@ -23,8 +23,8 @@ async function getAll(_, res) {
  * @returns {json} JSON response with one result
  */
 async function getOne(req, res) {
-  const id = req.params.id;
-  if (id && !isNaN(Number(id))) {
+  const id = Number(req.params.id);
+  if (id && !isNaN(id)) {
     const result = await resultDatamapper.findById(id);
 
     if (!result) throw new Api404Error("Result does not exist in DB");
@@ -63,7 +63,7 @@ async function create(req, res) {
  * @returns {json} JSON response with the updated result
  */
 async function update(req, res) {
-  const id = req.params.id;
+  const id = Number(req.params.id);
   const { label } = req.body;
   const result = await resultDatamapper.findById(id);
   
@@ -87,9 +87,9 @@ async function update(req, res) {
  * @returns {json} JSON response with one result
  */
 async function destroy(req, res) {
-  const id = req.params.id;
+  const id = Number(req.params.id);
 
-  if (id && !isNaN(Number(id))) {
+  if (id && !isNaN(id)) {
     const result = await resultDatamapper.findById(id);
 
     if (!result) {

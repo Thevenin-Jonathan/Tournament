@@ -23,7 +23,7 @@ async function getAll(_, res) {
  * @returns {json} JSON response with one club
  */
 async function getOne(req, res) {
-  const id = req.params.id;
+  const id = Number(req.params.id);
   if (id && !isNaN(Number(id))) {
     const club = await clubDatamapper.findById(id);
 
@@ -73,7 +73,7 @@ async function create(req, res) {
  * @returns {json} JSON response with the updated club
  */
 async function update(req, res) {
-  const id = req.params.id;
+  const id = Number(req.params.id);
   const newData = req.body;
   const club = await clubDatamapper.findById(id);
 
@@ -109,7 +109,7 @@ async function update(req, res) {
  * @returns {json} JSON response with one club
  */
 async function destroy(req, res) {
-  const id = req.params.id;  
+  const id = Number(req.params.id);  
 
   if (id && !isNaN(Number(id))) {
     const club = await clubDatamapper.findById(id);

@@ -24,7 +24,7 @@ async function getAll(_, res) {
  * @returns {json} JSON response with one player stats
  */
 async function getOne(req, res) {
-  const id = req.params.id;
+  const id = Number(req.params.id);
   if (id && !isNaN(Number(id))) {
     const stats = await statDatamapper.findById(id);
 

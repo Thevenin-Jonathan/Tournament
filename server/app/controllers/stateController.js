@@ -23,7 +23,7 @@ const { ApiError, Api404Error } = require("../services/errorHandler");
  * @returns {json} JSON response with one state
  */
   async function getOne(req, res) {
-    const id = req.params.id;
+    const id = Number(req.params.id);
     if (id && !isNaN(Number(id))) {
       const state = await stateDatamapper.findById(id);
   
@@ -63,7 +63,7 @@ const { ApiError, Api404Error } = require("../services/errorHandler");
  * @returns {json} JSON response with the updated state
  */
   async function update(req, res) {
-    const id = req.params.id;
+    const id = Number(req.params.id);
     const {name} = req.body
     const state = await stateDatamapper.findById(id);
   
@@ -88,7 +88,7 @@ const { ApiError, Api404Error } = require("../services/errorHandler");
  * @returns {json} JSON response with one state
  */
   async function destroy(req, res) {
-    const id = req.params.id;
+    const id = Number(req.params.id);
 
     if (id && !isNaN(Number(id))) {
       const state = await stateDatamapper.findById(id);

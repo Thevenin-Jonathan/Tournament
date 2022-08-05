@@ -26,7 +26,7 @@ async function getAll(_, res) {
  * @returns {json} JSON response with one team
  */
 async function getOne(req, res) {
-  const id = req.params.id;
+  const id = Number(req.params.id);
   if (id && !isNaN(Number(id))) {
     const team = await teamDatamapper.findById(id);
 
@@ -110,7 +110,7 @@ async function create(req, res) {
  * @returns {json} JSON response with the updated team
  */
  async function addUser(req, res) {
-  const id = req.params.id;
+  const id = Number(req.params.id);
   const { user_id } = req.body;
 
   /** Verify */
@@ -159,7 +159,7 @@ async function create(req, res) {
  * @returns {json} JSON response with the updated team
  */
  async function removeUser(req, res) {
-  const id = req.params.id;
+  const id = Number(req.params.id);
   const { user_id } = req.body;
 
   /** Verify */
@@ -189,7 +189,7 @@ async function create(req, res) {
  * @returns {json} JSON response with one team
  */
 async function destroy(req, res) {
-  const id = req.params.id;
+  const id = Number(req.params.id);
 
   if (id && !isNaN(Number(id))) {
     const team = await teamDatamapper.findById(id);

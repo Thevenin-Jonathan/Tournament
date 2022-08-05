@@ -23,7 +23,7 @@ async function getAll(_, res) {
  * @returns {json} JSON response with one gender
  */
 async function getOne(req, res) {
-  const id = req.params.id;
+  const id = Number(req.params.id);
   if (id && !isNaN(Number(id))) {
     const gender = await genderDatamapper.findById(id);
 
@@ -63,7 +63,7 @@ async function create(req, res) {
  * @returns {json} JSON response with the updated gender
  */
 async function update(req, res) {
-  const id = parseInt(req.params.id);
+  const id = Number(req.params.id);
   const name = req.body.name;
   const gender = await genderDatamapper.findById(id);
 
@@ -88,7 +88,7 @@ async function update(req, res) {
  * @returns {json} JSON response with one gender
  */
 async function destroy(req, res) {
-  const id = req.params.id;
+  const id = Number(req.params.id);
 
   if (id && !isNaN(Number(id))) {
     const gender = await genderDatamapper.findById(id);

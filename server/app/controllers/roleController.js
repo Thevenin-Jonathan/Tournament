@@ -23,8 +23,8 @@ const { ApiError, Api404Error } = require("../services/errorHandler");
  * @returns {json} JSON response with one role
  */
   async function getOne(req, res) {
-    const id = req.params.id;
-    if (id && !isNaN(Number(id))) {
+    const id = Number(req.params.id);
+    if (id && !isNaN(id)) {
       const role = await roleDatamapper.findById(id);
   
       if (!role) throw new Api404Error("Role does not exist in DB");
@@ -63,7 +63,7 @@ const { ApiError, Api404Error } = require("../services/errorHandler");
  * @returns {json} JSON response with the updated role
  */
   async function update(req, res) {
-    const id = parseInt(req.params.id);
+    const id = Number(req.params.id);
     const { name } = req.body;
     const role = await roleDatamapper.findById(id);
   
@@ -88,7 +88,7 @@ const { ApiError, Api404Error } = require("../services/errorHandler");
  * @returns {json} JSON response with one role
  */
   async function destroy(req, res) {
-    const id = parseInt(req.params.id);
+    const id = Number(req.params.id);
     
     if (id && !isNaN(Number(id))) {
       const role = await roleDatamapper.findById(id);

@@ -27,7 +27,8 @@ async function getAll(_, res) {
  * @returns {json} JSON response with one tournament
  */
 async function getOne(req, res) {
-  const { id, slug } = req.params;
+  const id = Number(req.params.id);
+  const slug = req.params.slug;
   let tournament = null;
 
   if (id && !isNaN(Number(id))) {
@@ -129,7 +130,7 @@ async function create(req, res) {
  * @returns {json} JSON response with the updated tournament
  */
 async function update(req, res) {
-  const id = req.params.id;
+  const id = Number(req.params.id);
   const newData = req.body;
   const tournament = await tournamentDatamapper.findById(id);
 
@@ -150,7 +151,7 @@ async function update(req, res) {
  * @returns {json} JSON response with one tournament
  */
 async function destroy(req, res) {
-  const id = req.params.id;
+  const id = Number(req.params.id);
 
   if (id && !isNaN(Number(id))) {
     const tournament = await tournamentDatamapper.findById(id);

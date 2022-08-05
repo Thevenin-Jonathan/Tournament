@@ -25,7 +25,7 @@ async function getAll(_, res) {
  * @returns {json} JSON response with one match
  */
 async function getOne(req, res) {
-  const id = req.params.id;
+  const id = Number(req.params.id);
   if (id && !isNaN(Number(id))) {
     const match = await matchDatamapper.findById(id);
 
@@ -74,7 +74,7 @@ async function create(req, res) {
  * @returns {json} JSON response with the updated match
  */
 async function update(req, res) {
-  const id = req.params.id;
+  const id = Number(req.params.id);
   const match = await matchDatamapper.findById(id);
 
   /** Verify */
@@ -95,7 +95,7 @@ async function update(req, res) {
  * @returns {json} JSON response with the updated match
  */
  async function updateScore(req, res) {
-  const id = req.params.id;
+  const id = Number(req.params.id);
   const data = req.body.match;
   const match = await matchDatamapper.findById(id);
 
@@ -139,7 +139,7 @@ async function update(req, res) {
  * @returns {json} JSON response with the updated match
  */
  async function addTeam(req, res) {
-  const id = req.params.id;
+  const id = Number(req.params.id);
   const { team_id } = req.body;
 
   /** Verify */
@@ -177,7 +177,7 @@ async function update(req, res) {
  * @returns {json} JSON response with the updated match
  */
  async function removeTeam(req, res) {
-  const id = req.params.id;
+  const id = Number(req.params.id);
   const { team_id } = req.body;
 
   /** Verify */
@@ -211,7 +211,7 @@ async function update(req, res) {
  * @returns {json} JSON response with one match
  */
 async function destroy(req, res) {
-  const id = parseInt(req.params.id);
+  const id = Number(req.params.id);
   
   if (id && !isNaN(Number(id))) {
     const match = await matchDatamapper.findById(id);
