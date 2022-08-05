@@ -312,9 +312,13 @@ function Tournament() {
                   { phase.map((match) => (
                     <span key={match.id} className="match">
                       <span className="players">
-                        <span className={match.teams[0].is_winner ? 'player winner' : 'player'}>{getPlayersFromTeam(match.teams[0].id, teams, members)}</span>
+                        <span className={match.teams[0].is_winner ? 'player winner' : 'player'}>
+                          {getPlayersFromTeam(match.teams[0].id, teams, members)}
+                        </span>
                         <span className="vs">&nbsp;vs&nbsp;</span>
-                        <span className={match.teams[1].is_winner ? 'player winner' : 'player'}>{getPlayersFromTeam(match.teams[1].id, teams, members)}</span>
+                        <span className={match.teams[1].is_winner ? 'player winner' : 'player'}>
+                          {getPlayersFromTeam(match.teams[1].id, teams, members)}
+                        </span>
                       </span>
                       {tournament.state_id === 3 && (
                         <span className="score-inputs">
@@ -323,6 +327,7 @@ function Tournament() {
                             data-matchid={match.id}
                             data-teamid={match.teams[0].id}
                             onChange={(evt) => handleChangeScore(evt)}
+                            defaultValue={match.teams[0].result_id}
                           >
                             <option value={null} />
                             <option value={1}>0</option>
@@ -335,6 +340,7 @@ function Tournament() {
                             data-matchid={match.id}
                             data-teamid={match.teams[1].id}
                             onChange={(evt) => handleChangeScore(evt)}
+                            defaultValue={match.teams[1].result_id}
                           >
                             <option value={null} />
                             <option value={1}>0</option>
