@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 
@@ -260,52 +261,65 @@ function Rankings() {
         <h2><i className="fa fa-sliders" aria-hidden="true" /> Filtres</h2>
         <h3>Disciplines</h3>
         <ul>
-          <li><input
-            type="radio"
-            name="discipline"
-            className="0"
-            onChange={(e) => setRankingCategory(parseInt(e.target.className, 10))}
-            // checked
-          />Tous
+          <li>
+            <label>
+              <input
+                type="radio"
+                name="discipline"
+                className="0"
+                onChange={(e) => setRankingCategory(parseInt(e.target.className, 10))}
+              />Tous
+            </label>
           </li>
-          <li><input
-            type="radio"
-            name="discipline"
-            className="1"
-            onChange={(e) => setRankingCategory(parseInt(e.target.className, 10))}
-          />
-            Simple Homme
+          <li>
+            <label>
+              <input
+                type="radio"
+                name="discipline"
+                className="1"
+                onChange={(e) => setRankingCategory(parseInt(e.target.className, 10))}
+              />Simple Homme
+            </label>
           </li>
-          <li><input
-            type="radio"
-            name="discipline"
-            className="2"
-            onChange={(e) => setRankingCategory(parseInt(e.target.className, 10))}
-          />Simple Dame
+          <li>
+            <label>
+              <input
+                type="radio"
+                name="discipline"
+                className="2"
+                onChange={(e) => setRankingCategory(parseInt(e.target.className, 10))}
+              />Simple Dame
+            </label>
           </li>
-          <li><input
-            type="radio"
-            name="discipline"
-            className="3"
-            onChange={(e) => setRankingCategory(parseInt(e.target.className, 10))}
-          />
-            Double Homme
+          <li>
+            <label>
+              <input
+                type="radio"
+                name="discipline"
+                className="3"
+                onChange={(e) => setRankingCategory(parseInt(e.target.className, 10))}
+              />Double Homme
+            </label>
           </li>
-          <li><input
-            type="radio"
-            name="discipline"
-            className="4"
-            onChange={(e) => setRankingCategory(parseInt(e.target.className, 10))}
-          />
-            Double Dame
+          <li>
+            <label>
+              <input
+                type="radio"
+                name="discipline"
+                className="4"
+                onChange={(e) => setRankingCategory(parseInt(e.target.className, 10))}
+              />Double Dame
+            </label>
           </li>
-          <li><input
-            type="radio"
-            name="discipline"
-            className="5"
-            onChange={(e) => setRankingCategory(parseInt(e.target.className, 10))}
-          />
-            Double Mixte
+          <li>
+            <label>
+              <input
+                type="radio"
+                name="discipline"
+                className="5"
+                onChange={(e) => setRankingCategory(parseInt(e.target.className, 10))}
+              />Double Mixte
+            </label>
           </li>
         </ul>
       </div>
