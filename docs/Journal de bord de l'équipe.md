@@ -818,7 +818,7 @@ _Ce que tu as fait hier:_
 - Gestion drag & drop des users par l'admin
 - Gestion des étapes et génération du tournoi ! 
 - recuperation des matchs
-- cloudinary upload : https://andreaskeller.name/blog/react-upload-images-cloudinary
+- cloudinary upload : [lien](https://andreaskeller.name/blog/react-upload-images-cloudinary)
 
 _Les problèmes rencontrés:_
 
@@ -893,3 +893,84 @@ _Les problèmes rencontrés:_
 _Ce que tu comptes faire aujourd'hui:_
 
 - finir les message joi Inch'Allah :D
+
+### 05/08/2022 - Sprint 3 - Jour 19
+
+**Tom:**
+
+_Ce que tu as fait hier:_
+
+- Gestion du tournoi
+- Gestion des scores
+- Gestion du hall on fame sur le dashboard.
+- Encore des map, des find et des filter biens corsés !
+- plein de petits fix css
+
+_Les problèmes rencontrés:_
+
+- bug de typage sur les scores
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- préparer la démo
+
+**Jonathan:**
+
+_Ce que tu as fait hier:_
+
+- Configuration d'Helmet, plusieurs test avec les CORS et les CSP
+- Correction de bugs sur le server avec Tom qui faisait les tests front-server
+- Fabriquation du template HTML et configuration du mail qui est envoyé au nouveaux utilisateurs
+
+_Les problèmes rencontrés:_
+
+- Probleme de cast sur un parametre sur la route update scorequi nous a encore pris du temps à trouver
+- Helmet à configurer, c'est pas simple, beaucoup de docs et de tests
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- Swagger
+- TU
+
+**Cédric:**
+
+_Ce que tu as fait hier:_
+
+- composant Rankings
+
+_Les problèmes rencontrés:_
+
+- afficher le numéro de rang dans les classements
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- design composant Profil
+- resoudre les problèmes de la partie "modifier mon profil"
+
+**Agustin:**
+
+_Ce que tu as fait hier:_
+
+- Continuation de veille pour reussir les TU dinamiques
+
+_Les problèmes rencontrés:_
+
+- Des erreurs, des erreurs et des erreurs, je n'ai pas reussi à le mettre en place. Je n'ai pas reussi avec supertest à recuperer des valeurs dans des variables
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- Veuille pour regarder tout le project dans sa globalité
+
+**Houceine:**
+
+_Ce que tu as fait hier:_
+
+- message Joi implementer
+
+_Les problèmes rencontrés:_
+
+- gerer la regex, qui est passer en "pattern" au lieu de regex sinon ça marchait pas
+
+_Ce que tu comptes faire aujourd'hui:_
+
+- visonner les demo blanche et voir ce que jpeux faire
