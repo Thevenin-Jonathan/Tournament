@@ -1598,12 +1598,13 @@ a {
         flex-direction: column;
         gap: .5rem;
         padding: 1rem 0;
-        li:first-child label {
-          font-weight: var(--normal);
+        li:first-child {
+          font-weight: var(--fine);
         }
       }
       li {
         font-weight: var(--fine);
+        
       }
       input {
         margin-right: 0.5rem;
