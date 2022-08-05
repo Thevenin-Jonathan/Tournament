@@ -31,8 +31,6 @@ content-type: application/json
   "state_id": 4
 }
 
-
-
 ###
 # Update match score
 PATCH {{hostname}}/matches/2/score HTTP/1.1
