@@ -1162,39 +1162,48 @@ a {
       color: var(--emphase-color);
 
       .infos-title, .stats-title {
-        font-size: 2rem;
         font-weight: var(--fine);
         padding: 0 1rem;
       }
+      .infos-title {
+        font-size: 3rem;
+        padding-bottom: 1rem;
+      }
       .stats-title {
-        padding-top: 2rem;
+        font-size: 1.8rem;
+        padding-top: 4rem;
       }
 
       span {
-        display: flex;
+        // display: flex;
         color: var(--ligth-color-text);
         font-weight: var(--fine);
-        padding: 0.4rem 0 1rem 0;
+        // padding: 0.4rem 0 1rem 0;
       }
 
-      .member-avatar {
-        width: 18rem; 
-      }
-
+      
       &-infos {
         .sub-wrapper-infos {
           display: flex;
           // padding: 1rem;
         }
-        .infos-left, .infos-right {
+        .member-avatar, .member-infos {
           padding: 0 1rem;
+        }
+        .member-avatar {
+          width: 15rem; 
+        }
+        .member-infos {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
         }
       }
 
       &-stats {
         padding: 0 1rem 2rem 1rem;
         table {
-          width: 100%;
+          width: 40rem;
         }
         th, td {
           text-align: left;

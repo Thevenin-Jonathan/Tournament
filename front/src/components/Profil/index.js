@@ -26,17 +26,13 @@ function Profil() {
 
         <div className="wrapper-infos">
           <div className="sub-wrapper-infos">
-            <div className="infos-left">
-              {/* <div>Prénom : <span>{user.firstname}</span></div>
-              <div>Nom : <span>{user.lastname}</span></div> */}
-              <img
-                className="member-avatar"
-                src={userAvatar}
-                alt={`${user.firstname} Avatar`}
-              />
-            </div>
+            <img
+              className="member-avatar"
+              src={userAvatar}
+              alt={`${user.firstname} Avatar`}
+            />
 
-            <div className="infos-right">
+            <div className="member-infos">
               <div>license FFBAD : <span>{user.playerLicense}</span></div>
               { (user.gender_id === 1)
                 ? <div>Née le : <span>{dateFr(user.birthdate)}</span></div>
