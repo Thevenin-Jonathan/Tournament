@@ -148,12 +148,32 @@ function Tournament() {
       type: 'TOURNAMENT_GENERATE',
     });
   };
-
   // action de passer le matche à "jeu" -> l'étape 3
   const handlePlayTournament = () => {
     dispatch({
       type: 'TOURNAMENT_PLAY',
     });
+  };
+  // action de passer le matche à "cloturer" -> l'étape 4
+  const handleEndTournament = () => {
+    dispatch({
+      type: 'TOURNAMENT_END',
+    });
+  };
+
+  const matchCount = () => tournament.matches.length;
+  const playedMatchsCount = () => {
+    const matchsWithWinner = tournament.matches
+      .filter((match) => match.teams[0].is_winner !== null);
+    return matchsWithWinner.length;
+  };
+  const isAllMatchsPlayed = () => {
+    const matchsWithWinner = tournament.matches
+      .filter((match) => match.teams[0].is_winner !== null);
+    if (matchsWithWinner.length === matchCount()) {
+      return true;
+    }
+    return false;
   };
 
   // action d'envoi d'un resultat
@@ -300,7 +320,11 @@ function Tournament() {
               <p className="note">Les matchs ne sont pas modifables en All vs All</p>
             )}
             {tournament.state_id === 3 && (
-              <p className="note">Saisissez les scores de chaque matchs</p>
+              <p className="note">
+                Saisissez les scores de chaque match <br />
+                {matchCount()} matchs à jouer <br />
+                {isAllMatchsPlayed() ? 'Tous les matchs ont été joués' : `${playedMatchsCount()} sur ${matchCount()} matchs joués `}
+              </p>
             )}
             <ul className="match-list">
               { matchsBuilder(tournament.matches).map((phase, i) => (
@@ -310,7 +334,11 @@ function Tournament() {
                 >
                   Journée {i + 1} :
                   { phase.map((match) => (
-                    <span key={match.id} className="match">
+                    <div
+                      key={match.id}
+                      // eslint-disable-next-line no-nested-ternary
+                      className={match.teams[0].is_winner ? 'match with-winner-left' : match.teams[1].is_winner ? 'match with-winner-right' : 'match'}
+                    >
                       <span className="players">
                         <span className={match.teams[0].is_winner ? 'player winner' : 'player'}>
                           {getPlayersFromTeam(match.teams[0].id, teams, members)}
@@ -352,7 +380,7 @@ function Tournament() {
 
                       )}
 
-                    </span>
+                    </div>
                   ))}
                 </li>
               ))}
@@ -408,7 +436,11 @@ function Tournament() {
           </button>
           )}
           {tournament.state_id === 3 && (
-          <button type="button" to="" className="action-btn ">
+          <button
+            type="button"
+            className="action-btn"
+            onClick={() => handleEndTournament()}
+          >
             Aller à l'étape 4 : Cloturer ce tournoi <i className="fa fa-hand-peace-o" />
           </button>
           )}

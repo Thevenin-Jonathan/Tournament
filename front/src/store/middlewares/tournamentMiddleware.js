@@ -183,7 +183,7 @@ const tournamentMiddleware = (store) => (next) => (action) => {
     }
 
     // ETAPE 3
-    // Passer ) la phase de jeu, ou l'on peut saisir les scores  !
+    // Passer à la phase de jeu, ou l'on peut saisir les scores  !
     case 'TOURNAMENT_PLAY': {
       const state = store.getState();
       next(action);
@@ -211,6 +211,37 @@ const tournamentMiddleware = (store) => (next) => (action) => {
             newToast: {
               id: state.interface.toastCounter,
               message: 'C\'est partit !',
+              type: 'success',
+            },
+          });
+        })
+        .catch((error) => {
+          throw new Error(error);
+        });
+      break;
+    }
+
+    // ETAPE 4
+    // Cloturer les tournoi et afficher les vainqueurs
+    case 'TOURNAMENT_END': {
+      const state = store.getState();
+      next(action);
+      const axiosConfig = {
+        method: 'patch',
+        url: `${config.api.baseUrl}/tournaments/${state.tournament.tournament.id}`,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        data: qs.stringify({ state_id: 4 }),
+      };
+      axios(axiosConfig)
+        .then((response) => {
+          store.dispatch({ type: 'TOURNAMENT_END_SUCCESS', value: response.data });
+          store.dispatch({
+            type: 'NEW_TOAST',
+            newToast: {
+              id: state.interface.toastCounter,
+              message: 'Tournoi terminé',
               type: 'success',
             },
           });

@@ -789,39 +789,66 @@ a {
           //border-radius: calc(var(--border-radius) * .5);
           &:hover {
             background-color: rgba(0,0,0,.2);
-            background-color: var(--dark-emphase-color);
           }
           .match {
+            position: relative;
             background-color: var(--main-color);
+            background-color: rgba(255, 255, 255, .2);
             padding: .5rem 1rem;
             border-radius: calc(var(--border-radius) * .5);
             flex: 1;
             width: 18rem;
             display: flex;
             flex-direction: column;
+            background-image: url(../../assets/img/bg-winner.png);
+            background-repeat: no-repeat;
+            background-position: 500% center;
+            transition: .5s cubic-bezier(.05,1.13,.52,1.06);
+            &.with-winner-left,
+            &.with-winner-right {
+              background-color: rgba(0,0,0,.2);
+              outline: solid .2rem var(--emphase-color);
+            }
+            &.with-winner-left {
+              // background: linear-gradient(60deg, var(--dark-emphase-color) 50%, var(--bg-color) 50%); 
+              background-position: 210% center;
+            }
+            &.with-winner-right {
+              background-position: -110% center;
+              // background: linear-gradient(240deg, var(--dark-emphase-color) 50%, var(--bg-color) 50%); 
+            }
             .players {
               display: flex;
               justify-content: space-between;
               border-radius: 5rem;
               .player.winner {
-                background-color: var(--emphase-color);
-                border-radius: 10rem;
-                padding: 0 1rem;
+
               }
               .vs {
-                color: var(--emphase-color);
+                font-size: 2rem;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+                color: var(--ligth-color-text);
                 font-weight: var(--black);
               }
             }
             .score-inputs{
+              font-size: .8rem;
               display: flex;
               gap: 1rem;
               justify-content: space-between;
               select {
-                background-color: rgba(255, 255, 255, 1);
-                color: black;
-                border-radius: 10px;
+                background-color: rgba(255, 255, 255, 0);
+                border: solid 1px white;
+                color:white;
+                border-radius: 5px;
                 text-align: center;
+                padding: .3rem;
+                option {
+                  background-color: #061B38;
+                }
               }
             }
           }
