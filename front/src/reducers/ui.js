@@ -81,6 +81,16 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         isLoading: false,
       };
+    case 'GET_USER_STATS':
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case 'GET_USER_STATS_SUCCESS':
+      return {
+        ...state,
+        isLoading: false,
+      };
     case 'NEW_TOAST':
       return {
         ...state,
