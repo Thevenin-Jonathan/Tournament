@@ -245,6 +245,14 @@ const tournamentMiddleware = (store) => (next) => (action) => {
               type: 'success',
             },
           });
+          // get tournamaent a jour
+          axios.get(`${config.api.baseUrl}/tournaments/${state.tournament.tournament.id}`)
+            .then((response2) => {
+              store.dispatch({ type: 'GET_TOURNAMENT_SUCCESS', value: response2.data });
+            })
+            .catch((error) => {
+              throw new Error(error);
+            });
         })
         .catch((error) => {
           throw new Error(error);
@@ -264,7 +272,6 @@ const tournamentMiddleware = (store) => (next) => (action) => {
         },
         data: qs.stringify(data),
       };
-      console.log("c'est celui la qui soit etre parsé en number coté serveur !");
       // c'est celui la qui soit etre parsé en number coté serveur.
       next(action);
       axios(axiosConfig)

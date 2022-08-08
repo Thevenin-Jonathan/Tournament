@@ -154,9 +154,13 @@ a {
   font-size: 1.2rem;
   color: var(--emphase-color);
   transition: .2s cubic-bezier(.82,.21,.1,1.02);
-  &:hover {
+  &:hover:enabled {
     background-color: var(--emphase-color);
     color: var(--ligth-color-text);
+  }
+  &:disabled {
+    opacity: .5;
+    cursor: not-allowed;
   }
   @media only screen and (max-width: 1100px) {
     width: 100%!important;
@@ -768,6 +772,33 @@ a {
       padding: 1rem;
       .player-list-item {
         width:max-content;
+      }
+    }
+    .results {
+      background-image: url(https://i.gifer.com/origin/03/03270abe66b1c66ef8832c57aa6da0c1.gif);
+      background-size: contain;
+    }
+    .tournament-ranking {
+      list-style-type: decimal;
+      padding: 1rem;
+      padding-left: 2rem;
+      min-width: 25rem;
+      background-color: rgba(0,0,0,.3);
+      border-radius: calc(var(--border-radius) * .5);
+      .score-line {
+        font-size: 1.2rem;
+        display: flex;
+        justify-content: space-between;
+        .team {
+
+        }
+        .pnt {
+
+        }
+      }
+      li:nth-child(1) {
+        color: var(--emphase-color);
+        font-weight: bold;
       }
     }
     .matchs{
