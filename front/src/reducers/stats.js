@@ -1,5 +1,6 @@
 export const initialState = {
   stats: [],
+  userStats: [],
 };
 
 function reducer(state = initialState, action = {}) {
@@ -9,6 +10,12 @@ function reducer(state = initialState, action = {}) {
         ...state,
         stats: action.value,
       };
+    case 'GET_USER_STATS_SUCCESS':
+      return {
+        ...state,
+        userStats: action.value,
+      };
+
     default:
       return state;
   }

@@ -38,70 +38,68 @@ function UpdateProfil() {
     return <Navigate to={redirectTo} />;
   }
   return (
-    <main className="content add-members-form">
+    <main className="content updateProfil">
       <h1 className="title">Modifier mon profil</h1>
 
-      <form className="single-add" onSubmit={handleUpdateProfilSubmit}>
+      <form className="wrapper" onSubmit={handleUpdateProfilSubmit}>
 
-        <div className="row">
+        <div className="input-line">
+          <label htmlFor="firstname">Prénom : </label>
+          <input
+            type="text"
+            name="firstname"
+            id="firstname"
+            value={user.updateFirstname}
+            onChange={(evt) => changeField(evt.target.value, 'updateFirstname')}
+          />
+        </div>
 
-          <div className="input-line">
-            <label htmlFor="firstname">Prénom</label>
-            <input
-              type="text"
-              name="firstname"
-              id="firstname"
-              value={user.updateFirstname}
-              onChange={(evt) => changeField(evt.target.value, 'updateFirstname')}
-            />
-          </div>
+        <div className="input-line">
+          <label htmlFor="lastname">Nom : </label>
+          <input
+            type="text"
+            name="lastname"
+            id="lastname"
+            value={user.updateLastname}
+            onChange={(evt) => changeField(evt.target.value, 'updateLastname')}
+          />
+        </div>
 
-          <div className="input-line">
-            <label htmlFor="lastname">Nom</label>
-            <input
-              type="text"
-              name="lastname"
-              id="lastname"
-              value={user.updateLastname}
-              onChange={(evt) => changeField(evt.target.value, 'updateLastname')}
-            />
-          </div>
+        <div className="input-line">
+          <label htmlFor="birthdate">Date de naissance : </label>
+          <input
+            type="date"
+            name="birthdate"
+            id="birthdate"
+            value={dateFr(user.updateBirthdate)}
+            onChange={(evt) => changeField(evt.target.value, 'updateBirthdate')}
+          />
+        </div>
 
-          <div className="input-line">
-            <label htmlFor="birthdate">Date de naissance</label>
-            <input
-              type="text"
-              name="birthdate"
-              id="birthdate"
-              value={dateFr(user.updateBirthdate)}
-              onChange={(evt) => changeField(evt.target.value, 'updateBirthdate')}
-            />
-          </div>
+        <div className="input-line">
+          <label htmlFor="email">Email : </label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            value={user.updateEmail}
+            onChange={(evt) => changeField(evt.target.value, 'updateEmail')}
+          />
+        </div>
 
-          {/* <div className="input-line">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              value={user.updateEmail}
-              onChange={(evt) => changeField(evt.target.value, 'updateEmail')}
-            />
-          </div>
+        <div className="input-line">
+          <label htmlFor="phone">Téléphone : </label>
+          <input
+            type="phone"
+            name="phone"
+            id="phone"
+            maxLength="10"
+            value={user.updatePhone}
+            onChange={(evt) => changeField(evt.target.value, 'updatePhone')}
+          />
+        </div>
 
-          <div className="input-line">
-            <label htmlFor="phone">Téléphone</label>
-            <input
-              type="phone"
-              name="phone"
-              id="phone"
-              maxLength="10"
-              value={user.updatePhone}
-              onChange={(evt) => changeField(evt.target.value, 'updatePhone')}
-            />
-          </div>
-
-          <div className="input-line">
+        {/* <div className="input-line">
             <label htmlFor="password-new">Nouveau mot de passe</label>
             <input
               type="password"
@@ -110,9 +108,9 @@ function UpdateProfil() {
               placeholder="Saisissez le nouveau mot de passe"
               onChange={(evt) => changeField(evt.target.value, 'password-new')}
             />
-          </div>
+          </div> */}
 
-          <div className="input-line">
+        {/* <div className="input-line">
             <label htmlFor="password-confirm">Confirmation du mot de passe</label>
             <input
               type="password"
@@ -121,19 +119,19 @@ function UpdateProfil() {
               placeholder="Confirmez le nouveau mot de passe"
               onChange={(evt) => changeField(evt.target.value, 'password-confirm')}
             />
-          </div> */}
+          </div>  */}
 
-          <div className="input-line">
-            <label htmlFor="address">Adresse</label>
-            <textarea
-              name="address"
-              id="address"
-              value={user.updateAddress}
-              onChange={(evt) => changeField(evt.target.value, 'updateAddress')}
-            />
-          </div>
+        <div className="input-line">
+          <label htmlFor="address">Adresse : </label>
+          <textarea
+            name="address"
+            id="address"
+            value={user.updateAddress}
+            onChange={(evt) => changeField(evt.target.value, 'updateAddress')}
+          />
+        </div>
 
-          {/* <div className="input-line">
+        {/* <div className="input-line">
             <label htmlFor="phone">Photo de profil</label>
             <input
               type="file"
@@ -144,14 +142,13 @@ function UpdateProfil() {
             />
           </div> */}
 
-        </div>
-
-        <div className="input-line">
-          <button type="submit" className="action-btn pull-right">
-            <i className="fa fa-floppy-o" aria-hidden="true" /> Enregister les modifications
-          </button>
-        </div>
+        {/* <Link to="/profil"> */}
+        <button type="submit" className="action-btn">
+          <i className="fa fa-floppy-o" aria-hidden="true" /> Enregister mes modifications
+        </button>
+        {/* </Link> */}
       </form>
+
     </main>
   );
 }

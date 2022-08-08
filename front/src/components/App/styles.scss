@@ -1160,7 +1160,6 @@ a {
       border-radius: var(--border-radius);
       padding: 2rem;
       color: var(--emphase-color);
-
       .infos-title, .stats-title {
         font-weight: var(--fine);
         padding: 0 1rem;
@@ -1173,19 +1172,24 @@ a {
         font-size: 1.8rem;
         padding-top: 4rem;
       }
-
       span {
-        // display: flex;
         color: var(--ligth-color-text);
         font-weight: var(--fine);
-        // padding: 0.4rem 0 1rem 0;
       }
-
-      
       &-infos {
         .sub-wrapper-infos {
           display: flex;
-          // padding: 1rem;
+          @media only screen and (max-width: 810px) {
+            flex-direction: column; 
+            .member-infos {
+              padding-top: 1rem;
+              & > div{
+                padding: 0.5rem 0;
+              }         
+            }
+             
+          }
+  
         }
         .member-avatar, .member-infos {
           padding: 0 1rem;
@@ -1199,21 +1203,34 @@ a {
           justify-content: space-between;
         }
       }
-
       &-stats {
+        display: flex;
+        flex-direction: column;
         padding: 0 1rem 2rem 1rem;
-        table {
-          width: 40rem;
-        }
-        th, td {
+        .row {
+          display: flex;
+          // width: 40rem;
+          gap: 0;
           text-align: left;
-          padding: 1rem 0;
-          span {
-            padding: 0;
+          padding: 0.5rem;
+          &:nth-child(odd){
+            background-color: rgba(0,0,0,.2);
           }
-        }
-        tr:nth-child(odd){
-          background-color: rgba(0,0,0,.2);
+          .col-title {
+            color: var(--emphase-color);
+          }
+          .col {
+            color: var(--ligth-color-text);
+            font-weight: var(--fine);
+            span {
+              font-weight: var(--bold);
+            }
+          }
+          .col, .col-title {
+            display: flex;
+            flex: 1;
+            padding: 1rem;
+          }
         }
       }
     }
@@ -1222,6 +1239,30 @@ a {
        margin-left: 1rem;
     }
   }
+
+.updateProfil {
+  .wrapper {
+    background-color: var(--main-color);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    color: var(--emphase-color);
+  }
+  label {
+    padding: 0.5rem;
+  }
+  .input-line {
+    padding: 0.5rem;
+  }
+  input, textarea {
+    border: solid 1px var(--bg-color);
+    color: var(--ligth-color-text);
+  }
+  .action-btn {
+    width: 22rem !important;
+    margin: 2rem 0 0 1rem;
+ }
+
+}
 
 // 404
 .app-error {
