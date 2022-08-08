@@ -109,6 +109,7 @@ const tournamentMiddleware = (store) => (next) => (action) => {
       break;
     }
 
+    // ETAPE 1
     // créer un tournoi
     case 'CREATE_TOURNAMENT': {
       next(action);
@@ -166,6 +167,7 @@ const tournamentMiddleware = (store) => (next) => (action) => {
       break;
     }
 
+    // ETAPE 2
     // générer les matchs du tournoi !
     case 'TOURNAMENT_GENERATE': {
       const state = store.getState();
@@ -180,7 +182,8 @@ const tournamentMiddleware = (store) => (next) => (action) => {
       break;
     }
 
-    // générer les matchs du tournoi !
+    // ETAPE 3
+    // Passer à la phase de jeu, ou l'on peut saisir les scores  !
     case 'TOURNAMENT_PLAY': {
       const state = store.getState();
       next(action);
@@ -218,6 +221,45 @@ const tournamentMiddleware = (store) => (next) => (action) => {
       break;
     }
 
+    // ETAPE 4
+    // Cloturer les tournoi et afficher les vainqueurs
+    case 'TOURNAMENT_END': {
+      const state = store.getState();
+      next(action);
+      const axiosConfig = {
+        method: 'patch',
+        url: `${config.api.baseUrl}/tournaments/${state.tournament.tournament.id}`,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        data: qs.stringify({ state_id: 4 }),
+      };
+      axios(axiosConfig)
+        .then((response) => {
+          store.dispatch({ type: 'TOURNAMENT_END_SUCCESS', value: response.data });
+          store.dispatch({
+            type: 'NEW_TOAST',
+            newToast: {
+              id: state.interface.toastCounter,
+              message: 'Tournoi terminé',
+              type: 'success',
+            },
+          });
+          // get tournamaent a jour
+          axios.get(`${config.api.baseUrl}/tournaments/${state.tournament.tournament.id}`)
+            .then((response2) => {
+              store.dispatch({ type: 'GET_TOURNAMENT_SUCCESS', value: response2.data });
+            })
+            .catch((error) => {
+              throw new Error(error);
+            });
+        })
+        .catch((error) => {
+          throw new Error(error);
+        });
+      break;
+    }
+
     // définir le score d'un match
     case 'SET_MATCH_SCORES': {
       const state = store.getState();
@@ -230,10 +272,10 @@ const tournamentMiddleware = (store) => (next) => (action) => {
         },
         data: qs.stringify(data),
       };
+      // c'est celui la qui soit etre parsé en number coté serveur.
       next(action);
       axios(axiosConfig)
         .then((response) => {
-          console.log(response.data);
           store.dispatch({
             type: 'NEW_TOAST',
             newToast: {
@@ -243,6 +285,14 @@ const tournamentMiddleware = (store) => (next) => (action) => {
             },
           });
           store.dispatch({ type: 'SET_MATCH_SCORES_SUCCESS', value: response.data });
+          next(action);
+          axios.get(`${config.api.baseUrl}/tournaments/${state.tournament.tournament.id}`)
+            .then((response2) => {
+              store.dispatch({ type: 'GET_TOURNAMENT_SUCCESS', value: response2.data });
+            })
+            .catch((error) => {
+              throw new Error(error);
+            });
         })
         .catch((error) => {
           store.dispatch({

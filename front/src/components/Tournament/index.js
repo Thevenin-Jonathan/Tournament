@@ -148,12 +148,32 @@ function Tournament() {
       type: 'TOURNAMENT_GENERATE',
     });
   };
-
   // action de passer le matche à "jeu" -> l'étape 3
   const handlePlayTournament = () => {
     dispatch({
       type: 'TOURNAMENT_PLAY',
     });
+  };
+  // action de passer le matche à "cloturer" -> l'étape 4
+  const handleEndTournament = () => {
+    dispatch({
+      type: 'TOURNAMENT_END',
+    });
+  };
+
+  const matchCount = () => tournament.matches.length;
+  const playedMatchsCount = () => {
+    const matchsWithWinner = tournament.matches
+      .filter((match) => match.teams[0].is_winner !== null);
+    return matchsWithWinner.length;
+  };
+  const isAllMatchsPlayed = () => {
+    const matchsWithWinner = tournament.matches
+      .filter((match) => match.teams[0].is_winner !== null);
+    if (matchsWithWinner.length === matchCount()) {
+      return true;
+    }
+    return false;
   };
 
   // action d'envoi d'un resultat
@@ -207,6 +227,53 @@ function Tournament() {
     return `${player.firstname} ${player.lastname.charAt(0)}.`;
   };
 
+  // trouver les joueurs d'une équipe (par id d'équipe)
+  const getFullPlayersFromTeam = (teamId, teamsList, membersList) => {
+    const playersIds = teamsList.find((team) => team.id === teamId);
+    // console.log(playersIds.users[0]);
+    const player = membersList.find((member) => member.id === playersIds.users[0].id);
+    return `${player.firstname} ${player.lastname}.`;
+  };
+
+  const convertResult = (resultId) => {
+    switch (resultId) {
+      case 1:
+        return 0;
+      case 2:
+        return 1;
+      case 3:
+        return 2;
+      case 4:
+        return 0;
+      default:
+        return 0;
+    }
+  };
+  // tableau de scores
+  const scoreResults = (tournament) => {
+    // pour chaque team du tournoi
+    const matches = [];
+    tournament.matches.forEach((match) => {
+      matches.push(match.teams[0], match.teams[1]);
+    });
+
+    const result = matches.reduce((acc, val) => {
+      const o = acc.filter((obj) => obj.id === val.id).pop() || { id: val.id, result_id: 0 };
+
+      o.result_id += convertResult(val.result_id);
+      acc.push(o);
+      return acc;
+    }, []);
+
+    const finalresult = result.filter((itm, i, a) => i === a.indexOf(itm));
+
+    const sortedFinal = finalresult.sort((a, b) => b.result_id - a.result_id);
+
+    // je renvoi son resultat
+    return sortedFinal;
+    // je cumule
+  };
+
   if (isLoading) {
     return <Loader />;
   }
@@ -250,6 +317,7 @@ function Tournament() {
             </p>
           </div>
 
+          { (tournament.state_id >= 1 && tournament.state_id <= 3) && (
           <div className="infos registred-users">
             <h2>Participants</h2>
 
@@ -292,6 +360,7 @@ function Tournament() {
             </ul>
 
           </div>
+          )}
 
           { (tournament.state_id === 2 || tournament.state_id === 3) && (
           <div className="infos matchs">
@@ -300,7 +369,11 @@ function Tournament() {
               <p className="note">Les matchs ne sont pas modifables en All vs All</p>
             )}
             {tournament.state_id === 3 && (
-              <p className="note">Saisissez les scores de chaque matchs</p>
+              <p className="note">
+                Saisissez les scores de chaque match <br />
+                {/* {matchCount()} matchs à jouer <br /> */}
+                {isAllMatchsPlayed() ? 'Tous les matchs ont été joués' : `${playedMatchsCount()} sur ${matchCount()} matchs joués `}
+              </p>
             )}
             <ul className="match-list">
               { matchsBuilder(tournament.matches).map((phase, i) => (
@@ -310,11 +383,19 @@ function Tournament() {
                 >
                   Journée {i + 1} :
                   { phase.map((match) => (
-                    <span key={match.id} className="match">
+                    <div
+                      key={match.id}
+                      // eslint-disable-next-line no-nested-ternary
+                      className={match.teams[0].is_winner ? 'match with-winner-left' : match.teams[1].is_winner ? 'match with-winner-right' : 'match'}
+                    >
                       <span className="players">
-                        <span className={match.teams[0].is_winner ? 'player winner' : 'player'}>{getPlayersFromTeam(match.teams[0].id, teams, members)}</span>
+                        <span className={match.teams[0].is_winner ? 'player winner' : 'player'}>
+                          {getPlayersFromTeam(match.teams[0].id, teams, members)}
+                        </span>
                         <span className="vs">&nbsp;vs&nbsp;</span>
-                        <span className={match.teams[1].is_winner ? 'player winner' : 'player'}>{getPlayersFromTeam(match.teams[1].id, teams, members)}</span>
+                        <span className={match.teams[1].is_winner ? 'player winner' : 'player'}>
+                          {getPlayersFromTeam(match.teams[1].id, teams, members)}
+                        </span>
                       </span>
                       {tournament.state_id === 3 && (
                         <span className="score-inputs">
@@ -323,6 +404,7 @@ function Tournament() {
                             data-matchid={match.id}
                             data-teamid={match.teams[0].id}
                             onChange={(evt) => handleChangeScore(evt)}
+                            defaultValue={match.teams[0].result_id}
                           >
                             <option value={null} />
                             <option value={1}>0</option>
@@ -335,6 +417,7 @@ function Tournament() {
                             data-matchid={match.id}
                             data-teamid={match.teams[1].id}
                             onChange={(evt) => handleChangeScore(evt)}
+                            defaultValue={match.teams[1].result_id}
                           >
                             <option value={null} />
                             <option value={1}>0</option>
@@ -346,7 +429,7 @@ function Tournament() {
 
                       )}
 
-                    </span>
+                    </div>
                   ))}
                 </li>
               ))}
@@ -354,23 +437,27 @@ function Tournament() {
           </div>
           )}
 
-          {/* <div className="infos registred-teams">
-            <h2>Equipes</h2>
-            <ul>
-              { teams.map((team) => (
-                <li
-                  key={`team-${team.id}`}
-                >
-                  {team.id}
+          { (tournament.state_id === 4) && (
+          <div className="infos results">
+            <h2>Résultats</h2>
+            <p className="note">Classement du tournoi</p>
+            <ol className="tournament-ranking">
+              {scoreResults(tournament).map((result) => (
+                <li key={result.id}>
+                  <div className="score-line">
+                    <span className="team">{getFullPlayersFromTeam(result.id, teams, members)}</span>
+                    <span className="pts">{result.result_id} pts</span>
+                  </div>
                 </li>
               ))}
-            </ul>
+            </ol>
+          </div>
+          )}
 
-          </div> */}
         </div>
 
         {/* Partie admin */}
-        {isAdmin && (
+        {isAdmin && tournament.state_id < 4 && (
         <div className="admin-zone">
           <h2>Gestion du tournoi</h2>
 
@@ -402,7 +489,12 @@ function Tournament() {
           </button>
           )}
           {tournament.state_id === 3 && (
-          <button type="button" to="" className="action-btn ">
+          <button
+            type="button"
+            className="action-btn"
+            disabled={!isAllMatchsPlayed()}
+            onClick={() => handleEndTournament()}
+          >
             Aller à l'étape 4 : Cloturer ce tournoi <i className="fa fa-hand-peace-o" />
           </button>
           )}

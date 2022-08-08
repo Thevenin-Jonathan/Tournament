@@ -46,10 +46,6 @@ function Dashboard() {
   // const tournamentCover = `${config.path.uploads.coverTournament}/cover-tournament-01.jpg`;
   // import clublogo from 'src/assets/logo-bayard-bad-blanc.png';
 
-  const statFilter = (list) => {
-    console.log(list[0]);
-  };
-
   function aggregateVictory(playerWithStats) {
     const totalMatchVictory = (
       playerWithStats?.single_men[0].nb_win
@@ -136,7 +132,6 @@ function Dashboard() {
       <Link to="/classements" className="dashboard-widget hall-of-fame">
         <i className="fa fa-star fa-2x hof-icon widget-icon" />
         <p className="hof-title">Hall of Fame</p>
-        { statFilter(stats) }
         <ol>
           { sortByTotalVictory(stats).slice(0, 10).map((member, index) => (
             <li key={member.id}>
