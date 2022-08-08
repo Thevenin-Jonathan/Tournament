@@ -44,21 +44,18 @@ function Tournament() {
     dispatch({ type: 'GET_MEMBERS' });
   }, []);
 
-  // todo
-  // function compatiblesMembers(members, tournament) {
-  //   let filteredMembers = members;
-  //   // seulement hommes
-
-  //   if ([1, 3].includes(tournament.discipline_id)) {
-  //     filteredMembers = members.filter((member) => member.gender_id === 1);
-  //   }
-  //   // seulement femmes
-  //   if ([2, 4].includes(tournament.discipline_id)) {
-  //     filteredMembers = members.filter((member) => member.gender_id === 2);
-  //   }
-  //   console.log(filteredMembers);
-  //   return filteredMembers;
-  // }
+  function authorisedGender(tournament) {
+    if ([1, 3].includes(tournament.discipline_id)) {
+      return [1];
+    }
+    if ([2, 4].includes(tournament.discipline_id)) {
+      return [2];
+    }
+    if ([2, 4].includes(tournament.discipline_id)) {
+      return [1, 2];
+    }
+    return [1, 2];
+  }
 
   function enroledMembers(members, enroledMembers) {
     const enroledMembersIds = Array.from((enroledMembers), (obj) => obj.id);
@@ -533,7 +530,8 @@ function Tournament() {
                     .map((player) => (
                       <div
                         key={player.id}
-                        className="player-list-item"
+                        // className="player-list-item"
+                        className={authorisedGender(tournament).includes(player.gender_id) ? 'player-list-item' : 'player-list-item disabled'}
                       >
                         <span className="player-firstname">
                           {player.firstname}
