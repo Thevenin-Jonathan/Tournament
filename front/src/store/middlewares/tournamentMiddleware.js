@@ -210,7 +210,7 @@ const tournamentMiddleware = (store) => (next) => (action) => {
             type: 'NEW_TOAST',
             newToast: {
               id: state.interface.toastCounter,
-              message: 'C\'est partit !',
+              message: 'C\'est parti !',
               type: 'success',
             },
           });
