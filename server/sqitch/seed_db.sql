@@ -29,14 +29,19 @@ INSERT INTO "state" ("name") VALUES
   ('started'),
   ('closed');
 
+INSERT INTO "result" ("label") VALUES
+  ('0'),
+  ('1'),
+  ('2'),
+  ('f');
 
 INSERT INTO "tournament" ("title", "slug", "date", "description", "picture_url", "nb_playground", "player_limit", "discipline_id", "type_id", "state_id", "club_id") VALUES
   ('Champion''s trophy', 'champions-trophy', '01/08/2022', 'La fin de saison est proche !', 'https://kinoah.com/images/tournament/cover/bad-03.jpg', '6', '25', '1', '1', '1', '1'),
   ('Tournoi Elegance 2022', 'tournoi-elegance-2022', '08/08/2022', 'Le tournoi pour celles qui veulent en découdre !', 'https://kinoah.com/images/tournament/cover/bad-01.jpg', '7', null, '2', '1', '1', '1'),
-  ('Tournoi des brutes', 'tournoi-des-brutes', '23/07/2022', 'Un tournoi en duo uniquement pour les hommes virils', 'https://kinoah.com/images/tournament/cover/the-witcher.jpg', '7', '30', '3', '1', '2', '1'),
-  ('Tournoi Lady Double', 'tournoi-lady-double', '19/07/2022', 'Un tournoi en duo pour l''élite féminine', 'https://kinoah.com/images/tournament/cover/bad-05.jpg', '7', null, '4', '1', '3', '1'),
-  ('Tournoi Téléportal III', 'tournoi-teleportal-iii', '01/06/2022', 'Célebre et difficile...', 'https://kinoah.com/images/tournament/cover/portal2.jpg', '5', '25', '5', '1', '4', '1'),
-  ('Tournoi du trône de fer', 'tournoi-du-trone-de-fer', '06/06/2022', 'Presque tous les coups sont permis', 'https://kinoah.com/images/tournament/cover/got01.jpg', '5', '25', '5', '1', '4', '1');
+  ('Tournoi des brutes', 'tournoi-des-brutes', '23/07/2022', 'Un tournoi en duo uniquement pour les hommes virils', 'https://kinoah.com/images/tournament/cover/the-witcher.jpg', '7', '30', '3', '1', '1', '1'),
+  ('Tournoi Lady Double', 'tournoi-lady-double', '19/07/2022', 'Un tournoi en duo pour l''élite féminine', 'https://kinoah.com/images/tournament/cover/bad-05.jpg', '7', null, '4', '1', '1', '1'),
+  ('Tournoi Téléportal III', 'tournoi-teleportal-iii', '01/06/2022', 'Célebre et difficile...', 'https://kinoah.com/images/tournament/cover/portal2.jpg', '5', '25', '5', '1', '1', '1'),
+  ('Tournoi du trône de fer', 'tournoi-du-trone-de-fer', '06/06/2022', 'Presque tous les coups sont permis', 'https://kinoah.com/images/tournament/cover/got01.jpg', '5', '25', '5', '1', '1', '1');
 
 INSERT INTO "user" ("firstname","lastname","address","birthdate","is_active","email","password","url_avatar","player_license","created_at","updated_at","club_id","role_id","phone","gender_id") VALUES
 	 ('Jonathan','Thevenin','Rue des fleurs, 31100 Toulouse','1990-04-12',true,'jonathan@gmail.com','$2a$10$vOUYY2w4YemevAAsed8S/u./U9PLwvcmsrk7srPekaPtgxS89hZXa','jonathan.jpg','6945214','2022-07-31 13:03:53.912275+02','2022-07-31 13:03:53.912275+02',1,2,NULL,1),
@@ -97,121 +102,5 @@ INSERT INTO "user" ("firstname","lastname","address","birthdate","is_active","em
 	 ('Angelita','Limbourne','32 avenue salive twos 65354 snowstorm','1993-05-04',false,'alimbourne1c@chicagotribune.com','Z7393u8AG6y3NY3n40cTH3e9331g2d7Pw03A4AG9g9RzXXd44W310P6nuc16E10V',NULL,'2050053868','2022-07-31 13:03:53.912275+02','2022-08-03 20:04:10.574786+02',1,2,NULL,1),
 	 ('Briana','Aberdalgy','98 boulevard zsea six 78522 tuba','1958-05-27',false,'baberdalgy1d@lycos.com','861f6rh68s7bYT4sTE0qk27q8z59qL3x98550f521MW7BPfT0AtUL4Rid2g618FU',NULL,'6123989687','2022-07-31 13:03:53.912275+02','2022-08-03 20:04:10.575432+02',1,2,NULL,1),
 	 ('Tom','Roche','Passage de la clé des champs, 38530 Pontcharra !','1980-02-29',true,'tom@gmail.com','$2a$10$vOUYY2w4YemevAAsed8S/u./U9PLwvcmsrk7srPekaPtgxS89hZXa','tom.jpg','3554666','2022-07-31 13:03:53.912275+02','2022-08-04 10:39:08.445902+02',1,1,NULL,1);
-
-INSERT INTO "result" ("label") VALUES
-  ('0'),
-  ('1'),
-  ('2'),
-  ('f');
-
-INSERT INTO "team" ("tournament_id") VALUES
-  ('5'),
-  ('5'),
-  ('5'),
-  ('5'),
-  ('5'),
-  ('4'),
-  ('4'),
-  ('4'),
-  ('4'),
-  ('4'),
-  ('3'),
-  ('3'),
-  ('3'),
-  ('3'),
-  ('3'),
-  ('2'),
-  ('2'),
-  ('1');
-
-INSERT INTO "match" ("note", "state_id", "tournament_id") VALUES
-  (null, '1', '3'),
-  (null, '1', '3'),
-  (null, '1', '3'),
-  (null, '1', '3'),
-  (null, '1', '3'),
-  (null, '1', '4'),
-  (null, '1', '4'),
-  (null, '1', '4'),
-  (null, '1', '4'),   
-  (null, '1', '4'),
-  (null, '4', '5'),
-  (null, '4', '5'),
-  (null, '4', '5'),
-  (null, '4', '5'),
-  (null, '4', '5');
-
-INSERT INTO "match_has_team" ("result_id", "is_winner", "team_id", "match_id") VALUES
-  (null, null, '10', '10'),
-  (null, null, '9', '10'),
-  ('1', false, '8', '9'),
-  ('3', true, '7', '9'),
-  ('1', false, '6', '8'),
-  ('3', true, '7', '8'),
-  (null, null, '8', '7'),
-  (null, null, '10', '7'),
-  ('3', true, '9', '6'),
-  ('2', false, '6', '6'),
-  (null, null, '11', '5'),
-  (null, null, '15', '5'),
-  (null, null, '12', '4'),
-  (null, null, '14', '4'),
-  (null, null, '13', '3'),
-  (null, null, '15', '3'),
-  (null, null, '13', '2'),
-  (null, null, '11', '2'),
-  (null, null, '14', '1'),
-  (null, null, '11', '1'),
-  ('3', true, '5', '11'),
-  ('1', false, '4', '11'),
-  ('3', true, '3', '12'),
-  ('2', false, '2', '12'),
-  ('2', false, '1', '13'),
-  ('3', true, '2', '13'),
-  ('1', false, '3', '14'),
-  ('3', true, '4', '14'),
-  ('2', true, '5', '15'),
-  ('4', false, '1', '15');
-
-
-INSERT INTO "team_has_user" ("team_id", "user_id") VALUES
-('18', '1'),
-('17', '2'),
-('16', '5'),  
-('15', '11'),
-('15', '8'),
-('14', '12'),
-('14', '1'),
-('13', '17'),
-('13', '14'),
-('12', '4'),
-('12', '38'),
-('11', '48'),
-('11', '51'),
-('10', '6'),
-('10', '9'),
-('9', '7'),
-('9', '3'),
-('8', '12'),
-('8', '16'),
-('7', '5'),
-('7', '10'),
-('6', '13'),
-('6', '2'),
-('5', '22'),
-('5', '36'),
-('4', '12'),
-('4', '45'),
-('3', '3'),
-('3', '9'),
-('2', '50'),
-('2', '31'),
-('1', '6'),
-('1', '18');
-
-INSERT INTO "tournament_has_user" ("tournament_id", "user_id") VALUES
-  ('2', '16'),
-  ('3', '5'),
-  ('5', '26');
 
 COMMIT;
